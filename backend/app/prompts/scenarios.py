@@ -30,14 +30,14 @@ require the brand name to be spoken or written on screen. Look for:
 
 For each year the corpus covers with detected visual presence, return:
 - year (integer)
-- frequency (count of distinct clips or scenes where adidas is visually present)
+- frequency (= number of entries in scenes)
 - dominant_theme (short label, e.g. "London Olympics lead sponsor",
-  "Jabulani match ball", "YEEZY collab", "Paris 2024 You Got This campaign")
-- representative_clip with the asset_id and timestamps of the most
-  visually compelling moment
+  "Jabulani match ball", "YEEZY collab")
+- scenes: ALL distinct clips where adidas is visually present that year,
+  sorted by prominence — return every one, not just the top
+- representative_clip = scenes[0]
 
-Skip years with no detected presence rather than emitting frequency=0. Be
-precise — frequency is an integer count, not a vague rating."""
+Skip years with no detected presence rather than emitting frequency=0."""
 
 SCENARIO_B_NARRATIVE = """You are a brand storytelling analyst working with
 the same TwelveLabs Knowledge Store described in the brand-visibility
@@ -57,12 +57,12 @@ brand mentions.
 
 For each year the corpus actually covers with detected presence, return:
 - year (integer)
-- frequency (count of distinct clips/scenes with Adidas presence in that year)
+- frequency (= number of entries in scenes)
 - dominant_theme (short narrative label, e.g. "event sponsorship", "Originals
-  lifestyle storytelling", "Yeezy cultural collaboration", "sustainability
-  campaign", "anthem brand film")
-- representative_clip with the asset_id and timestamps of the moment that
-  best captures that year's storytelling mode
+  lifestyle storytelling", "sustainability campaign", "anthem brand film")
+- scenes: ALL distinct clips with Adidas presence that year, sorted by how
+  well each captures that year's storytelling mode — return every one
+- representative_clip = scenes[0]
 
 Skip years with no detected presence rather than emitting frequency=0."""
 
@@ -84,12 +84,13 @@ product hero shots). Don't rely on spoken or written brand mentions.
 
 For each year the corpus covers, return:
 - year (integer)
-- frequency (count of distinct clips with Adidas visual presence)
+- frequency (= number of entries in scenes)
 - dominant_theme — label clearly as "EARNED:" or "OWNED:" followed by
   a short description (e.g. "EARNED: Telstar match ball + Germany kit",
   "OWNED: NMD launch film")
-- representative_clip with the asset_id and timestamps of the most
-  emblematic moment
+- scenes: ALL distinct clips with Adidas visual presence that year, sorted by
+  how emblematic each is — return every one
+- representative_clip = scenes[0]
 
 Skip years with no detected presence rather than emitting frequency=0."""
 

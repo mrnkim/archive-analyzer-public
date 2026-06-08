@@ -185,11 +185,16 @@ async def query(req: QueryRequest) -> QueryResponse:
     # to build a UUID->hex map. Without this step the UI gets placeholders.
     settings = get_settings()
     api_key = settings.twelvelabs_api_key
-    raw_ids = [
-        p.representative_clip.asset_id
-        for p in validated.timeline
-        if p.representative_clip.asset_id
-    ]
+    # Gather every asset id across representative clips AND all scenes, so the
+    # whole per-year scene strip gets thumbnails/manifests, not just the top.
+    raw_ids: list[str] = []
+    for p in validated.timeline:
+        if p.representative_clip.asset_id:
+            raw_ids.append(p.representative_clip.asset_id)
+        for s in p.scenes:
+            if s.asset_id:
+                raw_ids.append(s.asset_id)
+    raw_ids = list(dict.fromkeys(raw_ids))  # dedupe, preserve order
 
     uuid_to_hex: dict[str, str] = {}
     try:
@@ -207,19 +212,25 @@ async def query(req: QueryRequest) -> QueryResponse:
 
     resolved = await jockey_api.resolve_assets(api_key, hex_ids)
 
-    enriched_timeline = []
-    for point in validated.timeline:
-        clip = point.representative_clip.model_dump()
-        rid = clip["asset_id"]
+    def _enrich_clip(clip: dict) -> dict:
+        """Attach thumbnail_url / manifest_url / duration to a clip dict."""
+        rid = clip.get("asset_id") or ""
         hex_id = rid if jockey_api.is_hex_asset_id(rid) else uuid_to_hex.get(rid)
         info = resolved.get(hex_id) if hex_id else None
         if info:
             clip["thumbnail_url"] = info.get("thumbnail_url")
             clip["manifest_url"] = info.get("manifest_url")
             clip["duration"] = info.get("duration")
-        enriched_timeline.append(
-            {**point.model_dump(), "representative_clip": clip}
+        return clip
+
+    enriched_timeline = []
+    for point in validated.timeline:
+        point_data = point.model_dump()
+        point_data["representative_clip"] = _enrich_clip(
+            point.representative_clip.model_dump()
         )
+        point_data["scenes"] = [_enrich_clip(s.model_dump()) for s in point.scenes]
+        enriched_timeline.append(point_data)
 
     estimated_value = _backstop_monetization(
         validated.estimated_value.model_dump(),

@@ -30,6 +30,10 @@ class TimelinePoint(BaseModel):
     frequency: int = Field(ge=0)
     dominant_theme: str
     representative_clip: RepresentativeClip
+    # Every distinct clip for this year, sorted by relevance descending.
+    # `representative_clip` === `scenes[0]`. Defaults to empty for
+    # backwards-compat with older primed payloads that predate this field.
+    scenes: list[RepresentativeClip] = Field(default_factory=list)
 
 
 class EstimatedValue(BaseModel):
@@ -76,12 +80,16 @@ TREND_DATA_JSON_SCHEMA: dict[str, Any] = {
                         "frequency",
                         "dominant_theme",
                         "representative_clip",
+                        "scenes",
                     ],
                     "properties": {
                         "year": {"type": "integer"},
                         "frequency": {
                             "type": "integer",
-                            "description": "Number of mentions / clips in this year.",
+                            "description": (
+                                "Number of distinct clips for this year. Must "
+                                "equal the number of entries in `scenes`."
+                            ),
                         },
                         "dominant_theme": {
                             "type": "string",
@@ -101,6 +109,31 @@ TREND_DATA_JSON_SCHEMA: dict[str, Any] = {
                                 "timestamp_start": {"type": "number"},
                                 "timestamp_end": {"type": "number"},
                                 "title": {"type": "string"},
+                            },
+                        },
+                        "scenes": {
+                            "type": "array",
+                            "description": (
+                                "Every distinct clip where the entity is "
+                                "visually present this year, sorted by "
+                                "prominence. The first entry MUST equal "
+                                "representative_clip."
+                            ),
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": False,
+                                "required": [
+                                    "asset_id",
+                                    "timestamp_start",
+                                    "timestamp_end",
+                                    "title",
+                                ],
+                                "properties": {
+                                    "asset_id": {"type": "string"},
+                                    "timestamp_start": {"type": "number"},
+                                    "timestamp_end": {"type": "number"},
+                                    "title": {"type": "string"},
+                                },
                             },
                         },
                     },

@@ -2,143 +2,325 @@
   "query": "How has Adidas's storytelling evolved from sports event sponsorship to owned brand films and lifestyle/sustainability campaigns?",
   "scenario": "B",
   "payload": {
-    "entity": "Adidas visual storytelling across the corpus",
+    "entity": "Adidas storytelling evolution across the corpus",
     "query": "How has Adidas's storytelling evolved from sports event sponsorship to owned brand films and lifestyle/sustainability campaigns?",
     "timeline": [
       {
-        "year": 1994,
+        "year": 2010,
         "frequency": 1,
         "dominant_theme": "event sponsorship",
         "representative_clip": {
-          "asset_id": "06a1022e-404b-7777-8000-a944f8e3da46",
-          "timestamp_start": 0.0,
-          "timestamp_end": 27.0,
-          "title": "1994 FIFA World Cup footage with Adidas ball and staff apparel",
-          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1022e36e59e193d3411a0d/thumbnails/5.jpeg",
-          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1022e36e59e193d3411a0d/hlses/playlist.m3u8",
-          "duration": 222.56
-        }
-      },
-      {
-        "year": 2002,
-        "frequency": 2,
-        "dominant_theme": "event sponsorship",
-        "representative_clip": {
-          "asset_id": "06a10239-375f-78d5-8000-bbfa3ab12a66",
-          "timestamp_start": 3.0,
-          "timestamp_end": 10.0,
-          "title": "2002 FIFA World Cup highlights with Adidas match ball and Brazil kit",
-          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102392953c687bc2513523/thumbnails/5.jpeg",
-          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102392953c687bc2513523/hlses/playlist.m3u8",
-          "duration": 271.92
-        }
-      },
-      {
-        "year": 2010,
-        "frequency": 2,
-        "dominant_theme": "event sponsorship",
-        "representative_clip": {
           "asset_id": "06a1023d-979d-7922-8000-4731aedfc9bb",
-          "timestamp_start": 11.0,
-          "timestamp_end": 24.0,
-          "title": "2010 FIFA World Cup coverage showing Adidas sideline boards and Jabulani-era ball visibility",
+          "timestamp_start": 13.0,
+          "timestamp_end": 15.0,
+          "title": "aKSHgMqCwbQ.mp4",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/hlses/playlist.m3u8",
           "duration": 266.68
-        }
+        },
+        "scenes": [
+          {
+            "asset_id": "06a1023d-979d-7922-8000-4731aedfc9bb",
+            "timestamp_start": 13.0,
+            "timestamp_end": 15.0,
+            "title": "aKSHgMqCwbQ.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/hlses/playlist.m3u8",
+            "duration": 266.68
+          }
+        ]
       },
       {
         "year": 2012,
         "frequency": 2,
-        "dominant_theme": "Olympic outfitting and kit reveal",
+        "dominant_theme": "Olympic kit design storytelling",
         "representative_clip": {
           "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
-          "timestamp_start": 24.0,
-          "timestamp_end": 26.0,
-          "title": "London 2012 Team GB/Paralympics GB Adidas kit and footwear reveal",
+          "timestamp_start": 80.0,
+          "timestamp_end": 88.0,
+          "title": "zXhwGrLYrRo.mp4",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
           "duration": 163.2
-        }
+        },
+        "scenes": [
+          {
+            "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
+            "timestamp_start": 80.0,
+            "timestamp_end": 88.0,
+            "title": "zXhwGrLYrRo.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
+            "duration": 163.2
+          },
+          {
+            "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
+            "timestamp_start": 52.0,
+            "timestamp_end": 57.0,
+            "title": "zXhwGrLYrRo.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
+            "duration": 163.2
+          }
+        ]
       },
       {
         "year": 2014,
-        "frequency": 1,
-        "dominant_theme": "event sponsorship",
+        "frequency": 3,
+        "dominant_theme": "athlete-led football campaign",
         "representative_clip": {
-          "asset_id": "06a10243-b802-7454-8000-e7adb2093011",
-          "timestamp_start": 4.0,
-          "timestamp_end": 20.0,
-          "title": "2014 FIFA World Cup final with Adidas kits and match ball",
-          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10243ad688f211334f3832/thumbnails/5.jpeg",
-          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10243ad688f211334f3832/hlses/playlist.m3u8",
-          "duration": 129.128999999
-        }
+          "asset_id": "06a10243-1ff7-7795-8000-887809a0c7f2",
+          "timestamp_start": 69.0,
+          "timestamp_end": 72.0,
+          "title": "L5kPJqDTFdo.mp4",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
+          "duration": 166.499667
+        },
+        "scenes": [
+          {
+            "asset_id": "06a10243-1ff7-7795-8000-887809a0c7f2",
+            "timestamp_start": 69.0,
+            "timestamp_end": 72.0,
+            "title": "L5kPJqDTFdo.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
+            "duration": 166.499667
+          },
+          {
+            "asset_id": "06a10243-1ff7-7795-8000-887809a0c7f2",
+            "timestamp_start": 151.0,
+            "timestamp_end": 154.0,
+            "title": "L5kPJqDTFdo.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
+            "duration": 166.499667
+          },
+          {
+            "asset_id": "06a10243-1ff7-7795-8000-887809a0c7f2",
+            "timestamp_start": 115.0,
+            "timestamp_end": 116.0,
+            "title": "L5kPJqDTFdo.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
+            "duration": 166.499667
+          }
+        ]
+      },
+      {
+        "year": 2015,
+        "frequency": 2,
+        "dominant_theme": "product hero film",
+        "representative_clip": {
+          "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
+          "timestamp_start": 9.0,
+          "timestamp_end": 18.0,
+          "title": "KmifqyvJT9o.mp4",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
+          "duration": 45.0
+        },
+        "scenes": [
+          {
+            "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
+            "timestamp_start": 9.0,
+            "timestamp_end": 18.0,
+            "title": "KmifqyvJT9o.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
+            "duration": 45.0
+          },
+          {
+            "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
+            "timestamp_start": 39.0,
+            "timestamp_end": 45.0,
+            "title": "KmifqyvJT9o.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
+            "duration": 45.0
+          }
+        ]
       },
       {
         "year": 2016,
-        "frequency": 1,
-        "dominant_theme": "sustainability campaign",
+        "frequency": 2,
+        "dominant_theme": "urban lifestyle launch film",
         "representative_clip": {
-          "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
-          "timestamp_start": 0.0,
-          "timestamp_end": 17.0,
-          "title": "Adidas x Parley visual co-branding and sustainability-stage presentation",
-          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
-          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
-          "duration": 427.9692
-        }
+          "asset_id": "06a10244-4014-7215-8000-c42cd5e3a628",
+          "timestamp_start": 37.0,
+          "timestamp_end": 45.0,
+          "title": "jDzcPTBWRa0.mp4",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/hlses/playlist.m3u8",
+          "duration": 70.779042
+        },
+        "scenes": [
+          {
+            "asset_id": "06a10244-4014-7215-8000-c42cd5e3a628",
+            "timestamp_start": 37.0,
+            "timestamp_end": 45.0,
+            "title": "jDzcPTBWRa0.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/hlses/playlist.m3u8",
+            "duration": 70.779042
+          },
+          {
+            "asset_id": "06a10244-4014-7215-8000-c42cd5e3a628",
+            "timestamp_start": 63.0,
+            "timestamp_end": 70.0,
+            "title": "jDzcPTBWRa0.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/hlses/playlist.m3u8",
+            "duration": 70.779042
+          }
+        ]
       },
       {
         "year": 2018,
-        "frequency": 2,
-        "dominant_theme": "event sponsorship",
+        "frequency": 3,
+        "dominant_theme": "sustainability campaign",
         "representative_clip": {
-          "asset_id": "06a10247-26af-7628-8000-bb52801d2dc4",
-          "timestamp_start": 4.0,
-          "timestamp_end": 18.0,
-          "title": "2018 FIFA World Cup footage with Telstar match ball and sideline branding",
-          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024719a50a20b9055298c/thumbnails/5.jpeg",
-          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024719a50a20b9055298c/hlses/playlist.m3u8",
-          "duration": 130.0
-        }
+          "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
+          "timestamp_start": 382.0,
+          "timestamp_end": 388.0,
+          "title": "8XEanu0zJnY.mp4",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
+          "duration": 427.9692
+        },
+        "scenes": [
+          {
+            "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
+            "timestamp_start": 382.0,
+            "timestamp_end": 388.0,
+            "title": "8XEanu0zJnY.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
+            "duration": 427.9692
+          },
+          {
+            "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
+            "timestamp_start": 412.0,
+            "timestamp_end": 421.0,
+            "title": "8XEanu0zJnY.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
+            "duration": 427.9692
+          },
+          {
+            "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
+            "timestamp_start": 157.0,
+            "timestamp_end": 163.0,
+            "title": "8XEanu0zJnY.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
+            "duration": 427.9692
+          }
+        ]
       },
       {
-        "year": 2022,
-        "frequency": 2,
-        "dominant_theme": "event sponsorship",
-        "representative_clip": {
-          "asset_id": "06a1024b-5128-7920-8000-77a797bc69a0",
-          "timestamp_start": 26.0,
-          "timestamp_end": 30.0,
-          "title": "2022 FIFA World Cup final with Adidas match ball and Argentina kit visibility",
-          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024b49a50a20b905529b0/thumbnails/5.jpeg",
-          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024b49a50a20b905529b0/hlses/playlist.m3u8",
-          "duration": 127.42
-        }
-      },
-      {
-        "year": 2024,
-        "frequency": 2,
-        "dominant_theme": "lifestyle storytelling and contemporary tournament presence",
+        "year": 2021,
+        "frequency": 4,
+        "dominant_theme": "Originals lifestyle storytelling",
         "representative_clip": {
           "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
-          "timestamp_start": 16.0,
-          "timestamp_end": 28.0,
-          "title": "Adidas Samba lifestyle/product hero storytelling",
+          "timestamp_start": 244.0,
+          "timestamp_end": 251.0,
+          "title": "MAgCSOOeNFE.mp4",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
           "duration": 632.923958
-        }
+        },
+        "scenes": [
+          {
+            "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
+            "timestamp_start": 244.0,
+            "timestamp_end": 251.0,
+            "title": "MAgCSOOeNFE.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
+            "duration": 632.923958
+          },
+          {
+            "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
+            "timestamp_start": 436.0,
+            "timestamp_end": 447.0,
+            "title": "MAgCSOOeNFE.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
+            "duration": 632.923958
+          },
+          {
+            "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
+            "timestamp_start": 555.0,
+            "timestamp_end": 562.0,
+            "title": "MAgCSOOeNFE.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
+            "duration": 632.923958
+          },
+          {
+            "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
+            "timestamp_start": 34.0,
+            "timestamp_end": 40.0,
+            "title": "MAgCSOOeNFE.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
+            "duration": 632.923958
+          }
+        ]
+      },
+      {
+        "year": 2024,
+        "frequency": 3,
+        "dominant_theme": "anthem brand film",
+        "representative_clip": {
+          "asset_id": "06a1024c-ffa6-75fc-8000-9690ec568ae2",
+          "timestamp_start": 83.0,
+          "timestamp_end": 88.0,
+          "title": "FzaS0V_FCrI.mp4",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/hlses/playlist.m3u8",
+          "duration": 88.0
+        },
+        "scenes": [
+          {
+            "asset_id": "06a1024c-ffa6-75fc-8000-9690ec568ae2",
+            "timestamp_start": 83.0,
+            "timestamp_end": 88.0,
+            "title": "FzaS0V_FCrI.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/hlses/playlist.m3u8",
+            "duration": 88.0
+          },
+          {
+            "asset_id": "06a1024e-978f-7a9e-8000-4df3f36377d0",
+            "timestamp_start": 54.0,
+            "timestamp_end": 60.0,
+            "title": "GFT6Wt9VDWQ.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024e89a50a20b905529d6/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024e89a50a20b905529d6/hlses/playlist.m3u8",
+            "duration": 60.01996
+          },
+          {
+            "asset_id": "06a1024c-ffa6-75fc-8000-9690ec568ae2",
+            "timestamp_start": 34.0,
+            "timestamp_end": 40.0,
+            "title": "FzaS0V_FCrI.mp4",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/hlses/playlist.m3u8",
+            "duration": 88.0
+          }
+        ]
       }
     ],
-    "narrative_summary": "Across the corpus, Adidas’s visual storytelling clearly migrates from being an embedded sponsor inside major sports broadcasts to becoming the central subject of its own films. In the earliest material, Adidas is mostly seen through functional tournament assets: official match balls, team kits, and sideline boards. The brand is present, but usually as infrastructure around the spectacle rather than as the narrative driver. World Cup footage from 1994, 2002, 2010, 2014, 2018, and 2022 repeatedly shows this mode: the logo lives on the ball, on national kits, and at the edge of the pitch, signaling authority, scale, and legitimacy through event ownership.\n\nBy the London 2012 and Rio-era material, Adidas begins to move closer to authored visual identity. Olympic kit reveals and athlete apparel make the three-stripes more intentional and fashion-forward, while the brand starts using product close-ups and controlled presentation moments rather than relying only on incidental in-game exposure. That transition becomes much stronger in later owned or semi-owned films, where the camera lingers on footwear, apparel silhouettes, and heritage marks like the trefoil.\n\nThe biggest shift comes in the more recent lifestyle and campaign-led material. Instead of borrowing meaning from sport alone, Adidas creates meaning through product hero shots, cultural associations, and aesthetic world-building. The Samba footage positions the shoe as an object of style and identity, not just performance. The Yeezy/footwear-oriented content similarly centers materiality, form, and desirability, with Adidas no longer appearing as a sponsor inside someone else’s story but as the author of the frame.\n\nSustainability adds a further evolution in brand storytelling. In the Parley material, Adidas uses unmistakable visual co-branding and stagecraft to attach the brand to environmental purpose. Here the logo is not merely proof of sponsorship or product ownership; it becomes a signifier of values. Taken together, the corpus shows a progression from event visibility, to athlete and federation outfitting, to product-centric and culturally coded films, and finally to broader brand statements that combine performance, lifestyle, and sustainability.",
+    "narrative_summary": "Across the corpus, Adidas shifts from being seen mainly as part of the sporting stage to becoming the author of the stage itself. In the earliest footage, the brand is present through event infrastructure and performance equipment: the official World Cup ball, national-team kits, and tournament-adjacent gear. The storytelling is largely borrowed from the spectacle of global sport, with Adidas functioning as the visual system around elite competition rather than the central narrative voice.\n\nBy the early-to-mid 2010s, Adidas starts moving into authored brand worlds. The London 2012 Team GB material reframes sponsorship as design partnership, making kit development, fabrication, and presentation part of the story. The 2014 Messi-led football film goes further: Adidas is no longer just visible on athletes or equipment, but uses product close-ups, end cards, and campaign visual language to turn competitive mentality into a branded narrative. From there, product films like Yeezy Boost and NMD intensify control over image-making through isolated hero shots, exploded construction views, and highly stylized urban environments.\n\nLater entries expand Adidas beyond performance into culture and values. The Samba video explicitly traces a football shoe's migration into fashion, collaboration, and everyday lifestyle, with trefoil apparel, product tableaux, and collab editions standing in for a broader Originals identity. The Parley piece marks another evolution: Adidas uses product imagery, recycled-material symbolism, and co-brand iconography to present itself as a platform for sustainability storytelling, not just athletic aspiration.\n\nThe newest campaign material completes the transition. In the 2024 'You Got This' spots, Adidas blends sport, emotion, and cinematic montage across football, basketball, boxing, running, and skateboarding, ending on stripped-down three-stripe logos. The brand's visual storytelling has evolved from sponsorship visibility inside major events to fully owned films that connect performance, identity, design culture, and environmental purpose.",
     "estimated_value": {
-      "total_mentions": 15,
-      "estimated_brand_intelligence_value_usd": 75000,
-      "calculation_basis": "Heuristic brand-intelligence estimate based on 15 distinct clips/scenes with clear visual Adidas presence across the indexed corpus, valued at roughly $5,000 per validated scene because each clip contributes dated evidence of brand-role evolution (from background sponsorship to owned narrative/product storytelling)."
+      "total_mentions": 20,
+      "estimated_brand_intelligence_value_usd": 50000,
+      "calculation_basis": "Brand-intelligence proxy based on 20 distinct visually grounded Adidas-presence clips across the covered years, weighted at roughly $2,500 per validated clip because the corpus spans premium contexts: global event sponsorship, Olympic kit design, athlete-led films, product launch assets, and sustainability storytelling."
     },
-    "session_id": "sess_019e5e0c-7578-7862-a903-ae64d323ef8f",
+    "session_id": "sess_019ea6c8-7aee-7203-9094-152d5f810bcb",
     "source": "jockey"
   }
 }
