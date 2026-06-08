@@ -1,0 +1,144 @@
+{
+  "query": "How has Adidas's storytelling evolved from sports event sponsorship to owned brand films and lifestyle/sustainability campaigns?",
+  "scenario": "B",
+  "payload": {
+    "entity": "Adidas visual storytelling across the corpus",
+    "query": "How has Adidas's storytelling evolved from sports event sponsorship to owned brand films and lifestyle/sustainability campaigns?",
+    "timeline": [
+      {
+        "year": 1994,
+        "frequency": 1,
+        "dominant_theme": "event sponsorship",
+        "representative_clip": {
+          "asset_id": "06a1022e-404b-7777-8000-a944f8e3da46",
+          "timestamp_start": 0.0,
+          "timestamp_end": 27.0,
+          "title": "1994 FIFA World Cup footage with Adidas ball and staff apparel",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1022e36e59e193d3411a0d/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1022e36e59e193d3411a0d/hlses/playlist.m3u8",
+          "duration": 222.56
+        }
+      },
+      {
+        "year": 2002,
+        "frequency": 2,
+        "dominant_theme": "event sponsorship",
+        "representative_clip": {
+          "asset_id": "06a10239-375f-78d5-8000-bbfa3ab12a66",
+          "timestamp_start": 3.0,
+          "timestamp_end": 10.0,
+          "title": "2002 FIFA World Cup highlights with Adidas match ball and Brazil kit",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102392953c687bc2513523/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102392953c687bc2513523/hlses/playlist.m3u8",
+          "duration": 271.92
+        }
+      },
+      {
+        "year": 2010,
+        "frequency": 2,
+        "dominant_theme": "event sponsorship",
+        "representative_clip": {
+          "asset_id": "06a1023d-979d-7922-8000-4731aedfc9bb",
+          "timestamp_start": 11.0,
+          "timestamp_end": 24.0,
+          "title": "2010 FIFA World Cup coverage showing Adidas sideline boards and Jabulani-era ball visibility",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/hlses/playlist.m3u8",
+          "duration": 266.68
+        }
+      },
+      {
+        "year": 2012,
+        "frequency": 2,
+        "dominant_theme": "Olympic outfitting and kit reveal",
+        "representative_clip": {
+          "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
+          "timestamp_start": 24.0,
+          "timestamp_end": 26.0,
+          "title": "London 2012 Team GB/Paralympics GB Adidas kit and footwear reveal",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
+          "duration": 163.2
+        }
+      },
+      {
+        "year": 2014,
+        "frequency": 1,
+        "dominant_theme": "event sponsorship",
+        "representative_clip": {
+          "asset_id": "06a10243-b802-7454-8000-e7adb2093011",
+          "timestamp_start": 4.0,
+          "timestamp_end": 20.0,
+          "title": "2014 FIFA World Cup final with Adidas kits and match ball",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10243ad688f211334f3832/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10243ad688f211334f3832/hlses/playlist.m3u8",
+          "duration": 129.128999999
+        }
+      },
+      {
+        "year": 2016,
+        "frequency": 1,
+        "dominant_theme": "sustainability campaign",
+        "representative_clip": {
+          "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
+          "timestamp_start": 0.0,
+          "timestamp_end": 17.0,
+          "title": "Adidas x Parley visual co-branding and sustainability-stage presentation",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
+          "duration": 427.9692
+        }
+      },
+      {
+        "year": 2018,
+        "frequency": 2,
+        "dominant_theme": "event sponsorship",
+        "representative_clip": {
+          "asset_id": "06a10247-26af-7628-8000-bb52801d2dc4",
+          "timestamp_start": 4.0,
+          "timestamp_end": 18.0,
+          "title": "2018 FIFA World Cup footage with Telstar match ball and sideline branding",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024719a50a20b9055298c/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024719a50a20b9055298c/hlses/playlist.m3u8",
+          "duration": 130.0
+        }
+      },
+      {
+        "year": 2022,
+        "frequency": 2,
+        "dominant_theme": "event sponsorship",
+        "representative_clip": {
+          "asset_id": "06a1024b-5128-7920-8000-77a797bc69a0",
+          "timestamp_start": 26.0,
+          "timestamp_end": 30.0,
+          "title": "2022 FIFA World Cup final with Adidas match ball and Argentina kit visibility",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024b49a50a20b905529b0/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024b49a50a20b905529b0/hlses/playlist.m3u8",
+          "duration": 127.42
+        }
+      },
+      {
+        "year": 2024,
+        "frequency": 2,
+        "dominant_theme": "lifestyle storytelling and contemporary tournament presence",
+        "representative_clip": {
+          "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
+          "timestamp_start": 16.0,
+          "timestamp_end": 28.0,
+          "title": "Adidas Samba lifestyle/product hero storytelling",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
+          "duration": 632.923958
+        }
+      }
+    ],
+    "narrative_summary": "Across the corpus, Adidas’s visual storytelling clearly migrates from being an embedded sponsor inside major sports broadcasts to becoming the central subject of its own films. In the earliest material, Adidas is mostly seen through functional tournament assets: official match balls, team kits, and sideline boards. The brand is present, but usually as infrastructure around the spectacle rather than as the narrative driver. World Cup footage from 1994, 2002, 2010, 2014, 2018, and 2022 repeatedly shows this mode: the logo lives on the ball, on national kits, and at the edge of the pitch, signaling authority, scale, and legitimacy through event ownership.\n\nBy the London 2012 and Rio-era material, Adidas begins to move closer to authored visual identity. Olympic kit reveals and athlete apparel make the three-stripes more intentional and fashion-forward, while the brand starts using product close-ups and controlled presentation moments rather than relying only on incidental in-game exposure. That transition becomes much stronger in later owned or semi-owned films, where the camera lingers on footwear, apparel silhouettes, and heritage marks like the trefoil.\n\nThe biggest shift comes in the more recent lifestyle and campaign-led material. Instead of borrowing meaning from sport alone, Adidas creates meaning through product hero shots, cultural associations, and aesthetic world-building. The Samba footage positions the shoe as an object of style and identity, not just performance. The Yeezy/footwear-oriented content similarly centers materiality, form, and desirability, with Adidas no longer appearing as a sponsor inside someone else’s story but as the author of the frame.\n\nSustainability adds a further evolution in brand storytelling. In the Parley material, Adidas uses unmistakable visual co-branding and stagecraft to attach the brand to environmental purpose. Here the logo is not merely proof of sponsorship or product ownership; it becomes a signifier of values. Taken together, the corpus shows a progression from event visibility, to athlete and federation outfitting, to product-centric and culturally coded films, and finally to broader brand statements that combine performance, lifestyle, and sustainability.",
+    "estimated_value": {
+      "total_mentions": 15,
+      "estimated_brand_intelligence_value_usd": 75000,
+      "calculation_basis": "Heuristic brand-intelligence estimate based on 15 distinct clips/scenes with clear visual Adidas presence across the indexed corpus, valued at roughly $5,000 per validated scene because each clip contributes dated evidence of brand-role evolution (from background sponsorship to owned narrative/product storytelling)."
+    },
+    "session_id": "sess_019e5e0c-7578-7862-a903-ae64d323ef8f",
+    "source": "jockey"
+  }
+}

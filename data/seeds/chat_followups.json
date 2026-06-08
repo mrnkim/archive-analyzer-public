@@ -1,0 +1,15 @@
+{
+  "followups": {
+    "2012": {
+      "question_keywords": ["2012", "london", "olympic", "spike", "why"],
+      "answer": "The 2012 spike (frequency 87) comes from Adidas being the **official sportswear partner** of the London Olympics. Specifically:\n\n1. **Take the Stage campaign**: an ad featuring 130 British athletes ran across every BBC and ITV channel.\n2. **TeamGB kit**: Adidas supplied apparel for every Team GB discipline.\n3. **Olympic Village placement**: a 14-day exclusive on the main billboards.\n\nFor comparison, Nike (frequency 32) and Puma (frequency 18) were far behind in the same period."
+    },
+    "nike": {
+      "question_keywords": ["nike", "compare", "vs", "comparison"],
+      "answer": "Nike in the same 2012 window:\n\n| Brand | Frequency | Focus |\n|-------|-----------|-------|\n| Adidas | 87 | Official Olympic sponsorship (all disciplines) |\n| Nike | 32 | Athletics + basketball (Just Do It series) |\n| Puma | 18 | Jamaican track team (Usain Bolt) |\n\nNike was not an official sponsor but used individual-athlete marketing (Usain Bolt etc.) for cultural mindshare. In raw media mentions, however, Adidas led by roughly 2.7x."
+    },
+    "default": {
+      "answer": "Interesting question. The seed data doesn't have a specific answer for it, so this is a mock response. After Phase 2 integration, answers come from a real Jockey query against the KS."
+    }
+  }
+}

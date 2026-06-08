@@ -1,0 +1,60 @@
+# Environment
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Node
+node_modules/
+dist/
+build/
+.vite/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Data / runtime
+*.sqlite
+*.sqlite3
+*.db
+data/cache/
+data/runtime/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Railway
+.railway/
+
+# Python packaging
+*.egg-info/
+
+# Claude Code local settings (per-user)
+.claude/
+.env.bak*
+
+# Local tooling / authoring assets — not part of the published app
+jockey/
+
+# TS incremental build cache
+*.tsbuildinfo

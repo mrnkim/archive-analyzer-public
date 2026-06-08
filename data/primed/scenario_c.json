@@ -1,0 +1,158 @@
+{
+  "query": "Compare Adidas presence in third-party event coverage (World Cup, Olympics, Euros) vs in its own brand films (NMD, YEEZY, Samba, You Got This).",
+  "scenario": "C",
+  "payload": {
+    "entity": "Adidas visual presence across third-party event coverage vs owned brand films",
+    "query": "Compare Adidas presence in third-party event coverage (World Cup, Olympics, Euros) vs in its own brand films (NMD, YEEZY, Samba, You Got This).",
+    "timeline": [
+      {
+        "year": 1994,
+        "frequency": 1,
+        "dominant_theme": "EARNED: World Cup kits + sideline boards",
+        "representative_clip": {
+          "asset_id": "06a1022e-404b-7777-8000-a944f8e3da46",
+          "timestamp_start": 0.0,
+          "timestamp_end": 21.0,
+          "title": "1994 FIFA World Cup archival highlights",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1022e36e59e193d3411a0d/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1022e36e59e193d3411a0d/hlses/playlist.m3u8",
+          "duration": 222.56
+        }
+      },
+      {
+        "year": 2002,
+        "frequency": 2,
+        "dominant_theme": "EARNED: Fevernova match ball + tournament highlights",
+        "representative_clip": {
+          "asset_id": "06a10238-4824-7deb-8000-b13e03d008ad",
+          "timestamp_start": 15.0,
+          "timestamp_end": 29.0,
+          "title": "Iconic World Cup moments compilation featuring Adidas Fevernova",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023796afa435d1f30ae32/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023796afa435d1f30ae32/hlses/playlist.m3u8",
+          "duration": 6311.6053
+        }
+      },
+      {
+        "year": 2010,
+        "frequency": 3,
+        "dominant_theme": "EARNED: Jabulani match ball + South Africa tournament branding",
+        "representative_clip": {
+          "asset_id": "06a1023d-979d-7922-8000-4731aedfc9bb",
+          "timestamp_start": 11.0,
+          "timestamp_end": 15.0,
+          "title": "2010 FIFA World Cup South Africa coverage with Jabulani and boards",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/hlses/playlist.m3u8",
+          "duration": 266.68
+        }
+      },
+      {
+        "year": 2012,
+        "frequency": 2,
+        "dominant_theme": "OWNED: Team GB kit unveiling",
+        "representative_clip": {
+          "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
+          "timestamp_start": 24.0,
+          "timestamp_end": 26.0,
+          "title": "Adidas Team GB / Paralympics GB kit reveal",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
+          "duration": 163.2
+        }
+      },
+      {
+        "year": 2014,
+        "frequency": 1,
+        "dominant_theme": "EARNED: World Cup final kits",
+        "representative_clip": {
+          "asset_id": "06a10243-b802-7454-8000-e7adb2093011",
+          "timestamp_start": 4.0,
+          "timestamp_end": 8.0,
+          "title": "2014 FIFA World Cup Final Germany vs Argentina",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10243ad688f211334f3832/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10243ad688f211334f3832/hlses/playlist.m3u8",
+          "duration": 129.128999999
+        }
+      },
+      {
+        "year": 2015,
+        "frequency": 1,
+        "dominant_theme": "OWNED: YEEZY launch film",
+        "representative_clip": {
+          "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
+          "timestamp_start": 8.0,
+          "timestamp_end": 12.0,
+          "title": "Adidas Yeezy Boost promotional clip",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
+          "duration": 45.0
+        }
+      },
+      {
+        "year": 2016,
+        "frequency": 2,
+        "dominant_theme": "EARNED: Rio athlete uniforms vs OWNED: Parley collaboration",
+        "representative_clip": {
+          "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
+          "timestamp_start": 0.0,
+          "timestamp_end": 11.0,
+          "title": "Adidas Originals x Parley collaboration film",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
+          "duration": 427.9692
+        }
+      },
+      {
+        "year": 2018,
+        "frequency": 2,
+        "dominant_theme": "EARNED: Telstar 18 ball + national team kits",
+        "representative_clip": {
+          "asset_id": "06a10247-26af-7628-8000-bb52801d2dc4",
+          "timestamp_start": 12.0,
+          "timestamp_end": 19.0,
+          "title": "2018 FIFA World Cup Russia highlights",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024719a50a20b9055298c/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024719a50a20b9055298c/hlses/playlist.m3u8",
+          "duration": 130.0
+        }
+      },
+      {
+        "year": 2022,
+        "frequency": 2,
+        "dominant_theme": "EARNED: Al Rihla match ball + Argentina/France kits",
+        "representative_clip": {
+          "asset_id": "06a1024b-5128-7920-8000-77a797bc69a0",
+          "timestamp_start": 11.0,
+          "timestamp_end": 29.0,
+          "title": "2022 FIFA World Cup Final highlights",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024b49a50a20b905529b0/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024b49a50a20b905529b0/hlses/playlist.m3u8",
+          "duration": 127.42
+        }
+      },
+      {
+        "year": 2024,
+        "frequency": 1,
+        "dominant_theme": "EARNED: Euro 2024 sideline boards + Spain kit",
+        "representative_clip": {
+          "asset_id": "06a1024e-1b7c-7749-8000-ddb60be1efd4",
+          "timestamp_start": 13.0,
+          "timestamp_end": 29.0,
+          "title": "UEFA Euro 2024 final coverage",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024e04ff64115f29f876c/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024e04ff64115f29f876c/hlses/playlist.m3u8",
+          "duration": 522.36
+        }
+      }
+    ],
+    "narrative_summary": "Adidas shows up more consistently in earned media than in owned media across this corpus. The earned pattern is especially strong in football and major multisport events: FIFA World Cup footage repeatedly surfaces Adidas through official match balls, national team kits, and perimeter boards, while Olympic clips show the brand on athlete uniforms and footwear. This makes Adidas feel structurally embedded in elite sport, with visibility tied to competition, broadcast spectacle, and tournament iconography rather than explicit promotion.\n\nOwned presence is more intermittent but more controlled and product-led. When Adidas appears in its own films, the visuals are tighter and more intentional: campaign montages, Team GB kit unveilings, Parley collaboration imagery, and product storytelling such as Yeezy. In other words, earned exposure supplies scale and continuity, while owned exposure supplies narrative precision and style. In this dataset, earned footage dominates the year-by-year cadence, while owned content spikes around launches, collaborations, and campaign moments.",
+    "estimated_value": {
+      "total_mentions": 17,
+      "estimated_brand_intelligence_value_usd": 42500,
+      "calculation_basis": "Conservative clip-based estimate using only visually verifiable Adidas presence in the available corpus. Counted distinct clips where Adidas appears via kits, match balls, sideline boards, trefoil/three-stripes, or product hero shots. Omitted clips with unclear year attribution even if Adidas was likely present. Estimated brand-intelligence value assumes roughly $2,500 per validated visual-presence clip for comparative monitoring utility across earned and owned media."
+    },
+    "session_id": "sess_019e5e0c-7500-7550-bea8-6bf17cf0db25",
+    "source": "jockey"
+  }
+}

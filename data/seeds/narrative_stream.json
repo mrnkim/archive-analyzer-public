@@ -1,0 +1,22 @@
+{
+  "scenario": "A — Adidas brand visibility 1990–2025",
+  "tokens": [
+    "Adidas ", "media ", "exposure ", "across ", "30 ", "years ",
+    "shows ", "two ", "distinct ", "peaks.\n\n",
+    "**First peak (2012)**: ",
+    "As ", "the ", "lead ", "sportswear ", "partner ", "of ", "the ",
+    "London ", "Olympics, ", "Adidas ", "hit ", "an ", "all-time ",
+    "high ", "of ", "**87 mentions**. ", "The ", "Take ", "the ",
+    "Stage ", "campaign ", "ran ", "across ", "every ", "BBC ", "channel.\n\n",
+    "**Second peak (2024)**: ",
+    "Paris ", "Olympics ", "and ", "EURO ", "2024 ", "overlapped, ",
+    "producing ", "78 ", "mentions ", "— ",
+    "the ", "highest ", "since ", "London.\n\n",
+    "**Opportunity area**: ",
+    "Coverage ", "outside ", "sports ", "(entertainment, ",
+    "music, ", "lifestyle) ", "is ", "comparatively ", "thin, ",
+    "pointing ", "to ", "a ", "clear ", "growth ", "lane ",
+    "for ", "future ", "campaigns."
+  ],
+  "delay_ms": 50
+}

@@ -1,0 +1,144 @@
+{
+  "query": "How has Adidas brand exposure changed from 1990 to 2025?",
+  "scenario": "A",
+  "payload": {
+    "entity": "Adidas",
+    "query": "How has Adidas brand exposure changed from 1990 to 2025?",
+    "timeline": [
+      {
+        "year": 2010,
+        "frequency": 2,
+        "dominant_theme": "Jabulani match ball and World Cup kit visibility",
+        "representative_clip": {
+          "asset_id": "06a1023d-979d-7922-8000-4731aedfc9bb",
+          "timestamp_start": 11.0,
+          "timestamp_end": 14.0,
+          "title": "2010 FIFA World Cup highlights",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/hlses/playlist.m3u8",
+          "duration": 266.68
+        }
+      },
+      {
+        "year": 2012,
+        "frequency": 1,
+        "dominant_theme": "London Olympics athlete kit branding",
+        "representative_clip": {
+          "asset_id": "06a10242-9bd1-75eb-8000-219b5ca6c46b",
+          "timestamp_start": 21.0,
+          "timestamp_end": 29.0,
+          "title": "London 2012 athletics highlights",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024286afa435d1f30ae98/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024286afa435d1f30ae98/hlses/playlist.m3u8",
+          "duration": 137.68
+        }
+      },
+      {
+        "year": 2014,
+        "frequency": 2,
+        "dominant_theme": "Brazuca, finals-stage football, and Argentina training/kit exposure",
+        "representative_clip": {
+          "asset_id": "06a10243-b802-7454-8000-e7adb2093011",
+          "timestamp_start": 4.0,
+          "timestamp_end": 29.0,
+          "title": "2014 FIFA World Cup Final highlights",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10243ad688f211334f3832/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10243ad688f211334f3832/hlses/playlist.m3u8",
+          "duration": 129.128999999
+        }
+      },
+      {
+        "year": 2015,
+        "frequency": 1,
+        "dominant_theme": "YEEZY collaboration launch",
+        "representative_clip": {
+          "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
+          "timestamp_start": 1.0,
+          "timestamp_end": 20.0,
+          "title": "YEEZY Boost 750 product film",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
+          "duration": 45.0
+        }
+      },
+      {
+        "year": 2016,
+        "frequency": 1,
+        "dominant_theme": "NMD product storytelling and Originals-style sneaker branding",
+        "representative_clip": {
+          "asset_id": "06a10244-4014-7215-8000-c42cd5e3a628",
+          "timestamp_start": 4.0,
+          "timestamp_end": 29.0,
+          "title": "Adidas NMD campaign film",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/hlses/playlist.m3u8",
+          "duration": 70.779042
+        }
+      },
+      {
+        "year": 2018,
+        "frequency": 1,
+        "dominant_theme": "Telstar official match ball visibility",
+        "representative_clip": {
+          "asset_id": "06a10247-26af-7628-8000-bb52801d2dc4",
+          "timestamp_start": 4.0,
+          "timestamp_end": 18.0,
+          "title": "2018 FIFA World Cup highlights",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024719a50a20b9055298c/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024719a50a20b9055298c/hlses/playlist.m3u8",
+          "duration": 130.0
+        }
+      },
+      {
+        "year": 2022,
+        "frequency": 2,
+        "dominant_theme": "Women's football campaign plus Al Rihla World Cup ball",
+        "representative_clip": {
+          "asset_id": "06a1024a-7ca6-72f0-8000-ec0856892f9c",
+          "timestamp_start": 22.0,
+          "timestamp_end": 24.0,
+          "title": "2022 FIFA World Cup highlights",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024a6953c687bc25135d9/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024a6953c687bc25135d9/hlses/playlist.m3u8",
+          "duration": 623.64
+        }
+      },
+      {
+        "year": 2023,
+        "frequency": 1,
+        "dominant_theme": "Samba lifestyle/originals revival",
+        "representative_clip": {
+          "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
+          "timestamp_start": 15.0,
+          "timestamp_end": 29.0,
+          "title": "Adidas Samba campaign",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
+          "duration": 632.923958
+        }
+      },
+      {
+        "year": 2024,
+        "frequency": 2,
+        "dominant_theme": "Tournament integration plus 'You Got This' brand campaign",
+        "representative_clip": {
+          "asset_id": "06a1024c-ffa6-75fc-8000-9690ec568ae2",
+          "timestamp_start": 0.0,
+          "timestamp_end": 29.0,
+          "title": "Adidas 'You Got This' campaign",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/hlses/playlist.m3u8",
+          "duration": 88.0
+        }
+      }
+    ],
+    "narrative_summary": "Within this corpus, adidas exposure rises from effectively no confirmed visual presence in the sampled 1994 material to sustained, multi-context visibility from 2010 onward. The early sports archive shows that adidas was not uniformly visible in every legacy clip; for example, the checked 1994 World Cup footage did not yield clear adidas branding. By 2010, however, adidas becomes clearly detectable through official match-ball closeups, kit branding, and stadium signage tied to major football tournaments. That visibility continues in 2012 and intensifies in 2014, where adidas appears across team kits, pitchside boards, boots, and the Brazuca match ball.",
+    "estimated_value": {
+      "total_mentions": 13,
+      "estimated_brand_intelligence_value_usd": 130000,
+      "calculation_basis": "Corpus-limited estimate based on 13 visually verified adidas-presence clips/scenes across the available 1994–2024 video set. Heuristic valuation assumes ~$10,000 in brand-intelligence utility per verified scene (historical benchmarking, sponsorship visibility evidence, and creative reference value), rounded to a single aggregate figure. This is not enterprise value or media value equivalency."
+    },
+    "session_id": "sess_019e5e0c-757f-78e2-9e6d-756520e5f84c",
+    "source": "jockey"
+  }
+}
