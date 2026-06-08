@@ -33,11 +33,12 @@ COPY backend/pyproject.toml ./backend/
 WORKDIR /app/backend
 RUN pip install -e .
 
-# Backend source + seed data (mock fallback)
+# Backend source + seed data (mock fallback) + video title map
 WORKDIR /app
 COPY backend/ ./backend/
 COPY data/seeds/ ./data/seeds/
 COPY data/primed/ ./data/primed/
+COPY data/video_titles.json ./data/video_titles.json
 
 # Frontend build output → frontend/dist
 COPY --from=frontend-builder /build/dist ./frontend/dist
