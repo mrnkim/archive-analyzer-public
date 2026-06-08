@@ -2,6 +2,9 @@
 
 import json
 import logging
+import re
+from functools import lru_cache
+from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ValidationError
@@ -15,6 +18,32 @@ from app.deps.jockey_client import JockeyClient, QueryError
 from app.prompts import get_instructions
 from app.schemas.trend_data import TREND_DATA_JSON_SCHEMA, TrendResponse
 from app.seeds import load_seed
+
+# Clips arrive in the knowledge store as `<youtube_id>.<ext>` from the yt-dlp
+# ingest flow, so Jockey's `title` is just that opaque filename.
+# `data/video_titles.json` maps each id to its real YouTube title (populated
+# by scripts/refresh_video_titles.py); we swap it in at enrichment time.
+_TITLES_FILE = Path(__file__).resolve().parents[3] / "data" / "video_titles.json"
+_YT_FILENAME_RE = re.compile(r"^([A-Za-z0-9_-]{11})\.(mp4|webm|mkv|mov)$")
+
+
+@lru_cache
+def _video_titles() -> dict[str, str]:
+    if not _TITLES_FILE.exists():
+        return {}
+    try:
+        return json.loads(_TITLES_FILE.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as e:
+        logging.getLogger(__name__).warning("Could not load %s: %s", _TITLES_FILE, e)
+        return {}
+
+
+def _prettify_title(filename: str) -> str:
+    """Replace `<youtube_id>.mp4` with the real video title when available."""
+    m = _YT_FILENAME_RE.match(filename or "")
+    if not m:
+        return filename
+    return _video_titles().get(m.group(1)) or filename
 
 
 async def _list_all_ks_items(api_key: str, ks_id: str, base_url: str) -> list[dict]:
@@ -213,7 +242,7 @@ async def query(req: QueryRequest) -> QueryResponse:
     resolved = await jockey_api.resolve_assets(api_key, hex_ids)
 
     def _enrich_clip(clip: dict) -> dict:
-        """Attach thumbnail_url / manifest_url / duration to a clip dict."""
+        """Attach thumbnail_url / manifest_url / duration + a real title."""
         rid = clip.get("asset_id") or ""
         hex_id = rid if jockey_api.is_hex_asset_id(rid) else uuid_to_hex.get(rid)
         info = resolved.get(hex_id) if hex_id else None
@@ -221,6 +250,7 @@ async def query(req: QueryRequest) -> QueryResponse:
             clip["thumbnail_url"] = info.get("thumbnail_url")
             clip["manifest_url"] = info.get("manifest_url")
             clip["duration"] = info.get("duration")
+        clip["title"] = _prettify_title(clip.get("title") or "")
         return clip
 
     enriched_timeline = []
