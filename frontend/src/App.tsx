@@ -7,7 +7,10 @@ import { NarrativePanel } from "./components/NarrativePanel";
 import { RevenueWidget } from "./components/RevenueWidget";
 import { SearchBar } from "./components/SearchBar";
 import { TimelineChart } from "./components/TimelineChart";
+import { TutorialPanel } from "./components/TutorialPanel";
 import { useStore } from "./store";
+
+type Tab = "analyzer" | "tutorial";
 
 type HealthResponse = {
   status: string;
@@ -18,6 +21,7 @@ type HealthResponse = {
 
 export default function App() {
   const [health, setHealth] = useState<HealthResponse | null>(null);
+  const [tab, setTab] = useState<Tab>("analyzer");
   const result = useStore((s) => s.result);
   const setResult = useStore((s) => s.setResult);
   const setSelectedPoint = useStore((s) => s.setSelectedPoint);
@@ -80,7 +84,35 @@ export default function App() {
         </div>
       </header>
 
-      <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
+      <div className="flex-1 flex">
+        <aside className="w-48 flex-none border-r border-neutral-800 px-3 py-6">
+          <nav className="space-y-1 sticky top-6">
+            {([
+              ["analyzer", "Analyzer"],
+              ["tutorial", "Tutorial"],
+            ] as [Tab, string][]).map(([id, label]) => (
+              <button
+                key={id}
+                onClick={() => setTab(id)}
+                className={
+                  "w-full text-left px-3 py-2 text-sm rounded-md border-l-2 transition-colors " +
+                  (tab === id
+                    ? "border-brand-500 bg-brand-500/10 text-neutral-100 font-medium"
+                    : "border-transparent text-neutral-500 hover:text-neutral-300 hover:bg-neutral-900")
+                }
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
+        </aside>
+
+        {tab === "tutorial" ? (
+          <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full">
+            <TutorialPanel />
+          </main>
+        ) : (
+        <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
         <SearchBar onSubmit={handleSearch} loading={loading} />
 
         {result && (
@@ -141,6 +173,8 @@ export default function App() {
           </div>
         )}
       </main>
+        )}
+      </div>
 
       <footer className="px-6 py-3 border-t border-neutral-800 text-xs text-neutral-500 text-center">
         Demo only · Video sources: each official YouTube channel · Powered by{" "}
