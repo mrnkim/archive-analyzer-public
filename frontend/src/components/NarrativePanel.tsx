@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useEventSource } from "../hooks/useEventSource";
-import { JockeyMarkdown } from "./JockeyMarkdown";
+import { Markdown } from "./Markdown";
 
 type Props = {
   query: string | null;
   /**
    * Already-resolved narrative from /api/query. When provided we replay it
    * locally as a fake stream — same UX as SSE, perfectly consistent with the
-   * chart/clips, and zero extra Jockey cost. Falls back to true SSE when
+   * chart/clips, and zero extra Pegasus cost. Falls back to true SSE when
    * absent (mock mode or before the query response lands).
    */
   narrative?: string | null;
@@ -85,7 +85,7 @@ export function NarrativePanel({ query, narrative }: Props) {
 
       {active && (
         <div className="flex-1 overflow-y-auto text-sm">
-          <JockeyMarkdown>{text}</JockeyMarkdown>
+          <Markdown>{text}</Markdown>
           {!done && !error && (
             <span className="inline-block w-2 h-4 bg-brand-500 ml-0.5 animate-pulse align-middle" />
           )}

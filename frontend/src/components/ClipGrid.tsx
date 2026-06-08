@@ -1,5 +1,5 @@
 import { HlsClipPlayer } from "./HlsClipPlayer";
-import type { TimelinePoint } from "../types/api";
+import type { Scene, TimelinePoint } from "../types/api";
 
 type Props = {
   point: TimelinePoint | null;
@@ -14,76 +14,88 @@ export function ClipGrid({ point }: Props) {
     );
   }
 
-  const clip = point.representative_clip;
-  const clipDuration = clip.timestamp_end - clip.timestamp_start;
+  // Use the full scenes list when present (new backend), otherwise fall back
+  // to the single representative clip (older primed JSON snapshots).
+  const scenes: Scene[] =
+    point.scenes && point.scenes.length > 0
+      ? point.scenes
+      : [point.representative_clip];
 
   return (
     <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4">
       <div className="flex items-baseline justify-between mb-3">
         <h3 className="text-sm font-medium text-neutral-300">
-          Representative clip — {point.year}
+          Scenes — {point.year}
         </h3>
         <span
           className="text-xs text-neutral-500"
-          title="Distinct visual moments where adidas appears in this year's clip(s)"
+          title="Distinct visual moments where the entity appears this year"
         >
-          {point.frequency} scene{point.frequency === 1 ? "" : "s"}
+          {scenes.length} of {point.frequency}
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {clip.manifest_url ? (
+      {point.dominant_theme && (
+        <div className="text-xs text-neutral-400 mb-3">
+          Theme: <span className="text-brand-500">{point.dominant_theme}</span>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {scenes.map((scene, i) => (
+          <SceneCard key={`${scene.asset_id}-${scene.timestamp_start}-${i}`} scene={scene} rank={i} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SceneCard({ scene, rank }: { scene: Scene; rank: number }) {
+  const duration = scene.timestamp_end - scene.timestamp_start;
+  return (
+    <div className="bg-neutral-950 border border-neutral-800 rounded-md overflow-hidden flex flex-col">
+      <div className="relative">
+        {scene.manifest_url ? (
           <HlsClipPlayer
-            manifestUrl={clip.manifest_url}
-            thumbnailUrl={clip.thumbnail_url}
-            title={clip.title}
-            startSec={clip.timestamp_start}
-            endSec={clip.timestamp_end}
+            manifestUrl={scene.manifest_url}
+            thumbnailUrl={scene.thumbnail_url}
+            title={scene.title}
+            startSec={scene.timestamp_start}
+            endSec={scene.timestamp_end}
           />
-        ) : clip.thumbnail_url ? (
-          <div className="aspect-video bg-neutral-800 rounded-md overflow-hidden border border-neutral-700">
+        ) : scene.thumbnail_url ? (
+          <div className="aspect-video bg-neutral-800">
             <img
-              src={clip.thumbnail_url}
-              alt={clip.title}
+              src={scene.thumbnail_url}
+              alt={scene.title}
               className="w-full h-full object-cover"
               loading="lazy"
             />
           </div>
         ) : (
-          <div className="aspect-video bg-neutral-800 rounded-md flex items-center justify-center border border-neutral-700 text-xs text-neutral-600">
-            No thumbnail available
+          <div className="aspect-video bg-neutral-800 flex items-center justify-center text-xs text-neutral-600">
+            No thumbnail
           </div>
         )}
-
-        <div className="space-y-2">
-          <div className="text-base font-medium text-neutral-100">{clip.title}</div>
-          <div className="text-xs text-neutral-400">
-            Theme: <span className="text-brand-500">{point.dominant_theme}</span>
-          </div>
-          <div className="text-xs text-neutral-500">
-            asset_id: <code className="text-neutral-400">{clip.asset_id}</code>
-          </div>
-          <div className="text-xs text-neutral-500">
-            Range: {clip.timestamp_start.toFixed(1)}s – {clip.timestamp_end.toFixed(1)}s
-            <span className="ml-2 text-neutral-600">
-              ({clipDuration.toFixed(1)}s clip)
-            </span>
-            {clip.duration && (
-              <span className="ml-2 text-neutral-600">
-                · full asset {clip.duration.toFixed(0)}s
-              </span>
-            )}
-          </div>
-          {clip.manifest_url && (
-            <a
-              href={clip.manifest_url}
-              target="_blank"
-              rel="noopener"
-              className="inline-block text-xs text-brand-500 hover:underline"
-            >
-              ↗ Open HLS stream in browser
-            </a>
-          )}
+        <span className="absolute top-1.5 left-1.5 bg-black/70 backdrop-blur-sm text-[10px] font-medium text-neutral-100 px-1.5 py-0.5 rounded">
+          #{rank + 1}
+        </span>
+        {scene.score != null && (
+          <span
+            className="absolute top-1.5 right-1.5 bg-black/70 backdrop-blur-sm text-[10px] font-medium text-brand-500 px-1.5 py-0.5 rounded"
+            title="Marengo relevance score"
+          >
+            {scene.score.toFixed(2)}
+          </span>
+        )}
+      </div>
+      <div className="p-2.5 text-xs space-y-1">
+        <div className="text-neutral-200 truncate" title={scene.title}>
+          {scene.title || "(no title)"}
+        </div>
+        <div className="text-neutral-500">
+          {scene.timestamp_start.toFixed(1)}s – {scene.timestamp_end.toFixed(1)}s
+          <span className="ml-1 text-neutral-600">({duration.toFixed(1)}s)</span>
         </div>
       </div>
     </div>

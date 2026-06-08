@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { postQuery } from "./api/client";
+import type { TimelinePoint } from "./types/api";
 import { ChatPanel } from "./components/ChatPanel";
 import { ClipGrid } from "./components/ClipGrid";
 import { ClipStrip } from "./components/ClipStrip";
@@ -19,6 +20,12 @@ type HealthResponse = {
   api_key_configured: string;
 };
 
+// Debug panel is opt-in via `?debug=1` so end users never see it.
+// Devs can keep it on by hitting `http://localhost:5173/?debug=1`.
+const showDebug =
+  typeof window !== "undefined" &&
+  new URLSearchParams(window.location.search).get("debug") === "1";
+
 export default function App() {
   const [health, setHealth] = useState<HealthResponse | null>(null);
   const [tab, setTab] = useState<Tab>("analyzer");
@@ -31,13 +38,29 @@ export default function App() {
   const setStreamingQuery = useStore((s) => s.setStreamingQuery);
   const loading = useStore((s) => s.loading);
   const setLoading = useStore((s) => s.setLoading);
+  const clipGridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch("/api/health").then((r) => r.json()).then(setHealth).catch(() => {});
   }, []);
 
+  // Wrapping setSelectedPoint so user-initiated picks (timeline click,
+  // clip-strip click) also scroll the player into view. The initial
+  // auto-select-peak call after a query intentionally uses the bare
+  // setter so the page doesn't jump past the chart on first load.
+  function handleSelectPoint(point: TimelinePoint) {
+    setSelectedPoint(point);
+    requestAnimationFrame(() => {
+      clipGridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
   async function handleSearch(query: string, scenario?: string) {
     setLoading(true);
+    // Clear the previous result so the page visibly empties out while the
+    // new query runs — otherwise the user sees the old chart sitting under
+    // "Analyzing…" and thinks the data is current.
+    setResult(null);
     setSelectedPoint(null);
     resetChat();
     setStreamingQuery(null);
@@ -121,7 +144,7 @@ export default function App() {
               <div className="lg:col-span-2 space-y-4">
                 <TimelineChart
                   data={result.timeline}
-                  onPointClick={setSelectedPoint}
+                  onPointClick={handleSelectPoint}
                 />
               </div>
               <div className="space-y-4 flex flex-col">
@@ -142,27 +165,55 @@ export default function App() {
             <ClipStrip
               timeline={result.timeline}
               selectedYear={selectedPoint?.year ?? null}
-              onSelect={setSelectedPoint}
+              onSelect={handleSelectPoint}
               exportQuery={result.query}
             />
 
-            <ClipGrid point={selectedPoint} />
+            <div ref={clipGridRef} className="scroll-mt-4">
+              <ClipGrid point={selectedPoint} />
+            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <div className="lg:col-span-1">
+              <div className={showDebug ? "lg:col-span-1" : "lg:col-span-2"}>
                 <ChatPanel />
               </div>
-              <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 text-xs text-neutral-400">
-                <h3 className="text-sm font-medium text-neutral-300 mb-2">Debug info</h3>
-                <div>session_id: <code>{result.session_id}</code></div>
-                <div>entity: <code>{result.entity}</code></div>
-                <div>timeline points: {result.timeline.length}</div>
-                <div className="mt-2 text-neutral-600">
-                  Phase 1 mock mode. Responses are wired to real Jockey calls in Phase 2.
+              {showDebug && (
+                <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 text-xs text-neutral-400">
+                  <h3 className="text-sm font-medium text-neutral-300 mb-2">Debug info</h3>
+                  <div>session_id: <code>{result.session_id}</code></div>
+                  <div>entity: <code>{result.entity}</code></div>
+                  <div>timeline points: {result.timeline.length}</div>
+                  <div className="mt-2 text-neutral-600">
+                    Mock mode — set TWELVELABS_API_KEY + KS_ID to hit the real API.
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </>
+        )}
+
+        {loading && (
+          <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-12 flex flex-col items-center justify-center gap-3">
+            <svg
+              className="h-7 w-7 animate-spin text-brand-500"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden
+            >
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
+              <path
+                d="M22 12a10 10 0 0 0-10-10"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+            </svg>
+            <p className="text-sm text-neutral-200 font-medium">Analyzing the archive…</p>
+            <p className="text-xs text-neutral-500 max-w-md text-center">
+              Searching the index and generating per-clip themes + narrative.
+              First run on a new query can take 2–3 minutes; subsequent runs are cached.
+            </p>
+          </div>
         )}
 
         {!result && !loading && (

@@ -1,20 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { postFollowup } from "../api/client";
 import { useStore } from "../store";
-import { JockeyMarkdown } from "./JockeyMarkdown";
+import { Markdown } from "./Markdown";
 
 export function ChatPanel() {
   const chat = useStore((s) => s.chat);
   const appendChat = useStore((s) => s.appendChat);
   const result = useStore((s) => s.result);
+  const selectedPoint = useStore((s) => s.selectedPoint);
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
+  // Chip auto-reactivates whenever the user picks a new point. They can
+  // dismiss it for the current selection without losing the selection itself
+  // (player + chart highlight stay put).
+  const [contextEnabled, setContextEnabled] = useState(true);
+  useEffect(() => {
+    setContextEnabled(true);
+  }, [selectedPoint?.year]);
+
+  const contextActive = !!selectedPoint && contextEnabled;
+  const contextLabel = selectedPoint
+    ? `${selectedPoint.year} — ${selectedPoint.representative_clip.title || "clip"}`
+    : "";
 
   async function handleSend(e: React.FormEvent) {
     e.preventDefault();
     if (!input.trim() || !result?.session_id) return;
 
-    const userMsg = input.trim();
+    const typed = input.trim();
+    const userMsg = contextActive
+      ? `Regarding ${selectedPoint!.year} ("${selectedPoint!.representative_clip.title || "clip"}"): ${typed}`
+      : typed;
     appendChat({ role: "user", content: userMsg });
     setInput("");
     setPending(true);
@@ -58,7 +74,7 @@ export function ChatPanel() {
               {m.role === "user" ? "You" : "AI"}
             </div>
             {m.role === "assistant" ? (
-              <JockeyMarkdown>{m.content}</JockeyMarkdown>
+              <Markdown>{m.content}</Markdown>
             ) : (
               <div className="text-neutral-100 whitespace-pre-wrap">{m.content}</div>
             )}
@@ -70,12 +86,37 @@ export function ChatPanel() {
         )}
       </div>
 
+      {contextActive && (
+        <div className="mb-2 flex items-center gap-2 px-2 py-1.5 bg-brand-500/10 border border-brand-900 rounded-md">
+          <span className="text-[10px] uppercase tracking-wider text-brand-500 font-medium">
+            Asking about
+          </span>
+          <span className="text-xs text-neutral-200 truncate flex-1" title={contextLabel}>
+            {contextLabel}
+          </span>
+          <button
+            type="button"
+            onClick={() => setContextEnabled(false)}
+            aria-label="Remove clip context"
+            className="text-neutral-400 hover:text-neutral-100 text-sm leading-none px-1"
+          >
+            ×
+          </button>
+        </div>
+      )}
+
       <form onSubmit={handleSend} className="flex gap-2">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={disabled ? "Run a search first" : "Ask a followup…"}
+          placeholder={
+            disabled
+              ? "Run a search first"
+              : contextActive
+              ? "Ask about this clip…"
+              : "Ask a followup…"
+          }
           disabled={disabled || pending}
           className="flex-1 px-3 py-2 text-sm bg-neutral-950 border border-neutral-700 rounded-md
                      focus:outline-none focus:border-brand-500 disabled:opacity-50"

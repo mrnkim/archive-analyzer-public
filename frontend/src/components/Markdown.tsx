@@ -2,11 +2,11 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 /**
- * Jockey responses embed citations as `<vref id="..." start="HH:MM" end="HH:MM"></vref>`
- * inline tags. We strip them to a readable italicized hint instead of leaving
- * raw HTML in the output.
+ * Generative responses occasionally embed citations as
+ * `<vref id="..." start="HH:MM" end="HH:MM"></vref>` inline tags. We strip
+ * them to a readable italicized hint instead of letting raw HTML through.
  */
-function preprocessJockey(text: string): string {
+function preprocessCitations(text: string): string {
   return text.replace(
     /<vref\s+id="([^"]+)"(?:\s+start="([^"]*)")?(?:\s+end="([^"]*)")?\s*>\s*<\/vref>/g,
     (_match, _id, start, end) => {
@@ -22,12 +22,12 @@ type Props = {
   className?: string;
 };
 
-export function JockeyMarkdown({ children, className = "" }: Props) {
-  const cleaned = preprocessJockey(children);
+export function Markdown({ children, className = "" }: Props) {
+  const cleaned = preprocessCitations(children);
   return (
     <div
       className={
-        "prose-jockey text-neutral-100 leading-relaxed " +
+        "text-neutral-100 leading-relaxed " +
         "[&_p]:my-2 [&_p:first-child]:mt-0 [&_p:last-child]:mb-0 " +
         "[&_ul]:my-2 [&_ul]:list-disc [&_ul]:pl-5 " +
         "[&_ol]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 " +

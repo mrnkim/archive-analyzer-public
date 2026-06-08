@@ -1,16 +1,23 @@
+export type Scene = {
+  asset_id: string;
+  timestamp_start: number;
+  timestamp_end: number;
+  title: string;
+  thumbnail_url?: string | null;
+  manifest_url?: string | null;
+  duration?: number | null;
+  score?: number | null;
+};
+
 export type TimelinePoint = {
   year: number;
   frequency: number;
   dominant_theme: string;
-  representative_clip: {
-    asset_id: string;
-    timestamp_start: number;
-    timestamp_end: number;
-    title: string;
-    thumbnail_url?: string | null;
-    manifest_url?: string | null;
-    duration?: number | null;
-  };
+  representative_clip: Scene;
+  // All matching scenes for this year, sorted by relevance descending.
+  // `representative_clip` === `scenes[0]`. Optional for backwards-compat
+  // with older primed JSON payloads.
+  scenes?: Scene[];
 };
 
 export type QueryResponse = {

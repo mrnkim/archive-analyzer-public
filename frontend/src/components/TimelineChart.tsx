@@ -16,6 +16,52 @@ type Props = {
   onPointClick: (point: TimelinePoint) => void;
 };
 
+type TooltipPayload = {
+  payload: TimelinePoint;
+};
+
+function ClipPreviewTooltip({
+  active,
+  payload,
+}: {
+  active?: boolean;
+  payload?: TooltipPayload[];
+}) {
+  if (!active || !payload?.length) return null;
+  const point = payload[0].payload;
+  const clip = point.representative_clip;
+  const sceneLabel = `${point.frequency} scene${point.frequency === 1 ? "" : "s"}`;
+
+  return (
+    <div className="bg-neutral-950/95 border border-neutral-700 rounded-md shadow-xl overflow-hidden w-56 pointer-events-none">
+      <div className="aspect-video bg-neutral-800 relative">
+        {clip.thumbnail_url ? (
+          <img
+            src={clip.thumbnail_url}
+            alt={clip.title}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-[10px] text-neutral-600">
+            no thumbnail
+          </div>
+        )}
+        <div className="absolute top-1 left-1 bg-black/70 text-white text-[11px] font-semibold tabular-nums rounded px-1.5 py-0.5">
+          {point.year}
+        </div>
+      </div>
+      <div className="px-2.5 py-2 space-y-1">
+        <div className="text-[11px] text-neutral-200 font-medium line-clamp-1">
+          {clip.title}
+        </div>
+        <div className="text-[10px] text-neutral-400 line-clamp-1">
+          {sceneLabel} · {point.dominant_theme}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function TimelineChart({ data, onPointClick }: Props) {
   const peakPoint = data.reduce(
     (max, p) => (p.frequency > max.frequency ? p : max),
@@ -54,17 +100,8 @@ export function TimelineChart({ data, onPointClick }: Props) {
           />
           <YAxis stroke="#737373" tick={{ fontSize: 12 }} />
           <Tooltip
-            contentStyle={{
-              backgroundColor: "#0a0a0a",
-              border: "1px solid #404040",
-              borderRadius: "6px",
-              fontSize: "12px",
-            }}
-            labelStyle={{ color: "#d4d4d4" }}
-            formatter={(value: number, _name, props) => {
-              const theme = props.payload?.dominant_theme;
-              return [`${value} scene${value === 1 ? "" : "s"} · ${theme}`, "Frequency"];
-            }}
+            content={<ClipPreviewTooltip />}
+            cursor={{ stroke: "#404040", strokeDasharray: "3 3" }}
           />
           <Line
             type="monotone"
