@@ -241,15 +241,15 @@ export function TutorialPanel() {
 
       {/* Biggest gotcha */}
       <Section eyebrow="Watch out" title="The biggest gotcha: UUID ↔ hex">
-        <Card className="border-amber-500/30 bg-amber-500/5">
+        <Card className="border-warning/30 bg-warning/5">
           <p>
-            When Jockey emits <code className="text-amber-400">representative_clip.asset_id</code>,
+            When Jockey emits <code className="text-warning">representative_clip.asset_id</code>,
             it gives you a <strong className="text-neutral-200">KSI UUID</strong> — but{" "}
-            <code className="text-amber-400">GET /v1.3/assets/{"{id}"}</code> only accepts the{" "}
+            <code className="text-warning">GET /v1.3/assets/{"{id}"}</code> only accepts the{" "}
             <strong className="text-neutral-200">24-char hex</strong> key. Convert via{" "}
-            <code className="text-amber-400">GET /knowledge-stores/{"{ks_id}"}/items</code> (it
+            <code className="text-warning">GET /knowledge-stores/{"{ks_id}"}/items</code> (it
             returns both IDs), build the map once, and reuse it — see{" "}
-            <code className="text-amber-400">backend/app/deps/jockey_assets.py</code>.
+            <code className="text-warning">backend/app/deps/jockey_assets.py</code>.
           </p>
         </Card>
       </Section>

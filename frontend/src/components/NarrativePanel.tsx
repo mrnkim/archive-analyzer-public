@@ -81,7 +81,7 @@ export function NarrativePanel({ query, narrative }: Props) {
         </div>
       )}
 
-      {error && <div className="text-sm text-red-400">Error: {error}</div>}
+      {error && <div className="text-sm text-error">Error: {error}</div>}
 
       {active && (
         <div className="flex-1 overflow-y-auto text-sm">

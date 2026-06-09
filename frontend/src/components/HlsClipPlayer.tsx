@@ -1,5 +1,6 @@
 import Hls from "hls.js";
 import { useEffect, useRef, useState } from "react";
+import { Icon } from "./Icon";
 
 type Props = {
   manifestUrl: string;
@@ -91,7 +92,7 @@ export function HlsClipPlayer({
     return (
       <button
         onClick={() => setPlaying(true)}
-        className="relative w-full aspect-video bg-neutral-800 rounded-md overflow-hidden border border-neutral-700 group"
+        className="relative w-full aspect-video bg-neutral-800 rounded-[20px] overflow-hidden border border-neutral-800 group"
         title={`Play: ${title}`}
       >
         {thumbnailUrl ? (
@@ -108,7 +109,7 @@ export function HlsClipPlayer({
         )}
         <div className="absolute inset-0 bg-black/35 group-hover:bg-black/15 transition-colors flex items-center justify-center">
           <div className="w-16 h-16 rounded-full bg-white/95 flex items-center justify-center shadow-2xl group-hover:scale-105 transition-transform">
-            <span className="text-3xl text-black ml-1">▶</span>
+            <Icon name="play" className="w-5 h-5 text-neutral-950 ml-0.5" />
           </div>
         </div>
       </button>
@@ -116,7 +117,7 @@ export function HlsClipPlayer({
   }
 
   return (
-    <div className="relative w-full aspect-video bg-black rounded-md overflow-hidden border border-neutral-700">
+    <div className="relative w-full aspect-video bg-black rounded-[20px] overflow-hidden border border-neutral-800">
       <video
         ref={videoRef}
         className="w-full h-full"
@@ -126,13 +127,13 @@ export function HlsClipPlayer({
       />
       <button
         onClick={() => setPlaying(false)}
-        className="absolute top-2 right-2 text-xs bg-black/70 hover:bg-black/90 text-white px-2 py-1 rounded"
+        className="absolute top-2 right-2 bg-black/70 hover:bg-black/90 text-white p-1 rounded-md backdrop-blur-sm"
         title="Close player"
       >
-        ✕
+        <Icon name="close" className="w-3.5 h-3.5" />
       </button>
       {error && (
-        <div className="absolute inset-x-0 bottom-0 bg-red-900/80 text-white text-xs p-2">
+        <div className="absolute inset-x-0 bottom-0 bg-error/90 text-white text-xs p-2">
           {error}
         </div>
       )}

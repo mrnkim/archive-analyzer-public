@@ -43,7 +43,7 @@ export function ClipStrip({
             <button
               key={`${p.year}-${c.asset_id}`}
               onClick={() => onSelect(p)}
-              className={`group relative aspect-video rounded overflow-hidden border-2 transition-all text-left ${
+              className={`group relative aspect-video rounded-xl overflow-hidden border-2 transition-all text-left ${
                 selected
                   ? "border-brand-500 ring-2 ring-brand-500/40"
                   : "border-neutral-700 hover:border-neutral-500"

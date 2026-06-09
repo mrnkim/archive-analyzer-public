@@ -52,8 +52,10 @@ export function ClipGrid({ point }: Props) {
 
 function SceneCard({ scene, rank }: { scene: Scene; rank: number }) {
   const duration = scene.timestamp_end - scene.timestamp_start;
+  // Strand "Video Thumbnail" pattern: 20px-radius media with a timecode chip,
+  // title + meta below the card (no surrounding box).
   return (
-    <div className="bg-neutral-950 border border-neutral-800 rounded-md overflow-hidden flex flex-col">
+    <div className="flex flex-col gap-2">
       <div className="relative">
         {scene.manifest_url ? (
           <HlsClipPlayer
@@ -64,7 +66,7 @@ function SceneCard({ scene, rank }: { scene: Scene; rank: number }) {
             endSec={scene.timestamp_end}
           />
         ) : scene.thumbnail_url ? (
-          <div className="aspect-video bg-neutral-800">
+          <div className="aspect-video bg-neutral-800 rounded-[20px] overflow-hidden border border-neutral-800">
             <img
               src={scene.thumbnail_url}
               alt={scene.title}
@@ -73,33 +75,37 @@ function SceneCard({ scene, rank }: { scene: Scene; rank: number }) {
             />
           </div>
         ) : (
-          <div className="aspect-video bg-neutral-800 flex items-center justify-center text-xs text-neutral-600">
+          <div className="aspect-video bg-neutral-800 rounded-[20px] overflow-hidden border border-neutral-800 flex items-center justify-center text-xs text-neutral-600">
             No thumbnail
           </div>
         )}
-        <span className="absolute top-1.5 left-1.5 bg-black/70 backdrop-blur-sm text-[10px] font-medium text-neutral-100 px-1.5 py-0.5 rounded">
+        {/* Strand video chip — rank */}
+        <span className="pointer-events-none absolute top-2.5 left-2.5 backdrop-blur-[20px] bg-white/[0.08] border border-white/60 text-white text-[10px] font-medium px-1.5 py-0.5 rounded-md tabular-nums">
           #{rank + 1}
         </span>
         {scene.score != null && (
           <span
-            className="absolute top-1.5 right-1.5 bg-black/70 backdrop-blur-sm text-[10px] font-medium text-brand-500 px-1.5 py-0.5 rounded"
+            className="pointer-events-none absolute top-2.5 right-2.5 backdrop-blur-[20px] bg-white/[0.08] border border-white/60 text-brand-500 text-[10px] font-medium px-1.5 py-0.5 rounded-md tabular-nums"
             title="Marengo relevance score"
           >
             {scene.score.toFixed(2)}
           </span>
         )}
+        {/* Strand video chip — timecode (IBM Plex Mono), bottom overlay */}
+        <span className="pointer-events-none absolute bottom-2.5 left-2.5 backdrop-blur-[20px] bg-white/[0.08] border border-white/60 text-white text-[10px] font-mono px-1.5 py-0.5 rounded-md">
+          {scene.timestamp_start.toFixed(1)}s – {scene.timestamp_end.toFixed(1)}s
+        </span>
       </div>
-      <div className="p-2.5 text-xs space-y-1">
-        <div className="text-neutral-200 truncate" title={scene.title}>
+      <div className="px-0.5 text-xs space-y-1">
+        <div className="text-neutral-100 truncate" title={scene.title}>
           {scene.title || "(no title)"}
         </div>
-        <div className="text-neutral-500">
-          {scene.timestamp_start.toFixed(1)}s – {scene.timestamp_end.toFixed(1)}s
-          <span className="ml-1 text-neutral-600">({duration.toFixed(1)}s)</span>
+        <div className="text-neutral-600 font-mono text-[11px]">
+          {duration.toFixed(1)}s clip
         </div>
         {scene.reason && (
           <div
-            className="text-neutral-300 leading-snug pt-1 mt-0.5 border-t border-neutral-800"
+            className="text-neutral-300 leading-snug pt-0.5"
             title="Why this scene was selected"
           >
             <span className="text-brand-500 font-medium">Why: </span>

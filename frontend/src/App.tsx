@@ -4,11 +4,13 @@ import type { TimelinePoint } from "./types/api";
 import { ChatPanel } from "./components/ChatPanel";
 import { ClipGrid } from "./components/ClipGrid";
 import { ClipStrip } from "./components/ClipStrip";
+import { EmptyState } from "./components/EmptyState";
 import { NarrativePanel } from "./components/NarrativePanel";
 import { RevenueWidget } from "./components/RevenueWidget";
 import { SearchBar } from "./components/SearchBar";
 import { TimelineChart } from "./components/TimelineChart";
 import { TutorialPanel } from "./components/TutorialPanel";
+import { TwelveLabsLogo } from "./components/TwelveLabsLogo";
 import { useStore } from "./store";
 
 type Tab = "analyzer" | "tutorial";
@@ -85,21 +87,37 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="px-6 py-4 border-b border-neutral-800">
-        <div className="flex items-baseline justify-between">
-          <div>
-            <h1 className="text-xl font-semibold">
-              Archive Trend & Narrative Analyzer
-            </h1>
-            <p className="text-xs text-neutral-400 mt-0.5">
-              Powered by TwelveLabs Jockey · Sample app
-            </p>
+      <header className="px-6 py-4 border-b border-neutral-800 bg-neutral-950/80 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/60 sticky top-0 z-20">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5 min-w-0">
+            <TwelveLabsLogo className="h-[18px] w-auto flex-none text-neutral-50" />
+            <span className="h-5 w-px flex-none bg-neutral-700" aria-hidden />
+            <div className="min-w-0">
+              <h1 className="text-sm font-medium text-neutral-100 truncate">
+                Archive Trend &amp; Narrative Analyzer
+              </h1>
+              <p className="text-xs text-neutral-500 mt-0.5">
+                Powered by Jockey · Sample app
+              </p>
+            </div>
           </div>
           {health && (
-            <div className="text-xs text-neutral-500">
-              env: <span className="text-neutral-300">{health.env}</span>
+            <div className="text-xs text-neutral-500 flex-none">
+              env: <span className="text-neutral-300 font-mono">{health.env}</span>
               {" · "}
-              KS: <span className={health.ks_configured === "yes" ? "text-brand-500" : "text-amber-500"}>
+              KS:{" "}
+              <span
+                className={
+                  "inline-flex items-center gap-1.5 " +
+                  (health.ks_configured === "yes" ? "text-brand-500" : "text-warning")
+                }
+              >
+                <span
+                  className={
+                    "h-1.5 w-1.5 rounded-full " +
+                    (health.ks_configured === "yes" ? "bg-brand-500" : "bg-warning")
+                  }
+                />
                 {health.ks_configured === "yes" ? "connected" : "mock mode"}
               </span>
             </div>
@@ -111,7 +129,7 @@ export default function App() {
         <aside className="w-48 flex-none border-r border-neutral-800 px-3 py-6">
           <nav className="space-y-1 sticky top-6">
             {([
-              ["analyzer", "Analyzer"],
+              ["analyzer", "Brand Intelligence (Adidas Example)"],
               ["tutorial", "Tutorial"],
             ] as [Tab, string][]).map(([id, label]) => (
               <button
@@ -136,7 +154,7 @@ export default function App() {
           </main>
         ) : (
         <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
-        <SearchBar onSubmit={handleSearch} loading={loading} />
+        <SearchBar onSubmit={handleSearch} loading={loading} showDemoChips={!!result} />
 
         {result && (
           <>
@@ -217,11 +235,7 @@ export default function App() {
         )}
 
         {!result && !loading && (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-12 text-center">
-            <p className="text-neutral-400 text-sm">
-              Type a question above, or pick one of the demo scenarios.
-            </p>
-          </div>
+          <EmptyState onSelect={handleSearch} onOpenTutorial={() => setTab("tutorial")} />
         )}
       </main>
         )}

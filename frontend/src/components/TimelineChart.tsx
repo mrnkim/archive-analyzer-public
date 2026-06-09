@@ -10,6 +10,7 @@ import {
   YAxis,
 } from "recharts";
 import type { TimelinePoint } from "../types/api";
+import { Icon } from "./Icon";
 
 type Props = {
   data: TimelinePoint[];
@@ -76,7 +77,7 @@ export function TimelineChart({ data, onPointClick }: Props) {
           title="Each scene = a distinct moment where adidas is visually present in the corpus. One video can contribute multiple scenes."
         >
           Scenes per year
-          <span className="text-neutral-500 ml-1 cursor-help">ⓘ</span>
+          <Icon name="info" className="inline-block w-3 h-3 ml-1 text-neutral-500 cursor-help align-[-1px]" />
         </h3>
         <span className="text-xs text-neutral-500">
           peak: {peakPoint.year} ({peakPoint.frequency} scenes) — {peakPoint.dominant_theme}
@@ -92,38 +93,40 @@ export function TimelineChart({ data, onPointClick }: Props) {
           }}
           margin={{ top: 10, right: 20, left: 0, bottom: 10 }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#262626" />
+          {/* Strand dark tokens: border #333231, text-tertiary #6B6966,
+              accent #00DC82, highlight #60E21B, bg #1D1C1B. */}
+          <CartesianGrid strokeDasharray="3 3" stroke="#333231" />
           <XAxis
             dataKey="year"
-            stroke="#737373"
+            stroke="#6B6966"
             tick={{ fontSize: 12 }}
           />
-          <YAxis stroke="#737373" tick={{ fontSize: 12 }} />
+          <YAxis stroke="#6B6966" tick={{ fontSize: 12 }} />
           <Tooltip
             content={<ClipPreviewTooltip />}
-            cursor={{ stroke: "#404040", strokeDasharray: "3 3" }}
+            cursor={{ stroke: "#45423F", strokeDasharray: "3 3" }}
           />
           <Line
             type="monotone"
             dataKey="frequency"
-            stroke="#22c55e"
+            stroke="#00DC82"
             strokeWidth={2}
-            dot={{ r: 3, fill: "#22c55e", cursor: "pointer" }}
-            activeDot={{ r: 6, fill: "#86efac" }}
+            dot={{ r: 3, fill: "#00DC82", cursor: "pointer" }}
+            activeDot={{ r: 6, fill: "#60E21B" }}
           />
           <ReferenceDot
             x={peakPoint.year}
             y={peakPoint.frequency}
             r={8}
-            fill="#86efac"
-            stroke="#22c55e"
+            fill="#60E21B"
+            stroke="#00DC82"
             strokeWidth={2}
           />
           <Brush
             dataKey="year"
             height={24}
-            stroke="#22c55e"
-            fill="#171717"
+            stroke="#00DC82"
+            fill="#1D1C1B"
             travellerWidth={8}
           />
         </LineChart>

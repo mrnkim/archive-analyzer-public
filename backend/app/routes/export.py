@@ -1,4 +1,4 @@
-"""CSV export — one row per timeline point, ready for licensing / handoff."""
+"""CSV export — one row per scene, ready for licensing / handoff."""
 
 import csv
 import io
@@ -17,11 +17,13 @@ router = APIRouter(prefix="/api/export", tags=["export"])
 _CSV_COLUMNS = [
     "year",
     "frequency",
+    "scene",
     "dominant_theme",
     "asset_id",
     "timestamp_start",
     "timestamp_end",
     "title",
+    "reason",
     "thumbnail_url",
     "manifest_url",
 ]
@@ -54,18 +56,27 @@ async def export_csv(
     writer = csv.DictWriter(buf, fieldnames=_CSV_COLUMNS, quoting=csv.QUOTE_MINIMAL)
     writer.writeheader()
     for point in payload.get("timeline", []) or []:
-        clip = point.get("representative_clip") or {}
-        writer.writerow({
-            "year": point.get("year", ""),
-            "frequency": point.get("frequency", ""),
-            "dominant_theme": point.get("dominant_theme", ""),
-            "asset_id": clip.get("asset_id", ""),
-            "timestamp_start": clip.get("timestamp_start", ""),
-            "timestamp_end": clip.get("timestamp_end", ""),
-            "title": clip.get("title", ""),
-            "thumbnail_url": clip.get("thumbnail_url", "") or "",
-            "manifest_url": clip.get("manifest_url", "") or "",
-        })
+        # One row per scene. Fall back to the single representative_clip for
+        # older payloads that predate the `scenes` list.
+        scenes = point.get("scenes") or []
+        if not scenes:
+            rep = point.get("representative_clip")
+            scenes = [rep] if rep else []
+        for idx, clip in enumerate(scenes, start=1):
+            clip = clip or {}
+            writer.writerow({
+                "year": point.get("year", ""),
+                "frequency": point.get("frequency", ""),
+                "scene": idx,
+                "dominant_theme": point.get("dominant_theme", ""),
+                "asset_id": clip.get("asset_id", ""),
+                "timestamp_start": clip.get("timestamp_start", ""),
+                "timestamp_end": clip.get("timestamp_end", ""),
+                "title": clip.get("title", ""),
+                "reason": clip.get("reason", "") or "",
+                "thumbnail_url": clip.get("thumbnail_url", "") or "",
+                "manifest_url": clip.get("manifest_url", "") or "",
+            })
 
     csv_text = buf.getvalue()
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")

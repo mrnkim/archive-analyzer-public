@@ -1,3 +1,9 @@
+/* TwelveLabs Strand fonts — Noto Sans (body), Geist (technical), IBM Plex Mono (code).
+   Milling is a licensed brand font and isn't bundled; the stack falls back to Noto Sans. */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.min.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,4 +16,26 @@ body,
 
 body {
   @apply bg-neutral-950 text-neutral-100 font-sans antialiased;
+}
+
+/* Strand green selection highlight. */
+::selection {
+  background-color: rgba(0, 220, 130, 0.28);
+}
+
+/* Slim, on-brand scrollbars for the charcoal surfaces. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #45423F transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #45423F;
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #6B6966;
 }
