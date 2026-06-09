@@ -32,6 +32,7 @@ pnpm-debug.log*
 *.db
 data/cache/
 data/runtime/
+data/_primed_backups/
 
 # OS
 .DS_Store

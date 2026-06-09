@@ -2,7 +2,7 @@
   "query": "How has Adidas's storytelling evolved from sports event sponsorship to owned brand films and lifestyle/sustainability campaigns?",
   "scenario": "B",
   "payload": {
-    "entity": "Adidas storytelling evolution across the corpus",
+    "entity": "Adidas storytelling evolution across the sports-event and branded-content corpus",
     "query": "How has Adidas's storytelling evolved from sports event sponsorship to owned brand films and lifestyle/sustainability campaigns?",
     "timeline": [
       {
@@ -12,8 +12,9 @@
         "representative_clip": {
           "asset_id": "06a1023d-979d-7922-8000-4731aedfc9bb",
           "timestamp_start": 13.0,
-          "timestamp_end": 15.0,
+          "timestamp_end": 18.0,
           "title": "aKSHgMqCwbQ.mp4",
+          "reason": "The official Jabulani match ball is shown in close-up before kickoff.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/hlses/playlist.m3u8",
           "duration": 266.68
@@ -22,8 +23,9 @@
           {
             "asset_id": "06a1023d-979d-7922-8000-4731aedfc9bb",
             "timestamp_start": 13.0,
-            "timestamp_end": 15.0,
+            "timestamp_end": 18.0,
             "title": "aKSHgMqCwbQ.mp4",
+            "reason": "The official Jabulani match ball is shown in close-up before kickoff.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/hlses/playlist.m3u8",
             "duration": 266.68
@@ -32,13 +34,14 @@
       },
       {
         "year": 2012,
-        "frequency": 2,
+        "frequency": 3,
         "dominant_theme": "Olympic kit design storytelling",
         "representative_clip": {
           "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
-          "timestamp_start": 80.0,
-          "timestamp_end": 88.0,
+          "timestamp_start": 38.0,
+          "timestamp_end": 44.0,
           "title": "Team GB and Paralympics GB adidas Kit launch",
+          "reason": "Stella McCartney fits the Team GB uniform in a studio, making the kit itself the visual hero.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
           "duration": 163.2
@@ -46,18 +49,30 @@
         "scenes": [
           {
             "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
-            "timestamp_start": 80.0,
-            "timestamp_end": 88.0,
+            "timestamp_start": 38.0,
+            "timestamp_end": 44.0,
             "title": "Team GB and Paralympics GB adidas Kit launch",
+            "reason": "Stella McCartney fits the Team GB uniform in a studio, making the kit itself the visual hero.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
             "duration": 163.2
           },
           {
             "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
-            "timestamp_start": 52.0,
-            "timestamp_end": 57.0,
+            "timestamp_start": 62.0,
+            "timestamp_end": 64.0,
             "title": "Team GB and Paralympics GB adidas Kit launch",
+            "reason": "The Team GB crest and Olympic rings are shown in tight close-up on the top.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
+            "duration": 163.2
+          },
+          {
+            "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
+            "timestamp_start": 80.0,
+            "timestamp_end": 88.0,
+            "title": "Team GB and Paralympics GB adidas Kit launch",
+            "reason": "Athletes model the collection on a launch stage with Adidas-branded Union Jack graphics behind them.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
             "duration": 163.2
@@ -67,12 +82,13 @@
       {
         "year": 2014,
         "frequency": 3,
-        "dominant_theme": "athlete-led football campaign",
+        "dominant_theme": "athlete-led football brand film",
         "representative_clip": {
           "asset_id": "06a10243-1ff7-7795-8000-887809a0c7f2",
           "timestamp_start": 69.0,
-          "timestamp_end": 72.0,
+          "timestamp_end": 75.0,
           "title": "The Wake Up Call  all in or nothing ft  Messi, Alves, Suarez, Ozil, RVP and more    adidas Football",
+          "reason": "Adidas Battle Pack boots are featured in rapid close-up as the campaign aesthetic takes over the match imagery.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
           "duration": 166.499667
@@ -81,17 +97,9 @@
           {
             "asset_id": "06a10243-1ff7-7795-8000-887809a0c7f2",
             "timestamp_start": 69.0,
-            "timestamp_end": 72.0,
+            "timestamp_end": 75.0,
             "title": "The Wake Up Call  all in or nothing ft  Messi, Alves, Suarez, Ozil, RVP and more    adidas Football",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
-            "duration": 166.499667
-          },
-          {
-            "asset_id": "06a10243-1ff7-7795-8000-887809a0c7f2",
-            "timestamp_start": 151.0,
-            "timestamp_end": 154.0,
-            "title": "The Wake Up Call  all in or nothing ft  Messi, Alves, Suarez, Ozil, RVP and more    adidas Football",
+            "reason": "Adidas Battle Pack boots are featured in rapid close-up as the campaign aesthetic takes over the match imagery.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
             "duration": 166.499667
@@ -101,6 +109,17 @@
             "timestamp_start": 115.0,
             "timestamp_end": 116.0,
             "title": "The Wake Up Call  all in or nothing ft  Messi, Alves, Suarez, Ozil, RVP and more    adidas Football",
+            "reason": "Messi’s footwork is shown in close-up with the distinctive Battle Pack boot pattern visible.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
+            "duration": 166.499667
+          },
+          {
+            "asset_id": "06a10243-1ff7-7795-8000-887809a0c7f2",
+            "timestamp_start": 152.0,
+            "timestamp_end": 154.0,
+            "title": "The Wake Up Call  all in or nothing ft  Messi, Alves, Suarez, Ozil, RVP and more    adidas Football",
+            "reason": "The film resolves with a clean Adidas logo end card after the dream narrative.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
             "duration": 166.499667
@@ -108,48 +127,15 @@
         ]
       },
       {
-        "year": 2015,
-        "frequency": 2,
-        "dominant_theme": "product hero film",
-        "representative_clip": {
-          "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
-          "timestamp_start": 9.0,
-          "timestamp_end": 18.0,
-          "title": "Adidas by Kanye West YEEZY BOOST Commercial",
-          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
-          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
-          "duration": 45.0
-        },
-        "scenes": [
-          {
-            "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
-            "timestamp_start": 9.0,
-            "timestamp_end": 18.0,
-            "title": "Adidas by Kanye West YEEZY BOOST Commercial",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
-            "duration": 45.0
-          },
-          {
-            "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
-            "timestamp_start": 39.0,
-            "timestamp_end": 45.0,
-            "title": "Adidas by Kanye West YEEZY BOOST Commercial",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
-            "duration": 45.0
-          }
-        ]
-      },
-      {
         "year": 2016,
         "frequency": 2,
-        "dominant_theme": "urban lifestyle launch film",
+        "dominant_theme": "innovation and fashion-forward product cinema",
         "representative_clip": {
           "asset_id": "06a10244-4014-7215-8000-c42cd5e3a628",
-          "timestamp_start": 37.0,
-          "timestamp_end": 45.0,
+          "timestamp_start": 0.0,
+          "timestamp_end": 70.0,
           "title": "adidas Originals NMD / The Past Empowers the Future",
+          "reason": "The NMD silhouette is framed in stylized urban hero shots that connect heritage sneakers to future city life.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/hlses/playlist.m3u8",
           "duration": 70.779042
@@ -157,33 +143,36 @@
         "scenes": [
           {
             "asset_id": "06a10244-4014-7215-8000-c42cd5e3a628",
-            "timestamp_start": 37.0,
-            "timestamp_end": 45.0,
+            "timestamp_start": 0.0,
+            "timestamp_end": 70.0,
             "title": "adidas Originals NMD / The Past Empowers the Future",
+            "reason": "The NMD silhouette is framed in stylized urban hero shots that connect heritage sneakers to future city life.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/hlses/playlist.m3u8",
             "duration": 70.779042
           },
           {
-            "asset_id": "06a10244-4014-7215-8000-c42cd5e3a628",
-            "timestamp_start": 63.0,
-            "timestamp_end": 70.0,
-            "title": "adidas Originals NMD / The Past Empowers the Future",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/hlses/playlist.m3u8",
-            "duration": 70.779042
+            "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
+            "timestamp_start": 0.0,
+            "timestamp_end": 45.0,
+            "title": "Adidas by Kanye West YEEZY BOOST Commercial",
+            "reason": "The Yeezy Boost is broken into exploded technical layers, turning the shoe into a design object.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
+            "duration": 45.0
           }
         ]
       },
       {
-        "year": 2018,
-        "frequency": 3,
+        "year": 2017,
+        "frequency": 2,
         "dominant_theme": "sustainability campaign",
         "representative_clip": {
           "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
-          "timestamp_start": 382.0,
-          "timestamp_end": 388.0,
+          "timestamp_start": 157.0,
+          "timestamp_end": 163.0,
           "title": "Parley for the Oceans & adidas Explain Their Eco-Friendly Sneakers",
+          "reason": "A white Adidas sneaker with green wave graphics is shown beside netting, linking product design to ocean-plastic recovery.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
           "duration": 427.9692
@@ -191,27 +180,20 @@
         "scenes": [
           {
             "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
-            "timestamp_start": 382.0,
-            "timestamp_end": 388.0,
-            "title": "Parley for the Oceans & adidas Explain Their Eco-Friendly Sneakers",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
-            "duration": 427.9692
-          },
-          {
-            "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
-            "timestamp_start": 412.0,
-            "timestamp_end": 421.0,
-            "title": "Parley for the Oceans & adidas Explain Their Eco-Friendly Sneakers",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
-            "duration": 427.9692
-          },
-          {
-            "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
             "timestamp_start": 157.0,
             "timestamp_end": 163.0,
             "title": "Parley for the Oceans & adidas Explain Their Eco-Friendly Sneakers",
+            "reason": "A white Adidas sneaker with green wave graphics is shown beside netting, linking product design to ocean-plastic recovery.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
+            "duration": 427.9692
+          },
+          {
+            "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
+            "timestamp_start": 382.0,
+            "timestamp_end": 388.0,
+            "title": "Parley for the Oceans & adidas Explain Their Eco-Friendly Sneakers",
+            "reason": "Multiple Adidas x Parley sneakers hang among plastic bottles as a direct sustainability metaphor.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
             "duration": 427.9692
@@ -219,14 +201,15 @@
         ]
       },
       {
-        "year": 2021,
+        "year": 2024,
         "frequency": 4,
-        "dominant_theme": "Originals lifestyle storytelling",
+        "dominant_theme": "lifestyle heritage and inclusive anthem storytelling",
         "representative_clip": {
           "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
-          "timestamp_start": 244.0,
-          "timestamp_end": 251.0,
+          "timestamp_start": 436.0,
+          "timestamp_end": 447.0,
           "title": "How The Adidas Samba Became a Cultural Icon",
+          "reason": "The Samba OG is isolated in clean product hero framing with its black three-stripes and suede toe clearly visible.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
           "duration": 632.923958
@@ -234,93 +217,54 @@
         "scenes": [
           {
             "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
-            "timestamp_start": 244.0,
-            "timestamp_end": 251.0,
-            "title": "How The Adidas Samba Became a Cultural Icon",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
-            "duration": 632.923958
-          },
-          {
-            "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
             "timestamp_start": 436.0,
             "timestamp_end": 447.0,
             "title": "How The Adidas Samba Became a Cultural Icon",
+            "reason": "The Samba OG is isolated in clean product hero framing with its black three-stripes and suede toe clearly visible.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
             "duration": 632.923958
           },
           {
             "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
-            "timestamp_start": 555.0,
-            "timestamp_end": 562.0,
+            "timestamp_start": 35.0,
+            "timestamp_end": 37.0,
             "title": "How The Adidas Samba Became a Cultural Icon",
+            "reason": "A black jacket with a large white trefoil logo anchors the Samba’s shift into streetwear culture.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
             "duration": 632.923958
           },
-          {
-            "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
-            "timestamp_start": 34.0,
-            "timestamp_end": 40.0,
-            "title": "How The Adidas Samba Became a Cultural Icon",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
-            "duration": 632.923958
-          }
-        ]
-      },
-      {
-        "year": 2024,
-        "frequency": 3,
-        "dominant_theme": "anthem brand film",
-        "representative_clip": {
-          "asset_id": "06a1024c-ffa6-75fc-8000-9690ec568ae2",
-          "timestamp_start": 83.0,
-          "timestamp_end": 88.0,
-          "title": "You Got This | adidas",
-          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/thumbnails/5.jpeg",
-          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/hlses/playlist.m3u8",
-          "duration": 88.0
-        },
-        "scenes": [
           {
             "asset_id": "06a1024c-ffa6-75fc-8000-9690ec568ae2",
-            "timestamp_start": 83.0,
+            "timestamp_start": 0.0,
             "timestamp_end": 88.0,
             "title": "You Got This | adidas",
+            "reason": "A multi-sport montage uses Adidas athletes and gear as recurring visual anchors across sports and age groups.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/hlses/playlist.m3u8",
             "duration": 88.0
           },
           {
             "asset_id": "06a1024e-978f-7a9e-8000-4df3f36377d0",
-            "timestamp_start": 54.0,
+            "timestamp_start": 0.0,
             "timestamp_end": 60.0,
             "title": "Great Rivals Make Great Motivation | adidas",
+            "reason": "Aitana Bonmatí and Alessia Russo are framed in training and tunnel-walk imagery that makes adidas-branded football identity aspirational.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024e89a50a20b905529d6/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024e89a50a20b905529d6/hlses/playlist.m3u8",
             "duration": 60.01996
-          },
-          {
-            "asset_id": "06a1024c-ffa6-75fc-8000-9690ec568ae2",
-            "timestamp_start": 34.0,
-            "timestamp_end": 40.0,
-            "title": "You Got This | adidas",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/hlses/playlist.m3u8",
-            "duration": 88.0
           }
         ]
       }
     ],
-    "narrative_summary": "Across the corpus, Adidas shifts from being seen mainly as part of the sporting stage to becoming the author of the stage itself. In the earliest footage, the brand is present through event infrastructure and performance equipment: the official World Cup ball, national-team kits, and tournament-adjacent gear. The storytelling is largely borrowed from the spectacle of global sport, with Adidas functioning as the visual system around elite competition rather than the central narrative voice.\n\nBy the early-to-mid 2010s, Adidas starts moving into authored brand worlds. The London 2012 Team GB material reframes sponsorship as design partnership, making kit development, fabrication, and presentation part of the story. The 2014 Messi-led football film goes further: Adidas is no longer just visible on athletes or equipment, but uses product close-ups, end cards, and campaign visual language to turn competitive mentality into a branded narrative. From there, product films like Yeezy Boost and NMD intensify control over image-making through isolated hero shots, exploded construction views, and highly stylized urban environments.\n\nLater entries expand Adidas beyond performance into culture and values. The Samba video explicitly traces a football shoe's migration into fashion, collaboration, and everyday lifestyle, with trefoil apparel, product tableaux, and collab editions standing in for a broader Originals identity. The Parley piece marks another evolution: Adidas uses product imagery, recycled-material symbolism, and co-brand iconography to present itself as a platform for sustainability storytelling, not just athletic aspiration.\n\nThe newest campaign material completes the transition. In the 2024 'You Got This' spots, Adidas blends sport, emotion, and cinematic montage across football, basketball, boxing, running, and skateboarding, ending on stripped-down three-stripe logos. The brand's visual storytelling has evolved from sponsorship visibility inside major events to fully owned films that connect performance, identity, design culture, and environmental purpose.",
+    "narrative_summary": "The corpus shows Adidas moving from being embedded inside major sports spectacles to controlling the entire frame. In the earliest examples, Adidas is mostly present as event infrastructure: the official World Cup match ball, tournament kit details, and branded football equipment visible within finals coverage. The brand benefits from the authority of global events, but the storytelling is still primarily about the match, the athletes, and the trophy rather than Adidas itself.\n\nBy the early 2010s, Adidas begins to shift from sponsor visibility to authored narrative. The London 2012 Team GB kit launch turns apparel into a designed object with fashion credibility and national identity, using close-ups of kit details, logos, and athlete fittings. The 2014 World Cup campaign then goes further: instead of merely appearing on the field, Adidas builds a psychological football story around Messi and elite players, with boots, kits, and end-frame branding working as visual proof points inside a cinematic brand film.\n\nFrom 2016 onward, the center of gravity moves decisively toward owned product worlds. NMD and Yeezy use hero shots, design breakdowns, monochrome-to-neon transitions, and silhouette-first presentation to position Adidas as a culture and innovation brand, not just a sports supplier. The Samba history video extends that logic by reframing a football shoe as a cross-generational lifestyle icon, where the three-stripes and trefoil-coded styling carry heritage into fashion, collaboration, and subculture.\n\nThe most mature stage is Adidas using owned films to express values as well as products. The Adidas x Parley piece makes sustainability itself a visual story through ocean-plastic material, green-blue colorways, hanging sneakers, and recycled-textile process imagery. The recent 'You Got This' films then broaden the brand again: Adidas is no longer only telling product stories, but confidence, rivalry, inspiration, and participation stories across elite athletes and everyday players. In short, the corpus traces a clear evolution from sponsorship visibility, to athlete-led brand authorship, to lifestyle/product mythology, and finally to values-led and emotionally inclusive brand cinema.",
     "estimated_value": {
-      "total_mentions": 20,
-      "estimated_brand_intelligence_value_usd": 50000,
-      "calculation_basis": "Brand-intelligence proxy based on 20 distinct visually grounded Adidas-presence clips across the covered years, weighted at roughly $2,500 per validated clip because the corpus spans premium contexts: global event sponsorship, Olympic kit design, athlete-led films, product launch assets, and sustainability storytelling."
+      "total_mentions": 8,
+      "estimated_brand_intelligence_value_usd": 2400,
+      "calculation_basis": "Estimated as 8 visually grounded Adidas clips × $300 per validated brand-intelligence datapoint, using only clips with explicit visual brand signals surfaced by retrieval/metadata."
     },
-    "session_id": "sess_019ea6c8-7aee-7203-9094-152d5f810bcb",
+    "session_id": "sess_019eaa01-183e-79b2-b4b4-b8b31d3cd3e4",
     "source": "jockey"
   }
 }

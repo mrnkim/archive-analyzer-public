@@ -19,6 +19,10 @@ class RepresentativeClip(BaseModel):
     timestamp_start: float
     timestamp_end: float
     title: str = ""
+    # One-line explanation, from Jockey, of why this scene was selected
+    # (what visual evidence of the entity it contains). Optional default
+    # keeps older primed/seed payloads that predate the field valid.
+    reason: str = ""
     # Enriched server-side after Jockey returns the timeline.
     thumbnail_url: str | None = None
     manifest_url: str | None = None
@@ -103,12 +107,23 @@ TREND_DATA_JSON_SCHEMA: dict[str, Any] = {
                                 "timestamp_start",
                                 "timestamp_end",
                                 "title",
+                                "reason",
                             ],
                             "properties": {
                                 "asset_id": {"type": "string"},
                                 "timestamp_start": {"type": "number"},
                                 "timestamp_end": {"type": "number"},
                                 "title": {"type": "string"},
+                                "reason": {
+                                    "type": "string",
+                                    "description": (
+                                        "One short sentence on why this clip "
+                                        "was selected — the specific visual "
+                                        "evidence of the entity in it (e.g. "
+                                        "'three-stripes visible on the Germany "
+                                        "home kit')."
+                                    ),
+                                },
                             },
                         },
                         "scenes": {
@@ -127,12 +142,23 @@ TREND_DATA_JSON_SCHEMA: dict[str, Any] = {
                                     "timestamp_start",
                                     "timestamp_end",
                                     "title",
+                                    "reason",
                                 ],
                                 "properties": {
                                     "asset_id": {"type": "string"},
                                     "timestamp_start": {"type": "number"},
                                     "timestamp_end": {"type": "number"},
                                     "title": {"type": "string"},
+                                    "reason": {
+                                        "type": "string",
+                                        "description": (
+                                            "One short sentence on why this "
+                                            "clip was selected — the specific "
+                                            "visual evidence of the entity in "
+                                            "it (e.g. 'three-stripes visible "
+                                            "on the Germany home kit')."
+                                        ),
+                                    },
                                 },
                             },
                         },

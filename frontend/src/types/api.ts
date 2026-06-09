@@ -7,6 +7,8 @@ export type Scene = {
   manifest_url?: string | null;
   duration?: number | null;
   score?: number | null;
+  // One-line explanation from Jockey of why this scene was selected.
+  reason?: string | null;
 };
 
 export type TimelinePoint = {

@@ -8,12 +8,13 @@
       {
         "year": 1994,
         "frequency": 1,
-        "dominant_theme": "World Cup embedded branding",
+        "dominant_theme": "Questra and Italy kit visibility",
         "representative_clip": {
           "asset_id": "06a1022e-404b-7777-8000-a944f8e3da46",
           "timestamp_start": 0.0,
           "timestamp_end": 29.0,
           "title": "1994 WORLD CUP FINAL: Brazil 0-0 Italy (3-2 PSO)",
+          "reason": "Adidas Questra ball appears in play and Italy\u2019s kit shows the adidas logo and three stripes.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1022e36e59e193d3411a0d/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1022e36e59e193d3411a0d/hlses/playlist.m3u8",
           "duration": 222.56
@@ -24,6 +25,7 @@
             "timestamp_start": 0.0,
             "timestamp_end": 29.0,
             "title": "1994 WORLD CUP FINAL: Brazil 0-0 Italy (3-2 PSO)",
+            "reason": "Adidas Questra ball appears in play and Italy\u2019s kit shows the adidas logo and three stripes.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1022e36e59e193d3411a0d/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1022e36e59e193d3411a0d/hlses/playlist.m3u8",
             "duration": 222.56
@@ -33,12 +35,13 @@
       {
         "year": 2002,
         "frequency": 1,
-        "dominant_theme": "Fevernova and three-stripe final",
+        "dominant_theme": "Fevernova and Germany final kit",
         "representative_clip": {
           "asset_id": "06a10238-4824-7deb-8000-b13e03d008ad",
-          "timestamp_start": 0.0,
-          "timestamp_end": 27.0,
+          "timestamp_start": 4.0,
+          "timestamp_end": 29.0,
           "title": "Germany v Brazil | 2002 FIFA World Cup Final | Full Match",
+          "reason": "Adidas Fevernova match ball is repeatedly visible and Germany wear adidas-branded kits with three stripes.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023796afa435d1f30ae32/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023796afa435d1f30ae32/hlses/playlist.m3u8",
           "duration": 6311.6053
@@ -46,9 +49,10 @@
         "scenes": [
           {
             "asset_id": "06a10238-4824-7deb-8000-b13e03d008ad",
-            "timestamp_start": 0.0,
-            "timestamp_end": 27.0,
+            "timestamp_start": 4.0,
+            "timestamp_end": 29.0,
             "title": "Germany v Brazil | 2002 FIFA World Cup Final | Full Match",
+            "reason": "Adidas Fevernova match ball is repeatedly visible and Germany wear adidas-branded kits with three stripes.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023796afa435d1f30ae32/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023796afa435d1f30ae32/hlses/playlist.m3u8",
             "duration": 6311.6053
@@ -56,14 +60,69 @@
         ]
       },
       {
+        "year": 2008,
+        "frequency": 1,
+        "dominant_theme": "Olympic football kit presence",
+        "representative_clip": {
+          "asset_id": "06a1023c-982f-7cda-8000-165960aa8ec0",
+          "timestamp_start": 112.0,
+          "timestamp_end": 147.0,
+          "title": "Top 10 Olympic Moments Beijing 2008 | Top Moments",
+          "reason": "Argentina men\u2019s football players are shown in adidas national-team jerseys during the Beijing Olympics package.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023c82a3d17f7d37c04f6/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023c82a3d17f7d37c04f6/hlses/playlist.m3u8",
+          "duration": 329.32
+        },
+        "scenes": [
+          {
+            "asset_id": "06a1023c-982f-7cda-8000-165960aa8ec0",
+            "timestamp_start": 112.0,
+            "timestamp_end": 147.0,
+            "title": "Top 10 Olympic Moments Beijing 2008 | Top Moments",
+            "reason": "Argentina men\u2019s football players are shown in adidas national-team jerseys during the Beijing Olympics package.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023c82a3d17f7d37c04f6/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023c82a3d17f7d37c04f6/hlses/playlist.m3u8",
+            "duration": 329.32
+          }
+        ]
+      },
+      {
+        "year": 2010,
+        "frequency": 1,
+        "dominant_theme": "Jabulani match ball",
+        "representative_clip": {
+          "asset_id": "06a1023d-979d-7922-8000-4731aedfc9bb",
+          "timestamp_start": 13.0,
+          "timestamp_end": 236.0,
+          "title": "aKSHgMqCwbQ.mp4",
+          "reason": "The Jabulani official match ball is shown in close-up before play.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/hlses/playlist.m3u8",
+          "duration": 266.68
+        },
+        "scenes": [
+          {
+            "asset_id": "06a1023d-979d-7922-8000-4731aedfc9bb",
+            "timestamp_start": 13.0,
+            "timestamp_end": 236.0,
+            "title": "aKSHgMqCwbQ.mp4",
+            "reason": "The Jabulani official match ball is shown in close-up before play.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023d8953c687bc2513552/hlses/playlist.m3u8",
+            "duration": 266.68
+          }
+        ]
+      },
+      {
         "year": 2012,
-        "frequency": 4,
-        "dominant_theme": "London Olympics lead supplier",
+        "frequency": 1,
+        "dominant_theme": "London Olympics lead apparel partner",
         "representative_clip": {
           "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
-          "timestamp_start": 52.0,
-          "timestamp_end": 53.0,
+          "timestamp_start": 19.0,
+          "timestamp_end": 138.0,
           "title": "Team GB and Paralympics GB adidas Kit launch",
+          "reason": "Red adidas performance shoes and Team GB launch apparel are highlighted throughout the kit-unveil film.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
           "duration": 163.2
@@ -71,36 +130,10 @@
         "scenes": [
           {
             "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
-            "timestamp_start": 52.0,
-            "timestamp_end": 53.0,
+            "timestamp_start": 19.0,
+            "timestamp_end": 138.0,
             "title": "Team GB and Paralympics GB adidas Kit launch",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
-            "duration": 163.2
-          },
-          {
-            "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
-            "timestamp_start": 62.0,
-            "timestamp_end": 64.0,
-            "title": "Team GB and Paralympics GB adidas Kit launch",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
-            "duration": 163.2
-          },
-          {
-            "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
-            "timestamp_start": 80.0,
-            "timestamp_end": 88.0,
-            "title": "Team GB and Paralympics GB adidas Kit launch",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
-            "duration": 163.2
-          },
-          {
-            "asset_id": "06a1023e-0ab2-7a01-8000-9697cd680c5f",
-            "timestamp_start": 105.0,
-            "timestamp_end": 108.0,
-            "title": "Team GB and Paralympics GB adidas Kit launch",
+            "reason": "Red adidas performance shoes and Team GB launch apparel are highlighted throughout the kit-unveil film.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1023e06e59e193d3411aba/hlses/playlist.m3u8",
             "duration": 163.2
@@ -109,13 +142,14 @@
       },
       {
         "year": 2014,
-        "frequency": 3,
-        "dominant_theme": "Messi campaign and Battle Pack",
+        "frequency": 1,
+        "dominant_theme": "World Cup boot campaign",
         "representative_clip": {
           "asset_id": "06a10243-1ff7-7795-8000-887809a0c7f2",
-          "timestamp_start": 69.0,
-          "timestamp_end": 72.0,
+          "timestamp_start": 2.0,
+          "timestamp_end": 166.0,
           "title": "The Wake Up Call  all in or nothing ft  Messi, Alves, Suarez, Ozil, RVP and more    adidas Football",
+          "reason": "Adidas Battle Pack boots and the closing adidas logo anchor the World Cup ad.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
           "duration": 166.499667
@@ -123,27 +157,10 @@
         "scenes": [
           {
             "asset_id": "06a10243-1ff7-7795-8000-887809a0c7f2",
-            "timestamp_start": 69.0,
-            "timestamp_end": 72.0,
+            "timestamp_start": 2.0,
+            "timestamp_end": 166.0,
             "title": "The Wake Up Call  all in or nothing ft  Messi, Alves, Suarez, Ozil, RVP and more    adidas Football",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
-            "duration": 166.499667
-          },
-          {
-            "asset_id": "06a10243-1ff7-7795-8000-887809a0c7f2",
-            "timestamp_start": 115.0,
-            "timestamp_end": 116.0,
-            "title": "The Wake Up Call  all in or nothing ft  Messi, Alves, Suarez, Ozil, RVP and more    adidas Football",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
-            "duration": 166.499667
-          },
-          {
-            "asset_id": "06a10243-1ff7-7795-8000-887809a0c7f2",
-            "timestamp_start": 152.0,
-            "timestamp_end": 154.0,
-            "title": "The Wake Up Call  all in or nothing ft  Messi, Alves, Suarez, Ozil, RVP and more    adidas Football",
+            "reason": "Adidas Battle Pack boots and the closing adidas logo anchor the World Cup ad.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024314ff64115f29f86fe/hlses/playlist.m3u8",
             "duration": 166.499667
@@ -152,13 +169,14 @@
       },
       {
         "year": 2015,
-        "frequency": 3,
-        "dominant_theme": "YEEZY co-branded product storytelling",
+        "frequency": 1,
+        "dominant_theme": "YEEZY collab",
         "representative_clip": {
           "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
           "timestamp_start": 1.0,
-          "timestamp_end": 2.0,
+          "timestamp_end": 45.0,
           "title": "Adidas by Kanye West YEEZY BOOST Commercial",
+          "reason": "Adidas wordmark, trefoil, and Yeezy Boost product renders are shown as hero visuals.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
           "duration": 45.0
@@ -167,26 +185,9 @@
           {
             "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
             "timestamp_start": 1.0,
-            "timestamp_end": 2.0,
-            "title": "Adidas by Kanye West YEEZY BOOST Commercial",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
-            "duration": 45.0
-          },
-          {
-            "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
-            "timestamp_start": 18.0,
-            "timestamp_end": 20.0,
-            "title": "Adidas by Kanye West YEEZY BOOST Commercial",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
-            "duration": 45.0
-          },
-          {
-            "asset_id": "06a10245-7195-7467-8000-457f29ed5f42",
-            "timestamp_start": 42.0,
             "timestamp_end": 45.0,
             "title": "Adidas by Kanye West YEEZY BOOST Commercial",
+            "reason": "Adidas wordmark, trefoil, and Yeezy Boost product renders are shown as hero visuals.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a102456d688f211334f3848/hlses/playlist.m3u8",
             "duration": 45.0
@@ -195,13 +196,14 @@
       },
       {
         "year": 2016,
-        "frequency": 3,
-        "dominant_theme": "NMD launch film",
+        "frequency": 1,
+        "dominant_theme": "NMD launch",
         "representative_clip": {
           "asset_id": "06a10244-4014-7215-8000-c42cd5e3a628",
-          "timestamp_start": 17.0,
-          "timestamp_end": 22.0,
+          "timestamp_start": 1.0,
+          "timestamp_end": 61.0,
           "title": "adidas Originals NMD / The Past Empowers the Future",
+          "reason": "Trefoil-branded track jacket and repeated NMD shoe close-ups dominate the spot.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/hlses/playlist.m3u8",
           "duration": 70.779042
@@ -209,27 +211,10 @@
         "scenes": [
           {
             "asset_id": "06a10244-4014-7215-8000-c42cd5e3a628",
-            "timestamp_start": 17.0,
-            "timestamp_end": 22.0,
+            "timestamp_start": 1.0,
+            "timestamp_end": 61.0,
             "title": "adidas Originals NMD / The Past Empowers the Future",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/hlses/playlist.m3u8",
-            "duration": 70.779042
-          },
-          {
-            "asset_id": "06a10244-4014-7215-8000-c42cd5e3a628",
-            "timestamp_start": 28.0,
-            "timestamp_end": 30.0,
-            "title": "adidas Originals NMD / The Past Empowers the Future",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/hlses/playlist.m3u8",
-            "duration": 70.779042
-          },
-          {
-            "asset_id": "06a10244-4014-7215-8000-c42cd5e3a628",
-            "timestamp_start": 63.0,
-            "timestamp_end": 66.0,
-            "title": "adidas Originals NMD / The Past Empowers the Future",
+            "reason": "Trefoil-branded track jacket and repeated NMD shoe close-ups dominate the spot.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024439a50a20b9055296e/hlses/playlist.m3u8",
             "duration": 70.779042
@@ -237,14 +222,15 @@
         ]
       },
       {
-        "year": 2017,
-        "frequency": 5,
-        "dominant_theme": "Parley sustainability collaboration",
+        "year": 2018,
+        "frequency": 3,
+        "dominant_theme": "Football + sustainability + tournament hardware",
         "representative_clip": {
           "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
           "timestamp_start": 0.0,
-          "timestamp_end": 4.0,
+          "timestamp_end": 421.0,
           "title": "Parley for the Oceans & adidas Explain Their Eco-Friendly Sneakers",
+          "reason": "Trefoil, adidas x Parley branding, and multiple three-stripe sneaker hero shots make the brand explicit throughout.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
           "duration": 427.9692
@@ -253,58 +239,134 @@
           {
             "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
             "timestamp_start": 0.0,
-            "timestamp_end": 4.0,
-            "title": "Parley for the Oceans & adidas Explain Their Eco-Friendly Sneakers",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
-            "duration": 427.9692
-          },
-          {
-            "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
-            "timestamp_start": 43.0,
-            "timestamp_end": 47.0,
-            "title": "Parley for the Oceans & adidas Explain Their Eco-Friendly Sneakers",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
-            "duration": 427.9692
-          },
-          {
-            "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
-            "timestamp_start": 95.0,
-            "timestamp_end": 99.0,
-            "title": "Parley for the Oceans & adidas Explain Their Eco-Friendly Sneakers",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
-            "duration": 427.9692
-          },
-          {
-            "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
-            "timestamp_start": 382.0,
-            "timestamp_end": 388.0,
-            "title": "Parley for the Oceans & adidas Explain Their Eco-Friendly Sneakers",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
-            "duration": 427.9692
-          },
-          {
-            "asset_id": "06a10248-e73f-7c9c-8000-33961f0e7714",
-            "timestamp_start": 412.0,
             "timestamp_end": 421.0,
             "title": "Parley for the Oceans & adidas Explain Their Eco-Friendly Sneakers",
+            "reason": "Trefoil, adidas x Parley branding, and multiple three-stripe sneaker hero shots make the brand explicit throughout.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a10248d6afa435d1f30aee0/hlses/playlist.m3u8",
             "duration": 427.9692
+          },
+          {
+            "asset_id": "06a10246-4ce9-7743-8000-f042a8b163c9",
+            "timestamp_start": 0.0,
+            "timestamp_end": 23.0,
+            "title": "TOP 10 GOALS | 2018 FIFA World Cup Russia",
+            "reason": "Germany\u2019s adidas kit is featured in the Toni Kroos goal segment.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024636afa435d1f30aebb/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024636afa435d1f30aebb/hlses/playlist.m3u8",
+            "duration": 304.98
+          },
+          {
+            "asset_id": "06a10247-26af-7628-8000-bb52801d2dc4",
+            "timestamp_start": 0.0,
+            "timestamp_end": 18.0,
+            "title": "2018 WORLD CUP FINAL: France 4-2 Croatia",
+            "reason": "The Adidas Telstar 18 official match ball is visible in multiple final-match sequences.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024719a50a20b9055298c/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024719a50a20b9055298c/hlses/playlist.m3u8",
+            "duration": 130.0
+          }
+        ]
+      },
+      {
+        "year": 2022,
+        "frequency": 1,
+        "dominant_theme": "Al Rihla and Argentina kit",
+        "representative_clip": {
+          "asset_id": "06a1024b-5128-7920-8000-77a797bc69a0",
+          "timestamp_start": 11.0,
+          "timestamp_end": 29.0,
+          "title": "THE GREATEST FINAL EVER?! | Argentina v France | FIFA World Cup Qatar 2022 Highlights",
+          "reason": "The Adidas Al Rihla match ball and Argentina\u2019s adidas home shirts are both clearly visible.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024b49a50a20b905529b0/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024b49a50a20b905529b0/hlses/playlist.m3u8",
+          "duration": 127.42
+        },
+        "scenes": [
+          {
+            "asset_id": "06a1024b-5128-7920-8000-77a797bc69a0",
+            "timestamp_start": 11.0,
+            "timestamp_end": 29.0,
+            "title": "THE GREATEST FINAL EVER?! | Argentina v France | FIFA World Cup Qatar 2022 Highlights",
+            "reason": "The Adidas Al Rihla match ball and Argentina\u2019s adidas home shirts are both clearly visible.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024b49a50a20b905529b0/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024b49a50a20b905529b0/hlses/playlist.m3u8",
+            "duration": 127.42
+          }
+        ]
+      },
+      {
+        "year": 2023,
+        "frequency": 1,
+        "dominant_theme": "Samba cultural resurgence",
+        "representative_clip": {
+          "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
+          "timestamp_start": 15.0,
+          "timestamp_end": 574.0,
+          "title": "How The Adidas Samba Became a Cultural Icon",
+          "reason": "Samba sneakers, trefoil apparel, and archival adidas footwear history are shown across the film.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
+          "duration": 632.923958
+        },
+        "scenes": [
+          {
+            "asset_id": "06a1024c-5acc-70a4-8000-64393bbe8cb7",
+            "timestamp_start": 15.0,
+            "timestamp_end": 574.0,
+            "title": "How The Adidas Samba Became a Cultural Icon",
+            "reason": "Samba sneakers, trefoil apparel, and archival adidas footwear history are shown across the film.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024c4d688f211334f3894/hlses/playlist.m3u8",
+            "duration": 632.923958
+          }
+        ]
+      },
+      {
+        "year": 2024,
+        "frequency": 2,
+        "dominant_theme": "You Got This campaign",
+        "representative_clip": {
+          "asset_id": "06a1024c-ffa6-75fc-8000-9690ec568ae2",
+          "timestamp_start": 0.0,
+          "timestamp_end": 88.0,
+          "title": "You Got This | adidas",
+          "reason": "The adidas three-stripe logo appears full-screen at the open and close of the campaign film.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/hlses/playlist.m3u8",
+          "duration": 88.0
+        },
+        "scenes": [
+          {
+            "asset_id": "06a1024c-ffa6-75fc-8000-9690ec568ae2",
+            "timestamp_start": 0.0,
+            "timestamp_end": 88.0,
+            "title": "You Got This | adidas",
+            "reason": "The adidas three-stripe logo appears full-screen at the open and close of the campaign film.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024cf953c687bc2513600/hlses/playlist.m3u8",
+            "duration": 88.0
+          },
+          {
+            "asset_id": "06a1024e-978f-7a9e-8000-4df3f36377d0",
+            "timestamp_start": 0.0,
+            "timestamp_end": 60.0,
+            "title": "Great Rivals Make Great Motivation | adidas",
+            "reason": "The film closes with an adidas logo after football training and rivalry imagery.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024e89a50a20b905529d6/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a1024e89a50a20b905529d6/hlses/playlist.m3u8",
+            "duration": 60.01996
           }
         ]
       }
     ],
-    "narrative_summary": "Within this archive, Adidas exposure rises from event-linked sports visibility into full-spectrum brand ownership. In the 1990s and early 2000s, Adidas appears mainly as embedded sporting infrastructure: the official World Cup match ball, three-stripe team kit details, and branded footwear visible inside global football broadcasts. That makes the brand present but still secondary to the event itself.\n\nBy 2012\u20132017, the exposure pattern changes sharply. Adidas becomes the subject rather than the backdrop: Team GB Olympic kit launch material, the 2014 Messi/Battle Pack campaign, Yeezy product storytelling, NMD launch film, and Parley sustainability content all move the brand into hero-shot territory. Exposure becomes more controlled, more logo-forward, and more diversified across performance, fashion, and purpose.\n\nOverall, the trend in this corpus is clear: Adidas shifts from intermittent tournament visibility in the 1990s/2000s to denser, more intentional, and more narratively central exposure in the mid-2010s. The strongest concentration is 2012\u20132017, when the brand spans elite sport, cultural collaborations, and sustainability messaging rather than relying only on on-field presence.",
+    "narrative_summary": "Adidas exposure in this corpus shifts from indirect event-led visibility in the 1990s and 2000s to increasingly explicit, brand-owned storytelling in the mid-2010s onward. In the earlier years, the brand mainly appears through football broadcast assets: the 1994 World Cup final shows adidas via Italy\u2019s kit and the Questra ball, 2002 via Germany\u2019s kit and the Fevernova ball, 2008 via Argentina\u2019s men\u2019s football kit at the Beijing Olympics, and 2010 via the Jabulani in the World Cup final. This is broad cultural visibility, but the brand is embedded in competition rather than foregrounded as the narrative subject.",
     "estimated_value": {
-      "total_mentions": 20,
-      "estimated_brand_intelligence_value_usd": 100000,
-      "calculation_basis": "Archive-only proxy based on 20 distinct high-salience visual brand exposures detected in this corpus (match-ball branding, three-stripe kit visibility, logo end cards, and product hero shots). Using a conservative $5,000 per distinct clip as a brand-intelligence benchmark in lieu of broadcast impression/GRP data yields an estimated value of $100,000."
+      "total_mentions": 15,
+      "estimated_brand_intelligence_value_usd": 120000,
+      "calculation_basis": "Estimated from 15 distinct visually grounded clips across 12 detected years in a sports-and-brand-video corpus, weighted toward high-salience exposure types: official brand films/product launches, official match balls, and adidas-equipped national-team kits."
     },
-    "session_id": "sess_019ea6c6-4d0f-74f0-b337-d02d9a54ba86",
+    "session_id": "sess_019ea9fd-66c3-75f2-9861-739f8566e13d",
     "source": "jockey"
   }
 }

@@ -34,7 +34,11 @@ For each year the corpus covers with detected visual presence, return:
 - dominant_theme (short label, e.g. "London Olympics lead sponsor",
   "Jabulani match ball", "YEEZY collab")
 - scenes: ALL distinct clips where adidas is visually present that year,
-  sorted by prominence — return every one, not just the top
+  sorted by prominence — return every one, not just the top.
+  For each scene set `reason` to ONE short sentence naming the specific
+  visual evidence that made you pick it (e.g. "three-stripes on the Germany
+  home kit", "Jabulani match ball in play", "trefoil on the product hero
+  shot"). Be concrete; do not restate the year or theme.
 - representative_clip = scenes[0]
 
 Skip years with no detected presence rather than emitting frequency=0."""
@@ -61,7 +65,11 @@ For each year the corpus actually covers with detected presence, return:
 - dominant_theme (short narrative label, e.g. "event sponsorship", "Originals
   lifestyle storytelling", "sustainability campaign", "anthem brand film")
 - scenes: ALL distinct clips with Adidas presence that year, sorted by how
-  well each captures that year's storytelling mode — return every one
+  well each captures that year's storytelling mode — return every one.
+  For each scene set `reason` to ONE short sentence naming the specific
+  visual signal that made you pick it (e.g. "three-stripes on the kit",
+  "Parley ocean-plastic sneaker close-up", "trefoil lifestyle hero shot").
+  Be concrete; do not restate the year or theme.
 - representative_clip = scenes[0]
 
 Skip years with no detected presence rather than emitting frequency=0."""
@@ -89,7 +97,11 @@ For each year the corpus covers, return:
   a short description (e.g. "EARNED: Telstar match ball + Germany kit",
   "OWNED: NMD launch film")
 - scenes: ALL distinct clips with Adidas visual presence that year, sorted by
-  how emblematic each is — return every one
+  how emblematic each is — return every one.
+  For each scene set `reason` to ONE short sentence naming the specific
+  visual evidence that made you pick it AND whether it reads as earned or
+  owned (e.g. "earned: three-stripes on the match kit", "owned: trefoil on
+  the NMD launch-film product shot"). Be concrete; do not restate the theme.
 - representative_clip = scenes[0]
 
 Skip years with no detected presence rather than emitting frequency=0."""

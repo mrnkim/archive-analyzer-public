@@ -97,6 +97,15 @@ function SceneCard({ scene, rank }: { scene: Scene; rank: number }) {
           {scene.timestamp_start.toFixed(1)}s – {scene.timestamp_end.toFixed(1)}s
           <span className="ml-1 text-neutral-600">({duration.toFixed(1)}s)</span>
         </div>
+        {scene.reason && (
+          <div
+            className="text-neutral-300 leading-snug pt-1 mt-0.5 border-t border-neutral-800"
+            title="Why this scene was selected"
+          >
+            <span className="text-brand-500 font-medium">Why: </span>
+            {scene.reason}
+          </div>
+        )}
       </div>
     </div>
   );
