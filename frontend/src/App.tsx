@@ -31,6 +31,10 @@ const showDebug =
 export default function App() {
   const [health, setHealth] = useState<HealthResponse | null>(null);
   const [tab, setTab] = useState<Tab>("analyzer");
+  // Scenario used for the on-screen result, so CSV export hits the same
+  // cache key (query+scenario) instead of missing and triggering a slow
+  // live re-run.
+  const [resultScenario, setResultScenario] = useState<string | undefined>(undefined);
   const result = useStore((s) => s.result);
   const setResult = useStore((s) => s.setResult);
   const setSelectedPoint = useStore((s) => s.setSelectedPoint);
@@ -70,6 +74,7 @@ export default function App() {
     try {
       const r = await postQuery(query, scenario);
       setResult(r);
+      setResultScenario(scenario);
       // Auto-select the peak point.
       const peak = r.timeline.reduce(
         (max, p) => (p.frequency > max.frequency ? p : max),
@@ -185,6 +190,7 @@ export default function App() {
               selectedYear={selectedPoint?.year ?? null}
               onSelect={handleSelectPoint}
               exportQuery={result.query}
+              exportScenario={resultScenario}
             />
 
             <div ref={clipGridRef} className="scroll-mt-4">
