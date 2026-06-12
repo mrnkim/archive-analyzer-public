@@ -29,10 +29,15 @@ def _ensure_db() -> sqlite3.Connection:
         CREATE TABLE IF NOT EXISTS query_cache (
             key TEXT PRIMARY KEY,
             payload TEXT NOT NULL,
-            created_at INTEGER NOT NULL
+            created_at INTEGER NOT NULL,
+            pinned INTEGER NOT NULL DEFAULT 0
         )
         """
     )
+    # Migrate older DBs (pre-`pinned`) that may persist in local dev.
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(query_cache)")}
+    if "pinned" not in cols:
+        conn.execute("ALTER TABLE query_cache ADD COLUMN pinned INTEGER NOT NULL DEFAULT 0")
     return conn
 
 
@@ -42,20 +47,24 @@ def _key(query: str, scenario: str | None) -> str:
 
 
 def get(query: str, scenario: str | None, ttl: int = DEFAULT_TTL_SECONDS) -> dict[str, Any] | None:
-    """Return cached payload if present and fresh; else None."""
+    """Return cached payload if present and fresh; else None.
+
+    Pinned entries (the primed demo scenarios) never expire — the TTL only
+    applies to ad-hoc user queries.
+    """
     with _lock:
         conn = _ensure_db()
         try:
             row = conn.execute(
-                "SELECT payload, created_at FROM query_cache WHERE key = ?",
+                "SELECT payload, created_at, pinned FROM query_cache WHERE key = ?",
                 (_key(query, scenario),),
             ).fetchone()
         finally:
             conn.close()
     if not row:
         return None
-    payload, created_at = row
-    if time.time() - created_at > ttl:
+    payload, created_at, pinned = row
+    if not pinned and time.time() - created_at > ttl:
         return None
     try:
         return json.loads(payload)
@@ -63,13 +72,13 @@ def get(query: str, scenario: str | None, ttl: int = DEFAULT_TTL_SECONDS) -> dic
         return None
 
 
-def put(query: str, scenario: str | None, payload: dict[str, Any]) -> None:
+def put(query: str, scenario: str | None, payload: dict[str, Any], pinned: bool = False) -> None:
     with _lock:
         conn = _ensure_db()
         try:
             conn.execute(
-                "INSERT OR REPLACE INTO query_cache (key, payload, created_at) VALUES (?, ?, ?)",
-                (_key(query, scenario), json.dumps(payload), int(time.time())),
+                "INSERT OR REPLACE INTO query_cache (key, payload, created_at, pinned) VALUES (?, ?, ?, ?)",
+                (_key(query, scenario), json.dumps(payload), int(time.time()), 1 if pinned else 0),
             )
             conn.commit()
         finally:
@@ -96,7 +105,8 @@ def load_primed_from_disk(force: bool = False) -> int:
     Jockey cold-call.
 
     Each file shape: ``{"query": str, "scenario": str | None, "payload": dict}``.
-    Skips entries where the key is already cached unless ``force=True``.
+    Entries are pinned so they never expire under the TTL. Skips entries where
+    the key is already cached unless ``force=True``.
     Returns the number of entries hydrated.
     """
     if not _PRIMED_DIR.exists():
@@ -114,6 +124,6 @@ def load_primed_from_disk(force: bool = False) -> int:
             continue
         if not force and get(query, scenario) is not None:
             continue
-        put(query, scenario, payload)
+        put(query, scenario, payload, pinned=True)
         n += 1
     return n
