@@ -1,0 +1,52 @@
+import { useEffect, useState } from "react";
+
+// Live queries hit Jockey synchronously and can take 2–3 minutes on a fresh
+// question. A static spinner reads as "frozen", so show an elapsed timer and
+// a stage hint that advances over time to make clear it's still working.
+const STAGES = [
+  { at: 0, label: "Searching the video index…" },
+  { at: 20, label: "Matching scenes across the archive…" },
+  { at: 60, label: "Scoring per-clip evidence…" },
+  { at: 110, label: "Writing themes + narrative…" },
+  { at: 160, label: "Almost there — finalizing results…" },
+];
+
+export function LoadingState() {
+  const [elapsed, setElapsed] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setElapsed((e) => e + 1), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const mm = String(Math.floor(elapsed / 60)).padStart(2, "0");
+  const ss = String(elapsed % 60).padStart(2, "0");
+  const stage = [...STAGES].reverse().find((s) => elapsed >= s.at) ?? STAGES[0];
+
+  return (
+    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-12 flex flex-col items-center justify-center gap-3">
+      <svg
+        className="h-7 w-7 animate-spin text-brand-500"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden
+      >
+        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
+        <path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+      </svg>
+
+      <div className="flex items-center gap-2">
+        <p className="text-sm text-neutral-200 font-medium">Analyzing the archive…</p>
+        <span className="text-xs font-mono text-brand-500 tabular-nums">{mm}:{ss}</span>
+      </div>
+
+      <p className="text-xs text-neutral-400">{stage.label}</p>
+
+      <p className="text-xs text-neutral-500 max-w-md text-center leading-relaxed">
+        First run on a new query searches the footage live and can take
+        <span className="text-neutral-300"> 2–3 minutes</span> — keep this tab
+        open. Once cached, the same query (and its CSV) returns instantly.
+      </p>
+    </div>
+  );
+}

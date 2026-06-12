@@ -5,6 +5,7 @@ import { ChatPanel } from "./components/ChatPanel";
 import { ClipGrid } from "./components/ClipGrid";
 import { ClipStrip } from "./components/ClipStrip";
 import { EmptyState } from "./components/EmptyState";
+import { LoadingState } from "./components/LoadingState";
 import { NarrativePanel } from "./components/NarrativePanel";
 import { RevenueWidget } from "./components/RevenueWidget";
 import { SearchBar } from "./components/SearchBar";
@@ -216,29 +217,7 @@ export default function App() {
           </>
         )}
 
-        {loading && (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-12 flex flex-col items-center justify-center gap-3">
-            <svg
-              className="h-7 w-7 animate-spin text-brand-500"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden
-            >
-              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
-              <path
-                d="M22 12a10 10 0 0 0-10-10"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
-            </svg>
-            <p className="text-sm text-neutral-200 font-medium">Analyzing the archive…</p>
-            <p className="text-xs text-neutral-500 max-w-md text-center">
-              Searching the index and generating per-clip themes + narrative.
-              First run on a new query can take 2–3 minutes; subsequent runs are cached.
-            </p>
-          </div>
-        )}
+        {loading && <LoadingState />}
 
         {!result && !loading && (
           <EmptyState onSelect={handleSearch} onOpenTutorial={() => setTab("tutorial")} />
