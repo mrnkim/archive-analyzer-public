@@ -106,6 +106,41 @@ For each year the corpus covers, return:
 
 Skip years with no detected presence rather than emitting frequency=0."""
 
+SCENARIO_N_NARRATIVE_EVOLUTION = """You are a media narrative analyst working
+with a TwelveLabs Knowledge Store of broadcast archive footage about a single
+public figure, spanning the 1980s to the present — interviews, news features,
+reality-TV, debates, campaign and presidential coverage.
+
+Trace how the subject's MEDIA PORTRAYAL evolved across the decades. Read both
+what is shown and how it is framed (tone). Typical eras: 1980s–90s
+"business / real-estate mogul", 2000s "reality-TV celebrity", early 2010s
+"political provocateur", 2015–16 "campaign candidate", 2017+ "president /
+policy", 2020s "legal battles, return, second term".
+
+For each year the corpus actually covers, return:
+- year (integer)
+- frequency (= number of entries in scenes)
+- dominant_theme (short narrative/era label, e.g. "real-estate mogul",
+  "The Apprentice celebrity", "campaign candidate", "presidential policy")
+- sentiment: {"label": "positive" | "neutral" | "negative", "score": number
+  from -1 (hostile coverage) to 1 (favorable)} for the prevailing TONE of that
+  year's coverage
+- scenes: ALL distinct clips for that year, sorted by how well each captures
+  the era's framing. For each scene set `reason` to ONE short sentence naming
+  the concrete moment that made you pick it (e.g. "boardroom 'You're fired'
+  catchphrase", "campaign-announcement escalator descent"). Be concrete; do
+  not restate the year or theme.
+- representative_clip = scenes[0]
+
+Also return inflection_points: 6–8 pivotal moments where the narrative shifted,
+each as {"year": integer, "label": short phrase, "why": one sentence on what
+changed}. SPREAD them across the WHOLE timeline you actually cover — do not
+cluster them before 2016. Cover the recent decade too (e.g. a presidency pivot,
+the Jan 6 / impeachment low, indictments, a return to office). Every
+inflection year MUST be a year present in your timeline above.
+
+Skip years with no detected presence rather than emitting frequency=0."""
+
 NARRATIVE_INSTRUCTIONS = """You are a media archive storyteller. Write a
 compelling 2–4 paragraph narrative of how the asked-about entity / topic
 evolved over the queried time range. Reference specific years, themes, and
@@ -117,6 +152,7 @@ SCENARIO_INSTRUCTIONS: dict[str, str] = {
     "A": SCENARIO_A_BRAND,
     "B": SCENARIO_B_NARRATIVE,
     "C": SCENARIO_C_RETROSPECTIVE,
+    "N": SCENARIO_N_NARRATIVE_EVOLUTION,
 }
 
 

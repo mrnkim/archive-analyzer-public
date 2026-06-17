@@ -8,6 +8,11 @@ type AppState = {
   result: QueryResponse | null;
   setResult: (r: QueryResponse | null) => void;
 
+  // Scenario that produced the on-screen result, so followups + CSV export
+  // hit the same Knowledge Store / cache key (e.g. "N" → Trump archive).
+  resultScenario: string | undefined;
+  setResultScenario: (s: string | undefined) => void;
+
   selectedPoint: TimelinePoint | null;
   setSelectedPoint: (p: TimelinePoint | null) => void;
 
@@ -28,6 +33,9 @@ export const useStore = create<AppState>((set) => ({
 
   result: null,
   setResult: (r) => set({ result: r }),
+
+  resultScenario: undefined,
+  setResultScenario: (s) => set({ resultScenario: s }),
 
   selectedPoint: null,
   setSelectedPoint: (p) => set({ selectedPoint: p }),

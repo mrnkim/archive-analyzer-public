@@ -5,6 +5,7 @@ import logging
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
+from app.config import get_settings
 from app.deps.jockey_client import JockeyClient, QueryError
 from app.prompts import get_instructions
 from app.seeds import load_seed
@@ -74,7 +75,7 @@ def _extract_text(jockey_response: dict) -> str:
 
 @router.post("/{session_id}/messages", response_model=FollowupResponse)
 async def followup(session_id: str, req: FollowupRequest) -> FollowupResponse:
-    client = JockeyClient()
+    client = JockeyClient(ks_id=get_settings().ks_for_scenario(req.scenario))
 
     if not client.configured:
         return _mock_followup(session_id, req.message)

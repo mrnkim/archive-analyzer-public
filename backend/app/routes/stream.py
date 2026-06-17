@@ -7,6 +7,7 @@ import logging
 from fastapi import APIRouter
 from sse_starlette.sse import EventSourceResponse
 
+from app.config import get_settings
 from app.deps.jockey_client import JockeyClient, QueryError
 from app.prompts import NARRATIVE_INSTRUCTIONS
 from app.seeds import load_seed
@@ -31,8 +32,11 @@ def _extract_delta(event: dict) -> str | None:
 
 
 @router.get("/stream")
-async def stream(query: str = "", session_id: str | None = None):
-    client = JockeyClient()
+async def stream(query: str = "", session_id: str | None = None, scenario: str | None = None):
+    # Route to the same KS the matching /query call used so the session_id
+    # (which is bound to that KS) stays valid — e.g. the Narrative tab's
+    # Trump archive.
+    client = JockeyClient(ks_id=get_settings().ks_for_scenario(scenario))
 
     if not client.configured:
         # Mock mode — replay the pre-recorded narrative.

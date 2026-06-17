@@ -12,9 +12,13 @@ import { SearchBar } from "./components/SearchBar";
 import { TimelineChart } from "./components/TimelineChart";
 import { TutorialPanel } from "./components/TutorialPanel";
 import { TwelveLabsLogo } from "./components/TwelveLabsLogo";
+import { EraClusters } from "./components/narrative/EraClusters";
+import { SentimentStrip } from "./components/narrative/SentimentStrip";
+import { InflectionPoints } from "./components/narrative/InflectionPoints";
+import { NarrativeEmptyState } from "./components/narrative/NarrativeEmptyState";
 import { useStore } from "./store";
 
-type Tab = "analyzer" | "tutorial";
+type Tab = "analyzer" | "narrative" | "tutorial";
 
 type HealthResponse = {
   status: string;
@@ -32,10 +36,11 @@ const showDebug =
 export default function App() {
   const [health, setHealth] = useState<HealthResponse | null>(null);
   const [tab, setTab] = useState<Tab>("analyzer");
-  // Scenario used for the on-screen result, so CSV export hits the same
-  // cache key (query+scenario) instead of missing and triggering a slow
-  // live re-run.
-  const [resultScenario, setResultScenario] = useState<string | undefined>(undefined);
+  // Scenario used for the on-screen result, so CSV export + followups hit the
+  // same Knowledge Store / cache key instead of missing and triggering a slow
+  // live re-run. Lives in the store so ChatPanel can read it too.
+  const resultScenario = useStore((s) => s.resultScenario);
+  const setResultScenario = useStore((s) => s.setResultScenario);
   const result = useStore((s) => s.result);
   const setResult = useStore((s) => s.setResult);
   const setSelectedPoint = useStore((s) => s.setSelectedPoint);
@@ -60,6 +65,25 @@ export default function App() {
     requestAnimationFrame(() => {
       clipGridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
+  }
+
+  // Switching tabs clears the on-screen result so the two analysis modes
+  // (Adidas brand vs Trump narrative) never bleed into each other.
+  function switchTab(id: Tab) {
+    if (id !== tab) {
+      setResult(null);
+      setSelectedPoint(null);
+      resetChat();
+      setStreamingQuery(null);
+      setResultScenario(undefined);
+    }
+    setTab(id);
+  }
+
+  // Jump to a given year's evidence (used by inflection-point clicks).
+  function selectYear(year: number) {
+    const point = result?.timeline.find((p) => p.year === year);
+    if (point) handleSelectPoint(point);
   }
 
   async function handleSearch(query: string, scenario?: string) {
@@ -136,11 +160,12 @@ export default function App() {
           <nav className="space-y-1 sticky top-6">
             {([
               ["analyzer", "Brand Intelligence (Adidas Example)"],
+              ["narrative", "Narrative Evolution (Trump Example)"],
               ["tutorial", "Tutorial"],
             ] as [Tab, string][]).map(([id, label]) => (
               <button
                 key={id}
-                onClick={() => setTab(id)}
+                onClick={() => switchTab(id)}
                 className={
                   "w-full text-left px-3 py-2 text-sm rounded-md border-l-2 transition-colors " +
                   (tab === id
@@ -158,6 +183,59 @@ export default function App() {
           <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full">
             <TutorialPanel />
           </main>
+        ) : tab === "narrative" ? (
+        <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
+          <SearchBar
+            onSubmit={(q, sc) => handleSearch(q, sc ?? "N")}
+            loading={loading}
+            showDemoChips={false}
+          />
+
+          {result && (
+            <>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
+                <div className="lg:col-span-2 space-y-4">
+                  <TimelineChart data={result.timeline} onPointClick={handleSelectPoint} />
+                  <SentimentStrip
+                    timeline={result.timeline}
+                    selectedYear={selectedPoint?.year ?? null}
+                    onSelect={handleSelectPoint}
+                  />
+                </div>
+                <InflectionPoints
+                  points={result.inflection_points ?? []}
+                  onSelectYear={selectYear}
+                />
+              </div>
+
+              <EraClusters timeline={result.timeline} />
+
+              <NarrativePanel
+                query={streamingQuery}
+                narrative={result?.narrative_summary}
+                columns
+              />
+
+              <ClipStrip
+                timeline={result.timeline}
+                selectedYear={selectedPoint?.year ?? null}
+                onSelect={handleSelectPoint}
+                exportQuery={result.query}
+                exportScenario={resultScenario}
+              />
+
+              <div ref={clipGridRef} className="scroll-mt-4">
+                <ClipGrid point={selectedPoint} />
+              </div>
+
+              <ChatPanel />
+            </>
+          )}
+
+          {loading && <LoadingState />}
+
+          {!result && !loading && <NarrativeEmptyState onRun={handleSearch} />}
+        </main>
         ) : (
         <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
         <SearchBar onSubmit={handleSearch} loading={loading} showDemoChips={!!result} />

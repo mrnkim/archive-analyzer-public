@@ -7,6 +7,7 @@ export function ChatPanel() {
   const chat = useStore((s) => s.chat);
   const appendChat = useStore((s) => s.appendChat);
   const result = useStore((s) => s.result);
+  const resultScenario = useStore((s) => s.resultScenario);
   const selectedPoint = useStore((s) => s.selectedPoint);
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
@@ -36,7 +37,7 @@ export function ChatPanel() {
     setPending(true);
 
     try {
-      const r = await postFollowup(result.session_id, userMsg);
+      const r = await postFollowup(result.session_id, userMsg, resultScenario);
       appendChat({ role: "assistant", content: r.answer });
     } catch (e) {
       appendChat({ role: "assistant", content: `Error: ${e}` });
@@ -48,10 +49,10 @@ export function ChatPanel() {
   const disabled = !result?.session_id;
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 h-full flex flex-col">
+    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 flex flex-col">
       <h3 className="text-sm font-medium text-neutral-300 mb-3">Multi-turn followups</h3>
 
-      <div className="flex-1 overflow-y-auto space-y-3 mb-3 min-h-0">
+      <div className="flex-1 overflow-y-auto space-y-3 mb-3 min-h-0 max-h-[420px]">
         {chat.length === 0 && (
           <div className="text-xs text-neutral-500 text-center py-8">
             Run a search above first,<br />then ask followup questions here.

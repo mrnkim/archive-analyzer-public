@@ -1,0 +1,805 @@
+{
+  "query": "How has Donald Trump's media portrayal evolved from the 1980s to 2026?",
+  "scenario": "N",
+  "payload": {
+    "entity": "Donald Trump",
+    "query": "How has Donald Trump's media portrayal evolved from the 1980s to 2026?",
+    "timeline": [
+      {
+        "year": 1985,
+        "frequency": 2,
+        "dominant_theme": "tabloid mogul / developer",
+        "representative_clip": {
+          "asset_id": "019ebae7-8428-7b92-baac-e8010b05523e",
+          "timestamp_start": 11.0,
+          "timestamp_end": 16.0,
+          "title": "Retrospective montage linking 1985 developer Trump to later politics",
+          "reason": "he gestures over skyscraper models and answers criticism with a smirk in 1985 archival footage.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b4c3eea0190eaa55d/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b4c3eea0190eaa55d/hlses/playlist.m3u8",
+          "duration": 291.648
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8428-7b92-baac-e8010b05523e",
+            "timestamp_start": 11.0,
+            "timestamp_end": 16.0,
+            "title": "Retrospective montage linking 1985 developer Trump to later politics",
+            "reason": "he gestures over skyscraper models and answers criticism with a smirk in 1985 archival footage.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b4c3eea0190eaa55d/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b4c3eea0190eaa55d/hlses/playlist.m3u8",
+            "duration": 291.648
+          },
+          {
+            "asset_id": "019ebae7-8573-7161-bedf-e89424856ad0",
+            "timestamp_start": 347.0,
+            "timestamp_end": 376.0,
+            "title": "Larry King interview with Trump on housing and trade",
+            "reason": "the lower-third identifies him as a real-estate developer while he argues about housing and national trade policy on Larry King.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5c593c5511ec2a0ed6/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5c593c5511ec2a0ed6/hlses/playlist.m3u8",
+            "duration": 1161.188
+          }
+        ],
+        "sentiment": {
+          "label": "positive",
+          "score": 0.35
+        }
+      },
+      {
+        "year": 1988,
+        "frequency": 2,
+        "dominant_theme": "rich outsider flirting with politics",
+        "representative_clip": {
+          "asset_id": "019ebae7-8573-7161-bedf-e89424856ad0",
+          "timestamp_start": 129.0,
+          "timestamp_end": 158.0,
+          "title": "Larry King interview with Trump on trade and foreign policy",
+          "reason": "he warns that America is losing money to Japan and Saudi Arabia, sounding like a businessman auditioning for political relevance.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5c593c5511ec2a0ed6/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5c593c5511ec2a0ed6/hlses/playlist.m3u8",
+          "duration": 1161.188
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8573-7161-bedf-e89424856ad0",
+            "timestamp_start": 129.0,
+            "timestamp_end": 158.0,
+            "title": "Larry King interview with Trump on trade and foreign policy",
+            "reason": "he warns that America is losing money to Japan and Saudi Arabia, sounding like a businessman auditioning for political relevance.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5c593c5511ec2a0ed6/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5c593c5511ec2a0ed6/hlses/playlist.m3u8",
+            "duration": 1161.188
+          },
+          {
+            "asset_id": "019ebae7-8573-7161-bedf-e89424856ad0",
+            "timestamp_start": 526.0,
+            "timestamp_end": 552.0,
+            "title": "Larry King interview with Trump on taxing allies",
+            "reason": "he says other countries should make a major contribution to the U.S. for protection, prefiguring America First language.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5c593c5511ec2a0ed6/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5c593c5511ec2a0ed6/hlses/playlist.m3u8",
+            "duration": 1161.188
+          }
+        ],
+        "sentiment": {
+          "label": "neutral",
+          "score": 0.15
+        }
+      },
+      {
+        "year": 1990,
+        "frequency": 3,
+        "dominant_theme": "debt crisis / tabloid fall",
+        "representative_clip": {
+          "asset_id": "019ebae7-8569-7af1-b843-cc8787de2d90",
+          "timestamp_start": 113.0,
+          "timestamp_end": 120.0,
+          "title": "1990s retrospective on Trump's decline and comeback",
+          "reason": "newspaper headlines like 'WELCOME TO THE NINETIES, DONALD' turn his financial distress into public spectacle.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/hlses/playlist.m3u8",
+          "duration": 307.968
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8569-7af1-b843-cc8787de2d90",
+            "timestamp_start": 113.0,
+            "timestamp_end": 120.0,
+            "title": "1990s retrospective on Trump's decline and comeback",
+            "reason": "newspaper headlines like 'WELCOME TO THE NINETIES, DONALD' turn his financial distress into public spectacle.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/hlses/playlist.m3u8",
+            "duration": 307.968
+          },
+          {
+            "asset_id": "019ebae7-856f-78e0-94b0-4e6a20ff2142",
+            "timestamp_start": 407.0,
+            "timestamp_end": 419.0,
+            "title": "Profile interview reflecting on losses and loyalty",
+            "reason": "he recalls wanting to be poor briefly just to see who stayed loyal, casting the crash as a personal test.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5e5f48616a1efc5f7b/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5e5f48616a1efc5f7b/hlses/playlist.m3u8",
+            "duration": 707.808
+          },
+          {
+            "asset_id": "019ebae7-856f-78e0-94b0-4e6a20ff2142",
+            "timestamp_start": 333.0,
+            "timestamp_end": 357.0,
+            "title": "Profile interview contrasting 1980s glamour with 1990s trouble",
+            "reason": "the narration calls him the model mogul of the 1980s just before contrasting it with collapse.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5e5f48616a1efc5f7b/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5e5f48616a1efc5f7b/hlses/playlist.m3u8",
+            "duration": 707.808
+          }
+        ],
+        "sentiment": {
+          "label": "negative",
+          "score": -0.55
+        }
+      },
+      {
+        "year": 1992,
+        "frequency": 1,
+        "dominant_theme": "divorce and tabloid scandal",
+        "representative_clip": {
+          "asset_id": "019ebae7-8569-7af1-b843-cc8787de2d90",
+          "timestamp_start": 41.0,
+          "timestamp_end": 49.0,
+          "title": "Retrospective on Ivana, Marla, and tabloid-era Trump",
+          "reason": "the Daily News divorce headline and jet-set footage turn his marriage breakup into celebrity-news theater.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/hlses/playlist.m3u8",
+          "duration": 307.968
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8569-7af1-b843-cc8787de2d90",
+            "timestamp_start": 41.0,
+            "timestamp_end": 49.0,
+            "title": "Retrospective on Ivana, Marla, and tabloid-era Trump",
+            "reason": "the Daily News divorce headline and jet-set footage turn his marriage breakup into celebrity-news theater.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/hlses/playlist.m3u8",
+            "duration": 307.968
+          }
+        ],
+        "sentiment": {
+          "label": "negative",
+          "score": -0.65
+        }
+      },
+      {
+        "year": 1997,
+        "frequency": 2,
+        "dominant_theme": "brand reinvention",
+        "representative_clip": {
+          "asset_id": "019ebae7-8569-7af1-b843-cc8787de2d90",
+          "timestamp_start": 202.0,
+          "timestamp_end": 207.0,
+          "title": "Retrospective on Trump's shift from building to branding",
+          "reason": "the narration says he became less of a developer and more of a brand while he gives a composed mid-90s interview.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/hlses/playlist.m3u8",
+          "duration": 307.968
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8569-7af1-b843-cc8787de2d90",
+            "timestamp_start": 202.0,
+            "timestamp_end": 207.0,
+            "title": "Retrospective on Trump's shift from building to branding",
+            "reason": "the narration says he became less of a developer and more of a brand while he gives a composed mid-90s interview.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/hlses/playlist.m3u8",
+            "duration": 307.968
+          },
+          {
+            "asset_id": "019ebae7-8569-7af1-b843-cc8787de2d90",
+            "timestamp_start": 233.0,
+            "timestamp_end": 245.0,
+            "title": "Event and studio footage signaling public comeback",
+            "reason": "a public-event shot with Rudy Giuliani and a studio interview presents him sounding big again after the slump.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b0d802ff69353d61c/hlses/playlist.m3u8",
+            "duration": 307.968
+          }
+        ],
+        "sentiment": {
+          "label": "neutral",
+          "score": 0.05
+        }
+      },
+      {
+        "year": 2004,
+        "frequency": 5,
+        "dominant_theme": "reality-TV boss",
+        "representative_clip": {
+          "asset_id": "019ebae7-8428-7b92-baac-e8010b05523e",
+          "timestamp_start": 8.0,
+          "timestamp_end": 10.0,
+          "title": "The Apprentice firing clip used in political retrospective",
+          "reason": "the boardroom 'You're fired' catchphrase distills his TV persona into pure executive authority.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b4c3eea0190eaa55d/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b4c3eea0190eaa55d/hlses/playlist.m3u8",
+          "duration": 291.648
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8428-7b92-baac-e8010b05523e",
+            "timestamp_start": 8.0,
+            "timestamp_end": 10.0,
+            "title": "The Apprentice firing clip used in political retrospective",
+            "reason": "the boardroom 'You're fired' catchphrase distills his TV persona into pure executive authority.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b4c3eea0190eaa55d/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b4c3eea0190eaa55d/hlses/playlist.m3u8",
+            "duration": 291.648
+          },
+          {
+            "asset_id": "019ebae7-86b8-75c1-b618-4e0ed425b90b",
+            "timestamp_start": 84.0,
+            "timestamp_end": 98.0,
+            "title": "Today show coverage of The Apprentice launch",
+            "reason": "the Today show segment celebrates the hit series that portrayed him in the most flattering possible light.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf774c3eea0190eaa567/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf774c3eea0190eaa567/hlses/playlist.m3u8",
+            "duration": 445.648
+          },
+          {
+            "asset_id": "019ebae7-86b8-75c1-b618-4e0ed425b90b",
+            "timestamp_start": 98.0,
+            "timestamp_end": 100.0,
+            "title": "Apprentice boardroom footage",
+            "reason": "he sits in the leather chair as the show turns him into a mass-market symbol of boardroom power.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf774c3eea0190eaa567/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf774c3eea0190eaa567/hlses/playlist.m3u8",
+            "duration": 445.648
+          },
+          {
+            "asset_id": "019ebae7-87ec-76d0-bdfa-cd37ef23f2d0",
+            "timestamp_start": 65.0,
+            "timestamp_end": 71.0,
+            "title": "Boardroom firing scene",
+            "reason": "he points at Michael and repeats 'You're fired,' reducing business to spectacle and judgment.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf8e593c5511ec2a0ee2/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf8e593c5511ec2a0ee2/hlses/playlist.m3u8",
+            "duration": 91.148
+          },
+          {
+            "asset_id": "019ebae7-87e0-7172-a942-8816c5af1dc9",
+            "timestamp_start": 157.0,
+            "timestamp_end": 163.0,
+            "title": "Boardroom confrontation with Jennifer Murphy",
+            "reason": "he bluntly tells Jennifer 'You didn't sell,' embodying TV-era dominance through humiliation and certainty.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf86593c5511ec2a0edc/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf86593c5511ec2a0edc/hlses/playlist.m3u8",
+            "duration": 294.528
+          }
+        ],
+        "sentiment": {
+          "label": "positive",
+          "score": 0.55
+        }
+      },
+      {
+        "year": 2005,
+        "frequency": 1,
+        "dominant_theme": "celebrity empire / licensing brand",
+        "representative_clip": {
+          "asset_id": "019ebae7-86b8-75c1-b618-4e0ed425b90b",
+          "timestamp_start": 188.0,
+          "timestamp_end": 195.0,
+          "title": "Retrospective on The Apprentice expanding the Trump brand",
+          "reason": "fans crowd around him as narration says the show validated branding over building and opened new licensing deals.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf774c3eea0190eaa567/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf774c3eea0190eaa567/hlses/playlist.m3u8",
+          "duration": 445.648
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-86b8-75c1-b618-4e0ed425b90b",
+            "timestamp_start": 188.0,
+            "timestamp_end": 195.0,
+            "title": "Retrospective on The Apprentice expanding the Trump brand",
+            "reason": "fans crowd around him as narration says the show validated branding over building and opened new licensing deals.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf774c3eea0190eaa567/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf774c3eea0190eaa567/hlses/playlist.m3u8",
+            "duration": 445.648
+          }
+        ],
+        "sentiment": {
+          "label": "positive",
+          "score": 0.4
+        }
+      },
+      {
+        "year": 2015,
+        "frequency": 4,
+        "dominant_theme": "campaign candidate / spectacle politics",
+        "representative_clip": {
+          "asset_id": "019ebae7-8abd-7051-bed4-9757aae8f8f3",
+          "timestamp_start": 22.0,
+          "timestamp_end": 27.0,
+          "title": "Inside Edition coverage of campaign announcement",
+          "reason": "the golden escalator descent with Melania turns a campaign launch into a made-for-TV entrance.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf9e0d802ff69353d634/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf9e0d802ff69353d634/hlses/playlist.m3u8",
+          "duration": 75.488
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8abd-7051-bed4-9757aae8f8f3",
+            "timestamp_start": 22.0,
+            "timestamp_end": 27.0,
+            "title": "Inside Edition coverage of campaign announcement",
+            "reason": "the golden escalator descent with Melania turns a campaign launch into a made-for-TV entrance.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf9e0d802ff69353d634/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf9e0d802ff69353d634/hlses/playlist.m3u8",
+            "duration": 75.488
+          },
+          {
+            "asset_id": "019ebae7-8abd-7051-bed4-9757aae8f8f3",
+            "timestamp_start": 7.0,
+            "timestamp_end": 20.0,
+            "title": "Trump formally announces presidential run",
+            "reason": "he declares his candidacy at a podium under giant branding, converting celebrity into electoral ambition.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf9e0d802ff69353d634/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf9e0d802ff69353d634/hlses/playlist.m3u8",
+            "duration": 75.488
+          },
+          {
+            "asset_id": "019ebae7-8a04-7f22-ac15-622e8a6a3c93",
+            "timestamp_start": 79.0,
+            "timestamp_end": 86.0,
+            "title": "Local news recap of campaign launch",
+            "reason": "he boasts 'I'm really rich' and ties personal wealth to political independence.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf9d593c5511ec2a0ee9/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf9d593c5511ec2a0ee9/hlses/playlist.m3u8",
+            "duration": 224.757867
+          },
+          {
+            "asset_id": "019ebae7-8abd-7051-bed4-9757aae8f8f3",
+            "timestamp_start": 46.0,
+            "timestamp_end": 49.0,
+            "title": "Campaign segment linking Trump to Celebrity Apprentice",
+            "reason": "a quick cut to Celebrity Apprentice shows the campaign being framed through his TV catchphrase and persona.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf9e0d802ff69353d634/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf9e0d802ff69353d634/hlses/playlist.m3u8",
+            "duration": 75.488
+          }
+        ],
+        "sentiment": {
+          "label": "neutral",
+          "score": 0.1
+        }
+      },
+      {
+        "year": 2016,
+        "frequency": 4,
+        "dominant_theme": "insurgent winner",
+        "representative_clip": {
+          "asset_id": "019ebae7-8b76-7591-814b-db4241aaa9a7",
+          "timestamp_start": 28.0,
+          "timestamp_end": 38.0,
+          "title": "2016 election night victory speech",
+          "reason": "he announces Clinton's concession call and immediately recasts the victory as belonging to 'us.'",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfb64c3eea0190eaa579/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfb64c3eea0190eaa579/hlses/playlist.m3u8",
+          "duration": 591.168
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8b76-7591-814b-db4241aaa9a7",
+            "timestamp_start": 28.0,
+            "timestamp_end": 38.0,
+            "title": "2016 election night victory speech",
+            "reason": "he announces Clinton's concession call and immediately recasts the victory as belonging to 'us.'",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfb64c3eea0190eaa579/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfb64c3eea0190eaa579/hlses/playlist.m3u8",
+            "duration": 591.168
+          },
+          {
+            "asset_id": "019ebae7-8b76-7591-814b-db4241aaa9a7",
+            "timestamp_start": 98.0,
+            "timestamp_end": 115.0,
+            "title": "Victory speech promise to govern for all Americans",
+            "reason": "he pledges to be president for all Americans, signaling a temporary softening from rally combat to statesmanlike tone.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfb64c3eea0190eaa579/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfb64c3eea0190eaa579/hlses/playlist.m3u8",
+            "duration": 591.168
+          },
+          {
+            "asset_id": "019ebae7-8428-7b92-baac-e8010b05523e",
+            "timestamp_start": 0.0,
+            "timestamp_end": 2.0,
+            "title": "Indiana primary victory rally opening",
+            "reason": "the Indiana rally victory stage shows him still surrounded by campaign-family spectacle even in triumph.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b4c3eea0190eaa55d/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbf5b4c3eea0190eaa55d/hlses/playlist.m3u8",
+            "duration": 291.648
+          },
+          {
+            "asset_id": "019ebae7-8b76-7591-814b-db4241aaa9a7",
+            "timestamp_start": 181.0,
+            "timestamp_end": 207.0,
+            "title": "Victory speech linking business success to national rebuilding",
+            "reason": "he leans on his business record to promise national renewal, keeping the businessman frame alive inside the win.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfb64c3eea0190eaa579/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfb64c3eea0190eaa579/hlses/playlist.m3u8",
+            "duration": 591.168
+          }
+        ],
+        "sentiment": {
+          "label": "positive",
+          "score": 0.45
+        }
+      },
+      {
+        "year": 2017,
+        "frequency": 5,
+        "dominant_theme": "presidential power / populist governance",
+        "representative_clip": {
+          "asset_id": "019ebae7-8c1d-7a71-83bc-4cf29b73df81",
+          "timestamp_start": 541.0,
+          "timestamp_end": 565.0,
+          "title": "2017 inauguration address",
+          "reason": "the inaugural 'American carnage' section gives his presidency a stark, confrontational governing frame from day one.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfca593c5511ec2a0ef3/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfca593c5511ec2a0ef3/hlses/playlist.m3u8",
+          "duration": 1203.068
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8c1d-7a71-83bc-4cf29b73df81",
+            "timestamp_start": 541.0,
+            "timestamp_end": 565.0,
+            "title": "2017 inauguration address",
+            "reason": "the inaugural 'American carnage' section gives his presidency a stark, confrontational governing frame from day one.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfca593c5511ec2a0ef3/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfca593c5511ec2a0ef3/hlses/playlist.m3u8",
+            "duration": 1203.068
+          },
+          {
+            "asset_id": "019ebae7-8c1d-7a71-83bc-4cf29b73df81",
+            "timestamp_start": 393.0,
+            "timestamp_end": 420.0,
+            "title": "Inaugural populist sovereignty passage",
+            "reason": "he says this is the day the people became rulers of the nation once again.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfca593c5511ec2a0ef3/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfca593c5511ec2a0ef3/hlses/playlist.m3u8",
+            "duration": 1203.068
+          },
+          {
+            "asset_id": "019ebae7-8c1d-7a71-83bc-4cf29b73df81",
+            "timestamp_start": 240.0,
+            "timestamp_end": 255.0,
+            "title": "Inaugural thanks to Obama and Michelle Obama",
+            "reason": "he thanks Obama during the transition, briefly wrapping outsider rhetoric in ceremonial legitimacy.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfca593c5511ec2a0ef3/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfca593c5511ec2a0ef3/hlses/playlist.m3u8",
+            "duration": 1203.068
+          },
+          {
+            "asset_id": "019ebae7-8c1d-7a71-83bc-4cf29b73df81",
+            "timestamp_start": 200.0,
+            "timestamp_end": 240.0,
+            "title": "Inaugural rebuilding message",
+            "reason": "he casts national rebuilding as the core mission, using forceful gestures behind the Capitol microphones.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfca593c5511ec2a0ef3/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfca593c5511ec2a0ef3/hlses/playlist.m3u8",
+            "duration": 1203.068
+          },
+          {
+            "asset_id": "019ebae7-8c1d-7a71-83bc-4cf29b73df81",
+            "timestamp_start": 1115.0,
+            "timestamp_end": 1150.0,
+            "title": "Inaugural closing crescendo",
+            "reason": "the closing MAGA crescendo seals the move from candidate slogan to state ideology.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfca593c5511ec2a0ef3/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfca593c5511ec2a0ef3/hlses/playlist.m3u8",
+            "duration": 1203.068
+          }
+        ],
+        "sentiment": {
+          "label": "neutral",
+          "score": 0.05
+        }
+      },
+      {
+        "year": 2020,
+        "frequency": 4,
+        "dominant_theme": "crisis presidency",
+        "representative_clip": {
+          "asset_id": "019ebae7-8bab-77f3-a9cc-80f52ca1e7ff",
+          "timestamp_start": 125.0,
+          "timestamp_end": 167.0,
+          "title": "DW report on Trump at military hospital with COVID-19",
+          "reason": "split-screen coverage of his transfer to Walter Reed frames him through illness, secrecy, and institutional anxiety.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc4593c5511ec2a0ef1/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc4593c5511ec2a0ef1/hlses/playlist.m3u8",
+          "duration": 340.828
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8bab-77f3-a9cc-80f52ca1e7ff",
+            "timestamp_start": 125.0,
+            "timestamp_end": 167.0,
+            "title": "DW report on Trump at military hospital with COVID-19",
+            "reason": "split-screen coverage of his transfer to Walter Reed frames him through illness, secrecy, and institutional anxiety.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc4593c5511ec2a0ef1/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc4593c5511ec2a0ef1/hlses/playlist.m3u8",
+            "duration": 340.828
+          },
+          {
+            "asset_id": "019ebae7-8bab-77f3-a9cc-80f52ca1e7ff",
+            "timestamp_start": 149.0,
+            "timestamp_end": 156.0,
+            "title": "Report emphasizing lack of medical transparency",
+            "reason": "the report stresses there were no official doctor briefings, making opacity part of the story.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc4593c5511ec2a0ef1/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc4593c5511ec2a0ef1/hlses/playlist.m3u8",
+            "duration": 340.828
+          },
+          {
+            "asset_id": "019ebae7-8bab-77f3-a9cc-80f52ca1e7ff",
+            "timestamp_start": 204.0,
+            "timestamp_end": 242.0,
+            "title": "Walter Reed exterior during COVID coverage",
+            "reason": "night footage of Walter Reed with flashing police lights turns the presidency into a health emergency tableau.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc4593c5511ec2a0ef1/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc4593c5511ec2a0ef1/hlses/playlist.m3u8",
+            "duration": 340.828
+          },
+          {
+            "asset_id": "019ebae7-8bab-77f3-a9cc-80f52ca1e7ff",
+            "timestamp_start": 291.0,
+            "timestamp_end": 302.0,
+            "title": "Campaign-rally cutaway inside COVID report",
+            "reason": "rally footage beside a red truck is used to contrast his performative strength with visible political vulnerability.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc4593c5511ec2a0ef1/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc4593c5511ec2a0ef1/hlses/playlist.m3u8",
+            "duration": 340.828
+          }
+        ],
+        "sentiment": {
+          "label": "negative",
+          "score": -0.5
+        }
+      },
+      {
+        "year": 2021,
+        "frequency": 1,
+        "dominant_theme": "democratic rupture / post-presidential blame",
+        "representative_clip": {
+          "asset_id": "019ebae7-8cac-7be1-af4a-b03951a59533",
+          "timestamp_start": 6.0,
+          "timestamp_end": 44.0,
+          "title": "January 6 Ellipse speech excerpt",
+          "reason": "his 'walk down to the Capitol' line anchors coverage that presents him as the inciting voice of a national crisis.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc1363f9692ab321669/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc1363f9692ab321669/hlses/playlist.m3u8",
+          "duration": 121.588
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8cac-7be1-af4a-b03951a59533",
+            "timestamp_start": 6.0,
+            "timestamp_end": 44.0,
+            "title": "January 6 Ellipse speech excerpt",
+            "reason": "his 'walk down to the Capitol' line anchors coverage that presents him as the inciting voice of a national crisis.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc1363f9692ab321669/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc1363f9692ab321669/hlses/playlist.m3u8",
+            "duration": 121.588
+          }
+        ],
+        "sentiment": {
+          "label": "negative",
+          "score": -0.9
+        }
+      },
+      {
+        "year": 2023,
+        "frequency": 4,
+        "dominant_theme": "legal jeopardy / defiant defendant",
+        "representative_clip": {
+          "asset_id": "019ebae7-8d4c-7041-8af0-26b9ecc3b9f2",
+          "timestamp_start": 0.0,
+          "timestamp_end": 15.0,
+          "title": "Sky News coverage of Trump mugshot",
+          "reason": "the full-screen Fulton County mugshot turns his face itself into the story and symbol of criminal exposure.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfcc363f9692ab32166b/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfcc363f9692ab32166b/hlses/playlist.m3u8",
+          "duration": 199.668
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8d4c-7041-8af0-26b9ecc3b9f2",
+            "timestamp_start": 0.0,
+            "timestamp_end": 15.0,
+            "title": "Sky News coverage of Trump mugshot",
+            "reason": "the full-screen Fulton County mugshot turns his face itself into the story and symbol of criminal exposure.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfcc363f9692ab32166b/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfcc363f9692ab32166b/hlses/playlist.m3u8",
+            "duration": 199.668
+          },
+          {
+            "asset_id": "019ebae7-8d4c-7041-8af0-26b9ecc3b9f2",
+            "timestamp_start": 15.0,
+            "timestamp_end": 25.0,
+            "title": "Arrival in Atlanta before booking",
+            "reason": "he gives a thumbs-up after descending from the jet, visually pairing brand confidence with criminal booking.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfcc363f9692ab32166b/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfcc363f9692ab32166b/hlses/playlist.m3u8",
+            "duration": 199.668
+          },
+          {
+            "asset_id": "019ebae7-8d4c-7041-8af0-26b9ecc3b9f2",
+            "timestamp_start": 50.0,
+            "timestamp_end": 74.0,
+            "title": "Booking information and charges close-up",
+            "reason": "the charge sheet scroll foregrounds RICO and forgery allegations over his physical description.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfcc363f9692ab32166b/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfcc363f9692ab32166b/hlses/playlist.m3u8",
+            "duration": 199.668
+          },
+          {
+            "asset_id": "019ebae7-8d4c-7041-8af0-26b9ecc3b9f2",
+            "timestamp_start": 169.0,
+            "timestamp_end": 178.0,
+            "title": "Post-booking statement on the tarmac",
+            "reason": "his tarmac statement calling the case a travesty of justice reasserts the grievance frame against the indictment frame.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfcc363f9692ab32166b/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfcc363f9692ab32166b/hlses/playlist.m3u8",
+            "duration": 199.668
+          }
+        ],
+        "sentiment": {
+          "label": "negative",
+          "score": -0.8
+        }
+      },
+      {
+        "year": 2024,
+        "frequency": 3,
+        "dominant_theme": "martyr-comeback candidate",
+        "representative_clip": {
+          "asset_id": "019ebae7-8d91-7a11-8703-82989ba7683e",
+          "timestamp_start": 85.0,
+          "timestamp_end": 103.0,
+          "title": "Assassination-attempt rally footage from Butler",
+          "reason": "after the shooting he rises with blood on his ear and thrusts a fist upward while mouthing 'Fight!'",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc85f48616a1efc5f92/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc85f48616a1efc5f92/hlses/playlist.m3u8",
+          "duration": 131.008
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8d91-7a11-8703-82989ba7683e",
+            "timestamp_start": 85.0,
+            "timestamp_end": 103.0,
+            "title": "Assassination-attempt rally footage from Butler",
+            "reason": "after the shooting he rises with blood on his ear and thrusts a fist upward while mouthing 'Fight!'",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc85f48616a1efc5f92/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc85f48616a1efc5f92/hlses/playlist.m3u8",
+            "duration": 131.008
+          },
+          {
+            "asset_id": "019ebae7-8d91-7a11-8703-82989ba7683e",
+            "timestamp_start": 8.0,
+            "timestamp_end": 15.0,
+            "title": "Shots fired and agents rush the stage",
+            "reason": "Secret Service agents pile onto him the instant shots ring out, making vulnerability and danger the entire frame.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc85f48616a1efc5f92/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfc85f48616a1efc5f92/hlses/playlist.m3u8",
+            "duration": 131.008
+          },
+          {
+            "asset_id": "019ebae7-8de9-7221-9960-a9556aa81549",
+            "timestamp_start": 7.0,
+            "timestamp_end": 31.0,
+            "title": "Victory speech in West Palm Beach",
+            "reason": "he thanks voters as both 45th and 47th president, recasting the campaign as completed restoration.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfd15f48616a1efc5f94/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfd15f48616a1efc5f94/hlses/playlist.m3u8",
+            "duration": 171.728
+          }
+        ],
+        "sentiment": {
+          "label": "positive",
+          "score": 0.25
+        }
+      },
+      {
+        "year": 2025,
+        "frequency": 2,
+        "dominant_theme": "restored presidency / triumphant return",
+        "representative_clip": {
+          "asset_id": "019ebae7-8e39-77c1-bd0a-d661673891a9",
+          "timestamp_start": 50.0,
+          "timestamp_end": 89.0,
+          "title": "Mar-a-Lago address after return to office",
+          "reason": "the backdrop naming him '45th & 47th President' presents return itself as settled fact and spectacle.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfe8363f9692ab32166f/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfe8363f9692ab32166f/hlses/playlist.m3u8",
+          "duration": 273.468
+        },
+        "scenes": [
+          {
+            "asset_id": "019ebae7-8e39-77c1-bd0a-d661673891a9",
+            "timestamp_start": 50.0,
+            "timestamp_end": 89.0,
+            "title": "Mar-a-Lago address after return to office",
+            "reason": "the backdrop naming him '45th & 47th President' presents return itself as settled fact and spectacle.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfe8363f9692ab32166f/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfe8363f9692ab32166f/hlses/playlist.m3u8",
+            "duration": 273.468
+          },
+          {
+            "asset_id": "019ebae7-8e39-77c1-bd0a-d661673891a9",
+            "timestamp_start": 144.0,
+            "timestamp_end": 228.0,
+            "title": "Mar-a-Lago event blending politics and showmanship",
+            "reason": "he pauses politics to introduce a speed painter, showing the old entertainment instinct folded back into presidential imagery.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfe8363f9692ab32166f/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a2bbfe8363f9692ab32166f/hlses/playlist.m3u8",
+            "duration": 273.468
+          }
+        ],
+        "sentiment": {
+          "label": "positive",
+          "score": 0.35
+        }
+      }
+    ],
+    "narrative_summary": "Across this archive, Trump's portrayal evolves less as a straight political biography than as a sequence of media archetypes. In the 1980s he is framed as a high-visibility New York builder: rich, quotable, performative, and already speaking in broad national terms about trade and decline. By the early 1990s that glossy mogul image darkens into tabloid damage, debt, divorce, and overextension. The coverage does not make him disappear; instead, it begins to show the core pattern that defines later decades \u2014 setbacks becoming fuel for a new public role.\n\nThe 2000s are the clearest rehabilitation phase. Reality television transforms him from scandal-shadowed businessman into a highly legible entertainment character: decisive boss, boardroom executioner, branded authority. That TV persona becomes the bridge to politics. By 2015\u201316, the media no longer treats him as merely a celebrity dabbling in politics; the spectacle of his campaign becomes the political story itself, and then shifts again into victory and presidential power.\n\nDuring the presidency, the tone broadens from triumphant populist promise to polarized governance and recurring crisis. In this corpus, inauguration footage still carries a forceful but ceremonious legitimacy, while later material turns more skeptical or openly negative around COVID, January 6, and indictments. The visual language changes too: podiums, seals, and flags give way to hospital split-screens, the Fulton County mugshot, and footage built around threat, accountability, and democratic stress.\n\nBy the mid-2020s, the portrayal becomes paradoxical: simultaneously damaged and mythologized. The mugshot frames him as an accused ex-president under legal siege, while the assassination-attempt and return-to-office footage frame him as resilient, defiant, and restored. So the long arc is not just mogul-to-president; it is mogul, celebrity, provocateur, officeholder, crisis figure, defendant, and comeback symbol \u2014 with media repeatedly recoding the same traits of spectacle, dominance, grievance, and self-branding for each era.",
+    "estimated_value": {
+      "total_mentions": 39,
+      "estimated_brand_intelligence_value_usd": 9750000,
+      "calculation_basis": "Estimated from 39 indexed Trump-related video items in the archive, using clip count as total mentions and valuing long-run reusable media/narrative visibility at roughly $250,000 per distinct clip-year equivalent across business, celebrity, campaign, presidency, crisis, and comeback coverage."
+    },
+    "session_id": "sess_019ed042-fc6e-7643-a782-b6fa0bdba23b",
+    "source": "jockey",
+    "inflection_points": [
+      {
+        "year": 1985,
+        "label": "Tabloid mogul enters national TV politics talk",
+        "why": "Coverage shifts from glamorous developer imagery to a businessman publicly weighing trade, housing, and foreign-policy themes on television."
+      },
+      {
+        "year": 1992,
+        "label": "Debt-and-divorce collapse",
+        "why": "The framing turns from gilded success to overreach and personal-financial humiliation as headlines emphasize losses and tabloid fallout."
+      },
+      {
+        "year": 1997,
+        "label": "Brand over building",
+        "why": "Mid-1990s coverage recasts him less as a builder and more as a self-marketing celebrity brand surviving by visibility."
+      },
+      {
+        "year": 2004,
+        "label": "The Apprentice makeover",
+        "why": "Reality television rebrands him as an authoritative, decisive boss and gives his persona a mass-market entertainment polish."
+      },
+      {
+        "year": 2015,
+        "label": "Candidate spectacle",
+        "why": "The escalator launch converts celebrity branding into overt electoral politics, with media treating spectacle itself as the story."
+      },
+      {
+        "year": 2016,
+        "label": "From insurgent to officeholder",
+        "why": "Election and inauguration coverage moves the narrative from provocation and outsider energy to national power and presidential rhetoric."
+      },
+      {
+        "year": 2021,
+        "label": "Presidency to democratic rupture",
+        "why": "January 6 coverage hardens the tone, portraying him less as combative leader and more as a central figure in national crisis."
+      },
+      {
+        "year": 2023,
+        "label": "Legal jeopardy to comeback iconography",
+        "why": "Indictment imagery and assassination-attempt footage are followed by triumphant return messaging, producing a narrative of embattled survival and restoration."
+      }
+    ]
+  }
+}

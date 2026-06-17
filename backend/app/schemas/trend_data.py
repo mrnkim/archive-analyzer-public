@@ -9,6 +9,7 @@ The same shape is enforced two ways:
 
 from __future__ import annotations
 
+import copy
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -29,6 +30,13 @@ class RepresentativeClip(BaseModel):
     duration: float | None = None
 
 
+class Sentiment(BaseModel):
+    # Prevailing tone of the year's coverage. Used by the Narrative Evolution
+    # tab's sentiment overlay; absent for the brand-intelligence scenarios.
+    label: str = ""  # "positive" | "neutral" | "negative"
+    score: float = 0.0  # -1 (hostile) .. 1 (favorable)
+
+
 class TimelinePoint(BaseModel):
     year: int = Field(ge=1900, le=2100)
     frequency: int = Field(ge=0)
@@ -38,6 +46,15 @@ class TimelinePoint(BaseModel):
     # `representative_clip` === `scenes[0]`. Defaults to empty for
     # backwards-compat with older primed payloads that predate this field.
     scenes: list[RepresentativeClip] = Field(default_factory=list)
+    # Optional — only the Narrative Evolution scenario ("N") populates this.
+    sentiment: Sentiment | None = None
+
+
+class InflectionPoint(BaseModel):
+    # A pivotal year where the narrative shifted (Narrative Evolution tab).
+    year: int = Field(ge=1900, le=2100)
+    label: str
+    why: str = ""
 
 
 class EstimatedValue(BaseModel):
@@ -51,6 +68,8 @@ class TrendResponse(BaseModel):
     timeline: list[TimelinePoint]
     narrative_summary: str
     estimated_value: EstimatedValue
+    # Optional — only the Narrative Evolution scenario ("N") populates this.
+    inflection_points: list[InflectionPoint] = Field(default_factory=list)
 
 
 # ─────────────────────────────────────────────────────────
@@ -186,3 +205,65 @@ TREND_DATA_JSON_SCHEMA: dict[str, Any] = {
         },
     },
 }
+
+
+# ─────────────────────────────────────────────────────────
+# Narrative Evolution schema (scenario "N"). Derived from the
+# brand schema so the two stay in sync, then adds a required
+# per-year `sentiment` (for the tone overlay) and a required
+# top-level `inflection_points` list. Kept separate so the
+# brand scenarios' output shape is untouched. Every property
+# is listed in `required` because Jockey's structured-output
+# decoder (OpenAI-style) rejects optional keys under
+# additionalProperties:false.
+# ─────────────────────────────────────────────────────────
+
+_SENTIMENT_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "additionalProperties": False,
+    "required": ["label", "score"],
+    "properties": {
+        "label": {
+            "type": "string",
+            "description": "Prevailing tone: positive | neutral | negative.",
+        },
+        "score": {
+            "type": "number",
+            "description": "Tone score from -1 (hostile coverage) to 1 (favorable).",
+        },
+    },
+}
+
+_INFLECTION_POINTS_SCHEMA: dict[str, Any] = {
+    "type": "array",
+    "description": (
+        "2–4 pivotal years where the subject's media narrative shifted."
+    ),
+    "items": {
+        "type": "object",
+        "additionalProperties": False,
+        "required": ["year", "label", "why"],
+        "properties": {
+            "year": {"type": "integer"},
+            "label": {"type": "string", "description": "Short phrase for the shift."},
+            "why": {"type": "string", "description": "One sentence on what changed."},
+        },
+    },
+}
+
+
+def _build_narrative_schema() -> dict[str, Any]:
+    s = copy.deepcopy(TREND_DATA_JSON_SCHEMA)
+    s["name"] = "narrative_trend_data"
+    schema = s["schema"]
+    # Required per-year sentiment for the tone overlay.
+    item = schema["properties"]["timeline"]["items"]
+    item["properties"]["sentiment"] = _SENTIMENT_SCHEMA
+    item["required"].append("sentiment")
+    # Required top-level inflection points.
+    schema["properties"]["inflection_points"] = _INFLECTION_POINTS_SCHEMA
+    schema["required"].append("inflection_points")
+    return s
+
+
+NARRATIVE_DATA_JSON_SCHEMA: dict[str, Any] = _build_narrative_schema()

@@ -11,6 +11,13 @@ export type Scene = {
   reason?: string | null;
 };
 
+// Prevailing tone of a year's coverage — only the Narrative Evolution
+// scenario ("N") populates this.
+export type Sentiment = {
+  label: string; // "positive" | "neutral" | "negative"
+  score: number; // -1 (hostile) .. 1 (favorable)
+};
+
 export type TimelinePoint = {
   year: number;
   frequency: number;
@@ -20,6 +27,15 @@ export type TimelinePoint = {
   // `representative_clip` === `scenes[0]`. Optional for backwards-compat
   // with older primed JSON payloads.
   scenes?: Scene[];
+  // Narrative Evolution only.
+  sentiment?: Sentiment | null;
+};
+
+// A pivotal year where the narrative shifted (Narrative Evolution only).
+export type InflectionPoint = {
+  year: number;
+  label: string;
+  why: string;
 };
 
 export type QueryResponse = {
@@ -33,6 +49,8 @@ export type QueryResponse = {
     calculation_basis: string;
   };
   session_id: string;
+  // Narrative Evolution only.
+  inflection_points?: InflectionPoint[];
 };
 
 export type FollowupResponse = {

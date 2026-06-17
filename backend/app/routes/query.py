@@ -16,7 +16,11 @@ from app.config import get_settings
 from app.deps import jockey_assets as jockey_api
 from app.deps.jockey_client import JockeyClient, QueryError
 from app.prompts import get_instructions
-from app.schemas.trend_data import TREND_DATA_JSON_SCHEMA, TrendResponse
+from app.schemas.trend_data import (
+    NARRATIVE_DATA_JSON_SCHEMA,
+    TREND_DATA_JSON_SCHEMA,
+    TrendResponse,
+)
 from app.seeds import load_seed
 
 # Clips arrive in the knowledge store as `<youtube_id>.<ext>` from the yt-dlp
@@ -92,6 +96,8 @@ class QueryResponse(BaseModel):
     estimated_value: dict
     session_id: str
     source: str  # "jockey" | "mock"
+    # Populated only by the Narrative Evolution scenario ("N").
+    inflection_points: list[dict] = []
 
 
 def _mock_response(query: str, scenario: str | None) -> QueryResponse:
@@ -171,7 +177,11 @@ def _extract_structured_payload(jockey_response: dict) -> dict:
 
 @router.post("/query", response_model=QueryResponse)
 async def query(req: QueryRequest) -> QueryResponse:
-    client = JockeyClient()
+    settings = get_settings()
+    is_narrative = (req.scenario or "").upper() == "N"
+    # The Narrative Evolution tab runs against a separate archive (Trump KS).
+    ks_id = settings.ks_for_scenario(req.scenario)
+    client = JockeyClient(ks_id=ks_id)
 
     # Dev convenience: fall back to seed data when env isn't fully configured.
     if not client.configured:
@@ -185,11 +195,12 @@ async def query(req: QueryRequest) -> QueryResponse:
         return QueryResponse(**cached)
 
     instructions = get_instructions(req.scenario)
+    text_format = NARRATIVE_DATA_JSON_SCHEMA if is_narrative else TREND_DATA_JSON_SCHEMA
     try:
         raw = await client.create_response(
             question=req.query,
             instructions=instructions,
-            text_format=TREND_DATA_JSON_SCHEMA,
+            text_format=text_format,
         )
     except QueryError as e:
         logger.exception("Jockey /responses failed: %s", e)
@@ -212,7 +223,6 @@ async def query(req: QueryRequest) -> QueryResponse:
     # (knowledge-store item IDs), but GET /assets/{id} only accepts the
     # 24-char hex asset primary key — so we resolve via list_ks_items first
     # to build a UUID->hex map. Without this step the UI gets placeholders.
-    settings = get_settings()
     api_key = settings.twelvelabs_api_key
     # Gather every asset id across representative clips AND all scenes, so the
     # whole per-year scene strip gets thumbnails/manifests, not just the top.
@@ -227,7 +237,7 @@ async def query(req: QueryRequest) -> QueryResponse:
 
     uuid_to_hex: dict[str, str] = {}
     try:
-        ks_items = await _list_all_ks_items(api_key, settings.ks_id, settings.jockey_base_url)
+        ks_items = await _list_all_ks_items(api_key, ks_id, settings.jockey_base_url)
         uuid_to_hex = {item["ksi_uuid"]: item["asset_id"] for item in ks_items if item.get("asset_id")}
     except Exception as e:
         logger.warning("list_ks_items failed; thumbnails will be missing: %s", e)
@@ -275,6 +285,7 @@ async def query(req: QueryRequest) -> QueryResponse:
         estimated_value=estimated_value,
         session_id=session_id,
         source="jockey",
+        inflection_points=[ip.model_dump() for ip in validated.inflection_points],
     )
     # Quality gate: don't cache "I couldn't find anything" responses.
     # Jockey is stochastic — a future call might find evidence the first

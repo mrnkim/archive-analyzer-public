@@ -11,6 +11,12 @@ type Props = {
    * absent (mock mode or before the query response lands).
    */
   narrative?: string | null;
+  /**
+   * When true, flow the prose into magazine-style columns on wide screens.
+   * Used when the panel sits as a full-width block instead of a narrow
+   * side column, so line length stays readable instead of spanning the page.
+   */
+  columns?: boolean;
 };
 
 const CHUNK_SIZE = 4;
@@ -52,7 +58,7 @@ function useFakeStream(text: string | null): { text: string; done: boolean } {
   return { text: shown, done };
 }
 
-export function NarrativePanel({ query, narrative }: Props) {
+export function NarrativePanel({ query, narrative, columns }: Props) {
   const useFake = !!narrative;
   const fake = useFakeStream(useFake ? narrative ?? null : null);
   const sse = useEventSource(useFake ? null : query);
@@ -63,7 +69,12 @@ export function NarrativePanel({ query, narrative }: Props) {
   const active = !!query || !!narrative;
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 h-full flex flex-col">
+    <div
+      className={
+        "bg-neutral-900 border border-neutral-800 rounded-lg p-4 flex flex-col " +
+        (columns ? "" : "h-full")
+      }
+    >
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-medium text-neutral-300">AI narrative summary</h3>
         {active && !done && !error && (
@@ -84,7 +95,14 @@ export function NarrativePanel({ query, narrative }: Props) {
       {error && <div className="text-sm text-error">Error: {error}</div>}
 
       {active && (
-        <div className="flex-1 overflow-y-auto text-sm">
+        <div
+          className={
+            "flex-1 overflow-y-auto text-sm " +
+            (columns
+              ? "lg:[column-count:2] lg:[column-gap:2rem] [&>*:first-child]:mt-0"
+              : "")
+          }
+        >
           <Markdown>{text}</Markdown>
           {!done && !error && (
             <span className="inline-block w-2 h-4 bg-brand-500 ml-0.5 animate-pulse align-middle" />

@@ -80,3 +80,82 @@ hydrated into the cache on startup. To refresh them against the live API:
 - One source video (`aKSHgMqCwbQ`) is private/removed on YouTube, so its oEmbed
   title can't be resolved — it shows the filename. Re-run the titles script if it
   comes back online.
+
+---
+
+# Handoff — 2026-06-12
+
+Two small fixes shipped, plus a larger feature (Scenario B — Narrative
+Evolution) now in progress.
+
+## Shipped + deployed this session
+
+1. **Pinned primed cache (never-expiring demo scenarios)** — `backend/app/cache.py`
+   - Bug: the three demo scenarios are hydrated into the SQLite cache at startup
+     with `created_at = now`, but were subject to the same 24h TTL as ad-hoc
+     queries. Once a Railway container stayed up >24h, the primed entries went
+     stale and the next click paid the 60–180s Jockey cold-call.
+   - Fix: added a `pinned` column. `load_primed_from_disk()` writes entries with
+     `pinned=1`; `get()` skips the TTL check for pinned rows. Ad-hoc user queries
+     keep the 24h TTL. Regression tests in `backend/tests/test_cache.py`.
+   - Commit `85876f1`, deployed; verified all three scenarios return <0.4s in prod.
+
+2. **Loading state with elapsed timer + staged hints** —
+   `frontend/src/components/LoadingState.tsx` (extracted from inline JSX in
+   `App.tsx`). Shows an `mm:ss` timer and a stage label that advances over time so
+   a fresh 2–3 min live query doesn't read as "frozen". Commit `3c58f41`.
+
+## In progress: Scenario B — Narrative Evolution (PRD §Demo Scenarios B)
+
+Goal: add a **new tab** (alongside "Brand Intelligence (Adidas Example)") that
+traces how an entity's media portrayal evolved over decades — per the PRD's
+Scenario B (Donald Trump example). Differentiators to build (all three per PRD):
+decade **thematic clusters** (core), **sentiment overlay** on the timeline, and
+**inflection points**.
+
+### Done — new Knowledge Store ingested
+- A separate Trump archive was ingested into its **own vanilla KS** (no
+  `ingestion_config`, same style as the Adidas KS). Years are inferred by Jockey
+  at query time from content, not from metadata.
+- **KS_ID:** `ks_019ebae7-82f6-73c2-baff-b982a3443485`  (name: `Trump Archive 1986-2026`)
+- **39/43 videos ready** (all indexed). 4 failed and are NOT in the KS:
+  - `GZpMJeynBeg` Oprah 1988 — resolution 426x240 (<360p min)
+  - `PSkvbQfpl5E` Real-estate interview — 320x240 (<360p)
+  - `SwbokALrcxs` Celebrity Apprentice "YOU'RE FIRED" — 320x240 (<360p)
+  - `jkghtyxZ6rc` WWE McMahon takedown 2007 — age-restricted (needs cookies)
+  - These are mostly redundant (era/theme covered by sibling clips), so we
+    proceeded with 39. Distribution: Era1 10 · Era2 8 · Era3 10 · Era4 11,
+    spanning 1986→2026.
+
+### How the ingest was done (reproducible)
+- Curation + ingest used the **private Jockey skill at `/Users/Miranda/twelveLabs/jockey`**
+  (NOT committed here — only the resulting KS_ID + future primed JSON land in this
+  repo, so no private content leaks). Its CLI:
+  `python scripts/youtube_ingest.py "<url>" --ks-name "<name>"` (append more with
+  `--ks-id`). Auth: API key at `~/.twelvelabs/credentials` (same key as `.env`).
+- Trick: passed one `watch_videos?video_ids=ID1,ID2,...` URL with all 43 ids;
+  yt-dlp expands it to a 43-entry playlist, the script ingests with 10-worker
+  concurrency into one new KS. (~13 min wall-clock.)
+- Curation artifacts (outside the repo, in `/Users/Miranda/twelveLabs/`):
+  `trump_archive_playlist.txt` (43 ids + durations + KS_ID record) and
+  `trump_archive_playlist.html` (local IFrame-API player; serve via
+  `python3 -m http.server` and open over http://localhost — `file://` triggers
+  YouTube embed Error 153). The `watch_videos` anonymous-playlist URL no longer
+  plays in-browser (redirects to the first video); yt-dlp still expands it.
+
+### TODO — build the feature (this is option 1, proceeding now)
+- **Backend**
+  - Config: add a second KS id (e.g. `KS_ID_NARRATIVE`) and route the new tab's
+    queries to the Trump KS; existing scenarios keep the Adidas `KS_ID`.
+    `JockeyClient` currently binds one `ks_id` — needs per-request KS selection.
+  - New scenario instructions (narrative evolution: era thematic clusters +
+    sentiment). Mind the ~2000-char `instructions` cap.
+  - Extend `schemas/trend_data.py`: add `sentiment` (per timeline point/scene),
+    optionally `era`/`thematic_cluster` labels and an `inflection_points[]` block.
+    Keep it backward compatible with the existing Adidas payloads.
+- **Frontend**
+  - New sidebar tab "Narrative Evolution (Trump Example)".
+  - Decade thematic-cluster view (core), sentiment overlay on the timeline,
+    inflection-point markers; reuse ClipGrid/ChatPanel/Export where possible.
+- **Demo data**: once the live query shape is stable, capture a primed snapshot
+  for the demo query so it's instant (and pinned, per the cache fix above).
