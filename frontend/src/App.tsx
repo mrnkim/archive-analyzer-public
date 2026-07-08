@@ -195,11 +195,25 @@ export default function App() {
             <>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
                 <div className="lg:col-span-2 space-y-4">
-                  <TimelineChart data={result.timeline} onPointClick={handleSelectPoint} />
+                  <TimelineChart
+                    data={result.timeline}
+                    onPointClick={handleSelectPoint}
+                    selectedYear={selectedPoint?.year ?? null}
+                  />
                   <SentimentStrip
                     timeline={result.timeline}
                     selectedYear={selectedPoint?.year ?? null}
                     onSelect={handleSelectPoint}
+                  />
+                  <div ref={clipGridRef} className="scroll-mt-4">
+                    <ClipGrid point={selectedPoint} />
+                  </div>
+                  <ClipStrip
+                    timeline={result.timeline}
+                    selectedYear={selectedPoint?.year ?? null}
+                    onSelect={handleSelectPoint}
+                    exportQuery={result.query}
+                    exportScenario={resultScenario}
                   />
                 </div>
                 <InflectionPoints
@@ -213,20 +227,12 @@ export default function App() {
               <NarrativePanel
                 query={streamingQuery}
                 narrative={result?.narrative_summary}
-                columns
-              />
-
-              <ClipStrip
+                bullets={result?.summary_bullets}
                 timeline={result.timeline}
                 selectedYear={selectedPoint?.year ?? null}
-                onSelect={handleSelectPoint}
-                exportQuery={result.query}
-                exportScenario={resultScenario}
+                onSelectYear={selectYear}
+                columns
               />
-
-              <div ref={clipGridRef} className="scroll-mt-4">
-                <ClipGrid point={selectedPoint} />
-              </div>
 
               <ChatPanel />
             </>
@@ -247,33 +253,36 @@ export default function App() {
                 <TimelineChart
                   data={result.timeline}
                   onPointClick={handleSelectPoint}
+                  selectedYear={selectedPoint?.year ?? null}
+                />
+                <div ref={clipGridRef} className="scroll-mt-4">
+                  <ClipGrid point={selectedPoint} />
+                </div>
+                <ClipStrip
+                  timeline={result.timeline}
+                  selectedYear={selectedPoint?.year ?? null}
+                  onSelect={handleSelectPoint}
+                  exportQuery={result.query}
+                  exportScenario={resultScenario}
                 />
               </div>
-              <div className="space-y-4 flex flex-col">
+              <div className="space-y-4 flex flex-col lg:sticky lg:top-24 lg:h-[calc(100vh-7rem)]">
                 <RevenueWidget
                   totalMentions={result.estimated_value.total_mentions}
                   estimatedValueUsd={result.estimated_value.estimated_brand_intelligence_value_usd}
                   basis={result.estimated_value.calculation_basis}
                 />
-                <div className="flex-1 min-h-[260px]">
+                <div className="flex-1 min-h-[260px] lg:min-h-0">
                   <NarrativePanel
                     query={streamingQuery}
                     narrative={result?.narrative_summary}
+                    bullets={result?.summary_bullets}
+                    timeline={result.timeline}
+                    selectedYear={selectedPoint?.year ?? null}
+                    onSelectYear={selectYear}
                   />
                 </div>
               </div>
-            </div>
-
-            <ClipStrip
-              timeline={result.timeline}
-              selectedYear={selectedPoint?.year ?? null}
-              onSelect={handleSelectPoint}
-              exportQuery={result.query}
-              exportScenario={resultScenario}
-            />
-
-            <div ref={clipGridRef} className="scroll-mt-4">
-              <ClipGrid point={selectedPoint} />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

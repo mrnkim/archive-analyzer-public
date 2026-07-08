@@ -15,6 +15,7 @@ import { Icon } from "./Icon";
 type Props = {
   data: TimelinePoint[];
   onPointClick: (point: TimelinePoint) => void;
+  selectedYear?: number | null;
 };
 
 type TooltipPayload = {
@@ -63,11 +64,14 @@ function ClipPreviewTooltip({
   );
 }
 
-export function TimelineChart({ data, onPointClick }: Props) {
+export function TimelineChart({ data, onPointClick, selectedYear }: Props) {
   const peakPoint = data.reduce(
     (max, p) => (p.frequency > max.frequency ? p : max),
     data[0]
   );
+  const selectedPoint = selectedYear
+    ? data.find((p) => p.year === selectedYear)
+    : null;
 
   return (
     <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4">
@@ -122,6 +126,16 @@ export function TimelineChart({ data, onPointClick }: Props) {
             stroke="#00DC82"
             strokeWidth={2}
           />
+          {selectedPoint && (
+            <ReferenceDot
+              x={selectedPoint.year}
+              y={selectedPoint.frequency}
+              r={11}
+              fill="transparent"
+              stroke="#F7F4ED"
+              strokeWidth={2}
+            />
+          )}
           <Brush
             dataKey="year"
             height={24}

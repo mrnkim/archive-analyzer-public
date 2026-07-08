@@ -146,6 +146,15 @@ compelling 2–4 paragraph narrative of how the asked-about entity / topic
 evolved over the queried time range. Reference specific years, themes, and
 inflection points. Avoid generic filler. Write in clear English."""
 
+SUMMARY_BULLET_INSTRUCTIONS = """
+
+For the AI summary, do not write long prose as the primary output. Return
+summary_bullets with exactly one bullet for every year in the timeline. Each
+bullet must use that timeline `year`, a short `headline`, and one sentence of
+`text`. Make each bullet explain what changed or why that year matters so the
+UI can highlight the matching chart dot. Keep narrative_summary as a brief
+fallback only."""
+
 DEFAULT_INSTRUCTIONS = SCENARIO_A_BRAND
 
 SCENARIO_INSTRUCTIONS: dict[str, str] = {
@@ -162,5 +171,5 @@ def get_instructions(scenario: str | None) -> str:
     Falls back to scenario A when unknown.
     """
     if scenario and scenario.upper() in SCENARIO_INSTRUCTIONS:
-        return SCENARIO_INSTRUCTIONS[scenario.upper()]
-    return DEFAULT_INSTRUCTIONS
+        return SCENARIO_INSTRUCTIONS[scenario.upper()] + SUMMARY_BULLET_INSTRUCTIONS
+    return DEFAULT_INSTRUCTIONS + SUMMARY_BULLET_INSTRUCTIONS

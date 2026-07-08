@@ -38,11 +38,18 @@ export type InflectionPoint = {
   why: string;
 };
 
+export type SummaryBullet = {
+  year: number;
+  headline: string;
+  text: string;
+};
+
 export type QueryResponse = {
   entity: string;
   query: string;
   timeline: TimelinePoint[];
   narrative_summary: string;
+  summary_bullets?: SummaryBullet[];
   estimated_value: {
     total_mentions: number;
     estimated_brand_intelligence_value_usd: number;

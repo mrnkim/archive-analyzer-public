@@ -93,6 +93,7 @@ class QueryResponse(BaseModel):
     query: str
     timeline: list[dict]
     narrative_summary: str
+    summary_bullets: list[dict] = []
     estimated_value: dict
     session_id: str
     source: str  # "jockey" | "mock"
@@ -108,6 +109,7 @@ def _mock_response(query: str, scenario: str | None) -> QueryResponse:
         query=query,
         timeline=seed["timeline"],
         narrative_summary=seed["narrative_summary"],
+        summary_bullets=[],
         estimated_value=seed["estimated_value"],
         session_id="mock_session_001",
         source="mock",
@@ -282,6 +284,7 @@ async def query(req: QueryRequest) -> QueryResponse:
         query=req.query,
         timeline=enriched_timeline,
         narrative_summary=validated.narrative_summary,
+        summary_bullets=[b.model_dump() for b in validated.summary_bullets],
         estimated_value=estimated_value,
         session_id=session_id,
         source="jockey",

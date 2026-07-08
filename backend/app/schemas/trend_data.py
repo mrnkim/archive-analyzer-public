@@ -57,6 +57,13 @@ class InflectionPoint(BaseModel):
     why: str = ""
 
 
+class SummaryBullet(BaseModel):
+    # A clickable summary point tied to a concrete year in the timeline.
+    year: int = Field(ge=1900, le=2100)
+    headline: str
+    text: str
+
+
 class EstimatedValue(BaseModel):
     total_mentions: int = Field(ge=0)
     estimated_brand_intelligence_value_usd: int = Field(ge=0)
@@ -67,6 +74,9 @@ class TrendResponse(BaseModel):
     entity: str
     timeline: list[TimelinePoint]
     narrative_summary: str
+    # Clickable, chart-linked summary bullets. Optional default keeps older
+    # primed/seed payloads valid.
+    summary_bullets: list[SummaryBullet] = Field(default_factory=list)
     estimated_value: EstimatedValue
     # Optional — only the Narrative Evolution scenario ("N") populates this.
     inflection_points: list[InflectionPoint] = Field(default_factory=list)
@@ -86,7 +96,13 @@ TREND_DATA_JSON_SCHEMA: dict[str, Any] = {
     "schema": {
         "type": "object",
         "additionalProperties": False,
-        "required": ["entity", "timeline", "narrative_summary", "estimated_value"],
+        "required": [
+            "entity",
+            "timeline",
+            "narrative_summary",
+            "summary_bullets",
+            "estimated_value",
+        ],
         "properties": {
             "entity": {
                 "type": "string",
@@ -186,7 +202,33 @@ TREND_DATA_JSON_SCHEMA: dict[str, Any] = {
             },
             "narrative_summary": {
                 "type": "string",
-                "description": "Two-to-four paragraph prose summary of the trend.",
+                "description": (
+                    "Brief fallback summary. The UI primarily renders summary_bullets."
+                ),
+            },
+            "summary_bullets": {
+                "type": "array",
+                "description": (
+                    "One concise summary bullet per timeline point. Each bullet must "
+                    "reference a year that exists in timeline so the UI can highlight "
+                    "the matching dot."
+                ),
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "required": ["year", "headline", "text"],
+                    "properties": {
+                        "year": {"type": "integer"},
+                        "headline": {
+                            "type": "string",
+                            "description": "Short label for the point.",
+                        },
+                        "text": {
+                            "type": "string",
+                            "description": "One sentence explaining the year-specific insight.",
+                        },
+                    },
+                },
             },
             "estimated_value": {
                 "type": "object",

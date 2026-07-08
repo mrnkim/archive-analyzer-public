@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useEventSource } from "../hooks/useEventSource";
+import type { SummaryBullet, TimelinePoint } from "../types/api";
 import { Markdown } from "./Markdown";
 
 type Props = {
@@ -11,6 +12,10 @@ type Props = {
    * absent (mock mode or before the query response lands).
    */
   narrative?: string | null;
+  bullets?: SummaryBullet[];
+  timeline?: TimelinePoint[];
+  selectedYear?: number | null;
+  onSelectYear?: (year: number) => void;
   /**
    * When true, flow the prose into magazine-style columns on wide screens.
    * Used when the panel sits as a full-width block instead of a narrow
@@ -58,20 +63,92 @@ function useFakeStream(text: string | null): { text: string; done: boolean } {
   return { text: shown, done };
 }
 
-export function NarrativePanel({ query, narrative, columns }: Props) {
+function fallbackBullets(
+  narrative: string | null | undefined,
+  timeline: TimelinePoint[] | undefined
+): SummaryBullet[] {
+  if (!timeline?.length) return [];
+  const knownYears = new Set(timeline.map((p) => p.year));
+  const sentences = (narrative ?? "")
+    .replace(/\s+/g, " ")
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  const out: SummaryBullet[] = [];
+  for (const sentence of sentences) {
+    const year = Number(sentence.match(/\b(19\d{2}|20\d{2})\b/)?.[1]);
+    if (!knownYears.has(year)) continue;
+    const point = timeline.find((p) => p.year === year);
+    out.push({
+      year,
+      headline: point?.dominant_theme || `${year} shift`,
+      text: sentence,
+    });
+    if (out.length >= 6) break;
+  }
+
+  const byYear = new Map(out.map((bullet) => [bullet.year, bullet]));
+  return timeline.map((point) => {
+    const existing = byYear.get(point.year);
+    if (existing) return existing;
+    return {
+      year: point.year,
+      headline: point.dominant_theme,
+      text:
+        point.representative_clip.reason ||
+        `${point.frequency} scene${point.frequency === 1 ? "" : "s"} support this point.`,
+    };
+  });
+}
+
+export function NarrativePanel({
+  query,
+  narrative,
+  bullets,
+  timeline,
+  selectedYear,
+  onSelectYear,
+  columns,
+}: Props) {
+  const fallback = fallbackBullets(narrative, timeline);
+  const providedByYear = new Map((bullets ?? []).map((bullet) => [bullet.year, bullet]));
+  const linkedBullets = timeline?.length
+    ? timeline.map((point) => providedByYear.get(point.year) ?? fallback.find((b) => b.year === point.year))
+        .filter((bullet): bullet is SummaryBullet => Boolean(bullet))
+    : bullets ?? fallback;
+  const selectedBullet =
+    linkedBullets.find((bullet) => bullet.year === selectedYear) ?? null;
+  const bulletRefs = useRef<Record<number, HTMLButtonElement | null>>({});
+  const hasLinkedBullets = linkedBullets.length > 0;
   const useFake = !!narrative;
   const fake = useFakeStream(useFake ? narrative ?? null : null);
   const sse = useEventSource(useFake ? null : query);
 
   const text = useFake ? fake.text : sse.text;
-  const done = useFake ? fake.done : sse.done;
+  const done = hasLinkedBullets || (useFake ? fake.done : sse.done);
   const error = useFake ? null : sse.error;
-  const active = !!query || !!narrative;
+  const active = !!query || !!narrative || hasLinkedBullets;
+  const visibleBullets = useMemo(
+    () =>
+      selectedYear
+        ? linkedBullets.filter((bullet) => bullet.year !== selectedYear)
+        : linkedBullets,
+    [linkedBullets, selectedYear]
+  );
+
+  useEffect(() => {
+    if (!selectedYear) return;
+    bulletRefs.current[selectedYear]?.scrollIntoView({
+      block: "nearest",
+      behavior: "smooth",
+    });
+  }, [selectedYear]);
 
   return (
     <div
       className={
-        "bg-neutral-900 border border-neutral-800 rounded-lg p-4 flex flex-col " +
+        "bg-neutral-900 border border-neutral-800 rounded-lg p-4 flex min-h-0 flex-col " +
         (columns ? "" : "h-full")
       }
     >
@@ -94,7 +171,84 @@ export function NarrativePanel({ query, narrative, columns }: Props) {
 
       {error && <div className="text-sm text-error">Error: {error}</div>}
 
-      {active && (
+      {active && hasLinkedBullets && (
+        <div className="flex-1 min-h-0 flex flex-col gap-2">
+          {selectedBullet && (
+            <button
+              type="button"
+              onClick={() => onSelectYear?.(selectedBullet.year)}
+              className="w-full text-left rounded-md border border-brand-500 bg-brand-500/10 px-3 py-2.5 text-neutral-50"
+            >
+              <div className="text-[10px] uppercase tracking-[0.14em] text-brand-500 mb-1">
+                Selected insight
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="mt-0.5 rounded bg-brand-500 px-1.5 py-0.5 font-mono text-[10px] tabular-nums text-neutral-950">
+                  {selectedBullet.year}
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-sm font-medium leading-snug">
+                    {selectedBullet.headline}
+                  </span>
+                  <span className="mt-1 block text-xs leading-5 text-neutral-300">
+                    {selectedBullet.text}
+                  </span>
+                </span>
+              </div>
+            </button>
+          )}
+
+          <div
+            className={
+              "flex-1 min-h-0 overflow-y-auto pr-1 " +
+              (columns ? "grid content-start gap-2 lg:grid-cols-2" : "space-y-2")
+            }
+          >
+          {visibleBullets.map((bullet, i) => {
+            const selected = bullet.year === selectedYear;
+            return (
+              <button
+                key={`${bullet.year}-${bullet.headline}-${i}`}
+                ref={(node) => {
+                  bulletRefs.current[bullet.year] = node;
+                }}
+                type="button"
+                onClick={() => onSelectYear?.(bullet.year)}
+                className={
+                  "w-full text-left rounded-md border px-3 py-2.5 transition-colors " +
+                  (selected
+                    ? "border-brand-500 bg-brand-500/10 text-neutral-50"
+                    : "border-neutral-800 bg-neutral-950/35 text-neutral-200 hover:border-neutral-700 hover:bg-neutral-950/60")
+                }
+              >
+                <div className="flex items-start gap-2">
+                  <span
+                    className={
+                      "mt-0.5 rounded px-1.5 py-0.5 font-mono text-[10px] tabular-nums " +
+                      (selected
+                        ? "bg-brand-500 text-neutral-950"
+                        : "bg-neutral-800 text-neutral-400")
+                    }
+                  >
+                    {bullet.year}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-medium leading-snug">
+                      {bullet.headline}
+                    </span>
+                    <span className="mt-1 block text-xs leading-5 text-neutral-400">
+                      {bullet.text}
+                    </span>
+                  </span>
+                </div>
+              </button>
+            );
+          })}
+          </div>
+        </div>
+      )}
+
+      {active && !hasLinkedBullets && (
         <div
           className={
             "flex-1 overflow-y-auto text-sm " +

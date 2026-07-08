@@ -159,3 +159,71 @@ decade **thematic clusters** (core), **sentiment overlay** on the timeline, and
     inflection-point markers; reuse ClipGrid/ChatPanel/Export where possible.
 - **Demo data**: once the live query shape is stable, capture a primed snapshot
   for the demo query so it's instant (and pinned, per the cache fix above).
+
+---
+
+# Handoff — 2026-07-08
+
+UI/UX pass for the analyzer results view, plus structured summary bullets that
+link the narrative panel to the chart and selected scenes.
+
+## Shipped this session
+
+1. **Results layout: scenes directly under the graph**
+   - In `frontend/src/App.tsx`, the selected-year `Scenes — {year}` section
+     (`ClipGrid`) now sits immediately below `TimelineChart`.
+   - `All representative clips` (`ClipStrip`) moved below the selected scenes,
+     so the main flow is now: graph → selected scenes → representative clip strip.
+   - Applies to both the Adidas Brand Intelligence tab and the Narrative
+     Evolution tab.
+
+2. **Monetization estimate now shows the equation**
+   - `frontend/src/components/RevenueWidget.tsx` was redesigned from a single
+     large number into an equation-style card:
+     `evidence scenes × assumed value per scene = modeled value`.
+   - The original `calculation_basis` text is preserved in a separate basis
+     block, so the assumptions are visible instead of hidden below the number.
+
+3. **AI summary is now chart-linked bullets**
+   - Backend schema now includes `summary_bullets[]` in
+     `backend/app/schemas/trend_data.py`.
+   - `backend/app/prompts/scenarios.py` asks Jockey to return one summary bullet
+     for every timeline year. Each bullet has `year`, `headline`, and `text`.
+   - `backend/app/routes/query.py` returns `summary_bullets` while preserving
+     `narrative_summary` as a fallback for older payloads.
+   - Frontend `NarrativePanel` renders clickable bullets instead of long prose.
+     Clicking a bullet selects the matching year; clicking a chart dot highlights
+     the matching bullet.
+   - Older cached/primed responses still work: the frontend synthesizes fallback
+     bullets from the timeline when `summary_bullets` is absent.
+
+4. **Selected insight remains visible while reviewing scenes**
+   - The right-side estimate + summary column is sticky on desktop.
+   - The selected summary bullet is duplicated at the top of the summary panel as
+     `Selected insight`, so late-year selections (e.g. 2024) are visible without
+     scrolling the summary list.
+   - `TimelineChart` accepts `selectedYear` and draws a white ring around the
+     active dot.
+
+## Verification
+
+```bash
+cd frontend && npm run build
+cd backend && .venv/bin/pytest -q
+```
+
+Latest verification in this session:
+- Frontend build passed.
+- Backend tests passed: `20 passed`.
+- Local backend restarted on `http://127.0.0.1:8000`; frontend dev server was
+  already running on `http://127.0.0.1:5173`.
+
+## Notes for next session
+
+- Because `summary_bullets` is now required in the Jockey JSON Schema for live
+  calls, new live responses should contain one bullet per timeline point.
+- Existing `data/primed/*.json` files were not regenerated in this session; the
+  frontend fallback handles them. Regenerate primed data later if the demo should
+  ship with persisted `summary_bullets`.
+- The local backend is running without `--reload` due to sandbox file-watch
+  restrictions. Restart it after backend edits.
