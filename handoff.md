@@ -251,6 +251,45 @@ split:
   *components* (`<Button>`, `<TextField>`, …).** Requires the React 19 +
   Tailwind v4 upgrade. **No `@twelvelabs-io/react` component is used yet.**
 
+## Full PR roadmap (Track 1 + Track 2)
+
+Detailed steps, per-PR risk, and verification live in
+[`docs/tlds-migration-plan.md`](docs/tlds-migration-plan.md) §6. Checklist:
+
+**Track 1 — tokens-first (Vite + React 18 + Tailwind v3, NO upgrade):**
+
+- [x] **PR1** — Introduce TLDS tokens (`tokens.css` + semantic utilities in
+      `tailwind.config.js`); additive, legacy ramps kept. _Risk: very low._
+- [x] **PR2** — Migrate shell (`App.tsx` header/sidebar/footer/debug) + global
+      `index.css` to tokens. _Risk: low–med (visible chrome)._
+- [ ] **PR3** — Migrate data/display components: `RevenueWidget`,
+      `TimelineChart` (theme recharts palette via `--tl-*` vars), `ClipGrid`,
+      `ClipStrip`, `NarrativePanel`, `narrative/*`. _Risk: low._
+- [ ] **PR4** — Migrate interactive components: `SearchBar`, `ChatPanel`,
+      `ExportButton`, `HlsClipPlayer`, `EmptyState`, `LoadingState`; fix focus
+      rings → `ring-misc-ring`. _Risk: med (focus/disabled/hover states)._
+- [ ] **PR5** — Retire legacy `neutral`/`brand` ramps from `tailwind.config.js`
+      + grep-fail on any leftover `neutral-*`/`#hex`; decide the `::selection`
+      green. _Risk: low if PR2–4 complete (build breaks loudly on leftovers)._
+
+_After PR5, Track 1 is done: fully on TLDS semantic tokens, still React 18 +
+Tailwind v3, behavior unchanged._
+
+**Track 2 — component library (needs explicit approval + the upgrades):**
+
+- [ ] **PR6** — Tailwind v3→v4 (`@tailwindcss/upgrade`, PostCSS→`@tailwindcss/vite`,
+      ring/radius/border-color deltas). _Risk: med; riskiest PR — full visual regression._
+- [ ] **PR7** — React 18→19 (React 19 codemod, `@types/react` bump, verify
+      react-query/zustand/recharts/react-markdown peers). _Risk: low–med._
+- [ ] **PR8** — Install pinned `@twelvelabs-io/react` (private `.npmrc` +
+      `REGISTRY_TOKEN`), import `tokens.css`+`theme.css` after `@import
+      "tailwindcss"`, add `TooltipProvider`; drop the vendored `tokens.css`.
+- [ ] **PR9…N** — Swap components incrementally (lowest risk first): icons
+      (`Icon.tsx`→TLDS icons) → `Button`/`IconButton` → `TextField` →
+      `Chip`/`ToggleButtons` → `Spinner` → `Banner` → `Text`/`Markdown` →
+      `Accordion`/`Select`/`Popover`. **Keep `Tabs`/`Table`/`AspectRatio`
+      hand-rolled** — not exported by the library yet.
+
 ## Shipped this session (Track 1, PR1–PR2)
 
 1. **PR1 — TLDS tokens available (additive, zero visual change)**
