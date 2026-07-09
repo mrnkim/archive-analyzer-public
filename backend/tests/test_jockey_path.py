@@ -209,8 +209,17 @@ def test_followup_returns_context_answer_when_jockey_fails(configured_client):
 
 
 def test_followup_can_use_result_context_without_session(configured_client):
+    fake = {
+        "session_id": "sess_fresh_123",
+        "output": [
+            {"content": [{"type": "output_text", "text": "The biggest insight is the 2018 peak."}]}
+        ],
+    }
+
     async def fake_create_response(self, **kwargs):
-        raise AssertionError("Jockey should not be called for use_session=false")
+        assert kwargs["session_id"] is None
+        assert "Peak Adidas visibility" in kwargs["question"]
+        return fake
 
     with patch.object(
         sessions_route.JockeyClient,
@@ -238,8 +247,40 @@ def test_followup_can_use_result_context_without_session(configured_client):
 
     assert r.status_code == 200
     body = r.json()
+    assert body["source"] == "jockey"
+    assert "2018 peak" in body["answer"]
+
+
+def test_followup_selection_fallback_responds_to_definition_question(configured_client):
+    async def fake_create_response(self, **kwargs):
+        raise QueryError("boom")
+
+    with patch.object(
+        sessions_route.JockeyClient,
+        "create_response",
+        new=fake_create_response,
+    ):
+        r = client.post(
+            "/api/sessions/stale_cached_session/messages",
+            json={
+                "message": "what is the samba og?",
+                "scenario": "A",
+                "use_session": False,
+                "context": {
+                    "type": "selection",
+                    "year": 2024,
+                    "theme": "lifestyle heritage and inclusive anthem storytelling",
+                    "frequency": 4,
+                    "clip_title": "How The Adidas Samba Became a Cultural Icon",
+                    "clip_reason": "The Samba OG is isolated in clean product hero framing.",
+                },
+            },
+        )
+
+    assert r.status_code == 200
+    body = r.json()
     assert body["source"] == "context"
-    assert "Peak Adidas visibility" in body["answer"]
+    assert "being used here as evidence" in body["answer"]
 
 
 def test_extract_delta_handles_common_shapes():

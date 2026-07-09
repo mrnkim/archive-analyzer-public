@@ -75,6 +75,42 @@ def _extract_text(jockey_response: dict) -> str:
     return "(no answer returned)"
 
 
+def _standalone_followup_question(message: str, context: dict | None) -> str:
+    """Build a session-free followup prompt grounded in the visible result."""
+    if not context:
+        return message
+
+    if context.get("type") == "result":
+        timeline = context.get("timeline") or []
+        points = [
+            f"{p.get('year')}: {p.get('frequency')} scenes, {p.get('theme') or p.get('dominant_theme')}"
+            for p in timeline[:12]
+            if isinstance(p, dict)
+        ]
+        return (
+            f"User followup: {message}\n\n"
+            "Answer using this archive result summary, not a prior session.\n"
+            f"Timeline points: {'; '.join(points)}\n"
+            f"Narrative summary: {context.get('narrative_summary') or ''}"
+        )
+
+    scenes = context.get("scenes") or []
+    scene_bits = [
+        f"{s.get('title')}: {s.get('reason')}"
+        for s in scenes[:4]
+        if isinstance(s, dict)
+    ]
+    return (
+        f"User followup: {message}\n\n"
+        "Answer using this selected archive evidence, not a prior session.\n"
+        f"Selected year: {context.get('year')}\n"
+        f"Theme: {context.get('theme')}\n"
+        f"Representative clip: {context.get('clip_title')}\n"
+        f"Representative evidence: {context.get('clip_reason') or ''}\n"
+        f"Other scenes: {'; '.join(scene_bits)}"
+    )
+
+
 def _context_followup(session_id: str, message: str, context: dict | None) -> FollowupResponse:
     """Fallback answer using the selected UI evidence when Jockey followup fails."""
     if not context:
@@ -142,6 +178,7 @@ def _context_followup(session_id: str, message: str, context: dict | None) -> Fo
     clip_title = context.get("clip_title") or "the selected clip"
     clip_reason = context.get("clip_reason")
     scenes = context.get("scenes") or []
+    msg_lower = message.lower()
 
     def _clean_sentence(value: str) -> str:
         return value.strip().rstrip(".")
@@ -157,11 +194,17 @@ def _context_followup(session_id: str, message: str, context: dict | None) -> Fo
         if reason and title != clip_title:
             evidence_bits.append(_clean_sentence(str(reason)))
 
-    year_label = f"{year}" if year else "This selection"
-    answer = (
-        f"{year_label} stands out because it is anchored by **{theme}**. "
-        f"The current evidence centers on _{clip_title}_"
-    )
+    if "what is" in msg_lower or "what's" in msg_lower or "define" in msg_lower:
+        answer = (
+            f"Based on the selected archive evidence, **{clip_title}** is being used here "
+            f"as evidence for **{theme}**."
+        )
+    else:
+        year_label = f"{year}" if year else "This selection"
+        answer = (
+            f"{year_label} stands out because it is anchored by **{theme}**. "
+            f"The current evidence centers on _{clip_title}_"
+        )
     if evidence_bits:
         answer += ": " + "; ".join(evidence_bits) + "."
     else:
@@ -182,15 +225,14 @@ async def followup(session_id: str, req: FollowupRequest) -> FollowupResponse:
     if not client.configured:
         return _mock_followup(session_id, req.message)
 
-    if not req.use_session:
-        return _context_followup(session_id, req.message, req.context)
-
     instructions = get_followup_instructions(req.scenario)
+    followup_session_id = session_id if req.use_session else None
+    question = req.message if req.use_session else _standalone_followup_question(req.message, req.context)
     try:
         raw = await client.create_response(
-            question=req.message,
+            question=question,
             instructions=instructions,
-            session_id=session_id,
+            session_id=followup_session_id,
         )
     except QueryError as e:
         logger.exception("Jockey followup failed: %s", e)
