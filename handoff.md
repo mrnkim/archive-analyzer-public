@@ -227,3 +227,89 @@ Latest verification in this session:
   ship with persisted `summary_bullets`.
 - The local backend is running without `--reload` due to sandbox file-watch
   restrictions. Restart it after backend edits.
+
+---
+
+# Handoff — 2026-07-09
+
+Started aligning the frontend with **TwelveLabs Design System (TLDS) /
+`@twelvelabs-io/react`**. Full audit + phased plan in
+[`docs/tlds-migration-plan.md`](docs/tlds-migration-plan.md).
+
+## Key decision: two tracks
+
+The real component library (`@twelvelabs-io/react`) requires **React ≥19.2.7 +
+Tailwind v4 + a private GitHub Packages install** (and is self-labeled "not
+production ready"). This app is Vite + **React 18 + Tailwind v3**. So the work is
+split:
+
+- **Track 1 (this session) — tokens-first, NO upgrade.** Adopt TLDS design
+  *tokens* (colors/radius/fonts) on the existing hand-rolled components.
+  `tokens.css` is framework-agnostic CSS custom properties, so it works on
+  Tailwind v3.
+- **Track 2 (not started, needs approval) — adopt the actual TLDS React
+  *components* (`<Button>`, `<TextField>`, …).** Requires the React 19 +
+  Tailwind v4 upgrade. **No `@twelvelabs-io/react` component is used yet.**
+
+## Shipped this session (Track 1, PR1–PR2)
+
+1. **PR1 — TLDS tokens available (additive, zero visual change)**
+   - Vendored `frontend/src/tokens.css` — a **pinned verbatim copy** of
+     `@twelvelabs-io/react@0.30.0` `tokens.css` (commit `c4c5be6`). Vendored
+     (not installed) because the package is on a private SSO registry and this
+     is a public repo. Imported first in `frontend/src/index.css`.
+   - `frontend/tailwind.config.js`: exposed the `--tl-*` vars as semantic
+     utilities — `surface-*`, `foreground-*`, `border-*`, `misc-*`, `tl-*`
+     colors; `rounded-tlds-*` + semantic radii; `font-tl-sans` / `font-tl-mono`.
+     **Legacy `neutral`/`brand` ramps kept** so migration is incremental.
+   - Caveat: token values are hex-valued CSS vars, so Tailwind opacity
+     modifiers (`bg-surface-body/80`) do NOT inject alpha — translucent spots
+     use explicit `color-mix(...)` arbitrary values.
+
+2. **PR2 — migrated the app shell to semantic tokens**
+   - `frontend/src/App.tsx`: header, sidebar nav, footer, and `?debug=1` panel
+     now use `surface-*` / `foreground-*` / `border-*` / `misc-*` / `tl-*`
+     instead of `neutral-*` / hex (className-only changes).
+   - `frontend/src/index.css`: `body` base styles, scrollbar, and the pulse
+     keyframe now read from `--tl-*` vars.
+   - **Gotcha fixed:** `@apply bg-surface-body …` in `body {}` throws a fatal
+     "class does not exist" in the Vite/HMR dev pipeline (build tolerated it).
+     Set the body properties from the CSS vars directly instead — equivalent,
+     and robust in dev + build.
+
+Intended minor visual convergences (all toward TLDS): borders slightly more
+visible (single `border-secondary`), "mock mode" warning text is now the
+readable dark orange (`foreground-status-warning`), muted/subtle text tiering
+tidied. Page bg (`#F4F3F3`) and primary text (`#1D1C1B`) are unchanged.
+
+## Not migrated yet (still on legacy ramps)
+
+Everything in the **results/content area**: `SearchBar`, `TimelineChart`,
+`RevenueWidget`, `ClipGrid`, `ClipStrip`, `NarrativePanel`, narrative/*,
+`ChatPanel`, `EmptyState`, `LoadingState`, `Markdown`, `TutorialPanel`, the
+custom `Icon` set, `TwelveLabsLogo`. The whole screen still looks unified only
+because the legacy `neutral`/`brand` ramps were already hand-mapped to Strand
+values. Next: **PR3** (data/display), **PR4** (interactive), **PR5** (retire the
+legacy ramps + hex sweep), then optionally **Track 2**.
+
+## Verification
+
+- `cd frontend && npm run build` — passes (`tsc` + Vite + Tailwind).
+- 322 `--tl-*` vars inlined into the bundle; `bg-surface-white` etc. generate;
+  `.bg-neutral-950` still resolves to `#F4F3F3` (no call-site regression).
+- `App.tsx` + `index.css` contain no `neutral-*` / `#hex` (only the decorative
+  `::selection` green rgba is intentionally left for the PR5 sweep).
+
+## Operational note (hit this session — NOT a code bug)
+
+Clicking a demo scenario returned a spinner then nothing; `/api/query` was
+`502 "Jockey error … instructions parameter … value too large"`. Root cause:
+the runtime cache (`data/runtime/query_cache.sqlite`) was **empty (0 primed
+rows)**, so every scenario missed cache and fell through to a live Jockey call,
+which rejects the oversized `instructions` prompt. **Fix: restart the backend** —
+the startup hook (`main.py` → `cache.load_primed_from_disk()`) re-hydrates the
+4 pinned primed scenarios from `data/primed/*.json`. Unrelated to the UI work
+(git shows `backend/` + `data/` untouched this session). Verify:
+`curl -s localhost:8000/api/query -X POST -H 'Content-Type: application/json'
+-d '{"query":"How has Adidas brand exposure changed from 1990 to 2025?","scenario":"A"}'
+-o /dev/null -w '%{http_code}\n'` → expect `200`.
