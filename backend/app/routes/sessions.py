@@ -77,9 +77,16 @@ def _extract_text(jockey_response: dict) -> str:
 def _context_followup(session_id: str, message: str, context: dict | None) -> FollowupResponse:
     """Fallback answer using the selected UI evidence when Jockey followup fails."""
     if not context:
-        fallback = _mock_followup(session_id, message)
-        fallback.source = "context"
-        return fallback
+        return FollowupResponse(
+            session_id=session_id,
+            answer=(
+                "Jockey's multi-turn session endpoint was unavailable for this followup, "
+                "and no selected timeline evidence was attached. Try selecting a year or "
+                "scene first, then ask again."
+            ),
+            matched_key=None,
+            source="context",
+        )
 
     year = context.get("year")
     theme = context.get("theme") or "the selected theme"

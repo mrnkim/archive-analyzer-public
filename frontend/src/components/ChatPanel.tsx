@@ -32,7 +32,7 @@ export function ChatPanel() {
     const userMsg = contextActive
       ? `Regarding ${selectedPoint!.year} ("${selectedPoint!.representative_clip.title || "clip"}"): ${typed}`
       : typed;
-    const followupContext = selectedPoint
+    const followupContext = contextActive && selectedPoint
       ? {
           year: selectedPoint.year,
           theme: selectedPoint.dominant_theme,
