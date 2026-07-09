@@ -80,9 +80,8 @@ def _context_followup(session_id: str, message: str, context: dict | None) -> Fo
         return FollowupResponse(
             session_id=session_id,
             answer=(
-                "Jockey's multi-turn session endpoint was unavailable for this followup, "
-                "and no selected timeline evidence was attached. Try selecting a year or "
-                "scene first, then ask again."
+                "I need a selected year or scene to ground this followup in the archive "
+                "evidence. Select a timeline point or scene, then ask again."
             ),
             matched_key=None,
             source="context",
@@ -118,10 +117,6 @@ def _context_followup(session_id: str, message: str, context: dict | None) -> Fo
         answer += ": " + "; ".join(evidence_bits) + "."
     else:
         answer += "."
-    answer += (
-        "\n\nJockey's multi-turn session endpoint was unavailable for this followup, "
-        "so this answer is based on the selected timeline evidence already loaded in the UI."
-    )
 
     return FollowupResponse(
         session_id=session_id,
