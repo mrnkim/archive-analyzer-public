@@ -52,13 +52,13 @@ export function SearchBar({ onSubmit, loading, showDemoChips = true }: Props) {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask anything — e.g. 'Adidas exposure over 30 years'"
           className="flex-1 px-4 py-2 bg-neutral-900 border border-neutral-700 rounded-lg
-                     focus:outline-none focus:border-brand-500 transition-colors"
+                     focus:outline-none focus:border-neutral-50 focus:ring-2 focus:ring-neutral-50/10 transition-colors"
           disabled={loading}
         />
         <button
           type="submit"
           disabled={loading || !input.trim()}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-brand-500 hover:bg-brand-600 text-neutral-950 font-medium rounded-lg
+          className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-50 hover:bg-neutral-200 text-neutral-900 font-medium rounded-lg
                      disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? (
@@ -82,7 +82,7 @@ export function SearchBar({ onSubmit, loading, showDemoChips = true }: Props) {
             }}
             disabled={loading}
             className="text-xs px-3 py-1 bg-neutral-900 hover:bg-neutral-800
-                       border border-neutral-700 rounded-full text-neutral-300
+                       border border-neutral-700 rounded-full text-neutral-300 hover:text-neutral-50
                        disabled:opacity-50 transition-colors"
           >
             {s.label}

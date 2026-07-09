@@ -13,10 +13,10 @@ export function RevenueWidget({ totalMentions, estimatedValueUsd, basis }: Props
     totalMentions > 0 ? estimatedValueUsd / totalMentions : 0;
 
   return (
-    <div className="bg-neutral-900 border border-brand-900/50 rounded-lg p-4 overflow-hidden">
+    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 overflow-hidden">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-sm font-medium text-brand-500">
+          <h3 className="text-sm font-medium text-neutral-100">
             Archive monetization estimate
           </h3>
           <p className="text-xs text-neutral-500 mt-1">
@@ -62,8 +62,8 @@ export function RevenueWidget({ totalMentions, estimatedValueUsd, basis }: Props
           =
         </div>
 
-        <div className="rounded-md border border-brand-800/70 bg-brand-500/10 px-3 py-2">
-          <div className="text-[10px] uppercase tracking-[0.14em] text-brand-500">
+        <div className="rounded-md border border-neutral-700 bg-neutral-800 px-3 py-2">
+          <div className="text-[10px] uppercase tracking-[0.14em] text-neutral-300">
             modeled value
           </div>
           <div className="mt-1 text-lg font-semibold text-neutral-50 tabular-nums">

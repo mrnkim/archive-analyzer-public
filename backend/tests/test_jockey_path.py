@@ -15,6 +15,7 @@ from app.main import app
 from app.routes import query as query_route
 from app.routes import sessions as sessions_route
 from app.routes import stream as stream_route
+from app.deps.jockey_client import QueryError
 
 client = TestClient(app)
 
@@ -120,6 +121,7 @@ def test_query_uses_cache_on_second_call(configured_client):
     assert r1.status_code == 200
     assert r2.status_code == 200
     assert calls["n"] == 1  # second call served from cache
+    assert r2.json()["source"] == "cache"
 
 
 def test_query_502_on_malformed_jockey_payload(configured_client):
@@ -154,6 +156,8 @@ def test_followup_extracts_text_and_session_id(configured_client):
     async def fake_create_response(self, **kwargs):
         # session_id should be passed through.
         assert kwargs["session_id"] == "sess_existing_123"
+        assert len(kwargs["instructions"]) < 500
+        assert "summary_bullets" not in kwargs["instructions"]
         return fake
 
     with patch.object(
@@ -171,6 +175,112 @@ def test_followup_extracts_text_and_session_id(configured_client):
     assert body["source"] == "jockey"
     assert body["session_id"] == "sess_continuing_456"
     assert "London Olympics" in body["answer"]
+
+
+def test_followup_returns_context_answer_when_jockey_fails(configured_client):
+    async def fake_create_response(self, **kwargs):
+        raise QueryError("boom")
+
+    with patch.object(
+        sessions_route.JockeyClient,
+        "create_response",
+        new=fake_create_response,
+    ):
+        r = client.post(
+            "/api/sessions/sess_existing_123/messages",
+            json={
+                "message": "why peak in 2018?",
+                "scenario": "A",
+                "context": {
+                    "year": 2018,
+                    "theme": "Football + sustainability + tournament hardware",
+                    "frequency": 3,
+                    "clip_title": "Parley for the Oceans",
+                    "clip_reason": "Parley branding makes the brand explicit.",
+                },
+            },
+        )
+
+    assert r.status_code == 200
+    body = r.json()
+    assert body["source"] == "context"
+    assert "2018" in body["answer"]
+    assert "Football + sustainability" in body["answer"]
+
+
+def test_followup_can_use_result_context_without_session(configured_client):
+    fake = {
+        "session_id": "sess_fresh_123",
+        "output": [
+            {"content": [{"type": "output_text", "text": "The biggest insight is the 2018 peak."}]}
+        ],
+    }
+
+    async def fake_create_response(self, **kwargs):
+        assert kwargs["session_id"] is None
+        assert "Peak Adidas visibility" in kwargs["question"]
+        return fake
+
+    with patch.object(
+        sessions_route.JockeyClient,
+        "create_response",
+        new=fake_create_response,
+    ):
+        r = client.post(
+            "/api/sessions/stale_cached_session/messages",
+            json={
+                "message": "what is the biggest insight overall?",
+                "scenario": "A",
+                "use_session": False,
+                "context": {
+                    "type": "result",
+                    "timeline": [
+                        {"year": 2018, "frequency": 3, "theme": "Peak Adidas visibility"},
+                        {"year": 2024, "frequency": 2, "theme": "Euro kit visibility"},
+                    ],
+                    "summary_bullets": [
+                        {"year": 2018, "headline": "Peak Adidas visibility", "text": "The strongest cluster."}
+                    ],
+                },
+            },
+        )
+
+    assert r.status_code == 200
+    body = r.json()
+    assert body["source"] == "jockey"
+    assert "2018 peak" in body["answer"]
+
+
+def test_followup_selection_fallback_responds_to_definition_question(configured_client):
+    async def fake_create_response(self, **kwargs):
+        raise QueryError("boom")
+
+    with patch.object(
+        sessions_route.JockeyClient,
+        "create_response",
+        new=fake_create_response,
+    ):
+        r = client.post(
+            "/api/sessions/stale_cached_session/messages",
+            json={
+                "message": "what is the samba og?",
+                "scenario": "A",
+                "use_session": False,
+                "context": {
+                    "type": "selection",
+                    "year": 2024,
+                    "theme": "lifestyle heritage and inclusive anthem storytelling",
+                    "frequency": 4,
+                    "clip_title": "How The Adidas Samba Became a Cultural Icon",
+                    "clip_reason": "The Samba OG is isolated in clean product hero framing.",
+                },
+            },
+        )
+
+    assert r.status_code == 200
+    body = r.json()
+    assert body["source"] == "context"
+    assert "being used here as evidence" in body["answer"]
 
 
 def test_extract_delta_handles_common_shapes():

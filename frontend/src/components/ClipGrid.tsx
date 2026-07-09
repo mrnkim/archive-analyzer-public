@@ -24,9 +24,14 @@ export function ClipGrid({ point }: Props) {
   return (
     <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4">
       <div className="flex items-baseline justify-between mb-3">
-        <h3 className="text-sm font-medium text-neutral-300">
-          Scenes — {point.year}
-        </h3>
+        <div className="flex items-center gap-2">
+          <h3 className="text-sm font-medium text-neutral-300">
+            Scenes — {point.year}
+          </h3>
+          <span className="rounded bg-neutral-800 px-1.5 py-0.5 text-[10px] font-mono text-neutral-100">
+            selected
+          </span>
+        </div>
         <span
           className="text-xs text-neutral-500"
           title="Distinct visual moments where the entity appears this year"
@@ -37,7 +42,7 @@ export function ClipGrid({ point }: Props) {
 
       {point.dominant_theme && (
         <div className="text-xs text-neutral-400 mb-3">
-          Theme: <span className="text-brand-500">{point.dominant_theme}</span>
+          Theme: <span className="text-[#60E21C]">{point.dominant_theme}</span>
         </div>
       )}
 
@@ -108,7 +113,7 @@ function SceneCard({ scene, rank }: { scene: Scene; rank: number }) {
             className="text-neutral-300 leading-snug pt-0.5"
             title="Why this scene was selected"
           >
-            <span className="text-brand-500 font-medium">Why: </span>
+            <span className="text-[#60E21C] font-medium">Why: </span>
             {scene.reason}
           </div>
         )}

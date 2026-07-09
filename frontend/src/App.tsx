@@ -139,13 +139,13 @@ export default function App() {
               <span
                 className={
                   "inline-flex items-center gap-1.5 " +
-                  (health.ks_configured === "yes" ? "text-brand-500" : "text-warning")
+                  (health.ks_configured === "yes" ? "text-neutral-300" : "text-warning")
                 }
               >
                 <span
                   className={
                     "h-1.5 w-1.5 rounded-full " +
-                    (health.ks_configured === "yes" ? "bg-brand-500" : "bg-warning")
+                    (health.ks_configured === "yes" ? "bg-neutral-300" : "bg-warning")
                   }
                 />
                 {health.ks_configured === "yes" ? "connected" : "mock mode"}
@@ -167,10 +167,10 @@ export default function App() {
                 key={id}
                 onClick={() => switchTab(id)}
                 className={
-                  "w-full text-left px-3 py-2 text-sm rounded-md border-l-2 transition-colors " +
+                  "w-full text-left px-3 py-2 text-sm rounded-md transition-colors " +
                   (tab === id
-                    ? "border-brand-500 bg-brand-500/10 text-neutral-100 font-medium"
-                    : "border-transparent text-neutral-500 hover:text-neutral-300 hover:bg-neutral-900")
+                    ? "bg-neutral-700 text-neutral-50 font-medium"
+                    : "text-neutral-500 hover:text-neutral-100 hover:bg-neutral-800")
                 }
               >
                 {label}
@@ -198,7 +198,6 @@ export default function App() {
                   <TimelineChart
                     data={result.timeline}
                     onPointClick={handleSelectPoint}
-                    selectedYear={selectedPoint?.year ?? null}
                   />
                   <SentimentStrip
                     timeline={result.timeline}
@@ -253,7 +252,6 @@ export default function App() {
                 <TimelineChart
                   data={result.timeline}
                   onPointClick={handleSelectPoint}
-                  selectedYear={selectedPoint?.year ?? null}
                 />
                 <div ref={clipGridRef} className="scroll-mt-4">
                   <ClipGrid point={selectedPoint} />
@@ -315,7 +313,7 @@ export default function App() {
 
       <footer className="px-6 py-3 border-t border-neutral-800 text-xs text-neutral-500 text-center">
         Demo only · Video sources: each official YouTube channel · Powered by{" "}
-        <a href="https://twelvelabs.io" className="text-brand-500 hover:underline">
+        <a href="https://twelvelabs.io" className="text-[#60E21C] hover:underline">
           TwelveLabs
         </a>
       </footer>

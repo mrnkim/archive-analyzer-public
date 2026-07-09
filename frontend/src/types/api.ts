@@ -56,6 +56,7 @@ export type QueryResponse = {
     calculation_basis: string;
   };
   session_id: string;
+  source: "jockey" | "mock" | "cache" | string;
   // Narrative Evolution only.
   inflection_points?: InflectionPoint[];
 };

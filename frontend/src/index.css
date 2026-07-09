@@ -1,8 +1,24 @@
-/* TwelveLabs Strand fonts — Noto Sans (body), Geist (technical), IBM Plex Mono (code).
-   Milling is a licensed brand font and isn't bundled; the stack falls back to Noto Sans. */
+/* TwelveLabs Strand fonts. Milling is loaded from the TwelveLabs CDN; Noto Sans
+   remains the fallback for network failures or unsupported environments. */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
 @import url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.min.css');
+
+@font-face {
+  font-family: "Milling";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://d2n8i6crd2t3p1.cloudfront.net/font/milling/205TF-Milling-Duplex1mm.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Milling";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("https://d2n8i6crd2t3p1.cloudfront.net/font/milling/205TF-Milling-Triplex1mm.woff2") format("woff2");
+}
 
 @tailwind base;
 @tailwind components;
@@ -38,4 +54,20 @@ body {
 }
 *::-webkit-scrollbar-thumb:hover {
   background-color: #6B6966;
+}
+
+@keyframes selected-panel-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(29, 28, 27, 0.28);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(29, 28, 27, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(29, 28, 27, 0);
+  }
+}
+
+.selected-panel-attention {
+  animation: selected-panel-pulse 1.1s ease-out 1;
 }

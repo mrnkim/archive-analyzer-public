@@ -16,8 +16,8 @@ export function NarrativeEmptyState({ onRun }: Props) {
   return (
     <div className="space-y-10 py-4">
       <div className="mx-auto max-w-2xl text-center space-y-4">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-500/30 bg-brand-500/10 px-3 py-1 text-xs font-medium text-brand-500">
-          <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-900 px-3 py-1 text-xs font-medium text-neutral-300">
+          <span className="h-1.5 w-1.5 rounded-full bg-neutral-300" />
           Powered by TwelveLabs Jockey
         </span>
         <h2 className="text-2xl sm:text-3xl font-semibold text-neutral-50 tracking-tight">
@@ -37,9 +37,9 @@ export function NarrativeEmptyState({ onRun }: Props) {
         <div className="mx-auto max-w-md">
           <button
             onClick={() => onRun(NARRATIVE_DEMO.query, NARRATIVE_DEMO.scenario)}
-            className="group flex w-full flex-col rounded-xl border border-neutral-800 bg-neutral-900 p-4 text-left transition-colors hover:border-brand-500/50 hover:bg-neutral-900/70"
+            className="group flex w-full flex-col rounded-xl border border-neutral-800 bg-neutral-900 p-4 text-left transition-colors hover:border-neutral-700 hover:bg-neutral-800"
           >
-            <span className="mb-2.5 inline-flex h-7 w-7 items-center justify-center rounded-md bg-brand-500/15 text-sm font-semibold text-brand-500">
+            <span className="mb-2.5 inline-flex h-7 w-7 items-center justify-center rounded-md bg-neutral-800 text-sm font-semibold text-neutral-100">
               N
             </span>
             <h3 className="text-sm font-medium text-neutral-100">
@@ -49,7 +49,7 @@ export function NarrativeEmptyState({ onRun }: Props) {
               From real-estate mogul to reality-TV celebrity to president —
               thematic eras, sentiment shifts, and inflection points.
             </p>
-            <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-brand-500">
+            <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-neutral-100">
               <Icon name="search" className="h-3 w-3" />
               Run narrative analysis
             </span>
