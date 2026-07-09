@@ -121,6 +121,7 @@ def test_query_uses_cache_on_second_call(configured_client):
     assert r1.status_code == 200
     assert r2.status_code == 200
     assert calls["n"] == 1  # second call served from cache
+    assert r2.json()["source"] == "cache"
 
 
 def test_query_502_on_malformed_jockey_payload(configured_client):
@@ -205,6 +206,40 @@ def test_followup_returns_context_answer_when_jockey_fails(configured_client):
     assert body["source"] == "context"
     assert "2018" in body["answer"]
     assert "Football + sustainability" in body["answer"]
+
+
+def test_followup_can_use_result_context_without_session(configured_client):
+    async def fake_create_response(self, **kwargs):
+        raise AssertionError("Jockey should not be called for use_session=false")
+
+    with patch.object(
+        sessions_route.JockeyClient,
+        "create_response",
+        new=fake_create_response,
+    ):
+        r = client.post(
+            "/api/sessions/stale_cached_session/messages",
+            json={
+                "message": "what is the biggest insight overall?",
+                "scenario": "A",
+                "use_session": False,
+                "context": {
+                    "type": "result",
+                    "timeline": [
+                        {"year": 2018, "frequency": 3, "theme": "Peak Adidas visibility"},
+                        {"year": 2024, "frequency": 2, "theme": "Euro kit visibility"},
+                    ],
+                    "summary_bullets": [
+                        {"year": 2018, "headline": "Peak Adidas visibility", "text": "The strongest cluster."}
+                    ],
+                },
+            },
+        )
+
+    assert r.status_code == 200
+    body = r.json()
+    assert body["source"] == "context"
+    assert "Peak Adidas visibility" in body["answer"]
 
 
 def test_extract_delta_handles_common_shapes():

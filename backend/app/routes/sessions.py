@@ -19,6 +19,7 @@ class FollowupRequest(BaseModel):
     message: str
     scenario: str | None = None
     context: dict | None = None
+    use_session: bool = True
 
 
 class FollowupResponse(BaseModel):
@@ -87,6 +88,54 @@ def _context_followup(session_id: str, message: str, context: dict | None) -> Fo
             source="context",
         )
 
+    if context.get("type") == "result":
+        timeline = context.get("timeline") or []
+        bullets = context.get("summary_bullets") or []
+        peak = None
+        if timeline:
+            peak = max(
+                (p for p in timeline if isinstance(p, dict)),
+                key=lambda p: int(p.get("frequency") or 0),
+                default=None,
+            )
+
+        answer_parts: list[str] = []
+        if peak:
+            year = peak.get("year")
+            theme = peak.get("theme") or peak.get("dominant_theme") or "the strongest evidence cluster"
+            frequency = peak.get("frequency")
+            answer_parts.append(
+                f"The biggest visible signal is **{theme}** in {year}, "
+                f"where the archive shows {frequency} verified scene{'s' if frequency != 1 else ''}."
+            )
+
+        if bullets:
+            first_bullets = [
+                b for b in bullets[:2] if isinstance(b, dict) and (b.get("headline") or b.get("text"))
+            ]
+            if first_bullets:
+                summary = "; ".join(
+                    f"{b.get('year')}: {b.get('headline') or b.get('text')}"
+                    for b in first_bullets
+                )
+                answer_parts.append(f"Across the timeline, the pattern is: {summary}.")
+
+        if not answer_parts and context.get("narrative_summary"):
+            answer_parts.append(str(context["narrative_summary"]))
+
+        if not answer_parts:
+            answer_parts.append(
+                "The strongest insight is the shift from scattered archive visibility "
+                "to more explicit, evidence-backed brand presence in the selected results."
+            )
+
+        return FollowupResponse(
+            session_id=session_id,
+            answer="\n\n".join(answer_parts),
+            matched_key=None,
+            source="context",
+        )
+
     year = context.get("year")
     theme = context.get("theme") or "the selected theme"
     frequency = context.get("frequency")
@@ -132,6 +181,9 @@ async def followup(session_id: str, req: FollowupRequest) -> FollowupResponse:
 
     if not client.configured:
         return _mock_followup(session_id, req.message)
+
+    if not req.use_session:
+        return _context_followup(session_id, req.message, req.context)
 
     instructions = get_followup_instructions(req.scenario)
     try:

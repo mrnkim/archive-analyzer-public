@@ -32,25 +32,51 @@ export function ChatPanel() {
     const userMsg = contextActive
       ? `Regarding ${selectedPoint!.year} ("${selectedPoint!.representative_clip.title || "clip"}"): ${typed}`
       : typed;
-    const followupContext = contextActive && selectedPoint
-      ? {
-          year: selectedPoint.year,
-          theme: selectedPoint.dominant_theme,
-          frequency: selectedPoint.frequency,
-          clip_title: selectedPoint.representative_clip.title,
-          clip_reason: selectedPoint.representative_clip.reason,
-          scenes: (selectedPoint.scenes ?? []).map((scene) => ({
-            title: scene.title,
-            reason: scene.reason,
-          })),
-        }
-      : undefined;
+    const followupContext =
+      contextActive && selectedPoint
+        ? {
+            type: "selection",
+            year: selectedPoint.year,
+            theme: selectedPoint.dominant_theme,
+            frequency: selectedPoint.frequency,
+            clip_title: selectedPoint.representative_clip.title,
+            clip_reason: selectedPoint.representative_clip.reason,
+            scenes: (selectedPoint.scenes ?? []).map((scene) => ({
+              title: scene.title,
+              reason: scene.reason,
+            })),
+          }
+        : result
+        ? {
+            type: "result",
+            entity: result.entity,
+            query: result.query,
+            narrative_summary: result.narrative_summary,
+            summary_bullets: (result.summary_bullets ?? []).map((bullet) => ({
+              year: bullet.year,
+              headline: bullet.headline,
+              text: bullet.text,
+            })),
+            timeline: result.timeline.map((point) => ({
+              year: point.year,
+              frequency: point.frequency,
+              theme: point.dominant_theme,
+            })),
+          }
+        : undefined;
+    const useSession = result.source === "jockey";
     appendChat({ role: "user", content: userMsg });
     setInput("");
     setPending(true);
 
     try {
-      const r = await postFollowup(result.session_id, userMsg, resultScenario, followupContext);
+      const r = await postFollowup(
+        result.session_id,
+        userMsg,
+        resultScenario,
+        followupContext,
+        useSession
+      );
       appendChat({ role: "assistant", content: r.answer });
     } catch (e) {
       appendChat({ role: "assistant", content: `Error: ${e}` });

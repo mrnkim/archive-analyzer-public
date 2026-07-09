@@ -194,6 +194,8 @@ async def query(req: QueryRequest) -> QueryResponse:
     cached = cache.get(req.query, req.scenario)
     if cached:
         logger.info("Cache hit for query")
+        cached = dict(cached)
+        cached["source"] = "cache"
         return QueryResponse(**cached)
 
     instructions = get_instructions(req.scenario)
