@@ -1,42 +1,48 @@
 /** @type {import('tailwindcss').Config} */
-// Palette mapped to the TwelveLabs "Strand" design system (dark theme).
+// Palette mapped to the TwelveLabs "Strand" design system (light theme).
 // We redefine the `neutral` and `brand` ramps the components already use, so
-// the whole app adopts Strand's warm-charcoal surfaces + UI-green accent
+// the whole app adopts Strand's warm-white surfaces + UI-green accent
 // without rewriting every className. Tokens: Strand css/variables.css.
 export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        // Strand UI green (WCAG-safe derivative of brand green #00FF00).
+        // Strand / Playground lime accent.
         brand: {
-          50: "#1A3D2A", // dark accent tint (for /10 fills + subtle bg)
-          100: "#1A3D2A",
-          500: "#00DC82", // --strand-ui-accent
-          600: "#00B86E", // --strand-ui-accent-hover
-          900: "#30710E", // masterbrand dark green
+          50: "#BFF3A4",
+          100: "#BFF3A4",
+          500: "#60E21C",
+          600: "#60E21C",
+          800: "#60E21C",
+          900: "#60E21C",
         },
         // Masterbrand highlight green — for emphatic accents.
-        highlight: "#60E21B",
+        highlight: "#60E21C",
         // Strand semantic status colors (tokens/colors.json → ui.*).
         warning: { DEFAULT: "#FABA17", dark: "#7D5D0C", light: "#FDE3A2" },
         error: { DEFAULT: "#E22622", dark: "#9D422B", light: "#FFCCC0" },
         destructive: "#E22622",
-        success: { DEFAULT: "#60E21B", dark: "#30710E", light: "#BFF3A4" },
+        success: { DEFAULT: "#60E21C", dark: "#60E21C", light: "#BFF3A4" },
         info: { DEFAULT: "#6CD5FD", dark: "#366B7F", light: "#C4EEFE" },
-        // Warm-charcoal ramp (Strand brand-charcoal → masterbrand neutrals).
+        // Light Strand semantic ramp, mapped to the numeric classes already
+        // used by the app:
+        // - neutral-950 = page/subtle background
+        // - neutral-900 = surface/card
+        // - neutral-800/700 = borders and hover fills
+        // - neutral-50/100/200/300 = primary text
         neutral: {
-          50: "#F4F3F3", // brand white / primary text
-          100: "#ECECEC", // body text
-          200: "#D3D1CF", // light grey
-          300: "#BDBCBB",
-          400: "#9B9895", // secondary / muted text
-          500: "#8F8984", // mid grey
-          600: "#6B6966", // tertiary text, timestamps
-          700: "#45423F", // strong border / hover
-          800: "#333231", // card bg, subtle border
-          900: "#2A2928", // surface — panels, inputs, cards
-          950: "#1D1C1B", // brand charcoal — page background
+          50: "#1D1C1B", // primary text
+          100: "#1D1C1B", // body/headings
+          200: "#45423F", // strong body
+          300: "#45423F", // section labels
+          400: "#6B6966", // muted body
+          500: "#6B6966", // secondary text
+          600: "#9B9895", // tertiary text
+          700: "#D3D1CF", // default border / hover border
+          800: "#E8E7E5", // subtle border / subtle fill
+          900: "#FFFFFF", // surface
+          950: "#F4F3F3", // page background
         },
       },
       fontFamily: {

@@ -175,15 +175,16 @@ export function NarrativePanel({
         <div className="flex-1 min-h-0 flex flex-col gap-2">
           {selectedBullet && (
             <button
+              key={selectedBullet.year}
               type="button"
               onClick={() => onSelectYear?.(selectedBullet.year)}
-              className="w-full text-left rounded-md border border-brand-500 bg-brand-500/10 px-3 py-2.5 text-neutral-50"
+              className="selected-panel-attention w-full text-left rounded-md border-2 border-neutral-50 bg-neutral-800 px-3 py-2.5 text-neutral-50"
             >
-              <div className="text-[10px] uppercase tracking-[0.14em] text-brand-500 mb-1">
+              <div className="text-[10px] uppercase tracking-[0.14em] text-neutral-400 mb-1">
                 Selected insight
               </div>
               <div className="flex items-start gap-2">
-                <span className="mt-0.5 rounded bg-brand-500 px-1.5 py-0.5 font-mono text-[10px] tabular-nums text-neutral-950">
+                <span className="mt-0.5 rounded bg-neutral-50 px-1.5 py-0.5 font-mono text-[10px] tabular-nums text-neutral-900">
                   {selectedBullet.year}
                 </span>
                 <span className="min-w-0">
@@ -217,7 +218,7 @@ export function NarrativePanel({
                 className={
                   "w-full text-left rounded-md border px-3 py-2.5 transition-colors " +
                   (selected
-                    ? "border-brand-500 bg-brand-500/10 text-neutral-50"
+                    ? "selected-panel-attention border-2 border-neutral-50 bg-neutral-800 text-neutral-50"
                     : "border-neutral-800 bg-neutral-950/35 text-neutral-200 hover:border-neutral-700 hover:bg-neutral-950/60")
                 }
               >
@@ -226,7 +227,7 @@ export function NarrativePanel({
                     className={
                       "mt-0.5 rounded px-1.5 py-0.5 font-mono text-[10px] tabular-nums " +
                       (selected
-                        ? "bg-brand-500 text-neutral-950"
+                        ? "bg-neutral-50 text-neutral-900"
                         : "bg-neutral-800 text-neutral-400")
                     }
                   >

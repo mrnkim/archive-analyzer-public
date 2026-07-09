@@ -88,8 +88,8 @@ export function ChatPanel() {
       </div>
 
       {contextActive && (
-        <div className="mb-2 flex items-center gap-2 px-2 py-1.5 bg-brand-500/10 border border-brand-900 rounded-md">
-          <span className="text-[10px] uppercase tracking-wider text-brand-500 font-medium">
+        <div className="mb-2 flex items-center gap-2 px-2 py-1.5 bg-[#BFF3A4]/30 border border-[#60E21C] rounded-md">
+          <span className="text-[10px] uppercase tracking-wider text-[#60E21C] font-medium">
             Asking about
           </span>
           <span className="text-xs text-neutral-200 truncate flex-1" title={contextLabel}>
@@ -120,12 +120,12 @@ export function ChatPanel() {
           }
           disabled={disabled || pending}
           className="flex-1 px-3 py-2 text-sm bg-neutral-950 border border-neutral-700 rounded-md
-                     focus:outline-none focus:border-brand-500 disabled:opacity-50"
+          focus:outline-none focus:border-neutral-50 focus:ring-2 focus:ring-neutral-50/10 disabled:opacity-50"
         />
         <button
           type="submit"
           disabled={disabled || pending || !input.trim()}
-          className="px-3 py-2 text-sm bg-brand-500 hover:bg-brand-600 text-neutral-950 font-medium rounded-md
+          className="px-3 py-2 text-sm bg-neutral-50 hover:bg-neutral-200 text-neutral-900 font-medium rounded-md
                      disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Send

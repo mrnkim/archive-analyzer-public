@@ -109,7 +109,7 @@ export function HlsClipPlayer({
         )}
         <div className="absolute inset-0 bg-black/35 group-hover:bg-black/15 transition-colors flex items-center justify-center">
           <div className="w-16 h-16 rounded-full bg-white/95 flex items-center justify-center shadow-2xl group-hover:scale-105 transition-transform">
-            <Icon name="play" className="w-5 h-5 text-neutral-950 ml-0.5" />
+            <Icon name="play" className="w-5 h-5 text-neutral-50 ml-0.5" />
           </div>
         </div>
       </button>

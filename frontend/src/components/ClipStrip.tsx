@@ -45,7 +45,7 @@ export function ClipStrip({
               onClick={() => onSelect(p)}
               className={`group relative aspect-video rounded-xl overflow-hidden border-2 transition-all text-left ${
                 selected
-                  ? "border-brand-500 ring-2 ring-brand-500/40"
+                  ? "selected-panel-attention border-neutral-50 ring-2 ring-neutral-50/20"
                   : "border-neutral-700 hover:border-neutral-500"
               }`}
               title={`${c.title} · ${p.frequency} scene${p.frequency === 1 ? "" : "s"}`}
@@ -75,7 +75,7 @@ export function ClipStrip({
                 </div>
               </div>
               {selected && (
-                <div className="absolute top-1 right-1 w-2 h-2 bg-brand-500 rounded-full shadow-lg" />
+                <div className="absolute top-1 right-1 w-2 h-2 bg-neutral-50 rounded-full shadow-lg" />
               )}
             </button>
           );
