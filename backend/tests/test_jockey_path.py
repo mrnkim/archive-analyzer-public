@@ -15,6 +15,7 @@ from app.main import app
 from app.routes import query as query_route
 from app.routes import sessions as sessions_route
 from app.routes import stream as stream_route
+from app.deps.jockey_client import QueryError
 
 client = TestClient(app)
 
@@ -154,6 +155,8 @@ def test_followup_extracts_text_and_session_id(configured_client):
     async def fake_create_response(self, **kwargs):
         # session_id should be passed through.
         assert kwargs["session_id"] == "sess_existing_123"
+        assert len(kwargs["instructions"]) < 500
+        assert "summary_bullets" not in kwargs["instructions"]
         return fake
 
     with patch.object(
@@ -171,6 +174,37 @@ def test_followup_extracts_text_and_session_id(configured_client):
     assert body["source"] == "jockey"
     assert body["session_id"] == "sess_continuing_456"
     assert "London Olympics" in body["answer"]
+
+
+def test_followup_returns_context_answer_when_jockey_fails(configured_client):
+    async def fake_create_response(self, **kwargs):
+        raise QueryError("boom")
+
+    with patch.object(
+        sessions_route.JockeyClient,
+        "create_response",
+        new=fake_create_response,
+    ):
+        r = client.post(
+            "/api/sessions/sess_existing_123/messages",
+            json={
+                "message": "why peak in 2018?",
+                "scenario": "A",
+                "context": {
+                    "year": 2018,
+                    "theme": "Football + sustainability + tournament hardware",
+                    "frequency": 3,
+                    "clip_title": "Parley for the Oceans",
+                    "clip_reason": "Parley branding makes the brand explicit.",
+                },
+            },
+        )
+
+    assert r.status_code == 200
+    body = r.json()
+    assert body["source"] == "context"
+    assert "2018" in body["answer"]
+    assert "Football + sustainability" in body["answer"]
 
 
 def test_extract_delta_handles_common_shapes():

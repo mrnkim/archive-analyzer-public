@@ -15,12 +15,13 @@ export async function postQuery(query: string, scenario?: string): Promise<Query
 export async function postFollowup(
   sessionId: string,
   message: string,
-  scenario?: string
+  scenario?: string,
+  context?: Record<string, unknown>
 ): Promise<FollowupResponse> {
   const r = await fetch(`${BASE}/api/sessions/${sessionId}/messages`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message, scenario }),
+    body: JSON.stringify({ message, scenario, context }),
   });
   if (!r.ok) throw new Error(`Followup failed: ${r.status}`);
   return r.json();

@@ -173,3 +173,20 @@ def get_instructions(scenario: str | None) -> str:
     if scenario and scenario.upper() in SCENARIO_INSTRUCTIONS:
         return SCENARIO_INSTRUCTIONS[scenario.upper()] + SUMMARY_BULLET_INSTRUCTIONS
     return DEFAULT_INSTRUCTIONS + SUMMARY_BULLET_INSTRUCTIONS
+
+
+def get_followup_instructions(scenario: str | None) -> str:
+    """Return compact instructions for multi-turn followup questions.
+
+    Followups reuse the Jockey session created by /api/query, so they do not
+    need the full extraction/schema prompt. Keeping this short avoids the
+    Responses API instruction-size limit.
+    """
+    subject = "the selected archive evidence"
+    if scenario and scenario.upper() == "N":
+        subject = "the selected media narrative evidence"
+    return (
+        "Answer the user's followup using the existing session context and "
+        f"{subject}. Be concise, cite concrete years or clips when relevant, "
+        "and do not invent evidence that was not present in the archive."
+    )

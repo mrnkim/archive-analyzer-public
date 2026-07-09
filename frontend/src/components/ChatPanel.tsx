@@ -32,12 +32,25 @@ export function ChatPanel() {
     const userMsg = contextActive
       ? `Regarding ${selectedPoint!.year} ("${selectedPoint!.representative_clip.title || "clip"}"): ${typed}`
       : typed;
+    const followupContext = selectedPoint
+      ? {
+          year: selectedPoint.year,
+          theme: selectedPoint.dominant_theme,
+          frequency: selectedPoint.frequency,
+          clip_title: selectedPoint.representative_clip.title,
+          clip_reason: selectedPoint.representative_clip.reason,
+          scenes: (selectedPoint.scenes ?? []).map((scene) => ({
+            title: scene.title,
+            reason: scene.reason,
+          })),
+        }
+      : undefined;
     appendChat({ role: "user", content: userMsg });
     setInput("");
     setPending(true);
 
     try {
-      const r = await postFollowup(result.session_id, userMsg, resultScenario);
+      const r = await postFollowup(result.session_id, userMsg, resultScenario, followupContext);
       appendChat({ role: "assistant", content: r.answer });
     } catch (e) {
       appendChat({ role: "assistant", content: `Error: ${e}` });
