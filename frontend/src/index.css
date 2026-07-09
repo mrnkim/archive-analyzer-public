@@ -1,5 +1,5 @@
-/* TwelveLabs Strand fonts — Noto Sans (body), Geist (technical), IBM Plex Mono (code).
-   Milling is a licensed brand font and isn't bundled; the stack falls back to Noto Sans. */
+/* TwelveLabs Strand fonts. Milling is the brand font, but the licensed font
+   files are not bundled here; the CSS stack falls back to Noto Sans. */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
 @import url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.min.css');

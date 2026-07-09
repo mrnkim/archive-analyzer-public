@@ -46,8 +46,12 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["Noto Sans", "Helvetica", "Arial", "sans-serif"],
-        display: ["Geist", "Noto Sans", "system-ui", "sans-serif"],
+        sans: ["Milling Duplex 1mm", "Noto Sans", "Helvetica", "Arial", "sans-serif"],
+        display: ["Milling Duplex 1mm", "Noto Sans", "Helvetica", "Arial", "sans-serif"],
+        brand: ["Milling Duplex 1mm", "Noto Sans", "Helvetica", "Arial", "sans-serif"],
+        "brand-bold": ["Milling Triplex 1mm", "Milling Duplex 1mm", "Noto Sans", "Helvetica", "Arial", "sans-serif"],
+        "brand-xbold": ["Milling Triplex 1,5mm", "Milling Duplex 1mm", "Noto Sans", "Helvetica", "Arial", "sans-serif"],
+        geist: ["Geist", "Inter", "system-ui", "sans-serif"],
         mono: ["IBM Plex Mono", "ui-monospace", "monospace"],
       },
       borderRadius: {
