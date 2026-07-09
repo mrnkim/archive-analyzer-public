@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { postFollowup } from "../api/client";
 import { useStore } from "../store";
 import { Markdown } from "./Markdown";
@@ -11,6 +11,7 @@ export function ChatPanel() {
   const selectedPoint = useStore((s) => s.selectedPoint);
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
+  const scrollAnchorRef = useRef<HTMLDivElement | null>(null);
   // Chip auto-reactivates whenever the user picks a new point. They can
   // dismiss it for the current selection without losing the selection itself
   // (player + chart highlight stay put).
@@ -18,6 +19,10 @@ export function ChatPanel() {
   useEffect(() => {
     setContextEnabled(true);
   }, [selectedPoint?.year]);
+
+  useEffect(() => {
+    scrollAnchorRef.current?.scrollIntoView({ block: "end", behavior: "smooth" });
+  }, [chat.length, pending]);
 
   const contextActive = !!selectedPoint && contextEnabled;
   const contextLabel = selectedPoint
@@ -124,6 +129,7 @@ export function ChatPanel() {
         {pending && (
           <div className="text-xs text-neutral-500 italic">Thinking…</div>
         )}
+        <div ref={scrollAnchorRef} aria-hidden="true" />
       </div>
 
       {contextActive && (
