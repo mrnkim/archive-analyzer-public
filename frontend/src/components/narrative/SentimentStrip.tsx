@@ -31,11 +31,11 @@ export function SentimentStrip({ timeline, selectedYear, onSelect }: Props) {
   if (points.length === 0) return null;
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4">
+    <div className="bg-surface-white border border-border-secondary rounded-tlds-3 p-4">
       <div className="flex items-center justify-between gap-4 mb-3">
-        <h3 className="text-sm font-medium text-neutral-300">Coverage sentiment over time</h3>
-        <div className="flex items-center gap-2 text-[10px] text-neutral-500">
-          <span className="font-mono tabular-nums text-red-400">−1</span>
+        <h3 className="text-sm font-medium text-foreground-muted">Coverage sentiment over time</h3>
+        <div className="flex items-center gap-2 text-[10px] text-foreground-subtle">
+          <span className="font-tl-mono tabular-nums text-foreground-status-error">−1</span>
           <span className="inline-flex flex-col items-center gap-0.5">
             <span
               className="h-2 w-24 rounded-sm"
@@ -51,7 +51,7 @@ export function SentimentStrip({ timeline, selectedYear, onSelect }: Props) {
               <span>favorable</span>
             </span>
           </span>
-          <span className="font-mono tabular-nums text-emerald-400">+1</span>
+          <span className="font-tl-mono tabular-nums text-tl-embed-green">+1</span>
         </div>
       </div>
 
@@ -65,25 +65,25 @@ export function SentimentStrip({ timeline, selectedYear, onSelect }: Props) {
               onClick={() => onSelect(p)}
               title={`${p.year} · ${toneLabel(p)} (${score >= 0 ? "+" : ""}${score.toFixed(2)}) · ${p.dominant_theme}`}
               className={
-                "group flex min-w-[44px] flex-1 flex-col items-center gap-1 rounded-md border px-1 py-1.5 transition-colors " +
+                "group flex min-w-[44px] flex-1 flex-col items-center gap-1 rounded-nav-item border px-1 py-1.5 transition-colors " +
                 (active
-                  ? "border-brand-500 bg-brand-500/10"
-                  : "border-neutral-800 hover:border-neutral-600")
+                  ? "border-tl-embed-green bg-[color-mix(in_srgb,var(--tl-color-embed-green)_10%,transparent)]"
+                  : "border-border-secondary hover:border-foreground-subtle")
               }
             >
               <span
                 className="h-6 w-full rounded-sm"
                 style={{ background: toneColor(score) }}
               />
-              <span className="text-[10px] font-mono text-neutral-400">{p.year}</span>
+              <span className="text-[10px] font-tl-mono text-foreground-subtle">{p.year}</span>
               <span
                 className={
-                  "text-[10px] font-mono tabular-nums " +
+                  "text-[10px] font-tl-mono tabular-nums " +
                   (score > 0.1
-                    ? "text-emerald-400"
+                    ? "text-tl-embed-green"
                     : score < -0.1
-                    ? "text-red-400"
-                    : "text-neutral-500")
+                    ? "text-foreground-status-error"
+                    : "text-foreground-subtle")
                 }
               >
                 {score >= 0 ? "+" : ""}

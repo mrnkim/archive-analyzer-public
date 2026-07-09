@@ -62,8 +62,8 @@ export function EraClusters({ timeline }: Props) {
   if (clusters.length === 0) return null;
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4">
-      <h3 className="text-sm font-medium text-neutral-300 mb-3">Narrative by era</h3>
+    <div className="bg-surface-white border border-border-secondary rounded-tlds-3 p-4">
+      <h3 className="text-sm font-medium text-foreground-muted mb-3">Narrative by era</h3>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {clusters.map((c) => {
           const years = c.points.map((p) => p.year);
@@ -74,11 +74,11 @@ export function EraClusters({ timeline }: Props) {
           return (
             <div
               key={c.decade}
-              className="flex flex-col rounded-lg border border-neutral-800 bg-neutral-950/40 p-3"
+              className="flex flex-col rounded-tlds-3 border border-border-secondary bg-[color-mix(in_srgb,var(--tl-surface-body)_40%,transparent)] p-3"
             >
               <div className="flex items-baseline justify-between">
-                <span className="text-base font-semibold text-neutral-100">{c.decade}s</span>
-                <span className="text-[10px] font-mono text-neutral-500">{span}</span>
+                <span className="text-base font-semibold text-foreground-body">{c.decade}s</span>
+                <span className="text-[10px] font-tl-mono text-foreground-subtle">{span}</span>
               </div>
 
               {c.hasSentiment && (
@@ -87,9 +87,9 @@ export function EraClusters({ timeline }: Props) {
                     className="h-2 w-2 flex-none rounded-sm"
                     style={{ background: toneColor(c.avgScore) }}
                   />
-                  <span className="text-[11px] text-neutral-400">
+                  <span className="text-[11px] text-foreground-subtle">
                     {toneWord(c.avgScore)}{" "}
-                    <span className="font-mono text-neutral-500">
+                    <span className="font-tl-mono text-foreground-subtle">
                       ({c.avgScore >= 0 ? "+" : ""}
                       {c.avgScore.toFixed(2)})
                     </span>
@@ -99,13 +99,13 @@ export function EraClusters({ timeline }: Props) {
 
               <ul className="mt-2 space-y-1">
                 {c.themes.slice(0, 3).map((t, i) => (
-                  <li key={i} className="text-xs leading-snug text-neutral-300">
-                    <span className="text-brand-500">·</span> {t}
+                  <li key={i} className="text-xs leading-snug text-foreground-muted">
+                    <span className="text-tl-embed-green">·</span> {t}
                   </li>
                 ))}
               </ul>
 
-              <div className="mt-auto pt-2 text-[10px] text-neutral-600">
+              <div className="mt-auto pt-2 text-[10px] text-foreground-subtle">
                 {c.points.length} yr{c.points.length === 1 ? "" : "s"} · {c.scenes} clip
                 {c.scenes === 1 ? "" : "s"}
               </div>

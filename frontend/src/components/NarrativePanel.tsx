@@ -148,28 +148,28 @@ export function NarrativePanel({
   return (
     <div
       className={
-        "bg-neutral-900 border border-neutral-800 rounded-lg p-4 flex min-h-0 flex-col " +
+        "bg-surface-white border border-border-secondary rounded-tlds-3 p-4 flex min-h-0 flex-col " +
         (columns ? "" : "h-full")
       }
     >
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-medium text-neutral-300">AI narrative summary</h3>
+        <h3 className="text-sm font-medium text-foreground-muted">AI narrative summary</h3>
         {active && !done && !error && (
-          <span className="text-xs text-brand-500 flex items-center gap-1">
-            <span className="inline-block w-2 h-2 bg-brand-500 rounded-full animate-pulse" />
+          <span className="text-xs text-tl-embed-green flex items-center gap-1">
+            <span className="inline-block w-2 h-2 bg-tl-embed-green rounded-full animate-pulse" />
             Streaming
           </span>
         )}
-        {done && !error && <span className="text-xs text-neutral-500">Done</span>}
+        {done && !error && <span className="text-xs text-foreground-subtle">Done</span>}
       </div>
 
       {!active && (
-        <div className="flex-1 flex items-center justify-center text-sm text-neutral-500">
+        <div className="flex-1 flex items-center justify-center text-sm text-foreground-subtle">
           Run a search and the AI will write the story of the trend here.
         </div>
       )}
 
-      {error && <div className="text-sm text-error">Error: {error}</div>}
+      {error && <div className="text-sm text-foreground-status-error">Error: {error}</div>}
 
       {active && hasLinkedBullets && (
         <div className="flex-1 min-h-0 flex flex-col gap-2">
@@ -178,20 +178,20 @@ export function NarrativePanel({
               key={selectedBullet.year}
               type="button"
               onClick={() => onSelectYear?.(selectedBullet.year)}
-              className="selected-panel-attention w-full text-left rounded-md border-2 border-neutral-50 bg-neutral-800 px-3 py-2.5 text-neutral-50"
+              className="selected-panel-attention w-full text-left rounded-nav-item border-2 border-border-primary bg-surface-secondary px-3 py-2.5 text-foreground-body"
             >
-              <div className="text-[10px] uppercase tracking-[0.14em] text-neutral-400 mb-1">
+              <div className="text-[10px] uppercase tracking-[0.14em] text-foreground-subtle mb-1">
                 Selected insight
               </div>
               <div className="flex items-start gap-2">
-                <span className="mt-0.5 rounded bg-neutral-50 px-1.5 py-0.5 font-mono text-[10px] tabular-nums text-neutral-900">
+                <span className="mt-0.5 rounded bg-surface-primary px-1.5 py-0.5 font-tl-mono text-[10px] tabular-nums text-foreground-overlay">
                   {selectedBullet.year}
                 </span>
                 <span className="min-w-0">
                   <span className="block text-sm font-medium leading-snug">
                     {selectedBullet.headline}
                   </span>
-                  <span className="mt-1 block text-xs leading-5 text-neutral-300">
+                  <span className="mt-1 block text-xs leading-5 text-foreground-muted">
                     {selectedBullet.text}
                   </span>
                 </span>
@@ -216,19 +216,19 @@ export function NarrativePanel({
                 type="button"
                 onClick={() => onSelectYear?.(bullet.year)}
                 className={
-                  "w-full text-left rounded-md border px-3 py-2.5 transition-colors " +
+                  "w-full text-left rounded-nav-item border px-3 py-2.5 transition-colors " +
                   (selected
-                    ? "selected-panel-attention border-2 border-neutral-50 bg-neutral-800 text-neutral-50"
-                    : "border-neutral-800 bg-neutral-950/35 text-neutral-200 hover:border-neutral-700 hover:bg-neutral-950/60")
+                    ? "selected-panel-attention border-2 border-border-primary bg-surface-secondary text-foreground-body"
+                    : "border-border-secondary bg-[color-mix(in_srgb,var(--tl-surface-body)_35%,transparent)] text-foreground-muted hover:border-border-secondary hover:bg-[color-mix(in_srgb,var(--tl-surface-body)_60%,transparent)]")
                 }
               >
                 <div className="flex items-start gap-2">
                   <span
                     className={
-                      "mt-0.5 rounded px-1.5 py-0.5 font-mono text-[10px] tabular-nums " +
+                      "mt-0.5 rounded px-1.5 py-0.5 font-tl-mono text-[10px] tabular-nums " +
                       (selected
-                        ? "bg-neutral-50 text-neutral-900"
-                        : "bg-neutral-800 text-neutral-400")
+                        ? "bg-surface-primary text-foreground-overlay"
+                        : "bg-surface-secondary text-foreground-subtle")
                     }
                   >
                     {bullet.year}
@@ -237,7 +237,7 @@ export function NarrativePanel({
                     <span className="block text-sm font-medium leading-snug">
                       {bullet.headline}
                     </span>
-                    <span className="mt-1 block text-xs leading-5 text-neutral-400">
+                    <span className="mt-1 block text-xs leading-5 text-foreground-subtle">
                       {bullet.text}
                     </span>
                   </span>
@@ -260,7 +260,7 @@ export function NarrativePanel({
         >
           <Markdown>{text}</Markdown>
           {!done && !error && (
-            <span className="inline-block w-2 h-4 bg-brand-500 ml-0.5 animate-pulse align-middle" />
+            <span className="inline-block w-2 h-4 bg-tl-embed-green ml-0.5 animate-pulse align-middle" />
           )}
         </div>
       )}

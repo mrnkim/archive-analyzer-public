@@ -262,9 +262,11 @@ Detailed steps, per-PR risk, and verification live in
       `tailwind.config.js`); additive, legacy ramps kept. _Risk: very low._
 - [x] **PR2** — Migrate shell (`App.tsx` header/sidebar/footer/debug) + global
       `index.css` to tokens. _Risk: low–med (visible chrome)._
-- [ ] **PR3** — Migrate data/display components: `RevenueWidget`,
-      `TimelineChart` (theme recharts palette via `--tl-*` vars), `ClipGrid`,
-      `ClipStrip`, `NarrativePanel`, `narrative/*`. _Risk: low._
+- [x] **PR3** — Migrate data/display components: `RevenueWidget`,
+      `TimelineChart` (recharts palette centralized in a `CHART` const mirroring
+      `--tl-color-*` hex — SVG attrs can't take `var()`), `ClipGrid`, `ClipStrip`,
+      `NarrativePanel`, `narrative/*` (Era/Inflection/Sentiment/EmptyState).
+      Sentiment diverging HSL scale left as-is (data-viz, not a token). _Risk: low._
 - [ ] **PR4** — Migrate interactive components: `SearchBar`, `ChatPanel`,
       `ExportButton`, `HlsClipPlayer`, `EmptyState`, `LoadingState`; fix focus
       rings → `ring-misc-ring`. _Risk: med (focus/disabled/hover states)._
@@ -323,13 +325,17 @@ tidied. Page bg (`#F4F3F3`) and primary text (`#1D1C1B`) are unchanged.
 
 ## Not migrated yet (still on legacy ramps)
 
-Everything in the **results/content area**: `SearchBar`, `TimelineChart`,
-`RevenueWidget`, `ClipGrid`, `ClipStrip`, `NarrativePanel`, narrative/*,
-`ChatPanel`, `EmptyState`, `LoadingState`, `Markdown`, `TutorialPanel`, the
-custom `Icon` set, `TwelveLabsLogo`. The whole screen still looks unified only
-because the legacy `neutral`/`brand` ramps were already hand-mapped to Strand
-values. Next: **PR3** (data/display), **PR4** (interactive), **PR5** (retire the
-legacy ramps + hex sweep), then optionally **Track 2**.
+**Interactive components (PR4 targets):** `SearchBar`, `ChatPanel`,
+`ExportButton`, `HlsClipPlayer`, `EmptyState`, `LoadingState`, plus `Markdown`,
+`TutorialPanel`, the custom `Icon` set, `TwelveLabsLogo`. These still ride the
+legacy `neutral`/`brand` ramps (which stay visually unified only because those
+ramps were hand-mapped to Strand values). Next: **PR4** (interactive; focus
+rings → `ring-misc-ring`), **PR5** (retire the legacy ramps + hex sweep), then
+optionally **Track 2**.
+
+_PR3 migrated the data/display set — `TimelineChart`, `RevenueWidget`,
+`ClipGrid`, `ClipStrip`, `NarrativePanel`, `narrative/*` — to TLDS semantic
+tokens (see roadmap checklist above)._
 
 ## Verification
 

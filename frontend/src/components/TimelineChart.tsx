@@ -14,6 +14,20 @@ import {
 import type { TimelinePoint } from "../types/api";
 import { Icon } from "./Icon";
 
+// TLDS chart palette. recharts writes these as SVG `fill`/`stroke` *attributes*,
+// where CSS var() does not resolve — so we mirror the exact --tl-color-* token
+// hex values (single source: src/tokens.css). Keep in lockstep with the tokens;
+// a later pass can resolve them from CSS custom properties at runtime.
+const CHART = {
+  accent: "#60e21b", // --tl-color-embed-green
+  accentSoft: "#bff3a4", // --tl-color-embed-light-green
+  grid: "#e2e2e2", // --tl-color-gray-200
+  axis: "#8f8984", // --tl-color-gray-500 (foreground-subtle)
+  axisLine: "#d3d1cf", // --tl-color-gray-300 (border-secondary)
+  peakLabel: "#1d1c1b", // --tl-color-gray-700 (foreground-body)
+  brushFill: "#ffffff", // --tl-color-white (surface-white)
+} as const;
+
 type Props = {
   data: TimelinePoint[];
   onPointClick: (point: TimelinePoint) => void;
@@ -35,19 +49,19 @@ function EvidencePointTooltip({
   const sceneLabel = `${point.frequency} scene${point.frequency === 1 ? "" : "s"}`;
 
   return (
-    <div className="bg-white border border-neutral-800 rounded-md shadow-lg w-64 px-3 py-2 pointer-events-none">
+    <div className="bg-surface-white border border-border-secondary rounded-nav-item shadow-lg w-64 px-3 py-2 pointer-events-none">
       <div className="flex items-center justify-between gap-3">
-        <div className="text-xs font-semibold text-neutral-50 tabular-nums">
+        <div className="text-xs font-semibold text-foreground-body tabular-nums">
           {point.year}
         </div>
-        <div className="text-[11px] font-medium text-neutral-400">
+        <div className="text-[11px] font-medium text-foreground-subtle">
           {sceneLabel}
         </div>
       </div>
-      <div className="mt-1 text-xs text-neutral-200 leading-snug">
+      <div className="mt-1 text-xs text-foreground-muted leading-snug">
         {point.dominant_theme}
       </div>
-      <div className="mt-2 text-[10px] uppercase tracking-wider text-neutral-500">
+      <div className="mt-2 text-[10px] uppercase tracking-wider text-foreground-subtle">
         Click to inspect evidence
       </div>
     </div>
@@ -62,16 +76,16 @@ export function TimelineChart({ data, onPointClick }: Props) {
   const totalScenes = data.reduce((sum, p) => sum + p.frequency, 0);
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4">
+    <div className="bg-surface-white border border-border-secondary rounded-tlds-3 p-4">
       <div className="flex items-baseline justify-between mb-3 gap-3">
         <h3
-          className="text-sm font-medium text-neutral-300"
+          className="text-sm font-medium text-foreground-muted"
           title="Each scene = a distinct moment where adidas is visually present in the corpus. One video can contribute multiple scenes."
         >
           Evidence timeline
-          <Icon name="info" className="inline-block w-3 h-3 ml-1 text-neutral-500 cursor-help align-[-1px]" />
+          <Icon name="info" className="inline-block w-3 h-3 ml-1 text-foreground-subtle cursor-help align-[-1px]" />
         </h3>
-        <span className="text-xs text-neutral-500">
+        <span className="text-xs text-foreground-subtle">
           {totalScenes} scenes across {data.length} years · peak: {peakPoint.year}
         </span>
       </div>
@@ -85,18 +99,17 @@ export function TimelineChart({ data, onPointClick }: Props) {
           }}
           margin={{ top: 10, right: 20, left: 0, bottom: 10 }}
         >
-          {/* Strand light tokens: border #E8E7E5, text-secondary #6B6966,
-              accent #60E21C, accent-light #BFF3A4, bg #F4F3F3. */}
-          <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#E8E7E5" />
+          {/* Colors sourced from the CHART palette (mirrors --tl-color-* tokens). */}
+          <CartesianGrid vertical={false} strokeDasharray="3 3" stroke={CHART.grid} />
           <XAxis
             dataKey="year"
-            stroke="#6B6966"
+            stroke={CHART.axis}
             tick={{ fontSize: 12 }}
-            axisLine={{ stroke: "#D3D1CF" }}
+            axisLine={{ stroke: CHART.axisLine }}
             tickLine={false}
           />
           <YAxis
-            stroke="#6B6966"
+            stroke={CHART.axis}
             tick={{ fontSize: 12 }}
             axisLine={false}
             tickLine={false}
@@ -104,7 +117,7 @@ export function TimelineChart({ data, onPointClick }: Props) {
           />
           <Tooltip
             content={<EvidencePointTooltip />}
-            cursor={{ stroke: "#D3D1CF", strokeDasharray: "3 3" }}
+            cursor={{ stroke: CHART.axisLine, strokeDasharray: "3 3" }}
           />
           <Bar
             dataKey="frequency"
@@ -115,8 +128,8 @@ export function TimelineChart({ data, onPointClick }: Props) {
             {data.map((p) => (
               <Cell
                 key={`bar-${p.year}`}
-                fill={p.year === peakPoint.year ? "#60E21C" : "#BFF3A4"}
-                stroke="#60E21C"
+                fill={p.year === peakPoint.year ? CHART.accent : CHART.accentSoft}
+                stroke={CHART.accent}
                 strokeWidth={1}
               />
             ))}
@@ -125,8 +138,8 @@ export function TimelineChart({ data, onPointClick }: Props) {
             {data.map((p) => (
               <Cell
                 key={`dot-${p.year}`}
-                fill="#60E21C"
-                stroke="#60E21C"
+                fill={CHART.accent}
+                stroke={CHART.accent}
                 strokeWidth={1}
               />
             ))}
@@ -138,7 +151,7 @@ export function TimelineChart({ data, onPointClick }: Props) {
             label={{
               value: "peak",
               position: "top",
-              fill: "#1D1C1B",
+              fill: CHART.peakLabel,
               fontSize: 11,
               fontWeight: 600,
             }}
@@ -146,13 +159,13 @@ export function TimelineChart({ data, onPointClick }: Props) {
           <Brush
             dataKey="year"
             height={24}
-            stroke="#60E21C"
-            fill="#FFFFFF"
+            stroke={CHART.accent}
+            fill={CHART.brushFill}
             travellerWidth={8}
           />
         </ComposedChart>
       </ResponsiveContainer>
-      <p className="text-xs text-neutral-500 mt-2">
+      <p className="text-xs text-foreground-subtle mt-2">
         Tip: click a year marker to load its scenes. Bars show discrete evidence
         volume; dots are the selectable yearly anchors.
       </p>
