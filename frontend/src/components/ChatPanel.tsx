@@ -93,14 +93,14 @@ export function ChatPanel() {
   const disabled = !result?.session_id;
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 flex flex-col">
-      <h3 className="text-sm font-medium text-neutral-300 mb-3">Multi-turn followups</h3>
+    <div className="bg-surface-white border border-border-secondary rounded-tlds-3 p-4 flex flex-col">
+      <h3 className="text-sm font-medium text-foreground-muted mb-3">Multi-turn followups</h3>
 
       <div className="flex-1 overflow-y-auto space-y-3 mb-3 min-h-0 max-h-[420px]">
         {chat.length === 0 && (
-          <div className="text-xs text-neutral-500 text-center py-8">
+          <div className="text-xs text-foreground-subtle text-center py-8">
             Run a search above first,<br />then ask followup questions here.
-            <div className="mt-3 text-neutral-600">
+            <div className="mt-3 text-foreground-subtle">
               Try: "Why did 2012 spike?" or "Compare with Nike"
             </div>
           </div>
@@ -109,42 +109,42 @@ export function ChatPanel() {
         {chat.map((m, i) => (
           <div
             key={i}
-            className={`text-sm rounded-md p-2 ${
+            className={`text-sm rounded-nav-item p-2 ${
               m.role === "user"
-                ? "bg-brand-900/30 border border-brand-900 ml-6"
-                : "bg-neutral-800 border border-neutral-700 mr-6"
+                ? "bg-[color-mix(in_srgb,var(--tl-color-embed-green)_30%,transparent)] border border-tl-embed-green ml-6"
+                : "bg-surface-secondary border border-border-secondary mr-6"
             }`}
           >
-            <div className="text-[10px] uppercase tracking-wider text-neutral-500 mb-1">
+            <div className="text-[10px] uppercase tracking-wider text-foreground-subtle mb-1">
               {m.role === "user" ? "You" : "AI"}
             </div>
             {m.role === "assistant" ? (
               <Markdown>{m.content}</Markdown>
             ) : (
-              <div className="text-neutral-100 whitespace-pre-wrap">{m.content}</div>
+              <div className="text-foreground-body whitespace-pre-wrap">{m.content}</div>
             )}
           </div>
         ))}
 
         {pending && (
-          <div className="text-xs text-neutral-500 italic">Thinking…</div>
+          <div className="text-xs text-foreground-subtle italic">Thinking…</div>
         )}
         <div ref={scrollAnchorRef} aria-hidden="true" />
       </div>
 
       {contextActive && (
-        <div className="mb-2 flex items-center gap-2 px-2 py-1.5 bg-[#BFF3A4]/30 border border-[#60E21C] rounded-md">
-          <span className="text-[10px] uppercase tracking-wider text-[#60E21C] font-medium">
+        <div className="mb-2 flex items-center gap-2 px-2 py-1.5 bg-[color-mix(in_srgb,var(--tl-color-embed-light-green)_30%,transparent)] border border-tl-embed-green rounded-nav-item">
+          <span className="text-[10px] uppercase tracking-wider text-tl-embed-green font-medium">
             Asking about
           </span>
-          <span className="text-xs text-neutral-200 truncate flex-1" title={contextLabel}>
+          <span className="text-xs text-foreground-muted truncate flex-1" title={contextLabel}>
             {contextLabel}
           </span>
           <button
             type="button"
             onClick={() => setContextEnabled(false)}
             aria-label="Remove clip context"
-            className="text-neutral-400 hover:text-neutral-100 text-sm leading-none px-1"
+            className="text-foreground-subtle hover:text-foreground-body text-sm leading-none px-1"
           >
             ×
           </button>
@@ -164,13 +164,13 @@ export function ChatPanel() {
               : "Ask a followup…"
           }
           disabled={disabled || pending}
-          className="flex-1 px-3 py-2 text-sm bg-neutral-950 border border-neutral-700 rounded-md
-          focus:outline-none focus:border-neutral-50 focus:ring-2 focus:ring-neutral-50/10 disabled:opacity-50"
+          className="flex-1 px-3 py-2 text-sm bg-surface-body border border-border-secondary rounded-nav-item
+          focus:outline-none focus:border-border-primary focus:ring-2 focus:ring-[color-mix(in_srgb,var(--tl-misc-ring)_10%,transparent)] disabled:opacity-50"
         />
         <button
           type="submit"
           disabled={disabled || pending || !input.trim()}
-          className="px-3 py-2 text-sm bg-neutral-50 hover:bg-neutral-200 text-neutral-900 font-medium rounded-md
+          className="px-3 py-2 text-sm bg-surface-primary hover:bg-surface-primary-hover text-foreground-overlay font-medium rounded-nav-item
                      disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Send

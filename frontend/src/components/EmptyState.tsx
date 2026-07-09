@@ -11,14 +11,14 @@ export function EmptyState({ onSelect, onOpenTutorial }: Props) {
     <div className="space-y-10 py-4">
       {/* Hero */}
       <div className="mx-auto max-w-2xl text-center space-y-4">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-900 px-3 py-1 text-xs font-medium text-neutral-300">
-          <span className="h-1.5 w-1.5 rounded-full bg-neutral-300" />
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-border-secondary bg-surface-white px-3 py-1 text-xs font-medium text-foreground-muted">
+          <span className="h-1.5 w-1.5 rounded-full bg-tl-gray-600" />
           Powered by TwelveLabs Jockey
         </span>
-        <h2 className="text-2xl sm:text-3xl font-semibold text-neutral-50 tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-foreground-body tracking-tight">
           Turn raw video archives into brand intelligence
         </h2>
-        <p className="text-sm text-neutral-400 leading-relaxed">
+        <p className="text-sm text-foreground-subtle leading-relaxed">
           Ask a question and Jockey searches the footage visually — surfacing
           every scene where the brand appears, a year-by-year timeline, an
           estimated archive value, and an AI-written narrative.
@@ -27,7 +27,7 @@ export function EmptyState({ onSelect, onOpenTutorial }: Props) {
 
       {/* Demo scenario cards */}
       <div>
-        <p className="mb-3 text-center text-xs uppercase tracking-wider text-neutral-500">
+        <p className="mb-3 text-center text-xs uppercase tracking-wider text-foreground-subtle">
           Try a demo scenario
         </p>
         <div className="mx-auto grid max-w-4xl gap-3 sm:grid-cols-3">
@@ -35,16 +35,16 @@ export function EmptyState({ onSelect, onOpenTutorial }: Props) {
             <button
               key={s.scenario}
               onClick={() => onSelect(s.query, s.scenario)}
-              className="group flex flex-col rounded-xl border border-neutral-800 bg-neutral-900 p-4 text-left transition-colors hover:border-neutral-700 hover:bg-neutral-800"
+              className="group flex flex-col rounded-tlds-4 border border-border-secondary bg-surface-white p-4 text-left transition-colors hover:border-border-secondary hover:bg-surface-secondary"
             >
-              <span className="mb-2.5 inline-flex h-7 w-7 items-center justify-center rounded-md bg-neutral-800 text-sm font-semibold text-neutral-100">
+              <span className="mb-2.5 inline-flex h-7 w-7 items-center justify-center rounded-nav-item bg-surface-secondary text-sm font-semibold text-foreground-body">
                 {s.scenario}
               </span>
-              <h3 className="text-sm font-medium text-neutral-100">{s.title}</h3>
-              <p className="mt-1 flex-1 text-xs leading-relaxed text-neutral-500">
+              <h3 className="text-sm font-medium text-foreground-body">{s.title}</h3>
+              <p className="mt-1 flex-1 text-xs leading-relaxed text-foreground-subtle">
                 {s.blurb}
               </p>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-neutral-100">
+              <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-foreground-body">
                 <Icon name="search" className="h-3 w-3" />
                 Run scenario
               </span>
@@ -55,11 +55,11 @@ export function EmptyState({ onSelect, onOpenTutorial }: Props) {
 
       {/* Pointer to the Tutorial tab (no duplicated how-it-works content) */}
       {onOpenTutorial && (
-        <p className="text-center text-xs text-neutral-500">
+        <p className="text-center text-xs text-foreground-subtle">
           New here? See how it works in the{" "}
           <button
             onClick={onOpenTutorial}
-            className="font-medium text-neutral-100 hover:underline"
+            className="font-medium text-foreground-body hover:underline"
           >
             Tutorial
           </button>

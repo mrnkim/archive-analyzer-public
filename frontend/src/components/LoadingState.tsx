@@ -24,9 +24,9 @@ export function LoadingState() {
   const stage = [...STAGES].reverse().find((s) => elapsed >= s.at) ?? STAGES[0];
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-12 flex flex-col items-center justify-center gap-3">
+    <div className="bg-surface-white border border-border-secondary rounded-tlds-3 p-12 flex flex-col items-center justify-center gap-3">
       <svg
-        className="h-7 w-7 animate-spin text-brand-500"
+        className="h-7 w-7 animate-spin text-tl-embed-green"
         viewBox="0 0 24 24"
         fill="none"
         aria-hidden
@@ -36,15 +36,15 @@ export function LoadingState() {
       </svg>
 
       <div className="flex items-center gap-2">
-        <p className="text-sm text-neutral-200 font-medium">Analyzing the archive…</p>
-        <span className="text-xs font-mono text-brand-500 tabular-nums">{mm}:{ss}</span>
+        <p className="text-sm text-foreground-muted font-medium">Analyzing the archive…</p>
+        <span className="text-xs font-tl-mono text-tl-embed-green tabular-nums">{mm}:{ss}</span>
       </div>
 
-      <p className="text-xs text-neutral-400">{stage.label}</p>
+      <p className="text-xs text-foreground-subtle">{stage.label}</p>
 
-      <p className="text-xs text-neutral-500 max-w-md text-center leading-relaxed">
+      <p className="text-xs text-foreground-subtle max-w-md text-center leading-relaxed">
         First run on a new query searches the footage live and can take
-        <span className="text-neutral-300"> 2–3 minutes</span> — keep this tab
+        <span className="text-foreground-muted"> 2–3 minutes</span> — keep this tab
         open. Once cached, the same query (and its CSV) returns instantly.
       </p>
     </div>

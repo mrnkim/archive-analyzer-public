@@ -267,12 +267,19 @@ Detailed steps, per-PR risk, and verification live in
       `--tl-color-*` hex — SVG attrs can't take `var()`), `ClipGrid`, `ClipStrip`,
       `NarrativePanel`, `narrative/*` (Era/Inflection/Sentiment/EmptyState).
       Sentiment diverging HSL scale left as-is (data-viz, not a token). _Risk: low._
-- [ ] **PR4** — Migrate interactive components: `SearchBar`, `ChatPanel`,
-      `ExportButton`, `HlsClipPlayer`, `EmptyState`, `LoadingState`; fix focus
-      rings → `ring-misc-ring`. _Risk: med (focus/disabled/hover states)._
-- [ ] **PR5** — Retire legacy `neutral`/`brand` ramps from `tailwind.config.js`
-      + grep-fail on any leftover `neutral-*`/`#hex`; decide the `::selection`
-      green. _Risk: low if PR2–4 complete (build breaks loudly on leftovers)._
+- [x] **PR4** — Migrate interactive components: `SearchBar`, `ChatPanel`,
+      `ExportButton`, `HlsClipPlayer`, `EmptyState`, `LoadingState` (+ `Markdown`,
+      `TutorialPanel` pulled in to finish the sweep). Focus rings now
+      `border-border-primary` + a 10%-alpha `misc-ring` (`color-mix`, preserves
+      the subtle look); primary buttons `bg-surface-primary` /
+      `hover:bg-surface-primary-hover` / `text-foreground-overlay`; warning/error
+      alpha fills via `color-mix`. Video overlays (white/black scrims) kept
+      literal by design. _Risk: med (focus/disabled/hover) — verified._
+- [ ] **PR5** — Retire legacy `neutral`/`brand`/`warning`/`error` ramps from
+      `tailwind.config.js` + decide the `::selection` green. **Now trivial:** the
+      entire `src/` tree is already grep-clean of `neutral-*`/`brand-*`/`#hex`
+      classes (verified post-PR4), so removing the ramps only deletes dead config.
+      _Risk: very low._
 
 _After PR5, Track 1 is done: fully on TLDS semantic tokens, still React 18 +
 Tailwind v3, behavior unchanged._
@@ -323,19 +330,18 @@ visible (single `border-secondary`), "mock mode" warning text is now the
 readable dark orange (`foreground-status-warning`), muted/subtle text tiering
 tidied. Page bg (`#F4F3F3`) and primary text (`#1D1C1B`) are unchanged.
 
-## Not migrated yet (still on legacy ramps)
+## Component migration status — COMPLETE (PR2–PR4)
 
-**Interactive components (PR4 targets):** `SearchBar`, `ChatPanel`,
-`ExportButton`, `HlsClipPlayer`, `EmptyState`, `LoadingState`, plus `Markdown`,
-`TutorialPanel`, the custom `Icon` set, `TwelveLabsLogo`. These still ride the
-legacy `neutral`/`brand` ramps (which stay visually unified only because those
-ramps were hand-mapped to Strand values). Next: **PR4** (interactive; focus
-rings → `ring-misc-ring`), **PR5** (retire the legacy ramps + hex sweep), then
-optionally **Track 2**.
+Every component now uses TLDS semantic tokens. Verified post-PR4: the whole
+`src/` tree is grep-clean of `neutral-*` / `brand-*` / `warning` / `error`
+classes and of `#hex` literals in `className` (the only remaining hex live in
+`tokens.css` and the documented `CHART` recharts palette). `Icon` /
+`TwelveLabsLogo` never carried hardcoded colors (they use `currentColor`).
 
-_PR3 migrated the data/display set — `TimelineChart`, `RevenueWidget`,
-`ClipGrid`, `ClipStrip`, `NarrativePanel`, `narrative/*` — to TLDS semantic
-tokens (see roadmap checklist above)._
+All that's left for **PR5** is deleting the now-dead legacy `neutral`/`brand`/
+`warning`/`error` ramps from `tailwind.config.js` and deciding the decorative
+`::selection` green in `index.css`. Then optionally **Track 2** (component
+library — needs React 19 + Tailwind v4 + private registry).
 
 ## Verification
 
