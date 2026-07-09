@@ -23,7 +23,7 @@ type TooltipPayload = {
   payload: TimelinePoint;
 };
 
-function ClipPreviewTooltip({
+function EvidencePointTooltip({
   active,
   payload,
 }: {
@@ -32,34 +32,23 @@ function ClipPreviewTooltip({
 }) {
   if (!active || !payload?.length) return null;
   const point = payload[0].payload;
-  const clip = point.representative_clip;
   const sceneLabel = `${point.frequency} scene${point.frequency === 1 ? "" : "s"}`;
 
   return (
-    <div className="bg-neutral-900/95 border border-neutral-700 rounded-md shadow-xl overflow-hidden w-56 pointer-events-none">
-      <div className="aspect-video bg-neutral-800 relative">
-        {clip.thumbnail_url ? (
-          <img
-            src={clip.thumbnail_url}
-            alt={clip.title}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-[10px] text-neutral-600">
-            no thumbnail
-          </div>
-        )}
-        <div className="absolute top-1 left-1 bg-black/70 text-white text-[11px] font-semibold tabular-nums rounded px-1.5 py-0.5">
+    <div className="bg-white border border-neutral-800 rounded-md shadow-lg w-64 px-3 py-2 pointer-events-none">
+      <div className="flex items-center justify-between gap-3">
+        <div className="text-xs font-semibold text-neutral-50 tabular-nums">
           {point.year}
         </div>
+        <div className="text-[11px] font-medium text-neutral-400">
+          {sceneLabel}
+        </div>
       </div>
-      <div className="px-2.5 py-2 space-y-1">
-        <div className="text-[11px] text-neutral-200 font-medium line-clamp-1">
-          {clip.title}
-        </div>
-        <div className="text-[10px] text-neutral-500 line-clamp-1">
-          {sceneLabel} · {point.dominant_theme}
-        </div>
+      <div className="mt-1 text-xs text-neutral-200 leading-snug">
+        {point.dominant_theme}
+      </div>
+      <div className="mt-2 text-[10px] uppercase tracking-wider text-neutral-500">
+        Click to inspect evidence
       </div>
     </div>
   );
@@ -114,7 +103,7 @@ export function TimelineChart({ data, onPointClick }: Props) {
             allowDecimals={false}
           />
           <Tooltip
-            content={<ClipPreviewTooltip />}
+            content={<EvidencePointTooltip />}
             cursor={{ stroke: "#D3D1CF", strokeDasharray: "3 3" }}
           />
           <Bar
@@ -137,8 +126,8 @@ export function TimelineChart({ data, onPointClick }: Props) {
               <Cell
                 key={`dot-${p.year}`}
                 fill="#60E21C"
-                stroke={p.year === peakPoint.year ? "#1D1C1B" : "#60E21C"}
-                strokeWidth={p.year === peakPoint.year ? 2 : 1}
+                stroke="#60E21C"
+                strokeWidth={1}
               />
             ))}
           </Scatter>
