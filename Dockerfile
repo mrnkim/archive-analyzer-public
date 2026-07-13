@@ -6,7 +6,15 @@
 FROM node:20-alpine AS frontend-builder
 WORKDIR /build
 
-COPY frontend/package.json frontend/package-lock.json* ./
+# @twelvelabs-io/react is a private GitHub Packages dependency, so the install
+# needs the scoped-registry config (frontend/.npmrc) plus a read:packages token.
+# REGISTRY_TOKEN is a build arg — .npmrc reads it via ${REGISTRY_TOKEN}. It lives
+# only in this build stage; the runtime image below copies just /build/dist, so
+# the token never ships in the deployed image.
+#   Local:   docker build --build-arg REGISTRY_TOKEN=ghp_xxx .
+#   Railway: set REGISTRY_TOKEN as a service/build variable (exposed as this ARG).
+ARG REGISTRY_TOKEN
+COPY frontend/package.json frontend/package-lock.json* frontend/.npmrc ./
 RUN npm install
 
 COPY frontend/ ./
