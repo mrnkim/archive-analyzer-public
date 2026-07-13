@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Icon } from "./Icon";
+import { Button, SearchIcon } from "@twelvelabs-io/react";
 
 type Props = {
   onSubmit: (query: string, scenario?: string) => void;
@@ -55,19 +55,16 @@ export function SearchBar({ onSubmit, loading, showDemoChips = true }: Props) {
                      focus:outline-hidden focus:border-border-primary focus:ring-2 focus:ring-[color-mix(in_srgb,var(--tl-misc-ring)_10%,transparent)] transition-colors"
           disabled={loading}
         />
-        <button
+        <Button
           type="submit"
+          variant="primary"
+          size="md"
+          loading={loading}
           disabled={loading || !input.trim()}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-surface-primary hover:bg-surface-primary-hover text-foreground-overlay font-medium rounded-tlds-3
-                     disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          leftIcon={loading ? undefined : <SearchIcon className="size-4" />}
         >
-          {loading ? (
-            <Icon name="spinner" className="w-4 h-4 animate-spin" />
-          ) : (
-            <Icon name="search" className="w-4 h-4" />
-          )}
           {loading ? "Analyzing…" : "Analyze"}
-        </button>
+        </Button>
       </form>
 
       {showDemoChips && (
