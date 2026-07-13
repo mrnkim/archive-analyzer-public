@@ -12,11 +12,11 @@ import {
   YAxis,
 } from "recharts";
 import type { TimelinePoint } from "../types/api";
-import { Icon } from "./Icon";
+import { InfoIcon, Tooltip as InfoTooltip, TooltipTrigger, TooltipContent } from "@twelvelabs-io/react";
 
 // TLDS chart palette. recharts writes these as SVG `fill`/`stroke` *attributes*,
 // where CSS var() does not resolve — so we mirror the exact --tl-color-* token
-// hex values (single source: src/tokens.css). Keep in lockstep with the tokens;
+// hex values (single source: @twelvelabs-io/react tokens.css). Keep in lockstep;
 // a later pass can resolve them from CSS custom properties at runtime.
 const CHART = {
   accent: "#60e21b", // --tl-color-embed-green
@@ -78,12 +78,19 @@ export function TimelineChart({ data, onPointClick }: Props) {
   return (
     <div className="bg-surface-white border border-border-secondary rounded-tlds-3 p-4">
       <div className="flex items-baseline justify-between mb-3 gap-3">
-        <h3
-          className="text-sm font-medium text-foreground-muted"
-          title="Each scene = a distinct moment where adidas is visually present in the corpus. One video can contribute multiple scenes."
-        >
+        <h3 className="text-sm font-medium text-foreground-muted">
           Evidence timeline
-          <Icon name="info" className="inline-block w-3 h-3 ml-1 text-foreground-subtle cursor-help align-[-1px]" />
+          <InfoTooltip>
+            <TooltipTrigger asChild>
+              <span className="ml-1 inline-flex cursor-help align-[-1px]">
+                <InfoIcon className="w-3 h-3 text-foreground-subtle" />
+              </span>
+            </TooltipTrigger>
+            <TooltipContent className="max-w-xs">
+              Each scene = a distinct moment where adidas is visually present in the
+              corpus. One video can contribute multiple scenes.
+            </TooltipContent>
+          </InfoTooltip>
         </h3>
         <span className="text-xs text-foreground-subtle">
           {totalScenes} scenes across {data.length} years · peak: {peakPoint.year}

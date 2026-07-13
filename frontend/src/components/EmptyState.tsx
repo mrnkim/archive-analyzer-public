@@ -1,4 +1,4 @@
-import { Icon } from "./Icon";
+import { SearchIcon } from "@twelvelabs-io/react";
 import { SEED_QUERIES } from "./SearchBar";
 
 type Props = {
@@ -45,7 +45,7 @@ export function EmptyState({ onSelect, onOpenTutorial }: Props) {
                 {s.blurb}
               </p>
               <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-foreground-body">
-                <Icon name="search" className="h-3 w-3" />
+                <SearchIcon className="h-3 w-3" />
                 Run scenario
               </span>
             </button>

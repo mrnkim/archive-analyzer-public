@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Spinner } from "@twelvelabs-io/react";
 
 // Live queries hit Jockey synchronously and can take 2–3 minutes on a fresh
 // question. A static spinner reads as "frozen", so show an elapsed timer and
@@ -25,15 +26,7 @@ export function LoadingState() {
 
   return (
     <div className="bg-surface-white border border-border-secondary rounded-tlds-3 p-12 flex flex-col items-center justify-center gap-3">
-      <svg
-        className="h-7 w-7 animate-spin text-tl-embed-green"
-        viewBox="0 0 24 24"
-        fill="none"
-        aria-hidden
-      >
-        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
-        <path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      </svg>
+      <Spinner className="size-7 text-tl-embed-green" />
 
       <div className="flex items-center gap-2">
         <p className="text-sm text-foreground-muted font-medium">Analyzing the archive…</p>
