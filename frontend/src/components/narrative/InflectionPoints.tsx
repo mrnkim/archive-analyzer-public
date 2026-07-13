@@ -20,7 +20,7 @@ export function InflectionPoints({ points, onSelectYear }: Props) {
           .sort((a, b) => a.year - b.year)
           .map((ip, i) => (
             <li key={i} className="relative">
-              <span className="absolute -left-[21px] top-1 h-2.5 w-2.5 rounded-full border-2 border-surface-body bg-tl-embed-green" />
+              <span className="absolute left-[-21px] top-1 h-2.5 w-2.5 rounded-full border-2 border-surface-body bg-tl-embed-green" />
               <button
                 onClick={() => onSelectYear(ip.year)}
                 className="group text-left"

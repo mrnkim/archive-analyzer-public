@@ -52,7 +52,7 @@ export function SearchBar({ onSubmit, loading, showDemoChips = true }: Props) {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask anything — e.g. 'Adidas exposure over 30 years'"
           className="flex-1 px-4 py-2 bg-surface-white border border-border-secondary rounded-tlds-3
-                     focus:outline-none focus:border-border-primary focus:ring-2 focus:ring-[color-mix(in_srgb,var(--tl-misc-ring)_10%,transparent)] transition-colors"
+                     focus:outline-hidden focus:border-border-primary focus:ring-2 focus:ring-[color-mix(in_srgb,var(--tl-misc-ring)_10%,transparent)] transition-colors"
           disabled={loading}
         />
         <button

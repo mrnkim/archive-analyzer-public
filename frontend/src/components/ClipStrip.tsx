@@ -64,12 +64,12 @@ export function ClipStrip({
                   no thumbnail
                 </div>
               )}
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent px-1.5 py-1">
+              <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/85 via-black/45 to-transparent px-1.5 py-1">
                 <div className="flex items-center justify-between gap-1">
                   <span className="text-[11px] font-semibold text-white tabular-nums">
                     {p.year}
                   </span>
-                  <span className="text-[9px] text-foreground-muted bg-black/40 rounded px-1">
+                  <span className="text-[9px] text-foreground-muted bg-black/40 rounded-sm px-1">
                     {p.frequency}×
                   </span>
                 </div>

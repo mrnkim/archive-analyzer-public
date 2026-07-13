@@ -28,7 +28,7 @@ export function ClipGrid({ point }: Props) {
           <h3 className="text-sm font-medium text-foreground-muted">
             Scenes — {point.year}
           </h3>
-          <span className="rounded bg-surface-secondary px-1.5 py-0.5 text-[10px] font-tl-mono text-foreground-body">
+          <span className="rounded-sm bg-surface-secondary px-1.5 py-0.5 text-[10px] font-tl-mono text-foreground-body">
             selected
           </span>
         </div>
@@ -85,19 +85,19 @@ function SceneCard({ scene, rank }: { scene: Scene; rank: number }) {
           </div>
         )}
         {/* Strand video chip — rank */}
-        <span className="pointer-events-none absolute top-2.5 left-2.5 backdrop-blur-[20px] bg-white/[0.08] border border-white/60 text-white text-[10px] font-medium px-1.5 py-0.5 rounded-nav-item tabular-nums">
+        <span className="pointer-events-none absolute top-2.5 left-2.5 backdrop-blur-[20px] bg-white/8 border border-white/60 text-white text-[10px] font-medium px-1.5 py-0.5 rounded-nav-item tabular-nums">
           #{rank + 1}
         </span>
         {scene.score != null && (
           <span
-            className="pointer-events-none absolute top-2.5 right-2.5 backdrop-blur-[20px] bg-white/[0.08] border border-white/60 text-tl-embed-green text-[10px] font-medium px-1.5 py-0.5 rounded-nav-item tabular-nums"
+            className="pointer-events-none absolute top-2.5 right-2.5 backdrop-blur-[20px] bg-white/8 border border-white/60 text-tl-embed-green text-[10px] font-medium px-1.5 py-0.5 rounded-nav-item tabular-nums"
             title="Marengo relevance score"
           >
             {scene.score.toFixed(2)}
           </span>
         )}
         {/* Strand video chip — timecode (IBM Plex Mono), bottom overlay */}
-        <span className="pointer-events-none absolute bottom-2.5 left-2.5 backdrop-blur-[20px] bg-white/[0.08] border border-white/60 text-white text-[10px] font-tl-mono px-1.5 py-0.5 rounded-nav-item">
+        <span className="pointer-events-none absolute bottom-2.5 left-2.5 backdrop-blur-[20px] bg-white/8 border border-white/60 text-white text-[10px] font-tl-mono px-1.5 py-0.5 rounded-nav-item">
           {scene.timestamp_start.toFixed(1)}s – {scene.timestamp_end.toFixed(1)}s
         </span>
       </div>

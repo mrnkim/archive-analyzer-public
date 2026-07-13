@@ -177,7 +177,7 @@ export function NarrativePanel({
                 <div className="flex items-start gap-2">
                   <span
                     className={
-                      "mt-0.5 rounded px-1.5 py-0.5 font-tl-mono text-[10px] tabular-nums " +
+                      "mt-0.5 rounded-sm px-1.5 py-0.5 font-tl-mono text-[10px] tabular-nums " +
                       (selected
                         ? "bg-surface-primary text-foreground-overlay"
                         : "bg-surface-secondary text-foreground-subtle")
@@ -205,7 +205,7 @@ export function NarrativePanel({
           className={
             "flex-1 overflow-y-auto text-sm " +
             (columns
-              ? "lg:[column-count:2] lg:[column-gap:2rem] [&>*:first-child]:mt-0"
+              ? "lg:[column-count:2] lg:gap-x-8 [&>*:first-child]:mt-0"
               : "")
           }
         >

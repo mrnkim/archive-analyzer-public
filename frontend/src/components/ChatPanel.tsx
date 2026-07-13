@@ -169,7 +169,7 @@ export function ChatPanel() {
           }
           disabled={disabled || pending}
           className="flex-1 px-3 py-2 text-sm bg-surface-body border border-border-secondary rounded-nav-item
-          focus:outline-none focus:border-border-primary focus:ring-2 focus:ring-[color-mix(in_srgb,var(--tl-misc-ring)_10%,transparent)] disabled:opacity-50"
+          focus:outline-hidden focus:border-border-primary focus:ring-2 focus:ring-[color-mix(in_srgb,var(--tl-misc-ring)_10%,transparent)] disabled:opacity-50"
         />
         <button
           type="submit"

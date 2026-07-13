@@ -34,7 +34,7 @@ export function Markdown({ children, className = "" }: Props) {
         "[&_li]:my-0.5 " +
         "[&_strong]:font-semibold [&_strong]:text-foreground-body " +
         "[&_em]:text-foreground-muted [&_em]:italic " +
-        "[&_code]:bg-surface-secondary [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-xs " +
+        "[&_code]:bg-surface-secondary [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded-sm [&_code]:text-xs " +
         "[&_h1]:text-base [&_h1]:font-semibold [&_h1]:mt-3 [&_h1]:mb-1 " +
         "[&_h2]:text-base [&_h2]:font-semibold [&_h2]:mt-3 [&_h2]:mb-1 " +
         "[&_h3]:text-sm [&_h3]:font-semibold [&_h3]:mt-2 [&_h3]:mb-1 " +
