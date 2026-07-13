@@ -290,7 +290,7 @@ Detailed steps, per-PR risk, and verification live in
 _✅ Track 1 is COMPLETE: fully on TLDS semantic tokens, still React 18 +
 Tailwind v3, behavior unchanged._
 
-**Track 2 — component library (IN PROGRESS on `feature/tlds-components-track2`):**
+**Track 2 — component library (SUBSTANTIVELY COMPLETE, merged to main `d38d560`):**
 
 > **Registry access — RESOLVED.** The `@twelvelabs-io/react` package (private
 > GitHub Packages, org `twelvelabs-io`) is readable with an **outside-collaborator**
@@ -310,20 +310,29 @@ Tailwind v3, behavior unchanged._
       `rounded-sm`→`rounded-xs` renames. Verified: **visual regression
       pixel-identical** on home + scenario screens, zero console errors.
       _(Done before PR6 despite the label — order swapped intentionally.)_
-- [ ] **PR8 — NEXT.** `source ~/.tl-registry.env && npm install @twelvelabs-io/react@0.34.0`;
-      commit `frontend/.npmrc` (it's currently untracked). Then in `index.css`
-      replace the vendored `tokens.css` import + hand-written `@theme` block with
-      the package's own: `@import "@twelvelabs-io/react/tokens.css";` +
-      `@import "@twelvelabs-io/react/theme.css";` **after** `@import "tailwindcss";`.
-      Add `TooltipProvider` at the root (main.tsx/App). Run `npx twelvelabs-ui-skills`
-      to install the design-system Claude skills. **Verify:** one `<Button>` renders
-      correctly (proves CSS import order). _Note: `.npmrc` in a public repo means
-      external `npm install` needs the token — accepted Track 2 tradeoff._
-- [ ] **PR9…N** — Swap components incrementally (lowest risk first): icons
-      (`Icon.tsx`→TLDS icons) → `Button`/`IconButton` → `TextField` →
-      `Chip`/`ToggleButtons` → `Spinner` → `Banner` → `Text`/`Markdown` →
-      `Accordion`/`Select`/`Popover`. **Keep `Tabs`/`Table`/`AspectRatio`
-      hand-rolled** — not exported by the library yet.
+- [x] **PR8 — DONE** (`82d82c1`). Installed `@twelvelabs-io/react@0.34.0`; committed
+      `frontend/.npmrc`; `index.css` now imports the package `tokens.css` + `theme.css`
+      after `@import "tailwindcss"` (vendored `tokens.css` + hand-rolled `@theme`
+      deleted); `TooltipProvider` at the root; `npx twelvelabs-ui-skills` installed
+      (`.claude/skills`, gitignored). Verified pixel-identical, zero console errors.
+- [x] **PR9 — DONE** (`18e2d36`, `22421a1`, `8096b99`, `aca0428`, `3e10f4b`). Swapped
+      all cleanly-mapping controls to the library: `<Button>` (Analyze/Send/Export/demo
+      prompts), `<TextField>` (search + chat inputs), `<Spinner>`, the full package icon
+      set (**`Icon.tsx` retired**), a real `<Tooltip>` on the timeline info hint,
+      `CheckmarkIcon`. Verified end-to-end on **both** tabs + tutorial, zero console errors.
+      - **Intentionally kept custom** (per skill: only swap when a component fits):
+        data-viz (recharts timeline, SentimentStrip, EraClusters, InflectionPoints,
+        ClipStrip), the Tutorial doc layout (Section/Card/Step), and the micro-badges
+        (year "2018", A/B/C letters) — `Chip` is a larger tag and doesn't fit them.
+      - **Not done (optional, low value):** a full `<Text>` typography sweep.
+
+> **⚠️ Railway deploy is now BLOCKED until the Dockerfile handles the private
+> registry.** `Dockerfile` stage 1 runs `npm install` but (a) does NOT copy
+> `frontend/.npmrc` before it and (b) has no `REGISTRY_TOKEN` at build time — so the
+> Docker build now fails to resolve `@twelvelabs-io/react`. To deploy: copy `.npmrc`
+> into the frontend build stage AND pass `REGISTRY_TOKEN` (Docker build arg / BuildKit
+> secret), and set `REGISTRY_TOKEN` as a Railway build variable. This is the
+> public-repo × private-registry tradeoff — Track 1 avoided it; Track 2 requires it.
 
 ## Shipped this session (Track 1, PR1–PR2)
 
