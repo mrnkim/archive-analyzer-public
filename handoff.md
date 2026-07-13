@@ -7,12 +7,15 @@ to run, regenerate demo data, and deploy.
 
 - **URL:** https://archive-analyzer-public-production.up.railway.app
 - **Platform:** Railway (Dockerfile build, healthcheck `/api/health`, config in `railway.json`)
-- **Redeploy after a change:**
+- **Redeploy after a change:** run from the **repo root**
   ```bash
-  railway up <path-to-repo> --service archive-analyzer-public --ci
+  railway up --ci
   ```
-  Pass the explicit path — `railway up` uploads a directory. Changing a
-  service variable auto-redeploys the existing image.
+  `railway up` uploads the current directory, so run it from the repo root (the
+  older `railway up <path> --service …` form fails — use the bare `--ci` form).
+  Since 2026-07-13 the frontend depends on the private `@twelvelabs-io/react`
+  package, so the service needs a `REGISTRY_TOKEN` variable (see the 2026-07-13
+  section). Changing a service variable also auto-redeploys the existing image.
 - **Service env vars** (set in Railway, never committed — `.env` is dockerignored):
   `TWELVELABS_API_KEY`, `JOCKEY_BASE_URL`, `KS_ID`, `RATE_LIMIT_PER_MINUTE`,
   `APP_ENV=production`, `ALLOWED_ORIGINS=<the railway URL>`.
@@ -326,13 +329,13 @@ Tailwind v3, behavior unchanged._
         (year "2018", A/B/C letters) — `Chip` is a larger tag and doesn't fit them.
       - **Not done (optional, low value):** a full `<Text>` typography sweep.
 
-> **⚠️ Railway deploy is now BLOCKED until the Dockerfile handles the private
-> registry.** `Dockerfile` stage 1 runs `npm install` but (a) does NOT copy
-> `frontend/.npmrc` before it and (b) has no `REGISTRY_TOKEN` at build time — so the
-> Docker build now fails to resolve `@twelvelabs-io/react`. To deploy: copy `.npmrc`
-> into the frontend build stage AND pass `REGISTRY_TOKEN` (Docker build arg / BuildKit
-> secret), and set `REGISTRY_TOKEN` as a Railway build variable. This is the
-> public-repo × private-registry tradeoff — Track 1 avoided it; Track 2 requires it.
+> **✅ Railway deploy — RESOLVED (2026-07-13, see the dated section at the bottom).**
+> The `Dockerfile` frontend stage now copies `frontend/.npmrc` and takes an
+> `ARG REGISTRY_TOKEN`, so the Docker build installs the private
+> `@twelvelabs-io/react`. Set `REGISTRY_TOKEN` as a Railway **service** variable
+> (a *Shared* Variable must be shared into the service). Redeployed + verified live.
+> This is the public-repo × private-registry tradeoff — Track 1 avoided it; Track 2
+> requires the token at build time.
 
 ## Shipped this session (Track 1, PR1–PR2)
 
@@ -405,3 +408,77 @@ the startup hook (`main.py` → `cache.load_primed_from_disk()`) re-hydrates the
 `curl -s localhost:8000/api/query -X POST -H 'Content-Type: application/json'
 -d '{"query":"How has Adidas brand exposure changed from 1990 to 2025?","scenario":"A"}'
 -o /dev/null -w '%{http_code}\n'` → expect `200`.
+
+---
+
+# Handoff — 2026-07-13
+
+Long session: **finished Track 1, then executed all of Track 2** (adopting the
+real `@twelvelabs-io/react` component library), plus a Narrative-Evolution UX
+pass, a Dockerfile fix, and a live Railway redeploy. Everything is merged to
+**main (`7f6fb44`)** and deployed.
+
+## 1. Track 1 finalized
+- `::selection` highlight → TLDS `color-mix(... --tl-color-embed-green 28% ...)`
+  (`5c462cb`). Track 1 merged to main (`208b044`). (Full detail: 2026-07-09 section.)
+
+## 2. Narrative Evolution UX pass (commit `6681996`, in the Track 1 merge)
+Driven by feedback while running the app locally:
+- **Selected insight highlights in place** (chronological order) instead of being
+  pulled to the top of the AI-summary panel — the reordering read as confusing.
+  `NarrativePanel` dropped the pinned "Selected insight" card + the `visibleBullets`
+  filter; the in-place list item keeps the existing highlight.
+- **No load-time scroll jump.** Root cause was `ChatPanel`'s mount-time
+  `scrollIntoView` (the panel sits at the page bottom): guarded it to fire only
+  once the chat has messages. Also removed `NarrativePanel`'s now-redundant
+  scroll-to-selected effect.
+- **Narrative tab reordered** story-first: overview (timeline + sentiment +
+  inflection) → AI narrative → era clusters → clips → chat (was: narrative last).
+- **Tab labels shortened:** "Narrative Evolution" and "Brand Intelligence
+  (Adidas Examples)".
+
+## 3. Track 2 — real component library (merged to main `d38d560`)
+Per-PR detail is in the updated Track-2 checklist in the 2026-07-09 section above.
+Summary:
+- **Registry unblocked.** `@twelvelabs-io/react` is private (GitHub Packages, org
+  `twelvelabs-io`); an **outside-collaborator** `read:packages` PAT (SSO-authorized)
+  can read it. Local setup: token in `~/.tl-registry.env` (`export REGISTRY_TOKEN=…`),
+  `frontend/.npmrc` maps the scope + reads `${REGISTRY_TOKEN}`. Run npm as
+  `source ~/.tl-registry.env && npm …`.
+- **Stack upgrades** (each verified pixel-identical, merged to main): React
+  18→19.2.7 (`f95c93a`), Tailwind v3→v4.3.2 (`efae466`).
+- **PR8 (`82d82c1`):** installed `@twelvelabs-io/react@0.34.0`, imported the package
+  `tokens.css` + `theme.css` (dropped the vendored `tokens.css` + hand-rolled
+  `@theme`), added root `TooltipProvider`, installed the `twelvelabs-ui` Claude
+  skills (`.claude/skills`, gitignored).
+- **PR9 (`18e2d36`…`3e10f4b`):** swapped every cleanly-mapping control to the
+  library — `<Button>` (Analyze/Send/Export/demo prompts), `<TextField>` (search +
+  chat inputs), `<Spinner>`, the whole icon set (**`Icon.tsx` deleted**), a real
+  `<Tooltip>` on the timeline info hint, `CheckmarkIcon`. Kept custom (no fitting
+  component): recharts/data-viz, the tutorial doc layout, micro-badges. Skipped
+  the optional full `<Text>` sweep.
+- Verified end-to-end on **both tabs + tutorial**, zero console errors.
+
+## 4. Deployability + Railway
+- **Dockerfile fixed** (`352d9fc`, merged `7f6fb44`): the frontend build stage now
+  copies `frontend/.npmrc` and takes `ARG REGISTRY_TOKEN`, so the Docker build can
+  install the private package. Token stays in the build stage (multi-stage; the
+  runtime image copies only `dist/`), so it never ships.
+- **Railway:** set `REGISTRY_TOKEN` as a **service** variable. (A Railway *Shared*
+  Variable must be **shared into the service**, or added directly, to reach the
+  build `ARG`.)
+- **Redeployed the latest** via `railway up --ci` from the repo root — the service
+  had been serving a **stale old build**. Build succeeded (private package
+  installed), healthcheck passed, live bundle now the new version.
+
+## Handy: check which version is live
+```bash
+URL=https://archive-analyzer-public-production.up.railway.app
+JS=$(curl -s "$URL/" | grep -oE '/assets/index-[^"]+\.js' | head -1)
+curl -s "$URL$JS" | grep -oE "Adidas Examples|Trump Example"   # new vs old marker
+```
+
+## Notes for next session
+- The Docker build **requires** `REGISTRY_TOKEN` — CI / other machines / Railway all need it.
+- Optional remaining polish (low value): full `<Text>` typography sweep; `Chip`/`Banner` where they fit.
+- Local dev with the private package: always `source ~/.tl-registry.env` before `npm install`.
