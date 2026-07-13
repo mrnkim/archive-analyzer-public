@@ -159,8 +159,8 @@ export default function App() {
         <aside className="w-48 flex-none border-r border-border-secondary px-3 py-6">
           <nav className="space-y-1 sticky top-6">
             {([
-              ["analyzer", "Brand Intelligence (Adidas Example)"],
-              ["narrative", "Narrative Evolution (Trump Example)"],
+              ["analyzer", "Brand Intelligence (Adidas Examples)"],
+              ["narrative", "Narrative Evolution"],
               ["tutorial", "Tutorial"],
             ] as [Tab, string][]).map(([id, label]) => (
               <button
@@ -193,6 +193,8 @@ export default function App() {
 
           {result && (
             <>
+              {/* Overview: evidence volume + tone over time, with the pivotal
+                  moments called out alongside. */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
                 <div className="lg:col-span-2 space-y-4">
                   <TimelineChart
@@ -204,16 +206,6 @@ export default function App() {
                     selectedYear={selectedPoint?.year ?? null}
                     onSelect={handleSelectPoint}
                   />
-                  <div ref={clipGridRef} className="scroll-mt-4">
-                    <ClipGrid point={selectedPoint} />
-                  </div>
-                  <ClipStrip
-                    timeline={result.timeline}
-                    selectedYear={selectedPoint?.year ?? null}
-                    onSelect={handleSelectPoint}
-                    exportQuery={result.query}
-                    exportScenario={resultScenario}
-                  />
                 </div>
                 <InflectionPoints
                   points={result.inflection_points ?? []}
@@ -221,8 +213,8 @@ export default function App() {
                 />
               </div>
 
-              <EraClusters timeline={result.timeline} />
-
+              {/* The story leads: the AI-written narrative sits right under the
+                  overview, ahead of the supporting detail and raw clips. */}
               <NarrativePanel
                 query={streamingQuery}
                 narrative={result?.narrative_summary}
@@ -231,6 +223,20 @@ export default function App() {
                 selectedYear={selectedPoint?.year ?? null}
                 onSelectYear={selectYear}
                 columns
+              />
+
+              <EraClusters timeline={result.timeline} />
+
+              {/* Grounded evidence for the selected year. */}
+              <div ref={clipGridRef} className="scroll-mt-4">
+                <ClipGrid point={selectedPoint} />
+              </div>
+              <ClipStrip
+                timeline={result.timeline}
+                selectedYear={selectedPoint?.year ?? null}
+                onSelect={handleSelectPoint}
+                exportQuery={result.query}
+                exportScenario={resultScenario}
               />
 
               <ChatPanel />

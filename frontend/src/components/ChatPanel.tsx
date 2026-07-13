@@ -21,6 +21,10 @@ export function ChatPanel() {
   }, [selectedPoint?.year]);
 
   useEffect(() => {
+    // Only follow the conversation as it grows — never on the empty chat that
+    // mounts with a fresh result, or the page would yank down to this panel
+    // (it sits at the bottom) the moment a scenario loads.
+    if (chat.length === 0) return;
     scrollAnchorRef.current?.scrollIntoView({ block: "end", behavior: "smooth" });
   }, [chat.length, pending]);
 

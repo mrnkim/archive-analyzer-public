@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useEventSource } from "../hooks/useEventSource";
 import type { SummaryBullet, TimelinePoint } from "../types/api";
 import { Markdown } from "./Markdown";
@@ -117,9 +117,6 @@ export function NarrativePanel({
     ? timeline.map((point) => providedByYear.get(point.year) ?? fallback.find((b) => b.year === point.year))
         .filter((bullet): bullet is SummaryBullet => Boolean(bullet))
     : bullets ?? fallback;
-  const selectedBullet =
-    linkedBullets.find((bullet) => bullet.year === selectedYear) ?? null;
-  const bulletRefs = useRef<Record<number, HTMLButtonElement | null>>({});
   const hasLinkedBullets = linkedBullets.length > 0;
   const useFake = !!narrative;
   const fake = useFakeStream(useFake ? narrative ?? null : null);
@@ -129,21 +126,6 @@ export function NarrativePanel({
   const done = hasLinkedBullets || (useFake ? fake.done : sse.done);
   const error = useFake ? null : sse.error;
   const active = !!query || !!narrative || hasLinkedBullets;
-  const visibleBullets = useMemo(
-    () =>
-      selectedYear
-        ? linkedBullets.filter((bullet) => bullet.year !== selectedYear)
-        : linkedBullets,
-    [linkedBullets, selectedYear]
-  );
-
-  useEffect(() => {
-    if (!selectedYear) return;
-    bulletRefs.current[selectedYear]?.scrollIntoView({
-      block: "nearest",
-      behavior: "smooth",
-    });
-  }, [selectedYear]);
 
   return (
     <div
@@ -172,47 +154,17 @@ export function NarrativePanel({
       {error && <div className="text-sm text-foreground-status-error">Error: {error}</div>}
 
       {active && hasLinkedBullets && (
-        <div className="flex-1 min-h-0 flex flex-col gap-2">
-          {selectedBullet && (
-            <button
-              key={selectedBullet.year}
-              type="button"
-              onClick={() => onSelectYear?.(selectedBullet.year)}
-              className="selected-panel-attention w-full text-left rounded-nav-item border-2 border-border-primary bg-surface-secondary px-3 py-2.5 text-foreground-body"
-            >
-              <div className="text-[10px] uppercase tracking-[0.14em] text-foreground-subtle mb-1">
-                Selected insight
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="mt-0.5 rounded bg-surface-primary px-1.5 py-0.5 font-tl-mono text-[10px] tabular-nums text-foreground-overlay">
-                  {selectedBullet.year}
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-sm font-medium leading-snug">
-                    {selectedBullet.headline}
-                  </span>
-                  <span className="mt-1 block text-xs leading-5 text-foreground-muted">
-                    {selectedBullet.text}
-                  </span>
-                </span>
-              </div>
-            </button>
-          )}
-
-          <div
-            className={
-              "flex-1 min-h-0 overflow-y-auto pr-1 " +
-              (columns ? "grid content-start gap-2 lg:grid-cols-2" : "space-y-2")
-            }
-          >
-          {visibleBullets.map((bullet, i) => {
+        <div
+          className={
+            "flex-1 min-h-0 overflow-y-auto pr-1 " +
+            (columns ? "grid content-start gap-2 lg:grid-cols-2" : "space-y-2")
+          }
+        >
+          {linkedBullets.map((bullet, i) => {
             const selected = bullet.year === selectedYear;
             return (
               <button
                 key={`${bullet.year}-${bullet.headline}-${i}`}
-                ref={(node) => {
-                  bulletRefs.current[bullet.year] = node;
-                }}
                 type="button"
                 onClick={() => onSelectYear?.(bullet.year)}
                 className={
@@ -245,7 +197,6 @@ export function NarrativePanel({
               </button>
             );
           })}
-          </div>
         </div>
       )}
 
