@@ -16,7 +16,7 @@ import { Icon } from "./Icon";
 
 // TLDS chart palette. recharts writes these as SVG `fill`/`stroke` *attributes*,
 // where CSS var() does not resolve — so we mirror the exact --tl-color-* token
-// hex values (single source: src/tokens.css). Keep in lockstep with the tokens;
+// hex values (single source: @twelvelabs-io/react tokens.css). Keep in lockstep;
 // a later pass can resolve them from CSS custom properties at runtime.
 const CHART = {
   accent: "#60e21b", // --tl-color-embed-green

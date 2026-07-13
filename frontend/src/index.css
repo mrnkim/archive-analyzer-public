@@ -7,128 +7,17 @@ layer(base);
 @import url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.min.css')
 layer(base);
 
-/* TLDS design tokens (vendored). Defines the --tl-* custom properties that the
-   Tailwind config maps to semantic utilities (bg-surface-body, text-foreground-
-   muted, rounded-tlds-*, …). See docs/tlds-migration-plan.md (Track 1). */
-@import './tokens.css' layer(base);
-
 @import 'tailwindcss';
 
-@theme {
-  --color-surface-body: var(--tl-surface-body);
-  --color-surface-white: var(--tl-surface-white);
-  --color-surface-card: var(--tl-surface-card);
-  --color-surface-primary: var(--tl-surface-primary);
-  --color-surface-primary-inverse: var(--tl-surface-primary-inverse);
-  --color-surface-primary-hover: var(--tl-surface-primary-hover);
-  --color-surface-secondary: var(--tl-surface-secondary);
-  --color-surface-secondary-hover: var(--tl-surface-secondary-hover);
-  --color-surface-muted: var(--tl-surface-muted);
-  --color-surface-disabled: var(--tl-surface-disabled);
-  --color-surface-destructive: var(--tl-surface-destructive);
-  --color-surface-tooltip: var(--tl-surface-tooltip);
-  --color-surface-status-success: var(--tl-surface-status-success);
-  --color-surface-status-warning: var(--tl-surface-status-warning);
-  --color-surface-status-error: var(--tl-surface-status-error);
-  --color-surface-embed: var(--tl-surface-embed);
-  --color-surface-analyze: var(--tl-surface-analyze);
-  --color-surface-search: var(--tl-surface-search);
-
-  --color-foreground-body: var(--tl-foreground-body);
-  --color-foreground-primary: var(--tl-foreground-primary);
-  --color-foreground-primary-inverse: var(--tl-foreground-primary-inverse);
-  --color-foreground-secondary: var(--tl-foreground-secondary);
-  --color-foreground-muted: var(--tl-foreground-muted);
-  --color-foreground-subtle: var(--tl-foreground-subtle);
-  --color-foreground-disabled: var(--tl-foreground-disabled);
-  --color-foreground-destructive: var(--tl-foreground-destructive);
-  --color-foreground-tooltip: var(--tl-foreground-tooltip);
-  --color-foreground-overlay: var(--tl-foreground-overlay);
-  --color-foreground-status-success: var(--tl-foreground-status-success);
-  --color-foreground-status-warning: var(--tl-foreground-status-warning);
-  --color-foreground-status-error: var(--tl-foreground-status-error);
-  --color-foreground-status-info: var(--tl-foreground-status-info);
-  --color-foreground-embed: var(--tl-foreground-embed);
-  --color-foreground-analyze: var(--tl-foreground-analyze);
-  --color-foreground-search: var(--tl-foreground-search);
-  --color-foreground-accent-purple: var(--tl-foreground-accent-purple);
-
-  --color-border-secondary: var(--tl-border-secondary);
-  --color-border-primary: var(--tl-border-primary);
-  --color-border-disabled: var(--tl-border-disabled);
-  --color-border-destructive: var(--tl-border-destructive);
-
-  --color-misc-overlay: var(--tl-misc-overlay);
-  --color-misc-border-light: var(--tl-misc-border-light);
-  --color-misc-border-medium: var(--tl-misc-border-medium);
-  --color-misc-ring: var(--tl-misc-ring);
-  --color-misc-status-success: var(--tl-misc-status-success);
-  --color-misc-status-warning: var(--tl-misc-status-warning);
-  --color-misc-status-error: var(--tl-misc-status-error);
-  --color-misc-status-info: var(--tl-misc-status-info);
-
-  --color-tl-black: var(--tl-color-black);
-  --color-tl-white: var(--tl-color-white);
-
-  --color-tl-gray-50: var(--tl-color-gray-50);
-  --color-tl-gray-100: var(--tl-color-gray-100);
-  --color-tl-gray-200: var(--tl-color-gray-200);
-  --color-tl-gray-300: var(--tl-color-gray-300);
-  --color-tl-gray-400: var(--tl-color-gray-400);
-  --color-tl-gray-500: var(--tl-color-gray-500);
-  --color-tl-gray-600: var(--tl-color-gray-600);
-  --color-tl-gray-700: var(--tl-color-gray-700);
-
-  --color-tl-embed-lightest-green: var(--tl-color-embed-lightest-green);
-  --color-tl-embed-light-green: var(--tl-color-embed-light-green);
-  --color-tl-embed-green: var(--tl-color-embed-green);
-  --color-tl-embed-dark-green: var(--tl-color-embed-dark-green);
-  --color-tl-embed-lightest-blue: var(--tl-color-embed-lightest-blue);
-  --color-tl-embed-light-blue: var(--tl-color-embed-light-blue);
-  --color-tl-embed-blue: var(--tl-color-embed-blue);
-  --color-tl-embed-dark-blue: var(--tl-color-embed-dark-blue);
-
-  --font-sans: Milling, Noto Sans, Helvetica, Arial, sans-serif;
-  --font-display: Milling, Noto Sans, Helvetica, Arial, sans-serif;
-  --font-brand: Milling, Noto Sans, Helvetica, Arial, sans-serif;
-  --font-brand-bold: Milling, Noto Sans, Helvetica, Arial, sans-serif;
-  --font-brand-xbold: Milling, Noto Sans, Helvetica, Arial, sans-serif;
-  --font-geist: Geist, Inter, system-ui, sans-serif;
-  --font-mono: IBM Plex Mono, ui-monospace, monospace;
-  --font-tl-sans:
-    var(--tl-font-family-primary), Noto Sans, Helvetica, Arial, sans-serif;
-  --font-tl-mono: var(--tl-font-family-mono), ui-monospace, monospace;
-
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-  --radius-tlds-1: var(--tl-radius-1);
-  --radius-tlds-2: var(--tl-radius-2);
-  --radius-tlds-3: var(--tl-radius-3);
-  --radius-tlds-4: var(--tl-radius-4);
-  --radius-tlds-5: var(--tl-radius-5);
-  --radius-tlds-6: var(--tl-radius-6);
-  --radius-tlds-1-half: var(--tl-radius-1-half);
-  --radius-tlds-2-half: var(--tl-radius-2-half);
-  --radius-tlds-full: var(--tl-radius-full);
-  --radius-dialog: var(--tl-radius-dialog);
-  --radius-menu: var(--tl-radius-menu);
-  --radius-tooltip: var(--tl-radius-tooltip);
-  --radius-textarea: var(--tl-radius-textarea);
-  --radius-spinner: var(--tl-radius-spinner);
-  --radius-nav-item: var(--tl-radius-nav-item);
-  --radius-video-thumbnail: var(--tl-radius-video-thumbnail);
-  --radius-input-sm: var(--tl-radius-input-sm);
-  --radius-input-md: var(--tl-radius-input-md);
-  --radius-input-lg: var(--tl-radius-input-lg);
-  --radius-button-mini: var(--tl-radius-button-mini);
-  --radius-button-small: var(--tl-radius-button-small);
-  --radius-button-regular: var(--tl-radius-button-regular);
-  --radius-button-medium: var(--tl-radius-button-medium);
-  --radius-button-large: var(--tl-radius-button-large);
-  --radius-chip-root: var(--tl-radius-chip-root);
-  --radius-chip-container: var(--tl-radius-chip-container);
-}
+/* TLDS design system, shipped by @twelvelabs-io/react: tokens.css defines the
+   --tl-* custom properties; theme.css registers them with Tailwind's `@theme`
+   so semantic utilities (bg-surface-body, text-foreground-muted, rounded-tlds-*,
+   rounded-nav-item, font-tl-mono, text-tl-embed-green, …) resolve. Order matters:
+   both must come AFTER `@import "tailwindcss"` so theme.css's @theme inline block
+   evaluates against an initialized Tailwind.
+   (Track 2 PR8: replaces the vendored tokens.css + hand-rolled @theme block.) */
+@import '@twelvelabs-io/react/tokens.css';
+@import '@twelvelabs-io/react/theme.css';
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
