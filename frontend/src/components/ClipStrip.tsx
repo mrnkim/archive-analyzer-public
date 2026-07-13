@@ -19,14 +19,14 @@ export function ClipStrip({
   if (!timeline.length) return null;
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4">
+    <div className="bg-surface-white border border-border-secondary rounded-tlds-3 p-4">
       <div className="flex items-baseline justify-between mb-3 gap-3">
-        <h3 className="text-sm font-medium text-neutral-300">
+        <h3 className="text-sm font-medium text-foreground-muted">
           All representative clips
-          <span className="text-xs text-neutral-500 ml-2">({timeline.length})</span>
+          <span className="text-xs text-foreground-subtle ml-2">({timeline.length})</span>
         </h3>
         <div className="flex items-center gap-3">
-          <span className="text-xs text-neutral-500 hidden sm:inline">
+          <span className="text-xs text-foreground-subtle hidden sm:inline">
             click any to focus
           </span>
           {exportQuery && (
@@ -43,10 +43,10 @@ export function ClipStrip({
             <button
               key={`${p.year}-${c.asset_id}`}
               onClick={() => onSelect(p)}
-              className={`group relative aspect-video rounded-xl overflow-hidden border-2 transition-all text-left ${
+              className={`group relative aspect-video rounded-tlds-4 overflow-hidden border-2 transition-all text-left ${
                 selected
-                  ? "selected-panel-attention border-neutral-50 ring-2 ring-neutral-50/20"
-                  : "border-neutral-700 hover:border-neutral-500"
+                  ? "selected-panel-attention border-border-primary ring-2 ring-[color-mix(in_srgb,var(--tl-color-gray-700)_20%,transparent)]"
+                  : "border-border-secondary hover:border-foreground-subtle"
               }`}
               title={`${c.title} · ${p.frequency} scene${p.frequency === 1 ? "" : "s"}`}
             >
@@ -60,7 +60,7 @@ export function ClipStrip({
                   loading="lazy"
                 />
               ) : (
-                <div className="w-full h-full bg-neutral-800 flex items-center justify-center text-[10px] text-neutral-600">
+                <div className="w-full h-full bg-surface-secondary flex items-center justify-center text-[10px] text-foreground-subtle">
                   no thumbnail
                 </div>
               )}
@@ -69,13 +69,13 @@ export function ClipStrip({
                   <span className="text-[11px] font-semibold text-white tabular-nums">
                     {p.year}
                   </span>
-                  <span className="text-[9px] text-neutral-200 bg-black/40 rounded px-1">
+                  <span className="text-[9px] text-foreground-muted bg-black/40 rounded px-1">
                     {p.frequency}×
                   </span>
                 </div>
               </div>
               {selected && (
-                <div className="absolute top-1 right-1 w-2 h-2 bg-neutral-50 rounded-full shadow-lg" />
+                <div className="absolute top-1 right-1 w-2 h-2 bg-surface-primary rounded-full shadow-lg" />
               )}
             </button>
           );

@@ -227,3 +227,152 @@ Latest verification in this session:
   ship with persisted `summary_bullets`.
 - The local backend is running without `--reload` due to sandbox file-watch
   restrictions. Restart it after backend edits.
+
+---
+
+# Handoff — 2026-07-09
+
+Started aligning the frontend with **TwelveLabs Design System (TLDS) /
+`@twelvelabs-io/react`**. Full audit + phased plan in
+[`docs/tlds-migration-plan.md`](docs/tlds-migration-plan.md).
+
+## Key decision: two tracks
+
+The real component library (`@twelvelabs-io/react`) requires **React ≥19.2.7 +
+Tailwind v4 + a private GitHub Packages install** (and is self-labeled "not
+production ready"). This app is Vite + **React 18 + Tailwind v3**. So the work is
+split:
+
+- **Track 1 (this session) — tokens-first, NO upgrade.** Adopt TLDS design
+  *tokens* (colors/radius/fonts) on the existing hand-rolled components.
+  `tokens.css` is framework-agnostic CSS custom properties, so it works on
+  Tailwind v3.
+- **Track 2 (not started, needs approval) — adopt the actual TLDS React
+  *components* (`<Button>`, `<TextField>`, …).** Requires the React 19 +
+  Tailwind v4 upgrade. **No `@twelvelabs-io/react` component is used yet.**
+
+## Full PR roadmap (Track 1 + Track 2)
+
+Detailed steps, per-PR risk, and verification live in
+[`docs/tlds-migration-plan.md`](docs/tlds-migration-plan.md) §6. Checklist:
+
+**Track 1 — tokens-first (Vite + React 18 + Tailwind v3, NO upgrade):**
+
+- [x] **PR1** — Introduce TLDS tokens (`tokens.css` + semantic utilities in
+      `tailwind.config.js`); additive, legacy ramps kept. _Risk: very low._
+- [x] **PR2** — Migrate shell (`App.tsx` header/sidebar/footer/debug) + global
+      `index.css` to tokens. _Risk: low–med (visible chrome)._
+- [x] **PR3** — Migrate data/display components: `RevenueWidget`,
+      `TimelineChart` (recharts palette centralized in a `CHART` const mirroring
+      `--tl-color-*` hex — SVG attrs can't take `var()`), `ClipGrid`, `ClipStrip`,
+      `NarrativePanel`, `narrative/*` (Era/Inflection/Sentiment/EmptyState).
+      Sentiment diverging HSL scale left as-is (data-viz, not a token). _Risk: low._
+- [x] **PR4** — Migrate interactive components: `SearchBar`, `ChatPanel`,
+      `ExportButton`, `HlsClipPlayer`, `EmptyState`, `LoadingState` (+ `Markdown`,
+      `TutorialPanel` pulled in to finish the sweep). Focus rings now
+      `border-border-primary` + a 10%-alpha `misc-ring` (`color-mix`, preserves
+      the subtle look); primary buttons `bg-surface-primary` /
+      `hover:bg-surface-primary-hover` / `text-foreground-overlay`; warning/error
+      alpha fills via `color-mix`. Video overlays (white/black scrims) kept
+      literal by design. _Risk: med (focus/disabled/hover) — verified._
+- [x] **PR5 — DONE (`a7395f2` + `5c462cb`).**
+      - [x] Removed the now-dead legacy `neutral`/`brand`/`highlight`/`warning`/
+        `error`/`destructive`/`success`/`info` color ramps from
+        `tailwind.config.js`. **Build re-verified green** (`npm run build`) — the
+        `src/` tree was already grep-clean, so nothing referenced them.
+      - [x] Swapped the `::selection` highlight in `frontend/src/index.css` to the
+        TLDS token: `rgba(0, 220, 130, 0.28)` →
+        `color-mix(in srgb, var(--tl-color-embed-green) 28%, transparent)`.
+        Build re-verified; confirmed emitted in `dist/assets/index-*.css`.
+        Commit `5c462cb`.
+      _Risk: very low (one decorative line)._
+
+_✅ Track 1 is COMPLETE: fully on TLDS semantic tokens, still React 18 +
+Tailwind v3, behavior unchanged._
+
+**Track 2 — component library (needs explicit approval + the upgrades):**
+
+- [ ] **PR6** — Tailwind v3→v4 (`@tailwindcss/upgrade`, PostCSS→`@tailwindcss/vite`,
+      ring/radius/border-color deltas). _Risk: med; riskiest PR — full visual regression._
+- [ ] **PR7** — React 18→19 (React 19 codemod, `@types/react` bump, verify
+      react-query/zustand/recharts/react-markdown peers). _Risk: low–med._
+- [ ] **PR8** — Install pinned `@twelvelabs-io/react` (private `.npmrc` +
+      `REGISTRY_TOKEN`), import `tokens.css`+`theme.css` after `@import
+      "tailwindcss"`, add `TooltipProvider`; drop the vendored `tokens.css`.
+- [ ] **PR9…N** — Swap components incrementally (lowest risk first): icons
+      (`Icon.tsx`→TLDS icons) → `Button`/`IconButton` → `TextField` →
+      `Chip`/`ToggleButtons` → `Spinner` → `Banner` → `Text`/`Markdown` →
+      `Accordion`/`Select`/`Popover`. **Keep `Tabs`/`Table`/`AspectRatio`
+      hand-rolled** — not exported by the library yet.
+
+## Shipped this session (Track 1, PR1–PR2)
+
+1. **PR1 — TLDS tokens available (additive, zero visual change)**
+   - Vendored `frontend/src/tokens.css` — a **pinned verbatim copy** of
+     `@twelvelabs-io/react@0.30.0` `tokens.css` (commit `c4c5be6`). Vendored
+     (not installed) because the package is on a private SSO registry and this
+     is a public repo. Imported first in `frontend/src/index.css`.
+   - `frontend/tailwind.config.js`: exposed the `--tl-*` vars as semantic
+     utilities — `surface-*`, `foreground-*`, `border-*`, `misc-*`, `tl-*`
+     colors; `rounded-tlds-*` + semantic radii; `font-tl-sans` / `font-tl-mono`.
+     **Legacy `neutral`/`brand` ramps kept** so migration is incremental.
+   - Caveat: token values are hex-valued CSS vars, so Tailwind opacity
+     modifiers (`bg-surface-body/80`) do NOT inject alpha — translucent spots
+     use explicit `color-mix(...)` arbitrary values.
+
+2. **PR2 — migrated the app shell to semantic tokens**
+   - `frontend/src/App.tsx`: header, sidebar nav, footer, and `?debug=1` panel
+     now use `surface-*` / `foreground-*` / `border-*` / `misc-*` / `tl-*`
+     instead of `neutral-*` / hex (className-only changes).
+   - `frontend/src/index.css`: `body` base styles, scrollbar, and the pulse
+     keyframe now read from `--tl-*` vars.
+   - **Gotcha fixed:** `@apply bg-surface-body …` in `body {}` throws a fatal
+     "class does not exist" in the Vite/HMR dev pipeline (build tolerated it).
+     Set the body properties from the CSS vars directly instead — equivalent,
+     and robust in dev + build.
+
+Intended minor visual convergences (all toward TLDS): borders slightly more
+visible (single `border-secondary`), "mock mode" warning text is now the
+readable dark orange (`foreground-status-warning`), muted/subtle text tiering
+tidied. Page bg (`#F4F3F3`) and primary text (`#1D1C1B`) are unchanged.
+
+## Component migration status — COMPLETE (PR2–PR4)
+
+Every component now uses TLDS semantic tokens. Verified post-PR4: the whole
+`src/` tree is grep-clean of `neutral-*` / `brand-*` / `warning` / `error`
+classes and of `#hex` literals in `className` (the only remaining hex live in
+`tokens.css` and the documented `CHART` recharts palette). `Icon` /
+`TwelveLabsLogo` never carried hardcoded colors (they use `currentColor`).
+
+**PR5 status:** DONE. The legacy ramps were **deleted** from
+`tailwind.config.js` (`a7395f2`) and the `::selection` highlight now uses the
+TLDS `color-mix(... --tl-color-embed-green 28% ...)` token (`5c462cb`), both
+build-verified green. **Track 1 is complete.** Next is optionally **Track 2**
+(component library — needs React 19 + Tailwind v4 + private registry, requires
+explicit approval).
+
+## Verification
+
+- `cd frontend && npm run build` — passes (`tsc` + Vite + Tailwind), including
+  after the PR5 legacy-ramp deletion.
+- `--tl-*` vars inline into the bundle; `bg-surface-white` etc. generate. After
+  PR5 the legacy ramps are gone, so `neutral-*` / `brand-*` classes no longer
+  resolve — intended, since the tree is grep-clean of them.
+- Whole `src/` tree is free of `neutral-*` / `brand-*` / `warning` / `error`
+  classes and of `#hex` in `className`. The `::selection` highlight now resolves
+  to the TLDS token via `color-mix` (confirmed in `dist/assets/index-*.css`);
+  no off-brand legacy color values remain in the app.
+
+## Operational note (hit this session — NOT a code bug)
+
+Clicking a demo scenario returned a spinner then nothing; `/api/query` was
+`502 "Jockey error … instructions parameter … value too large"`. Root cause:
+the runtime cache (`data/runtime/query_cache.sqlite`) was **empty (0 primed
+rows)**, so every scenario missed cache and fell through to a live Jockey call,
+which rejects the oversized `instructions` prompt. **Fix: restart the backend** —
+the startup hook (`main.py` → `cache.load_primed_from_disk()`) re-hydrates the
+4 pinned primed scenarios from `data/primed/*.json`. Unrelated to the UI work
+(git shows `backend/` + `data/` untouched this session). Verify:
+`curl -s localhost:8000/api/query -X POST -H 'Content-Type: application/json'
+-d '{"query":"How has Adidas brand exposure changed from 1990 to 2025?","scenario":"A"}'
+-o /dev/null -w '%{http_code}\n'` → expect `200`.

@@ -16,9 +16,9 @@ export function ExportButton({ query, scenario, className = "" }: Props) {
       href={url}
       download
       className={
-        "inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-md " +
-        "bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 " +
-        "text-neutral-200 hover:text-neutral-50 transition-colors " +
+        "inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-nav-item " +
+        "bg-surface-white hover:bg-surface-secondary border border-border-secondary " +
+        "text-foreground-muted hover:text-foreground-body transition-colors " +
         className
       }
       title="Download all timeline clips as CSV"

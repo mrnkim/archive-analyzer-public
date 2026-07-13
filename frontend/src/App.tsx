@@ -117,35 +117,35 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="px-6 py-4 border-b border-neutral-800 bg-neutral-950/80 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/60 sticky top-0 z-20">
+      <header className="px-6 py-4 border-b border-border-secondary bg-[color-mix(in_srgb,var(--tl-surface-body)_80%,transparent)] backdrop-blur supports-[backdrop-filter]:bg-[color-mix(in_srgb,var(--tl-surface-body)_60%,transparent)] sticky top-0 z-20">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3.5 min-w-0">
-            <TwelveLabsLogo className="h-[18px] w-auto flex-none text-neutral-50" />
-            <span className="h-5 w-px flex-none bg-neutral-700" aria-hidden />
+            <TwelveLabsLogo className="h-[18px] w-auto flex-none text-foreground-body" />
+            <span className="h-5 w-px flex-none bg-surface-secondary-hover" aria-hidden />
             <div className="min-w-0">
-              <h1 className="text-sm font-medium text-neutral-100 truncate">
+              <h1 className="text-sm font-medium text-foreground-body truncate">
                 Archive Trend &amp; Narrative Analyzer
               </h1>
-              <p className="text-xs text-neutral-500 mt-0.5">
+              <p className="text-xs text-foreground-subtle mt-0.5">
                 Powered by Jockey · Sample app
               </p>
             </div>
           </div>
           {health && (
-            <div className="text-xs text-neutral-500 flex-none">
-              env: <span className="text-neutral-300 font-mono">{health.env}</span>
+            <div className="text-xs text-foreground-subtle flex-none">
+              env: <span className="text-foreground-muted font-tl-mono">{health.env}</span>
               {" · "}
               KS:{" "}
               <span
                 className={
                   "inline-flex items-center gap-1.5 " +
-                  (health.ks_configured === "yes" ? "text-neutral-300" : "text-warning")
+                  (health.ks_configured === "yes" ? "text-foreground-muted" : "text-foreground-status-warning")
                 }
               >
                 <span
                   className={
                     "h-1.5 w-1.5 rounded-full " +
-                    (health.ks_configured === "yes" ? "bg-neutral-300" : "bg-warning")
+                    (health.ks_configured === "yes" ? "bg-tl-gray-600" : "bg-misc-status-warning")
                   }
                 />
                 {health.ks_configured === "yes" ? "connected" : "mock mode"}
@@ -156,21 +156,21 @@ export default function App() {
       </header>
 
       <div className="flex-1 flex">
-        <aside className="w-48 flex-none border-r border-neutral-800 px-3 py-6">
+        <aside className="w-48 flex-none border-r border-border-secondary px-3 py-6">
           <nav className="space-y-1 sticky top-6">
             {([
-              ["analyzer", "Brand Intelligence (Adidas Example)"],
-              ["narrative", "Narrative Evolution (Trump Example)"],
+              ["analyzer", "Brand Intelligence (Adidas Examples)"],
+              ["narrative", "Narrative Evolution"],
               ["tutorial", "Tutorial"],
             ] as [Tab, string][]).map(([id, label]) => (
               <button
                 key={id}
                 onClick={() => switchTab(id)}
                 className={
-                  "w-full text-left px-3 py-2 text-sm rounded-md transition-colors " +
+                  "w-full text-left px-3 py-2 text-sm rounded-nav-item transition-colors " +
                   (tab === id
-                    ? "bg-neutral-700 text-neutral-50 font-medium"
-                    : "text-neutral-500 hover:text-neutral-100 hover:bg-neutral-800")
+                    ? "bg-surface-secondary-hover text-foreground-body font-medium"
+                    : "text-foreground-subtle hover:text-foreground-body hover:bg-surface-secondary")
                 }
               >
                 {label}
@@ -193,6 +193,8 @@ export default function App() {
 
           {result && (
             <>
+              {/* Overview: evidence volume + tone over time, with the pivotal
+                  moments called out alongside. */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
                 <div className="lg:col-span-2 space-y-4">
                   <TimelineChart
@@ -204,16 +206,6 @@ export default function App() {
                     selectedYear={selectedPoint?.year ?? null}
                     onSelect={handleSelectPoint}
                   />
-                  <div ref={clipGridRef} className="scroll-mt-4">
-                    <ClipGrid point={selectedPoint} />
-                  </div>
-                  <ClipStrip
-                    timeline={result.timeline}
-                    selectedYear={selectedPoint?.year ?? null}
-                    onSelect={handleSelectPoint}
-                    exportQuery={result.query}
-                    exportScenario={resultScenario}
-                  />
                 </div>
                 <InflectionPoints
                   points={result.inflection_points ?? []}
@@ -221,8 +213,8 @@ export default function App() {
                 />
               </div>
 
-              <EraClusters timeline={result.timeline} />
-
+              {/* The story leads: the AI-written narrative sits right under the
+                  overview, ahead of the supporting detail and raw clips. */}
               <NarrativePanel
                 query={streamingQuery}
                 narrative={result?.narrative_summary}
@@ -231,6 +223,20 @@ export default function App() {
                 selectedYear={selectedPoint?.year ?? null}
                 onSelectYear={selectYear}
                 columns
+              />
+
+              <EraClusters timeline={result.timeline} />
+
+              {/* Grounded evidence for the selected year. */}
+              <div ref={clipGridRef} className="scroll-mt-4">
+                <ClipGrid point={selectedPoint} />
+              </div>
+              <ClipStrip
+                timeline={result.timeline}
+                selectedYear={selectedPoint?.year ?? null}
+                onSelect={handleSelectPoint}
+                exportQuery={result.query}
+                exportScenario={resultScenario}
               />
 
               <ChatPanel />
@@ -288,12 +294,12 @@ export default function App() {
                 <ChatPanel />
               </div>
               {showDebug && (
-                <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 text-xs text-neutral-400">
-                  <h3 className="text-sm font-medium text-neutral-300 mb-2">Debug info</h3>
+                <div className="bg-surface-white border border-border-secondary rounded-tlds-3 p-4 text-xs text-foreground-subtle">
+                  <h3 className="text-sm font-medium text-foreground-muted mb-2">Debug info</h3>
                   <div>session_id: <code>{result.session_id}</code></div>
                   <div>entity: <code>{result.entity}</code></div>
                   <div>timeline points: {result.timeline.length}</div>
-                  <div className="mt-2 text-neutral-600">
+                  <div className="mt-2 text-foreground-subtle">
                     Mock mode — set TWELVELABS_API_KEY + KS_ID to hit the real API.
                   </div>
                 </div>
@@ -311,9 +317,9 @@ export default function App() {
         )}
       </div>
 
-      <footer className="px-6 py-3 border-t border-neutral-800 text-xs text-neutral-500 text-center">
+      <footer className="px-6 py-3 border-t border-border-secondary text-xs text-foreground-subtle text-center">
         Demo only · Video sources: each official YouTube channel · Powered by{" "}
-        <a href="https://twelvelabs.io" className="text-[#60E21C] hover:underline">
+        <a href="https://twelvelabs.io" className="text-tl-embed-green hover:underline">
           TwelveLabs
         </a>
       </footer>
