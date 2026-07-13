@@ -290,15 +290,35 @@ Detailed steps, per-PR risk, and verification live in
 _✅ Track 1 is COMPLETE: fully on TLDS semantic tokens, still React 18 +
 Tailwind v3, behavior unchanged._
 
-**Track 2 — component library (needs explicit approval + the upgrades):**
+**Track 2 — component library (IN PROGRESS on `feature/tlds-components-track2`):**
 
-- [ ] **PR6** — Tailwind v3→v4 (`@tailwindcss/upgrade`, PostCSS→`@tailwindcss/vite`,
-      ring/radius/border-color deltas). _Risk: med; riskiest PR — full visual regression._
-- [ ] **PR7** — React 18→19 (React 19 codemod, `@types/react` bump, verify
-      react-query/zustand/recharts/react-markdown peers). _Risk: low–med._
-- [ ] **PR8** — Install pinned `@twelvelabs-io/react` (private `.npmrc` +
-      `REGISTRY_TOKEN`), import `tokens.css`+`theme.css` after `@import
-      "tailwindcss"`, add `TooltipProvider`; drop the vendored `tokens.css`.
+> **Registry access — RESOLVED.** The `@twelvelabs-io/react` package (private
+> GitHub Packages, org `twelvelabs-io`) is readable with an **outside-collaborator**
+> classic PAT (`read:packages`, SSO-authorized). Working setup on this machine:
+> - `~/.tl-registry.env` → `export REGISTRY_TOKEN=<classic PAT>` (chmod 600, NOT in repo).
+> - `frontend/.npmrc` (untracked) → `@twelvelabs-io:registry=https://npm.pkg.github.com`
+>   + `//npm.pkg.github.com/:_authToken=${REGISTRY_TOKEN}` (no secret in file).
+> - Run npm with the token: `source ~/.tl-registry.env && npm <cmd>`.
+> - Package **`@twelvelabs-io/react@0.34.0`**; peers **react/react-dom `>=19.2.7`** + **Tailwind v4** (both satisfied).
+
+- [x] **PR7** — React 18→19.2.7. **DONE, merged to main** (`f95c93a`). Only type
+      delta: global `JSX` namespace removed → `Icon.tsx` uses `ReactElement`.
+      Verified: build + full scenario run, zero console errors.
+- [x] **PR6** — Tailwind v3→v4.3.2. **DONE, merged to main** (`efae466`). Ran
+      `@tailwindcss/upgrade`: `tailwind.config.js` deleted → CSS-first `@theme`
+      block in `index.css` (all TLDS token mappings), `@tailwindcss/postcss`,
+      `rounded-sm`→`rounded-xs` renames. Verified: **visual regression
+      pixel-identical** on home + scenario screens, zero console errors.
+      _(Done before PR6 despite the label — order swapped intentionally.)_
+- [ ] **PR8 — NEXT.** `source ~/.tl-registry.env && npm install @twelvelabs-io/react@0.34.0`;
+      commit `frontend/.npmrc` (it's currently untracked). Then in `index.css`
+      replace the vendored `tokens.css` import + hand-written `@theme` block with
+      the package's own: `@import "@twelvelabs-io/react/tokens.css";` +
+      `@import "@twelvelabs-io/react/theme.css";` **after** `@import "tailwindcss";`.
+      Add `TooltipProvider` at the root (main.tsx/App). Run `npx twelvelabs-ui-skills`
+      to install the design-system Claude skills. **Verify:** one `<Button>` renders
+      correctly (proves CSS import order). _Note: `.npmrc` in a public repo means
+      external `npm install` needs the token — accepted Track 2 tradeoff._
 - [ ] **PR9…N** — Swap components incrementally (lowest risk first): icons
       (`Icon.tsx`→TLDS icons) → `Button`/`IconButton` → `TextField` →
       `Chip`/`ToggleButtons` → `Spinner` → `Banner` → `Text`/`Markdown` →
