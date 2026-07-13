@@ -1,6 +1,6 @@
 // Strand design-system icons (16x16 grid, stroke/fill via currentColor).
 // Extracted from @twelvelabs/strand/icons. Sized via className (default 1em).
-import type { SVGProps } from "react";
+import type { ReactElement, SVGProps } from "react";
 
 type IconName =
   | "play"
@@ -14,7 +14,7 @@ type IconName =
   | "warning"
   | "spinner";
 
-const PATHS: Record<IconName, { viewBox: string; body: JSX.Element }> = {
+const PATHS: Record<IconName, { viewBox: string; body: ReactElement }> = {
   play: {
     viewBox: "0 0 9 11",
     body: (
