@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, SearchIcon } from "@twelvelabs-io/react";
+import { Button, SearchIcon, TextField } from "@twelvelabs-io/react";
 
 type Props = {
   onSubmit: (query: string, scenario?: string) => void;
@@ -46,14 +46,13 @@ export function SearchBar({ onSubmit, loading, showDemoChips = true }: Props) {
   return (
     <div className="space-y-3">
       <form onSubmit={handleSubmit} className="flex gap-2">
-        <input
+        <TextField
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask anything — e.g. 'Adidas exposure over 30 years'"
-          className="flex-1 px-4 py-2 bg-surface-white border border-border-secondary rounded-tlds-3
-                     focus:outline-hidden focus:border-border-primary focus:ring-2 focus:ring-[color-mix(in_srgb,var(--tl-misc-ring)_10%,transparent)] transition-colors"
           disabled={loading}
+          className="flex-1"
         />
         <Button
           type="submit"

@@ -1,4 +1,4 @@
-import { Icon } from "../Icon";
+import { SearchIcon } from "@twelvelabs-io/react";
 
 // Empty state for the Narrative Evolution tab — one demo that traces a public
 // figure's media portrayal across decades (PRD Scenario B).
@@ -50,7 +50,7 @@ export function NarrativeEmptyState({ onRun }: Props) {
               thematic eras, sentiment shifts, and inflection points.
             </p>
             <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-foreground-body">
-              <Icon name="search" className="h-3 w-3" />
+              <SearchIcon className="h-3 w-3" />
               Run narrative analysis
             </span>
           </button>
