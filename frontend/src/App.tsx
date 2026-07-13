@@ -117,7 +117,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="px-6 py-4 border-b border-border-secondary bg-[color-mix(in_srgb,var(--tl-surface-body)_80%,transparent)] backdrop-blur supports-[backdrop-filter]:bg-[color-mix(in_srgb,var(--tl-surface-body)_60%,transparent)] sticky top-0 z-20">
+      <header className="px-6 py-4 border-b border-border-secondary bg-[color-mix(in_srgb,var(--tl-surface-body)_80%,transparent)] backdrop-blur-sm supports-backdrop-filter:bg-[color-mix(in_srgb,var(--tl-surface-body)_60%,transparent)] sticky top-0 z-20">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3.5 min-w-0">
             <TwelveLabsLogo className="h-[18px] w-auto flex-none text-foreground-body" />

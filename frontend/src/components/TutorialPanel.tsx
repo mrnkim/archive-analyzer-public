@@ -136,7 +136,7 @@ export function TutorialPanel() {
   return (
     <div className="mx-auto max-w-3xl pb-16">
       {/* Hero */}
-      <div className="relative overflow-hidden rounded-tlds-4 border border-border-secondary bg-gradient-to-b from-surface-white to-surface-body px-6 py-10 md:px-10 md:py-12">
+      <div className="relative overflow-hidden rounded-tlds-4 border border-border-secondary bg-linear-to-b from-surface-white to-surface-body px-6 py-10 md:px-10 md:py-12">
         <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[color-mix(in_srgb,var(--tl-color-embed-green)_10%,transparent)] blur-3xl" />
         <Pill>
           <span className="h-1.5 w-1.5 rounded-full bg-tl-embed-green" />
@@ -147,7 +147,7 @@ export function TutorialPanel() {
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-foreground-subtle md:text-base">
           Jockey indexes your videos into a <strong className="text-foreground-muted">Knowledge
-          Store</strong>. Your app calls <code className="rounded bg-surface-secondary px-1.5 py-0.5 text-xs text-tl-embed-green">POST /v1.3/responses</code> with
+          Store</strong>. Your app calls <code className="rounded-sm bg-surface-secondary px-1.5 py-0.5 text-xs text-tl-embed-green">POST /v1.3/responses</code> with
           a question + a JSON Schema, and gets back a structured answer the UI can
           render. Everything else is plumbing.
         </p>

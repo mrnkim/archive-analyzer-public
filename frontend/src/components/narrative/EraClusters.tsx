@@ -84,7 +84,7 @@ export function EraClusters({ timeline }: Props) {
               {c.hasSentiment && (
                 <div className="mt-2 flex items-center gap-2">
                   <span
-                    className="h-2 w-2 flex-none rounded-sm"
+                    className="h-2 w-2 flex-none rounded-xs"
                     style={{ background: toneColor(c.avgScore) }}
                   />
                   <span className="text-[11px] text-foreground-subtle">

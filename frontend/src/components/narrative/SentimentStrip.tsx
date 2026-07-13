@@ -38,7 +38,7 @@ export function SentimentStrip({ timeline, selectedYear, onSelect }: Props) {
           <span className="font-tl-mono tabular-nums text-foreground-status-error">−1</span>
           <span className="inline-flex flex-col items-center gap-0.5">
             <span
-              className="h-2 w-24 rounded-sm"
+              className="h-2 w-24 rounded-xs"
               style={{
                 background: `linear-gradient(to right, ${toneColor(-1)}, ${toneColor(
                   0
@@ -72,7 +72,7 @@ export function SentimentStrip({ timeline, selectedYear, onSelect }: Props) {
               }
             >
               <span
-                className="h-6 w-full rounded-sm"
+                className="h-6 w-full rounded-xs"
                 style={{ background: toneColor(score) }}
               />
               <span className="text-[10px] font-tl-mono text-foreground-subtle">{p.year}</span>

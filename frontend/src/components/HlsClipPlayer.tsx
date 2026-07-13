@@ -127,7 +127,7 @@ export function HlsClipPlayer({
       />
       <button
         onClick={() => setPlaying(false)}
-        className="absolute top-2 right-2 bg-black/70 hover:bg-black/90 text-white p-1 rounded-nav-item backdrop-blur-sm"
+        className="absolute top-2 right-2 bg-black/70 hover:bg-black/90 text-white p-1 rounded-nav-item backdrop-blur-xs"
         title="Close player"
       >
         <Icon name="close" className="w-3.5 h-3.5" />
