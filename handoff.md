@@ -275,26 +275,20 @@ Detailed steps, per-PR risk, and verification live in
       `hover:bg-surface-primary-hover` / `text-foreground-overlay`; warning/error
       alpha fills via `color-mix`. Video overlays (white/black scrims) kept
       literal by design. _Risk: med (focus/disabled/hover) — verified._
-- [~] **PR5 — IN PROGRESS (finish on the other device).**
+- [x] **PR5 — DONE (`a7395f2` + `5c462cb`).**
       - [x] Removed the now-dead legacy `neutral`/`brand`/`highlight`/`warning`/
         `error`/`destructive`/`success`/`info` color ramps from
         `tailwind.config.js`. **Build re-verified green** (`npm run build`) — the
         `src/` tree was already grep-clean, so nothing referenced them.
-      - [ ] **ONE step left:** swap the `::selection` highlight in
-        `frontend/src/index.css` to the TLDS token. Currently:
-        `background-color: rgba(0, 220, 130, 0.28);` (an off-brand green — NOT the
-        TLDS accent). Change to:
-        `background-color: color-mix(in srgb, var(--tl-color-embed-green) 28%, transparent);`
-        Then `npm run build` and commit — that completes Track 1.
-      - ⚠️ This edit was blocked by the **GateGuard hook** (`ECC_GATEGUARD`
-        "Fact-Forcing Gate") repeatedly this session. On the next device, either
-        answer the gate (state importers = `main.tsx`, no API/schema change) or
-        run with `ECC_GATEGUARD=off` / add `pre:edit-write:gateguard-fact-force`
-        to `ECC_DISABLED_HOOKS`.
+      - [x] Swapped the `::selection` highlight in `frontend/src/index.css` to the
+        TLDS token: `rgba(0, 220, 130, 0.28)` →
+        `color-mix(in srgb, var(--tl-color-embed-green) 28%, transparent)`.
+        Build re-verified; confirmed emitted in `dist/assets/index-*.css`.
+        Commit `5c462cb`.
       _Risk: very low (one decorative line)._
 
-_After the `::selection` line lands, Track 1 is done: fully on TLDS semantic
-tokens, still React 18 + Tailwind v3, behavior unchanged._
+_✅ Track 1 is COMPLETE: fully on TLDS semantic tokens, still React 18 +
+Tailwind v3, behavior unchanged._
 
 **Track 2 — component library (needs explicit approval + the upgrades):**
 
@@ -350,12 +344,12 @@ classes and of `#hex` literals in `className` (the only remaining hex live in
 `tokens.css` and the documented `CHART` recharts palette). `Icon` /
 `TwelveLabsLogo` never carried hardcoded colors (they use `currentColor`).
 
-**PR5 status:** the legacy ramps have now been **deleted** from
-`tailwind.config.js` (build re-verified green). The only remaining Track-1 step
-is the one-line `::selection` swap in `index.css` (see the PR5 checklist item
-above — blocked by GateGuard this session, finish on the next device). Then
-optionally **Track 2** (component library — needs React 19 + Tailwind v4 +
-private registry).
+**PR5 status:** DONE. The legacy ramps were **deleted** from
+`tailwind.config.js` (`a7395f2`) and the `::selection` highlight now uses the
+TLDS `color-mix(... --tl-color-embed-green 28% ...)` token (`5c462cb`), both
+build-verified green. **Track 1 is complete.** Next is optionally **Track 2**
+(component library — needs React 19 + Tailwind v4 + private registry, requires
+explicit approval).
 
 ## Verification
 
@@ -365,9 +359,9 @@ private registry).
   PR5 the legacy ramps are gone, so `neutral-*` / `brand-*` classes no longer
   resolve — intended, since the tree is grep-clean of them.
 - Whole `src/` tree is free of `neutral-*` / `brand-*` / `warning` / `error`
-  classes and of `#hex` in `className`. The only remaining legacy value is the
-  decorative `::selection` green rgba in `index.css` (one-line swap pending — see
-  PR5 checklist).
+  classes and of `#hex` in `className`. The `::selection` highlight now resolves
+  to the TLDS token via `color-mix` (confirmed in `dist/assets/index-*.css`);
+  no off-brand legacy color values remain in the app.
 
 ## Operational note (hit this session — NOT a code bug)
 
