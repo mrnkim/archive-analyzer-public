@@ -70,19 +70,18 @@ export function SearchBar({ onSubmit, loading, showDemoChips = true }: Props) {
       <div className="flex flex-wrap gap-2">
         <span className="text-xs text-foreground-subtle self-center">Demo prompts:</span>
         {SEED_QUERIES.map((s) => (
-          <button
+          <Button
             key={s.scenario}
+            variant="outlined-gray"
+            size="sm"
             onClick={() => {
               setInput(s.query);
               onSubmit(s.query, s.scenario);
             }}
             disabled={loading}
-            className="text-xs px-3 py-1 bg-surface-white hover:bg-surface-secondary
-                       border border-border-secondary rounded-full text-foreground-muted hover:text-foreground-body
-                       disabled:opacity-50 transition-colors"
           >
             {s.label}
-          </button>
+          </Button>
         ))}
       </div>
       )}

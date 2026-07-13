@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { postFollowup } from "../api/client";
 import { useStore } from "../store";
 import { Markdown } from "./Markdown";
+import { Button, TextField, CloseIcon } from "@twelvelabs-io/react";
 
 export function ChatPanel() {
   const chat = useStore((s) => s.chat);
@@ -148,15 +149,15 @@ export function ChatPanel() {
             type="button"
             onClick={() => setContextEnabled(false)}
             aria-label="Remove clip context"
-            className="text-foreground-subtle hover:text-foreground-body text-sm leading-none px-1"
+            className="text-foreground-subtle hover:text-foreground-body leading-none px-1"
           >
-            ×
+            <CloseIcon className="size-3" />
           </button>
         </div>
       )}
 
       <form onSubmit={handleSend} className="flex gap-2">
-        <input
+        <TextField
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -168,17 +169,17 @@ export function ChatPanel() {
               : "Ask a followup…"
           }
           disabled={disabled || pending}
-          className="flex-1 px-3 py-2 text-sm bg-surface-body border border-border-secondary rounded-nav-item
-          focus:outline-hidden focus:border-border-primary focus:ring-2 focus:ring-[color-mix(in_srgb,var(--tl-misc-ring)_10%,transparent)] disabled:opacity-50"
+          className="flex-1"
         />
-        <button
+        <Button
           type="submit"
+          variant="primary"
+          size="md"
+          loading={pending}
           disabled={disabled || pending || !input.trim()}
-          className="px-3 py-2 text-sm bg-surface-primary hover:bg-surface-primary-hover text-foreground-overlay font-medium rounded-nav-item
-                     disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Send
-        </button>
+        </Button>
       </form>
     </div>
   );
