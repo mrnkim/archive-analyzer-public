@@ -20,6 +20,16 @@ export type Sentiment = {
 
 export type TimelinePoint = {
   year: number;
+  // Optional month (1–12) for sub-year granularity — the Retroactive
+  // Discovery / COVID-19 tab ("V") uses month-level points. Absent for the
+  // year-based tabs, which keeps their rendering unchanged.
+  month?: number | null;
+  // Optional human label for the point (e.g. "Jan 2020"). Falls back to the
+  // year when absent. See lib/period.ts.
+  period_label?: string | null;
+  // COVID tab: true for points that predate the "COVID-19" naming, so the
+  // chart can highlight the "before it had a name" window.
+  pre_terminology?: boolean | null;
   frequency: number;
   dominant_theme: string;
   representative_clip: Scene;
@@ -27,19 +37,25 @@ export type TimelinePoint = {
   // `representative_clip` === `scenes[0]`. Optional for backwards-compat
   // with older primed JSON payloads.
   scenes?: Scene[];
-  // Narrative Evolution only.
+  // Narrative Evolution + COVID tabs.
   sentiment?: Sentiment | null;
 };
 
-// A pivotal year where the narrative shifted (Narrative Evolution only).
+// A pivotal moment where the narrative shifted (Narrative Evolution + COVID).
 export type InflectionPoint = {
   year: number;
+  // Optional month for month-level inflections (COVID tab).
+  month?: number | null;
+  period_label?: string | null;
   label: string;
   why: string;
 };
 
 export type SummaryBullet = {
   year: number;
+  // Optional month so bullets can bind to month-level points (COVID tab).
+  month?: number | null;
+  period_label?: string | null;
   headline: string;
   text: string;
 };

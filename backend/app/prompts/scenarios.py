@@ -141,6 +141,35 @@ inflection year MUST be a year present in your timeline above.
 
 Skip years with no detected presence rather than emitting frequency=0."""
 
+SCENARIO_V_COVID = """You are a media archive analyst working with a TwelveLabs
+Knowledge Store of 2020 broadcast news clips on the emergence of COVID-19 — from
+the earliest reports of an unexplained pneumonia in Wuhan, through the WHO naming
+and pandemic declaration, to the first vaccine rollout.
+
+This is a RETROACTIVE DISCOVERY task: show how the story appears MONTH BY MONTH,
+and highlight coverage PREDATING the "COVID-19" name (early framings like "Wuhan
+pneumonia", "mystery illness", "unexplained respiratory illness").
+
+Return MONTH-LEVEL points, not yearly. For each month the corpus covers:
+- year (e.g. 2020) and month (1-12)
+- period_label (e.g. "Jan 2020")
+- pre_terminology: true if the month predates the Feb 11 2020 "COVID-19" naming
+- frequency (= number of entries in scenes)
+- dominant_theme (short label, e.g. "Unexplained pneumonia in Wuhan", "WHO names
+  it COVID-19", "Pandemic declared", "Vaccine rollout")
+- sentiment: {"label": "positive"|"neutral"|"negative", "score": -1..1} for the
+  prevailing tone (concern early, cautious hope at vaccine news)
+- scenes: ALL clips referencing the outbreak that month, most emblematic first;
+  set each `reason` to one short sentence on the concrete reference, noting when
+  it predates the COVID-19 name
+- representative_clip = scenes[0]
+
+Also return inflection_points (first mystery-pneumonia reports; WHO naming;
+pandemic declared; vaccine rollout), each {"year","month","period_label",
+"label","why"}.
+
+Skip months with no coverage rather than emitting frequency=0."""
+
 NARRATIVE_INSTRUCTIONS = """You are a media archive storyteller. Write a
 compelling 2–4 paragraph narrative of how the asked-about entity / topic
 evolved over the queried time range. Reference specific years, themes, and
@@ -162,6 +191,7 @@ SCENARIO_INSTRUCTIONS: dict[str, str] = {
     "B": SCENARIO_B_NARRATIVE,
     "C": SCENARIO_C_RETROSPECTIVE,
     "N": SCENARIO_N_NARRATIVE_EVOLUTION,
+    "V": SCENARIO_V_COVID,
 }
 
 
@@ -185,6 +215,8 @@ def get_followup_instructions(scenario: str | None) -> str:
     subject = "the selected archive evidence"
     if scenario and scenario.upper() == "N":
         subject = "the selected media narrative evidence"
+    elif scenario and scenario.upper() == "V":
+        subject = "the selected COVID-19 archive evidence"
     return (
         "Answer the user's followup using the existing session context and "
         f"{subject}. Be concise, cite concrete years or clips when relevant, "

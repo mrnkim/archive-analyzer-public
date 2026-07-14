@@ -482,3 +482,128 @@ curl -s "$URL$JS" | grep -oE "Adidas Examples|Trump Example"   # new vs old mark
 - The Docker build **requires** `REGISTRY_TOKEN` — CI / other machines / Railway all need it.
 - Optional remaining polish (low value): full `<Text>` typography sweep; `Chip`/`Banner` where they fit.
 - Local dev with the private package: always `source ~/.tl-registry.env` before `npm install`.
+
+---
+
+# Handoff — 2026-07-14
+
+Built the **third demo tab — "Retroactive Discovery (COVID-19)" (PRD Scenario C)**.
+It **ships on hand-built mock data and is verified end-to-end in the browser**;
+the live Jockey path is fully wired but the real ingest is **blocked by a Jockey
+beta account indexing limit** (see the blocker below). Nothing committed yet —
+all changes are in the working tree on `feature/tlds-components-track2`.
+
+## Scenario code + KS mapping
+- New scenario code is **`"V"`** (viral/COVID). Existing: A/B/C → Adidas KS,
+  N → Trump KS, **V → COVID KS** (`ks_id_covid`, unset for now → falls back to
+  primary KS, which is why mock mode still works).
+- ⚠️ **Naming note:** the code already had a scenario `"C"` (Adidas earned-vs-owned),
+  which is NOT the PRD's Scenario C. That's why COVID uses `"V"`.
+
+## What the COVID tab does (differentiator vs A/B/N)
+- **Month-level timeline** (year + month), not yearly. The 2020 emergence arc:
+  **Jan** mystery-pneumonia spike (pre-naming) → **Feb** WHO names COVID-19 →
+  **Mar** pandemic declared → **Dec** vaccine rollout. Months with no coverage
+  are skipped, so the chart reads as a clean emergence curve with a Jan peak.
+- Reuses the narrative-style layout: TimelineChart (month x-axis), SentimentStrip
+  (concern → cautious hope), InflectionPoints (4 pivotal months), NarrativePanel
+  bullets, ClipGrid/ClipStrip, plus RevenueWidget. EraClusters is hidden for
+  monthly data (decade grouping is meaningless in one year).
+- `pre_terminology` flag on early-2020 points → the chart tooltip shows
+  "Before it was named COVID-19".
+
+## Frontend — month support (no regression to Adidas/Trump)
+The year-based tabs are byte-unchanged because everything degrades to plain year
+when `month` is absent. Key change:
+- **NEW `frontend/src/lib/period.ts`** — `pointKey(p)` (= `year` or
+  `year*100+month`) and `pointLabel(p)` (= `period_label`/"Mon YYYY"/year).
+- Shared timeline components now take **`selectedKey`/`onSelectKey`** (period
+  keys) instead of `selectedYear`/`onSelectYear`, and render `pointLabel(p)`.
+  Touched: `TimelineChart` (x-axis dataKey `_k` + `tickFormatter`, pre_terminology
+  tooltip), `SentimentStrip`, `InflectionPoints`, `NarrativePanel` (bullets keyed
+  by `pointKey`), `ClipStrip`, `ClipGrid`, `EraClusters` (returns null when monthly).
+- `App.tsx`: new `covid` tab (nav + branch), `selectYear`→`selectByKey`,
+  `import { pointKey }`, `CovidEmptyState`.
+- **NEW `frontend/src/components/narrative/CovidEmptyState.tsx`**.
+- `types/api.ts`: `TimelinePoint` gains `month?`/`period_label?`/`pre_terminology?`;
+  `InflectionPoint` + `SummaryBullet` gain `month?`/`period_label?`.
+- ✅ `npm run build` green; browser-verified: month chart + labels render, Jan
+  peak "wow" visible, sentiment/inflection/bullets month-labeled, **real news
+  thumbnails play**, zero console errors. Adidas tab still shows "15 scenes across
+  12 years · peak 2018" (fallback confirmed).
+
+## Mock data — `data/primed/scenario_v.json`
+- Hand-built 2020 monthly payload, but the **scenes use the REAL uploaded assets'**
+  thumbnail + HLS URLs (fetched from `GET /assets/{id}`), so clips actually play.
+  20 clips, all media resolved.
+- The demo query string in `CovidEmptyState.COVID_DEMO.query` must stay identical
+  to the `query` field in `scenario_v.json` (cache key = query+scenario).
+
+## Backend — live path wired (ready for the data swap)
+- `config.py`: `ks_id_covid` + `ks_for_scenario` routes `"V"`.
+- `prompts/scenarios.py`: `SCENARIO_V_COVID` (month-level retroactive-discovery
+  prompt), registered `"V"`, followup subject. **Kept under the ~2000-char cap**
+  (`get_instructions("V")` = 1911 chars — over 2000 gets rejected "value too large").
+- `schemas/trend_data.py`: `month`/`period_label`/`pre_terminology` on the models;
+  **`COVID_DATA_JSON_SCHEMA`** (narrative schema + month fields, all `required`).
+- `routes/query.py`: selects `COVID_DATA_JSON_SCHEMA` for `"V"` (removed the old
+  `is_narrative` bool). Cache/enrichment path unchanged.
+- ✅ `pytest -q` → **23 passed**.
+
+## 🚧 BLOCKER — Jockey beta indexing limit (the real reason we're on mock)
+Curated **24 public 2020 COVID news clips** and ingested them via the jockey skill.
+**Only ~4/attempt reach `ready`; the rest fail indexing** (`status: failed`, no
+error message). Ruled out everything:
+- Content/codec: all failed items are valid `ready` assets (720p/1080p h264/av1,
+  HLS+thumbnail ready). The SAME asset succeeds one run, fails the next.
+- Burst/concurrency: staggering (6 s) gave the same ~4/20; **fully serialized
+  (1-at-a-time, wait for `ready`) still fails ~4/5 fast (~21 s vs ~94 s success).**
+This is the signature of an **account-level indexing rate/quota** (the account
+already has Adidas 23 + Trump 39 indexed). **Retrying is counterproductive.**
+
+### Ingest facts (for tomorrow's retry)
+- Ran with **`backend/.venv/bin/python`** (system `python3` has no `httpx`):
+  `backend/.venv/bin/python /Users/Miranda/twelveLabs/jockey/scripts/youtube_ingest.py "<url>" --ks-name "<name>"`.
+- `watch_videos?video_ids=ID1,ID2,...` expands to a playlist (verify:
+  `yt-dlp --dump-single-json --flat-playlist "<url>"`). The jockey skill forces a
+  **vanilla KS (no metadata)** → month precision relies on Jockey inferring dates
+  from content at query time.
+- **24 curated video IDs** (Phase 1 pre-naming ·2·3·4):
+  `2LtA0-qoHOg s6JDp-Uool8 wBI5ygku2Cg OVj-HIRzMLI YhlEq5MqAkQ ayUMPyMKcuI Mh8UGRIOwLU 5KJUcKV9q50 9VQVHz8APLw`
+  `TQBDq22-ADQ BpOGN8p6imY RR1Uwh2qsGs wJFr_JFkWMs GKymX9j_j9Q`
+  `O84hgvFk4HQ xKPWngYf2Wk 4ClTs8eAU2o gghJVPgdFvo 9mT0zFR9us8`
+  `p02fUBmOmlA SRPxbOJXLSE WrmdYOuaY20 ee__NG7YC8Q JYJ-GPYPMbg`
+  - 3 failed **download** (403, retry may clear): `OVj-HIRzMLI`, `TQBDq22-ADQ`, `wJFr_JFkWMs`.
+    Each has a redundant sibling already uploaded, so mock uses the other 20.
+- **20 uploaded assets are all `ready`** — a KS-only retry needs no re-download.
+- **3 junk COVID KSs created today (cleanup candidates — deleting frees quota):**
+  - `ks_019f5fd0-2457-7f63-9436-30eeb33c0b40` "COVID-19 Archive 2020" (4 ready + tombstoned items)
+  - `ks_019f5fe0-33a5-7382-a9cd-54d7f543b7fb` "COVID-19 Emergence Archive 2020" (3 ready)
+  - `ks_019f5fe7-2cea-7c60-a7f7-0e48157c5248` "COVID-19 Archive 2020 (serial)" (partial — I stopped it)
+- Gotcha: deleting a failed KS item then re-adding the SAME asset **409s** (delete
+  is eventually-consistent + tombstoned); re-home to a FRESH KS instead.
+
+## ⚠️ Gotcha hit today — `pytest` wipes the shared runtime cache
+`backend/tests/test_cache.py` calls `cache.clear()` on the **shared on-disk
+SQLite** (`data/runtime/query_cache.sqlite`). Running `pytest` therefore **empties
+the primed cache out from under a running backend**, so the next demo click misses
+cache → live Jockey call → `502 "instructions … value too large"`.
+**Fix = restart the backend** (startup re-hydrates `data/primed/*.json`). This is
+what happened at end of session; the COVID demo reverted to the empty state
+because the cache had been wiped by the test run.
+
+## State at end of session (resume here tomorrow)
+- **Nothing committed.** Working tree on `feature/tlds-components-track2` has all
+  the frontend/backend/mock changes above.
+- **No backend currently running** (stopped it; restart was declined to write this).
+- **To resume the demo:** `cd backend && .venv/bin/uvicorn app.main:app --port 8000`
+  (re-hydrates primed incl. `scenario_v.json`) → open http://127.0.0.1:8000 →
+  COVID tab → demo. Verify: `curl -s localhost:8000/api/query -X POST -H 'Content-Type: application/json' -d '{"query":"<COVID_DEMO.query>","scenario":"V"}' -o /dev/null -w '%{http_code}\n'` → `200` with `source":"cache"`.
+
+## Next-session TODO
+1. **Commit** today's work (frontend month refactor + COVID tab + backend wiring + mock).
+2. **Real data swap** (when the indexing quota resets): delete the 3 junk KSs to
+   free budget → one clean ingest of the 24 (ideally forcing yt-dlp `h264 ≤720p`
+   to also fix the 3 download-403s) → set `KS_ID_COVID` (`.env` + Railway) → capture
+   a live `scenario_v.json` (`python scripts/refresh_video_titles.py` after).
+3. Deploy via `railway up --ci` from repo root.

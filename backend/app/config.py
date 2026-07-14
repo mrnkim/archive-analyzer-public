@@ -17,6 +17,9 @@ class Settings(BaseSettings):
     # Second Knowledge Store for the Narrative Evolution tab (scenario "N").
     # Falls back to the primary ks_id when unset so existing deploys keep working.
     ks_id_narrative: str = Field(default="")
+    # Third Knowledge Store for the Retroactive Discovery / COVID-19 tab
+    # (scenario "V"). Falls back to the primary ks_id when unset.
+    ks_id_covid: str = Field(default="")
     allowed_origins: str = Field(default="http://localhost:5173")
     rate_limit_per_minute: int = Field(default=10)
     app_env: str = Field(default="development")
@@ -38,6 +41,8 @@ class Settings(BaseSettings):
         """
         if scenario and scenario.upper() == "N" and self.ks_id_narrative:
             return self.ks_id_narrative
+        if scenario and scenario.upper() == "V" and self.ks_id_covid:
+            return self.ks_id_covid
         return self.ks_id
 
 

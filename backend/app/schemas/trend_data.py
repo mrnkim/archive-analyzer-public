@@ -39,6 +39,11 @@ class Sentiment(BaseModel):
 
 class TimelinePoint(BaseModel):
     year: int = Field(ge=1900, le=2100)
+    # Optional sub-year granularity for the Retroactive Discovery / COVID tab
+    # ("V"). Absent for the year-based scenarios, which stay unchanged.
+    month: int | None = Field(default=None, ge=1, le=12)
+    period_label: str = ""
+    pre_terminology: bool = False
     frequency: int = Field(ge=0)
     dominant_theme: str
     representative_clip: RepresentativeClip
@@ -51,15 +56,19 @@ class TimelinePoint(BaseModel):
 
 
 class InflectionPoint(BaseModel):
-    # A pivotal year where the narrative shifted (Narrative Evolution tab).
+    # A pivotal moment where the narrative shifted (Narrative + COVID tabs).
     year: int = Field(ge=1900, le=2100)
+    month: int | None = Field(default=None, ge=1, le=12)
+    period_label: str = ""
     label: str
     why: str = ""
 
 
 class SummaryBullet(BaseModel):
-    # A clickable summary point tied to a concrete year in the timeline.
+    # A clickable summary point tied to a concrete point in the timeline.
     year: int = Field(ge=1900, le=2100)
+    month: int | None = Field(default=None, ge=1, le=12)
+    period_label: str = ""
     headline: str
     text: str
 
@@ -309,3 +318,51 @@ def _build_narrative_schema() -> dict[str, Any]:
 
 
 NARRATIVE_DATA_JSON_SCHEMA: dict[str, Any] = _build_narrative_schema()
+
+
+# ─────────────────────────────────────────────────────────
+# COVID / Retroactive Discovery schema (scenario "V"). Built
+# on the narrative schema (sentiment + inflection_points),
+# then adds month-level fields so Jockey returns a monthly
+# timeline flagged with pre-COVID-19-naming coverage. Every
+# added key is listed in `required` (the OpenAI-style decoder
+# rejects optional keys under additionalProperties:false).
+# ─────────────────────────────────────────────────────────
+
+_MONTH_PROP: dict[str, Any] = {
+    "type": "integer",
+    "description": "Calendar month, 1-12.",
+}
+_PERIOD_LABEL_PROP: dict[str, Any] = {
+    "type": "string",
+    "description": "Human label for the point, e.g. 'Jan 2020'.",
+}
+
+
+def _build_covid_schema() -> dict[str, Any]:
+    s = copy.deepcopy(NARRATIVE_DATA_JSON_SCHEMA)
+    s["name"] = "covid_trend_data"
+    schema = s["schema"]
+    # Month-level timeline points, flagged pre/post the COVID-19 naming.
+    item = schema["properties"]["timeline"]["items"]
+    item["properties"]["month"] = _MONTH_PROP
+    item["properties"]["period_label"] = _PERIOD_LABEL_PROP
+    item["properties"]["pre_terminology"] = {
+        "type": "boolean",
+        "description": "True if this month predates the Feb 11 2020 'COVID-19' naming.",
+    }
+    item["required"] += ["month", "period_label", "pre_terminology"]
+    # Month-level inflection points.
+    infl = schema["properties"]["inflection_points"]["items"]
+    infl["properties"]["month"] = _MONTH_PROP
+    infl["properties"]["period_label"] = _PERIOD_LABEL_PROP
+    infl["required"] += ["month", "period_label"]
+    # Month-level summary bullets.
+    bul = schema["properties"]["summary_bullets"]["items"]
+    bul["properties"]["month"] = _MONTH_PROP
+    bul["properties"]["period_label"] = _PERIOD_LABEL_PROP
+    bul["required"] += ["month", "period_label"]
+    return s
+
+
+COVID_DATA_JSON_SCHEMA: dict[str, Any] = _build_covid_schema()

@@ -16,9 +16,11 @@ import { EraClusters } from "./components/narrative/EraClusters";
 import { SentimentStrip } from "./components/narrative/SentimentStrip";
 import { InflectionPoints } from "./components/narrative/InflectionPoints";
 import { NarrativeEmptyState } from "./components/narrative/NarrativeEmptyState";
+import { CovidEmptyState } from "./components/narrative/CovidEmptyState";
+import { pointKey } from "./lib/period";
 import { useStore } from "./store";
 
-type Tab = "analyzer" | "narrative" | "tutorial";
+type Tab = "analyzer" | "narrative" | "covid" | "tutorial";
 
 type HealthResponse = {
   status: string;
@@ -80,9 +82,11 @@ export default function App() {
     setTab(id);
   }
 
-  // Jump to a given year's evidence (used by inflection-point clicks).
-  function selectYear(year: number) {
-    const point = result?.timeline.find((p) => p.year === year);
+  // Jump to a point's evidence by its period key (used by inflection-point and
+  // summary-bullet clicks). The key is `pointKey` — the plain year for the
+  // year-based tabs, or year*100+month for the month-based COVID tab.
+  function selectByKey(key: number) {
+    const point = result?.timeline.find((p) => pointKey(p) === key);
     if (point) handleSelectPoint(point);
   }
 
@@ -161,6 +165,7 @@ export default function App() {
             {([
               ["analyzer", "Brand Intelligence (Adidas Examples)"],
               ["narrative", "Narrative Evolution"],
+              ["covid", "Retroactive Discovery (COVID-19)"],
               ["tutorial", "Tutorial"],
             ] as [Tab, string][]).map(([id, label]) => (
               <button
@@ -203,13 +208,13 @@ export default function App() {
                   />
                   <SentimentStrip
                     timeline={result.timeline}
-                    selectedYear={selectedPoint?.year ?? null}
+                    selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
                     onSelect={handleSelectPoint}
                   />
                 </div>
                 <InflectionPoints
                   points={result.inflection_points ?? []}
-                  onSelectYear={selectYear}
+                  onSelectKey={selectByKey}
                 />
               </div>
 
@@ -220,8 +225,8 @@ export default function App() {
                 narrative={result?.narrative_summary}
                 bullets={result?.summary_bullets}
                 timeline={result.timeline}
-                selectedYear={selectedPoint?.year ?? null}
-                onSelectYear={selectYear}
+                selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
+                onSelectKey={selectByKey}
                 columns
               />
 
@@ -233,7 +238,7 @@ export default function App() {
               </div>
               <ClipStrip
                 timeline={result.timeline}
-                selectedYear={selectedPoint?.year ?? null}
+                selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
                 onSelect={handleSelectPoint}
                 exportQuery={result.query}
                 exportScenario={resultScenario}
@@ -246,6 +251,77 @@ export default function App() {
           {loading && <LoadingState />}
 
           {!result && !loading && <NarrativeEmptyState onRun={handleSearch} />}
+        </main>
+        ) : tab === "covid" ? (
+        <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
+          <SearchBar
+            onSubmit={(q, sc) => handleSearch(q, sc ?? "V")}
+            loading={loading}
+            showDemoChips={false}
+          />
+
+          {result && (
+            <>
+              {/* Overview: monthly signal volume + tone, with the pivotal
+                  moments (first Wuhan reference, WHO naming, pandemic, vaccine)
+                  and the archive-value framing alongside. NOTE: the timeline is
+                  still year-keyed here — the month-level x-axis + schema land
+                  once the live Jockey response shape is confirmed. */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
+                <div className="lg:col-span-2 space-y-4">
+                  <TimelineChart
+                    data={result.timeline}
+                    onPointClick={handleSelectPoint}
+                  />
+                  <SentimentStrip
+                    timeline={result.timeline}
+                    selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
+                    onSelect={handleSelectPoint}
+                  />
+                </div>
+                <div className="space-y-4">
+                  <InflectionPoints
+                    points={result.inflection_points ?? []}
+                    onSelectKey={selectByKey}
+                  />
+                  <RevenueWidget
+                    totalMentions={result.estimated_value.total_mentions}
+                    estimatedValueUsd={result.estimated_value.estimated_brand_intelligence_value_usd}
+                    basis={result.estimated_value.calculation_basis}
+                  />
+                </div>
+              </div>
+
+              <NarrativePanel
+                query={streamingQuery}
+                narrative={result?.narrative_summary}
+                bullets={result?.summary_bullets}
+                timeline={result.timeline}
+                selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
+                onSelectKey={selectByKey}
+                columns
+              />
+
+              <EraClusters timeline={result.timeline} />
+
+              <div ref={clipGridRef} className="scroll-mt-4">
+                <ClipGrid point={selectedPoint} />
+              </div>
+              <ClipStrip
+                timeline={result.timeline}
+                selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
+                onSelect={handleSelectPoint}
+                exportQuery={result.query}
+                exportScenario={resultScenario}
+              />
+
+              <ChatPanel />
+            </>
+          )}
+
+          {loading && <LoadingState />}
+
+          {!result && !loading && <CovidEmptyState onRun={handleSearch} />}
         </main>
         ) : (
         <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
@@ -264,7 +340,7 @@ export default function App() {
                 </div>
                 <ClipStrip
                   timeline={result.timeline}
-                  selectedYear={selectedPoint?.year ?? null}
+                  selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
                   onSelect={handleSelectPoint}
                   exportQuery={result.query}
                   exportScenario={resultScenario}
@@ -282,8 +358,8 @@ export default function App() {
                     narrative={result?.narrative_summary}
                     bullets={result?.summary_bullets}
                     timeline={result.timeline}
-                    selectedYear={selectedPoint?.year ?? null}
-                    onSelectYear={selectYear}
+                    selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
+                    onSelectKey={selectByKey}
                   />
                 </div>
               </div>

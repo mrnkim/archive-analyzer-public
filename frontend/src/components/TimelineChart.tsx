@@ -12,6 +12,7 @@ import {
   YAxis,
 } from "recharts";
 import type { TimelinePoint } from "../types/api";
+import { pointKey, pointLabel } from "../lib/period";
 import { InfoIcon, Tooltip as InfoTooltip, TooltipTrigger, TooltipContent } from "@twelvelabs-io/react";
 
 // TLDS chart palette. recharts writes these as SVG `fill`/`stroke` *attributes*,
@@ -28,13 +29,18 @@ const CHART = {
   brushFill: "#ffffff", // --tl-color-white (surface-white)
 } as const;
 
+// Chart datum = a timeline point plus a numeric x key (`_k`) and its human
+// label (`_label`). Month-level points (COVID tab) get distinct keys per month;
+// year-only points collapse to the plain year, so year tabs are unchanged.
+type ChartDatum = TimelinePoint & { _k: number; _label: string };
+
 type Props = {
   data: TimelinePoint[];
   onPointClick: (point: TimelinePoint) => void;
 };
 
 type TooltipPayload = {
-  payload: TimelinePoint;
+  payload: ChartDatum;
 };
 
 function EvidencePointTooltip({
@@ -52,7 +58,7 @@ function EvidencePointTooltip({
     <div className="bg-surface-white border border-border-secondary rounded-nav-item shadow-lg w-64 px-3 py-2 pointer-events-none">
       <div className="flex items-center justify-between gap-3">
         <div className="text-xs font-semibold text-foreground-body tabular-nums">
-          {point.year}
+          {point._label}
         </div>
         <div className="text-[11px] font-medium text-foreground-subtle">
           {sceneLabel}
@@ -61,6 +67,11 @@ function EvidencePointTooltip({
       <div className="mt-1 text-xs text-foreground-muted leading-snug">
         {point.dominant_theme}
       </div>
+      {point.pre_terminology && (
+        <div className="mt-1 text-[10px] font-medium text-foreground-status-warning">
+          Before it was named “COVID-19”
+        </div>
+      )}
       <div className="mt-2 text-[10px] uppercase tracking-wider text-foreground-subtle">
         Click to inspect evidence
       </div>
@@ -69,11 +80,20 @@ function EvidencePointTooltip({
 }
 
 export function TimelineChart({ data, onPointClick }: Props) {
-  const peakPoint = data.reduce(
+  const chartData: ChartDatum[] = data.map((p) => ({
+    ...p,
+    _k: pointKey(p),
+    _label: pointLabel(p),
+  }));
+  const labelByKey = new Map(chartData.map((d) => [d._k, d._label]));
+  const peakDatum = chartData.reduce(
     (max, p) => (p.frequency > max.frequency ? p : max),
-    data[0]
+    chartData[0]
   );
-  const totalScenes = data.reduce((sum, p) => sum + p.frequency, 0);
+  const totalScenes = chartData.reduce((sum, p) => sum + p.frequency, 0);
+  const isMonthly = data.some((p) => p.month != null);
+  const unit = isMonthly ? "months" : "years";
+  const fmtTick = (v: number) => labelByKey.get(v) ?? String(v);
 
   return (
     <div className="bg-surface-white border border-border-secondary rounded-tlds-3 p-4">
@@ -87,18 +107,18 @@ export function TimelineChart({ data, onPointClick }: Props) {
               </span>
             </TooltipTrigger>
             <TooltipContent className="max-w-xs">
-              Each scene = a distinct moment where adidas is visually present in the
-              corpus. One video can contribute multiple scenes.
+              Each scene = a distinct moment surfaced in the corpus. One video can
+              contribute multiple scenes.
             </TooltipContent>
           </InfoTooltip>
         </h3>
         <span className="text-xs text-foreground-subtle">
-          {totalScenes} scenes across {data.length} years · peak: {peakPoint.year}
+          {totalScenes} scenes across {chartData.length} {unit} · peak: {peakDatum._label}
         </span>
       </div>
       <ResponsiveContainer width="100%" height={320}>
         <ComposedChart
-          data={data}
+          data={chartData}
           onClick={(e) => {
             if (e?.activePayload?.[0]?.payload) {
               onPointClick(e.activePayload[0].payload as TimelinePoint);
@@ -109,7 +129,9 @@ export function TimelineChart({ data, onPointClick }: Props) {
           {/* Colors sourced from the CHART palette (mirrors --tl-color-* tokens). */}
           <CartesianGrid vertical={false} strokeDasharray="3 3" stroke={CHART.grid} />
           <XAxis
-            dataKey="year"
+            dataKey="_k"
+            type="category"
+            tickFormatter={fmtTick}
             stroke={CHART.axis}
             tick={{ fontSize: 12 }}
             axisLine={{ stroke: CHART.axisLine }}
@@ -132,19 +154,19 @@ export function TimelineChart({ data, onPointClick }: Props) {
             radius={[999, 999, 0, 0]}
             cursor="pointer"
           >
-            {data.map((p) => (
+            {chartData.map((p) => (
               <Cell
-                key={`bar-${p.year}`}
-                fill={p.year === peakPoint.year ? CHART.accent : CHART.accentSoft}
+                key={`bar-${p._k}`}
+                fill={p._k === peakDatum._k ? CHART.accent : CHART.accentSoft}
                 stroke={CHART.accent}
                 strokeWidth={1}
               />
             ))}
           </Bar>
           <Scatter dataKey="frequency" cursor="pointer">
-            {data.map((p) => (
+            {chartData.map((p) => (
               <Cell
-                key={`dot-${p.year}`}
+                key={`dot-${p._k}`}
                 fill={CHART.accent}
                 stroke={CHART.accent}
                 strokeWidth={1}
@@ -152,8 +174,8 @@ export function TimelineChart({ data, onPointClick }: Props) {
             ))}
           </Scatter>
           <ReferenceDot
-            x={peakPoint.year}
-            y={peakPoint.frequency}
+            x={peakDatum._k}
+            y={peakDatum.frequency}
             r={0}
             label={{
               value: "peak",
@@ -164,17 +186,18 @@ export function TimelineChart({ data, onPointClick }: Props) {
             }}
           />
           <Brush
-            dataKey="year"
+            dataKey="_k"
             height={24}
             stroke={CHART.accent}
             fill={CHART.brushFill}
             travellerWidth={8}
+            tickFormatter={fmtTick}
           />
         </ComposedChart>
       </ResponsiveContainer>
       <p className="text-xs text-foreground-subtle mt-2">
-        Tip: click a year marker to load its scenes. Bars show discrete evidence
-        volume; dots are the selectable yearly anchors.
+        Tip: click a marker to load its scenes. Bars show discrete evidence
+        volume; dots are the selectable anchors.
       </p>
     </div>
   );

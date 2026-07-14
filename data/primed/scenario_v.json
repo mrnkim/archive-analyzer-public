@@ -1,0 +1,374 @@
+{
+  "query": "Show references to an unexplained respiratory illness in Wuhan across 2020 — before it was called COVID-19 — and how the coverage evolved through the WHO naming, the pandemic declaration, and the vaccine rollout.",
+  "scenario": "V",
+  "payload": {
+    "entity": "COVID-19",
+    "query": "Show references to an unexplained respiratory illness in Wuhan across 2020 — before it was called COVID-19 — and how the coverage evolved through the WHO naming, the pandemic declaration, and the vaccine rollout.",
+    "timeline": [
+      {
+        "year": 2020,
+        "month": 1,
+        "period_label": "Jan 2020",
+        "pre_terminology": true,
+        "frequency": 10,
+        "dominant_theme": "Unexplained pneumonia in Wuhan — before it had a name",
+        "representative_clip": {
+          "asset_id": "6a55f79390a8878b1d2db7e4",
+          "timestamp_start": 0.0,
+          "timestamp_end": 30.0,
+          "title": "Pneumonia outbreak in Wuhan: Changi Airport temperature screening",
+          "reason": "Airport screening begins over a 'pneumonia outbreak' — still unnamed.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f79390a8878b1d2db7e4/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f79390a8878b1d2db7e4/hlses/playlist.m3u8",
+          "duration": 46.948
+        },
+        "scenes": [
+          {
+            "asset_id": "6a55f79390a8878b1d2db7e4",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "Pneumonia outbreak in Wuhan: Changi Airport temperature screening",
+            "reason": "Airport screening begins over a 'pneumonia outbreak' — still unnamed.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f79390a8878b1d2db7e4/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f79390a8878b1d2db7e4/hlses/playlist.m3u8",
+            "duration": 46.948
+          },
+          {
+            "asset_id": "6a55f79aa415b6c270965df0",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "Pneumonia outbreak in Wuhan | The Big Story",
+            "reason": "One of the earliest broadcasts (Jan 3) on an unexplained pneumonia outbreak.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f79aa415b6c270965df0/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f79aa415b6c270965df0/hlses/playlist.m3u8",
+            "duration": 88.928
+          },
+          {
+            "asset_id": "6a55f78e90a8878b1d2db7bc",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "Mystery illness outbreak in Wuhan, China",
+            "reason": "Wuhan 'mystery illness' — reported before the disease had any name.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f78e90a8878b1d2db7bc/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f78e90a8878b1d2db7bc/hlses/playlist.m3u8",
+            "duration": 122.348
+          },
+          {
+            "asset_id": "6a55f7914142d1df791d38f2",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "China identifies new coronavirus behind Wuhan pneumonia",
+            "reason": "The Jan 9 'new coronavirus' identification — still before the COVID-19 name.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7914142d1df791d38f2/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7914142d1df791d38f2/hlses/playlist.m3u8",
+            "duration": 66.748
+          },
+          {
+            "asset_id": "6a55f792a065980124e0d79a",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "Wuhan pneumonia outbreak alerts South Korea",
+            "reason": "A major broadcaster on the 'Wuhan pneumonia outbreak', pre-naming.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f792a065980124e0d79a/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f792a065980124e0d79a/hlses/playlist.m3u8",
+            "duration": 132.968
+          },
+          {
+            "asset_id": "6a55f78fa065980124e0d785",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "Pneumonia virus in China about 80% similar to SARS",
+            "reason": "An unnamed 'pneumonia virus' compared to SARS.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f78fa065980124e0d785/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f78fa065980124e0d785/hlses/playlist.m3u8",
+            "duration": 53.688
+          },
+          {
+            "asset_id": "6a55f797a415b6c270965dcf",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "Wuhan pneumonia: Xi says people's safety must be a top priority",
+            "reason": "Late-January 'Wuhan pneumonia' framing as leadership responds.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f797a415b6c270965dcf/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f797a415b6c270965dcf/hlses/playlist.m3u8",
+            "duration": 228.268
+          },
+          {
+            "asset_id": "6a55f794a415b6c270965db3",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "'Wuhan pneumonia' spreading across China and beyond",
+            "reason": "Coverage still calls it 'Wuhan pneumonia' as it crosses borders.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f794a415b6c270965db3/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f794a415b6c270965db3/hlses/playlist.m3u8",
+            "duration": 137.168
+          },
+          {
+            "asset_id": "6a55f7974142d1df791d3926",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "Too early to declare coronavirus outbreak a global emergency: WHO",
+            "reason": "WHO's initial late-January hesitation before the emergency call.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7974142d1df791d3926/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7974142d1df791d3926/hlses/playlist.m3u8",
+            "duration": 104.148
+          },
+          {
+            "asset_id": "6a55f790170af3ffbeadb09b",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "WHO declares international emergency over coronavirus",
+            "reason": "Wire coverage of the Jan 30 international emergency.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f790170af3ffbeadb09b/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f790170af3ffbeadb09b/hlses/playlist.m3u8",
+            "duration": 38.628
+          }
+        ],
+        "sentiment": {
+          "label": "negative",
+          "score": -0.25
+        }
+      },
+      {
+        "year": 2020,
+        "month": 2,
+        "period_label": "Feb 2020",
+        "pre_terminology": false,
+        "frequency": 1,
+        "dominant_theme": "WHO names the disease COVID-19",
+        "representative_clip": {
+          "asset_id": "6a55f7a4170af3ffbeadb13a",
+          "timestamp_start": 0.0,
+          "timestamp_end": 30.0,
+          "title": "New coronavirus given the name COVID-19 by the WHO",
+          "reason": "Feb 11 2020: the disease is officially named COVID-19.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a4170af3ffbeadb13a/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a4170af3ffbeadb13a/hlses/playlist.m3u8",
+          "duration": 252.048
+        },
+        "scenes": [
+          {
+            "asset_id": "6a55f7a4170af3ffbeadb13a",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "New coronavirus given the name COVID-19 by the WHO",
+            "reason": "Feb 11 2020: the disease is officially named COVID-19.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a4170af3ffbeadb13a/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a4170af3ffbeadb13a/hlses/playlist.m3u8",
+            "duration": 252.048
+          }
+        ],
+        "sentiment": {
+          "label": "negative",
+          "score": -0.45
+        }
+      },
+      {
+        "year": 2020,
+        "month": 3,
+        "period_label": "Mar 2020",
+        "pre_terminology": false,
+        "frequency": 5,
+        "dominant_theme": "WHO declares a global pandemic",
+        "representative_clip": {
+          "asset_id": "6a55f7ac90a8878b1d2db8b7",
+          "timestamp_start": 0.0,
+          "timestamp_end": 30.0,
+          "title": "WHO declares coronavirus outbreak a pandemic as cases soar",
+          "reason": "Markets-desk coverage of the Mar 11 pandemic declaration.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7ac90a8878b1d2db8b7/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7ac90a8878b1d2db8b7/hlses/playlist.m3u8",
+          "duration": 91.488
+        },
+        "scenes": [
+          {
+            "asset_id": "6a55f7ac90a8878b1d2db8b7",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "WHO declares coronavirus outbreak a pandemic as cases soar",
+            "reason": "Markets-desk coverage of the Mar 11 pandemic declaration.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7ac90a8878b1d2db8b7/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7ac90a8878b1d2db8b7/hlses/playlist.m3u8",
+            "duration": 91.488
+          },
+          {
+            "asset_id": "6a55f7b190a8878b1d2db8e7",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "World Health Organization declares coronavirus a pandemic",
+            "reason": "National-network coverage of the pandemic declaration.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7b190a8878b1d2db8e7/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7b190a8878b1d2db8e7/hlses/playlist.m3u8",
+            "duration": 166.168
+          },
+          {
+            "asset_id": "6a55f7ab170af3ffbeadb175",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "Coronavirus outbreak: WHO declares COVID-19 a global pandemic",
+            "reason": "Pandemic-declaration-day coverage.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7ab170af3ffbeadb175/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7ab170af3ffbeadb175/hlses/playlist.m3u8",
+            "duration": 265.568
+          },
+          {
+            "asset_id": "6a55f7a17fd488f932b96ea7",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "WHO declares coronavirus a global pandemic",
+            "reason": "WHO's Mar 11 pandemic declaration.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a17fd488f932b96ea7/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a17fd488f932b96ea7/hlses/playlist.m3u8",
+            "duration": 190.188
+          },
+          {
+            "asset_id": "6a55f7af90a8878b1d2db8d3",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "What the WHO pandemic declaration means",
+            "reason": "An explainer on what the pandemic declaration changes.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7af90a8878b1d2db8d3/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7af90a8878b1d2db8d3/hlses/playlist.m3u8",
+            "duration": 83.808
+          }
+        ],
+        "sentiment": {
+          "label": "negative",
+          "score": -0.75
+        }
+      },
+      {
+        "year": 2020,
+        "month": 12,
+        "period_label": "Dec 2020",
+        "pre_terminology": false,
+        "frequency": 4,
+        "dominant_theme": "The first vaccines roll out",
+        "representative_clip": {
+          "asset_id": "6a55f7bd7fd488f932b96fa7",
+          "timestamp_start": 0.0,
+          "timestamp_end": 30.0,
+          "title": "New York expects first COVID vaccine delivery by December 15",
+          "reason": "Early-December 2020 vaccine-distribution planning.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7bd7fd488f932b96fa7/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7bd7fd488f932b96fa7/hlses/playlist.m3u8",
+          "duration": 122.948
+        },
+        "scenes": [
+          {
+            "asset_id": "6a55f7bd7fd488f932b96fa7",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "New York expects first COVID vaccine delivery by December 15",
+            "reason": "Early-December 2020 vaccine-distribution planning.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7bd7fd488f932b96fa7/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7bd7fd488f932b96fa7/hlses/playlist.m3u8",
+            "duration": 122.948
+          },
+          {
+            "asset_id": "6a55f7b8a415b6c270965efa",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "Vaccine rollout 'the beginning of the end' of the pandemic",
+            "reason": "Officials frame the rollout as the beginning of the end.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7b8a415b6c270965efa/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7b8a415b6c270965efa/hlses/playlist.m3u8",
+            "duration": 58.468
+          },
+          {
+            "asset_id": "6a55f7b97fd488f932b96f7d",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "UK begins coronavirus vaccine rollout",
+            "reason": "The start of the UK/world vaccine rollout, Dec 8 2020.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7b97fd488f932b96f7d/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7b97fd488f932b96f7d/hlses/playlist.m3u8",
+            "duration": 211.308
+          },
+          {
+            "asset_id": "6a55f7bf7fd488f932b96fb6",
+            "timestamp_start": 0.0,
+            "timestamp_end": 30.0,
+            "title": "COVID-19 vaccine rollout begins",
+            "reason": "US vaccine rollout begins in mid-December 2020.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7bf7fd488f932b96fb6/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7bf7fd488f932b96fb6/hlses/playlist.m3u8",
+            "duration": 301.728
+          }
+        ],
+        "sentiment": {
+          "label": "positive",
+          "score": 0.25
+        }
+      }
+    ],
+    "narrative_summary": "In the first weeks of 2020, broadcasters were already describing an unexplained, SARS-like pneumonia in Wuhan — weeks before the world had a word for it. Within a month the WHO had named the disease COVID-19; within three it was a declared pandemic. By December the first vaccines were being administered. Read back-to-front, the archive shows the outbreak was visible in plain sight before it was ever called COVID-19.",
+    "summary_bullets": [
+      {
+        "year": 2020,
+        "month": 1,
+        "period_label": "Jan 2020",
+        "headline": "Before it had a name",
+        "text": "Broadcasters report an unexplained, SARS-like pneumonia spreading in Wuhan — months before the term “COVID-19” existed."
+      },
+      {
+        "year": 2020,
+        "month": 2,
+        "period_label": "Feb 2020",
+        "headline": "It gets a name",
+        "text": "On Feb 11, 2020 the WHO officially names the disease COVID-19 as international cases climb."
+      },
+      {
+        "year": 2020,
+        "month": 3,
+        "period_label": "Mar 2020",
+        "headline": "A pandemic",
+        "text": "On Mar 11, 2020 the WHO declares COVID-19 a pandemic and countries begin locking down."
+      },
+      {
+        "year": 2020,
+        "month": 12,
+        "period_label": "Dec 2020",
+        "headline": "Vaccines arrive",
+        "text": "By December 2020 the first COVID-19 vaccines are administered, opening the road out of the crisis."
+      }
+    ],
+    "estimated_value": {
+      "total_mentions": 20,
+      "estimated_brand_intelligence_value_usd": 250000,
+      "calculation_basis": "Illustrative estimate: 20 archive clips referenced the outbreak across 2020 × $12,500 per clip — modeling the value of retroactive discovery to pandemic researchers and documentary producers."
+    },
+    "session_id": "primed_covid_v",
+    "source": "cache",
+    "inflection_points": [
+      {
+        "year": 2020,
+        "month": 1,
+        "period_label": "Jan 2020",
+        "label": "First reports of a mystery pneumonia",
+        "why": "Broadcasters cover an unexplained respiratory illness in Wuhan — before it had a name."
+      },
+      {
+        "year": 2020,
+        "month": 2,
+        "period_label": "Feb 2020",
+        "label": "The disease is named COVID-19",
+        "why": "The WHO gives the disease its official name on Feb 11, 2020."
+      },
+      {
+        "year": 2020,
+        "month": 3,
+        "period_label": "Mar 2020",
+        "label": "Declared a global pandemic",
+        "why": "The WHO declares COVID-19 a pandemic on Mar 11, 2020 and lockdowns begin."
+      },
+      {
+        "year": 2020,
+        "month": 12,
+        "period_label": "Dec 2020",
+        "label": "The first vaccines roll out",
+        "why": "The first COVID-19 vaccinations are administered in December 2020."
+      }
+    ]
+  }
+}
