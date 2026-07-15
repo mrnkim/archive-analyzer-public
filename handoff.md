@@ -607,3 +607,109 @@ because the cache had been wiped by the test run.
    to also fix the 3 download-403s) → set `KS_ID_COVID` (`.env` + Railway) → capture
    a live `scenario_v.json` (`python scripts/refresh_video_titles.py` after).
 3. Deploy via `railway up --ci` from repo root.
+
+> **✅ All three of the above were done on 2026-07-15 — see the next section.**
+> The Jockey indexing blocker was transient and cleared. The tab now runs on
+> LIVE data (plus a genuine Dec-2019 anchor) and is deployed. The 2026-07-14
+> facts above are historical.
+
+---
+
+# Handoff — 2026-07-15
+
+**The 2026-07-14 blocker is RESOLVED. The COVID tab now runs on LIVE Jockey data
+— including a genuine December-2019 broadcast anchor — and is DEPLOYED to Railway
+production.** All work is on branch **`feature/covid-tab`** (14 commits,
+`8a60eaa`…`6f443a5`), **NOT merged to main** — `railway up` deploys the working
+tree, so prod is running this branch's code.
+
+## 1. Indexing throttle was transient — RESOLVED
+Yesterday's "only ~4/20 index" failure was a **transient account-level indexing
+throttle**, not a hard quota; after ~1 day it cleared. Recovery (no re-download):
+- Deleted the 3 junk COVID KSs (`ks_019f5fd0…`, `ks_019f5fe0…`, `ks_019f5fe7…`).
+- **Re-homed the 20 already-`ready` assets into a FRESH KS → 20/20 indexed.**
+  Assets survive KS deletion; the failure was KS-item *indexing*, not upload.
+- **Live COVID KS = `ks_019f63c1-5083-78b2-9a37-136135c086fd`** ("COVID-19
+  Emergence 2020"), now 21 items (20 re-homed + the CCTV clip in §4).
+- Admin/re-home/poll helper scripts live in the session scratchpad; not committed.
+
+## 2. Live data swap (mock → real Jockey)
+`data/primed/scenario_v.json` is now a **live capture** against the COVID KS, not
+hand-built mock. Flow: set `KS_ID_COVID` in `.env` → move the mock aside → clear
+`data/runtime/query_cache.sqlite` → restart backend → POST the demo query → live
+Jockey call → save `{query, scenario:"V", payload}`.
+- **Prompt fix** (`prompts/scenarios.py`): scenario V uses a per-**month**
+  bullet instruction (`SUMMARY_BULLET_INSTRUCTIONS_MONTHLY`); the year-based one
+  collapsed all-2020 into one bullet. The ~2000-char cap is soft — N runs at 2322.
+
+## 3. Keyword-free demo query (PRD differentiator #1)
+The query no longer contains "COVID-19" — Jockey finds the illness by MEANING:
+> "Show me references to respiratory illness, unusual pneumonia, and Wuhan across
+> 2019–2020 archive content — surface the earliest mentions and how the coverage
+> evolved."
+Must stay byte-identical in `CovidEmptyState.COVID_DEMO.query` AND the
+`scenario_v.json` `query` field (cache key = `sha256("V|"+query.lower())`).
+
+## 4. Genuine December-2019 anchor (the real "wow")
+Genuine **Dec-2019** broadcast footage on YouTube is effectively nonexistent (the
+story broke ~Dec 31). The one real artifact is **CCTV 新闻直播间 "不明原因肺炎
+(pneumonia of unknown cause), Wuhan, 2019-12-31"** (verified yt-dlp metadata
+timestamp = 2019-12-31).
+- **Manual ingest** — the jockey skill is **YouTube-only** (rebuilds a
+  youtube.com/watch URL from the extracted id → fails on CCTV). So: `yt-dlp`
+  direct download → upload via the **assets multipart** endpoint
+  (`upload_asset_multipart`) → `add_ks_item` **after** the asset finishes
+  processing (adding before → 400 "asset being processed").
+- **The Dec-2019 timeline point is HAND-AUTHORED** in `scenario_v.json`: Jockey
+  (vanilla KS, no date metadata) grouped the CCTV clip under Jan 2020, so the
+  point was built from the asset's ground-truth date + real thumbnail/HLS. The
+  other 4 points (Jan/Feb/Mar/Dec 2020) are Jockey live-generated. Timeline now
+  **Dec 2019 → Jan → Feb → Mar → Dec 2020** (14 scenes, 5 bullets, 5 inflections;
+  Dec 2019 + Jan 2020 both `pre_terminology`). Demo-narration caveat: this one
+  point is curated, not auto-dated by Jockey.
+
+## 5. COVID tab redesign (purpose-built for Scenario C)
+Was borrowing the Narrative layout; rebuilt around retroactive discovery:
+- **NEW `frontend/src/components/covid/RetroactiveDiscovery.tsx`** replaces
+  InflectionPoints on the COVID tab (N tab keeps InflectionPoints): "matched by
+  meaning · not keywords" badge, "found before it had a name" hero (earliest ref
+  vs Feb 11 2020 naming), pre-terminology clip quotes.
+- **TimelineChart**: WHO-naming boundary marker + a filled monotone **emergence
+  curve (Area)** for monthly data (was sparse floating dots); year tabs keep Bar
+  (guarded by `isMonthly`).
+- **RevenueWidget**: scenario-V framing (researcher/documentary buyer).
+- **Removed** the "Coverage sentiment over time" panel from the COVID tab (N keeps it).
+- Layout: left col = timeline + AI narrative; right col = estimate (top) +
+  RetroactiveDiscovery.
+
+## 6. Cross-tab UX polish
+- **Scenario header** on every results page (`SCENARIO_META` + `ScenarioHeader`
+  in App.tsx) — title + one-line description, mirroring the demo-card copy.
+- **Single-scenario tabs (Narrative + COVID) auto-run** on selection; their
+  free-form **search bars were removed** (they invited arbitrary queries the
+  curated demo can't serve → the "Analyzing then revert" bug). Follow-ups still
+  live in the ChatPanel.
+- **Adidas**: the free-form text input was also removed; it now shows an **A/B/C
+  chip switcher** (`chipsOnly` mode on SearchBar) with the active scenario chip
+  filled (`primary`). The empty-state 3 cards remain the entry point.
+- **Nav**: grouped under a "Demo scenarios" label; a divider separates the
+  tutorial, relabeled "How it works" with an info icon. Scenario tabs are
+  two-line ([capability] / [subject]).
+- **Global pointer cursor** on buttons/links — unlayered rule in `index.css` so
+  it wins over Tailwind's utilities layer (TLDS/Radix default is `cursor:default`).
+
+## 7. Deployed to Railway production
+- Set `KS_ID_COVID=ks_019f63c1-5083-78b2-9a37-136135c086fd` as a Railway service
+  variable (`railway variables --set … --skip-deploys`) — `KS_ID` and
+  `KS_ID_NARRATIVE` were already present.
+- `railway up --ci` from repo root → build + deploy complete, healthcheck passed.
+- **Verified live:** the COVID query returns `source: cache` with the full
+  Dec 2019 → Dec 2020 timeline (14 scenes, Dec-2019 CCTV anchor) at
+  https://archive-analyzer-public-production.up.railway.app.
+
+## Notes for next session
+- **Branch not merged.** `feature/covid-tab` is deployed but not merged to `main`
+  — open a PR / merge when ready.
+- Re-capturing live COVID data later drops the hand-authored Dec-2019 point —
+  re-apply the CCTV anchor after any fresh capture.
+- `railway up` ships the local working tree; keep it clean before deploying.
