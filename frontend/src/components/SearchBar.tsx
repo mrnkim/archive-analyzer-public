@@ -7,6 +7,8 @@ type Props = {
   // Quick-access demo chips — hidden on the empty state (the scenario
   // cards cover that), shown once a result is on screen for fast re-runs.
   showDemoChips?: boolean;
+  // Scenario-specific input hint. Defaults to the Adidas brand example.
+  placeholder?: string;
 };
 
 export const SEED_QUERIES = [
@@ -35,7 +37,12 @@ export const SEED_QUERIES = [
   },
 ];
 
-export function SearchBar({ onSubmit, loading, showDemoChips = true }: Props) {
+export function SearchBar({
+  onSubmit,
+  loading,
+  showDemoChips = true,
+  placeholder = "Ask anything — e.g. 'Adidas exposure over 30 years'",
+}: Props) {
   const [input, setInput] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
@@ -50,7 +57,7 @@ export function SearchBar({ onSubmit, loading, showDemoChips = true }: Props) {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask anything — e.g. 'Adidas exposure over 30 years'"
+          placeholder={placeholder}
           disabled={loading}
           className="flex-1"
         />
