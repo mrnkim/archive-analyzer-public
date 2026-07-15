@@ -1,4 +1,5 @@
 import {
+  Area,
   Bar,
   Brush,
   CartesianGrid,
@@ -163,21 +164,42 @@ export function TimelineChart({ data, onPointClick }: Props) {
             content={<EvidencePointTooltip />}
             cursor={{ stroke: CHART.axisLine, strokeDasharray: "3 3" }}
           />
-          <Bar
-            dataKey="frequency"
-            barSize={8}
-            radius={[999, 999, 0, 0]}
-            cursor="pointer"
-          >
-            {chartData.map((p) => (
-              <Cell
-                key={`bar-${p._k}`}
-                fill={p._k === peakDatum._k ? CHART.accent : CHART.accentSoft}
-                stroke={CHART.accent}
-                strokeWidth={1}
-              />
-            ))}
-          </Bar>
+          <defs>
+            <linearGradient id="evidenceArea" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor={CHART.accent} stopOpacity={0.28} />
+              <stop offset="100%" stopColor={CHART.accent} stopOpacity={0.03} />
+            </linearGradient>
+          </defs>
+          {isMonthly ? (
+            // Monthly (COVID) data is sparse — a filled emergence curve reads as a
+            // trajectory, not a few floating dots with an empty middle.
+            <Area
+              type="monotone"
+              dataKey="frequency"
+              stroke={CHART.accent}
+              strokeWidth={2}
+              fill="url(#evidenceArea)"
+              dot={false}
+              activeDot={false}
+              isAnimationActive={false}
+            />
+          ) : (
+            <Bar
+              dataKey="frequency"
+              barSize={8}
+              radius={[999, 999, 0, 0]}
+              cursor="pointer"
+            >
+              {chartData.map((p) => (
+                <Cell
+                  key={`bar-${p._k}`}
+                  fill={p._k === peakDatum._k ? CHART.accent : CHART.accentSoft}
+                  stroke={CHART.accent}
+                  strokeWidth={1}
+                />
+              ))}
+            </Bar>
+          )}
           <Scatter dataKey="frequency" cursor="pointer">
             {chartData.map((p) => (
               <Cell
@@ -225,8 +247,9 @@ export function TimelineChart({ data, onPointClick }: Props) {
         </ComposedChart>
       </ResponsiveContainer>
       <p className="text-xs text-foreground-subtle mt-2">
-        Tip: click a marker to load its scenes. Bars show discrete evidence
-        volume; dots are the selectable anchors.
+        {isMonthly
+          ? "Tip: click a point to load its scenes. The curve shows evidence volume by month; dots are the selectable anchors."
+          : "Tip: click a marker to load its scenes. Bars show discrete evidence volume; dots are the selectable anchors."}
       </p>
     </div>
   );
