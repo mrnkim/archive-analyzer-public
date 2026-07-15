@@ -222,10 +222,10 @@ export default function App() {
             </p>
             <div className="space-y-1">
               {([
-                ["analyzer", "Brand Intelligence — Adidas"],
-                ["narrative", "Narrative Evolution — Trump"],
-                ["covid", "Retroactive Discovery — COVID-19"],
-              ] as [Tab, string][]).map(([id, label]) => (
+                ["analyzer", "Brand Intelligence", "Adidas"],
+                ["narrative", "Narrative Evolution", "Trump"],
+                ["covid", "Retroactive Discovery", "COVID-19"],
+              ] as [Tab, string, string][]).map(([id, title, subject]) => (
                 <button
                   key={id}
                   onClick={() => switchTab(id)}
@@ -236,7 +236,10 @@ export default function App() {
                       : "text-foreground-subtle hover:text-foreground-body hover:bg-surface-secondary")
                   }
                 >
-                  {label}
+                  <span className="block leading-tight">{title}</span>
+                  <span className="block text-xs text-foreground-subtle leading-tight">
+                    {subject}
+                  </span>
                 </button>
               ))}
             </div>
