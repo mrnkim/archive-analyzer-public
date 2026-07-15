@@ -12,6 +12,8 @@ type Props = {
   // Render only the A/B/C scenario chips (no free-form text input) — used as a
   // scenario switcher on the Adidas results view.
   chipsOnly?: boolean;
+  // Scenario code of the on-screen result, so its chip reads as selected.
+  activeScenario?: string;
 };
 
 export const SEED_QUERIES = [
@@ -46,6 +48,7 @@ export function SearchBar({
   showDemoChips = true,
   placeholder = "Ask anything — e.g. 'Adidas exposure over 30 years'",
   chipsOnly = false,
+  activeScenario,
 }: Props) {
   const [input, setInput] = useState("");
 
@@ -87,7 +90,7 @@ export function SearchBar({
         {SEED_QUERIES.map((s) => (
           <Button
             key={s.scenario}
-            variant="outlined-gray"
+            variant={s.scenario === activeScenario ? "primary" : "outlined-gray"}
             size="sm"
             onClick={() => {
               setInput(s.query);

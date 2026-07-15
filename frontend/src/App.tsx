@@ -392,7 +392,12 @@ export default function App() {
         {result && (
           <>
             <ScenarioHeader scenario={resultScenario} />
-            <SearchBar chipsOnly onSubmit={handleSearch} loading={loading} />
+            <SearchBar
+              chipsOnly
+              activeScenario={resultScenario}
+              onSubmit={handleSearch}
+              loading={loading}
+            />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               <div className="lg:col-span-2 space-y-4">
                 <TimelineChart
