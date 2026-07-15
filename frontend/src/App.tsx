@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { InfoIcon } from "@twelvelabs-io/react";
 import { postQuery } from "./api/client";
 import type { TimelinePoint } from "./types/api";
 import { ChatPanel } from "./components/ChatPanel";
@@ -214,26 +215,46 @@ export default function App() {
 
       <div className="flex-1 flex">
         <aside className="w-48 flex-none border-r border-border-secondary px-3 py-6">
-          <nav className="space-y-1 sticky top-6">
-            {([
-              ["analyzer", "Brand Intelligence (Adidas Examples)"],
-              ["narrative", "Narrative Evolution"],
-              ["covid", "Retroactive Discovery (COVID-19)"],
-              ["tutorial", "Tutorial"],
-            ] as [Tab, string][]).map(([id, label]) => (
-              <button
-                key={id}
-                onClick={() => switchTab(id)}
-                className={
-                  "w-full text-left px-3 py-2 text-sm rounded-nav-item transition-colors " +
-                  (tab === id
-                    ? "bg-surface-secondary-hover text-foreground-body font-medium"
-                    : "text-foreground-subtle hover:text-foreground-body hover:bg-surface-secondary")
-                }
-              >
-                {label}
-              </button>
-            ))}
+          <nav className="sticky top-6">
+            {/* Analysis demos — the three scenario tabs. */}
+            <p className="px-3 pb-2 text-[11px] font-medium uppercase tracking-wider text-foreground-subtle">
+              Demo scenarios
+            </p>
+            <div className="space-y-1">
+              {([
+                ["analyzer", "Brand Intelligence (Adidas Examples)"],
+                ["narrative", "Narrative Evolution"],
+                ["covid", "Retroactive Discovery (COVID-19)"],
+              ] as [Tab, string][]).map(([id, label]) => (
+                <button
+                  key={id}
+                  onClick={() => switchTab(id)}
+                  className={
+                    "w-full text-left px-3 py-2 text-sm rounded-nav-item transition-colors " +
+                    (tab === id
+                      ? "bg-surface-secondary-hover text-foreground-body font-medium"
+                      : "text-foreground-subtle hover:text-foreground-body hover:bg-surface-secondary")
+                  }
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {/* Tutorial is help, not a demo — separated below a divider. */}
+            <div className="my-4 border-t border-border-secondary" />
+            <button
+              onClick={() => switchTab("tutorial")}
+              className={
+                "w-full flex items-center gap-2 px-3 py-2 text-sm rounded-nav-item transition-colors " +
+                (tab === "tutorial"
+                  ? "bg-surface-secondary-hover text-foreground-body font-medium"
+                  : "text-foreground-subtle hover:text-foreground-body hover:bg-surface-secondary")
+              }
+            >
+              <InfoIcon className="w-3.5 h-3.5 flex-none" />
+              How it works
+            </button>
           </nav>
         </aside>
 
