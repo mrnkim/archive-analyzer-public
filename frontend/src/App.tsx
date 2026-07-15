@@ -272,6 +272,16 @@ export default function App() {
                     data={result.timeline}
                     onPointClick={handleSelectPoint}
                   />
+                  {/* Narrative summary sits under the chart to balance the tall
+                      retroactive-discovery column on the right. */}
+                  <NarrativePanel
+                    query={streamingQuery}
+                    narrative={result?.narrative_summary}
+                    bullets={result?.summary_bullets}
+                    timeline={result.timeline}
+                    selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
+                    onSelectKey={selectByKey}
+                  />
                 </div>
                 <div className="space-y-4">
                   <RetroactiveDiscovery
@@ -287,16 +297,6 @@ export default function App() {
                   />
                 </div>
               </div>
-
-              <NarrativePanel
-                query={streamingQuery}
-                narrative={result?.narrative_summary}
-                bullets={result?.summary_bullets}
-                timeline={result.timeline}
-                selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
-                onSelectKey={selectByKey}
-                columns
-              />
 
               <EraClusters timeline={result.timeline} />
 
