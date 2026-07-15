@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { InfoIcon } from "@twelvelabs-io/react";
 import { postQuery } from "./api/client";
 import type { TimelinePoint } from "./types/api";
 import { ChatPanel } from "./components/ChatPanel";
@@ -8,17 +9,20 @@ import { EmptyState } from "./components/EmptyState";
 import { LoadingState } from "./components/LoadingState";
 import { NarrativePanel } from "./components/NarrativePanel";
 import { RevenueWidget } from "./components/RevenueWidget";
-import { SearchBar } from "./components/SearchBar";
+import { SearchBar, SEED_QUERIES } from "./components/SearchBar";
 import { TimelineChart } from "./components/TimelineChart";
 import { TutorialPanel } from "./components/TutorialPanel";
 import { TwelveLabsLogo } from "./components/TwelveLabsLogo";
 import { EraClusters } from "./components/narrative/EraClusters";
 import { SentimentStrip } from "./components/narrative/SentimentStrip";
 import { InflectionPoints } from "./components/narrative/InflectionPoints";
-import { NarrativeEmptyState } from "./components/narrative/NarrativeEmptyState";
+import { RetroactiveDiscovery } from "./components/covid/RetroactiveDiscovery";
+import { NarrativeEmptyState, NARRATIVE_DEMO } from "./components/narrative/NarrativeEmptyState";
+import { CovidEmptyState, COVID_DEMO } from "./components/narrative/CovidEmptyState";
+import { pointKey } from "./lib/period";
 import { useStore } from "./store";
 
-type Tab = "analyzer" | "narrative" | "tutorial";
+type Tab = "analyzer" | "narrative" | "covid" | "tutorial";
 
 type HealthResponse = {
   status: string;
@@ -32,6 +36,38 @@ type HealthResponse = {
 const showDebug =
   typeof window !== "undefined" &&
   new URLSearchParams(window.location.search).get("debug") === "1";
+
+// Scenario title + one-line description, shown at the top of each results page
+// (mirrors the demo-card copy). A/B/C come from the Adidas seed queries; N and V
+// are the single-scenario Narrative + COVID tabs.
+const SCENARIO_META: Record<string, { title: string; blurb: string }> = {
+  ...Object.fromEntries(
+    SEED_QUERIES.map((s) => [s.scenario, { title: s.title, blurb: s.blurb }])
+  ),
+  N: {
+    title: "Narrative Evolution — Donald Trump, 1980s to 2026",
+    blurb:
+      "From real-estate mogul to reality-TV celebrity to president — thematic eras, sentiment shifts, and inflection points.",
+  },
+  V: {
+    title: "Retroactive Discovery — COVID-19, 2019 → 2020",
+    blurb:
+      "From the Dec 2019 “pneumonia of unknown cause” disclosure to a named pandemic to the vaccine rollout — surfaced by meaning, without the term “COVID-19”.",
+  },
+};
+
+function ScenarioHeader({ scenario }: { scenario?: string }) {
+  const meta = scenario ? SCENARIO_META[scenario.toUpperCase()] : undefined;
+  if (!meta) return null;
+  return (
+    <div className="space-y-1">
+      <h2 className="text-lg font-semibold text-foreground-body tracking-tight">
+        {meta.title}
+      </h2>
+      <p className="text-sm text-foreground-subtle leading-relaxed">{meta.blurb}</p>
+    </div>
+  );
+}
 
 export default function App() {
   const [health, setHealth] = useState<HealthResponse | null>(null);
@@ -51,10 +87,29 @@ export default function App() {
   const loading = useStore((s) => s.loading);
   const setLoading = useStore((s) => s.setLoading);
   const clipGridRef = useRef<HTMLDivElement>(null);
+  // Tracks whether the current single-scenario tab (narrative/covid) has already
+  // auto-run its demo, so a failed run doesn't loop. Reset in switchTab.
+  const autoRanRef = useRef(false);
 
   useEffect(() => {
     fetch("/api/health").then((r) => r.json()).then(setHealth).catch(() => {});
   }, []);
+
+  // Narrative + COVID are single-scenario tabs — selecting the tab runs its one
+  // demo immediately instead of making the user click a card.
+  useEffect(() => {
+    if (
+      (tab === "narrative" || tab === "covid") &&
+      !result &&
+      !loading &&
+      !autoRanRef.current
+    ) {
+      autoRanRef.current = true;
+      const demo = tab === "covid" ? COVID_DEMO : NARRATIVE_DEMO;
+      handleSearch(demo.query, demo.scenario);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab, result, loading]);
 
   // Wrapping setSelectedPoint so user-initiated picks (timeline click,
   // clip-strip click) also scroll the player into view. The initial
@@ -76,13 +131,16 @@ export default function App() {
       resetChat();
       setStreamingQuery(null);
       setResultScenario(undefined);
+      autoRanRef.current = false;
     }
     setTab(id);
   }
 
-  // Jump to a given year's evidence (used by inflection-point clicks).
-  function selectYear(year: number) {
-    const point = result?.timeline.find((p) => p.year === year);
+  // Jump to a point's evidence by its period key (used by inflection-point and
+  // summary-bullet clicks). The key is `pointKey` — the plain year for the
+  // year-based tabs, or year*100+month for the month-based COVID tab.
+  function selectByKey(key: number) {
+    const point = result?.timeline.find((p) => pointKey(p) === key);
     if (point) handleSelectPoint(point);
   }
 
@@ -157,25 +215,49 @@ export default function App() {
 
       <div className="flex-1 flex">
         <aside className="w-48 flex-none border-r border-border-secondary px-3 py-6">
-          <nav className="space-y-1 sticky top-6">
-            {([
-              ["analyzer", "Brand Intelligence (Adidas Examples)"],
-              ["narrative", "Narrative Evolution"],
-              ["tutorial", "Tutorial"],
-            ] as [Tab, string][]).map(([id, label]) => (
-              <button
-                key={id}
-                onClick={() => switchTab(id)}
-                className={
-                  "w-full text-left px-3 py-2 text-sm rounded-nav-item transition-colors " +
-                  (tab === id
-                    ? "bg-surface-secondary-hover text-foreground-body font-medium"
-                    : "text-foreground-subtle hover:text-foreground-body hover:bg-surface-secondary")
-                }
-              >
-                {label}
-              </button>
-            ))}
+          <nav className="sticky top-6">
+            {/* Analysis demos — the three scenario tabs. */}
+            <p className="px-3 pb-2 text-[11px] font-medium uppercase tracking-wider text-foreground-subtle">
+              Demo scenarios
+            </p>
+            <div className="space-y-1">
+              {([
+                ["analyzer", "Brand Intelligence", "Adidas"],
+                ["narrative", "Narrative Evolution", "Trump"],
+                ["covid", "Retroactive Discovery", "COVID-19"],
+              ] as [Tab, string, string][]).map(([id, title, subject]) => (
+                <button
+                  key={id}
+                  onClick={() => switchTab(id)}
+                  className={
+                    "w-full text-left px-3 py-2 text-sm rounded-nav-item transition-colors " +
+                    (tab === id
+                      ? "bg-surface-secondary-hover text-foreground-body font-medium"
+                      : "text-foreground-subtle hover:text-foreground-body hover:bg-surface-secondary")
+                  }
+                >
+                  <span className="block leading-tight">{title}</span>
+                  <span className="block text-xs text-foreground-subtle leading-tight">
+                    {subject}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Tutorial is help, not a demo — separated below a divider. */}
+            <div className="my-4 border-t border-border-secondary" />
+            <button
+              onClick={() => switchTab("tutorial")}
+              className={
+                "w-full flex items-center gap-2 px-3 py-2 text-sm rounded-nav-item transition-colors " +
+                (tab === "tutorial"
+                  ? "bg-surface-secondary-hover text-foreground-body font-medium"
+                  : "text-foreground-subtle hover:text-foreground-body hover:bg-surface-secondary")
+              }
+            >
+              <InfoIcon className="w-3.5 h-3.5 flex-none" />
+              How it works
+            </button>
           </nav>
         </aside>
 
@@ -185,14 +267,9 @@ export default function App() {
           </main>
         ) : tab === "narrative" ? (
         <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
-          <SearchBar
-            onSubmit={(q, sc) => handleSearch(q, sc ?? "N")}
-            loading={loading}
-            showDemoChips={false}
-          />
-
           {result && (
             <>
+              <ScenarioHeader scenario={resultScenario} />
               {/* Overview: evidence volume + tone over time, with the pivotal
                   moments called out alongside. */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
@@ -203,13 +280,13 @@ export default function App() {
                   />
                   <SentimentStrip
                     timeline={result.timeline}
-                    selectedYear={selectedPoint?.year ?? null}
+                    selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
                     onSelect={handleSelectPoint}
                   />
                 </div>
                 <InflectionPoints
                   points={result.inflection_points ?? []}
-                  onSelectYear={selectYear}
+                  onSelectKey={selectByKey}
                 />
               </div>
 
@@ -220,8 +297,8 @@ export default function App() {
                 narrative={result?.narrative_summary}
                 bullets={result?.summary_bullets}
                 timeline={result.timeline}
-                selectedYear={selectedPoint?.year ?? null}
-                onSelectYear={selectYear}
+                selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
+                onSelectKey={selectByKey}
                 columns
               />
 
@@ -233,7 +310,7 @@ export default function App() {
               </div>
               <ClipStrip
                 timeline={result.timeline}
-                selectedYear={selectedPoint?.year ?? null}
+                selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
                 onSelect={handleSelectPoint}
                 exportQuery={result.query}
                 exportScenario={resultScenario}
@@ -247,12 +324,80 @@ export default function App() {
 
           {!result && !loading && <NarrativeEmptyState onRun={handleSearch} />}
         </main>
+        ) : tab === "covid" ? (
+        <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
+          {result && (
+            <>
+              <ScenarioHeader scenario={resultScenario} />
+              {/* Overview: monthly signal volume with the retroactive
+                  discovery panel (pre-naming clips surfaced by meaning) and the
+                  researcher/documentary value framing alongside. */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
+                <div className="lg:col-span-2 space-y-4">
+                  <TimelineChart
+                    data={result.timeline}
+                    onPointClick={handleSelectPoint}
+                  />
+                  {/* Narrative summary sits under the chart to balance the tall
+                      retroactive-discovery column on the right. */}
+                  <NarrativePanel
+                    query={streamingQuery}
+                    narrative={result?.narrative_summary}
+                    bullets={result?.summary_bullets}
+                    timeline={result.timeline}
+                    selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
+                    onSelectKey={selectByKey}
+                  />
+                </div>
+                <div className="space-y-4">
+                  {/* Estimate at the top-right, matching the Adidas + Narrative
+                      tabs; the retroactive-discovery panel sits below it. */}
+                  <RevenueWidget
+                    scenario="V"
+                    totalMentions={result.estimated_value.total_mentions}
+                    estimatedValueUsd={result.estimated_value.estimated_brand_intelligence_value_usd}
+                    basis={result.estimated_value.calculation_basis}
+                  />
+                  <RetroactiveDiscovery
+                    timeline={result.timeline}
+                    selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
+                    onSelectKey={selectByKey}
+                  />
+                </div>
+              </div>
+
+              <EraClusters timeline={result.timeline} />
+
+              <div ref={clipGridRef} className="scroll-mt-4">
+                <ClipGrid point={selectedPoint} />
+              </div>
+              <ClipStrip
+                timeline={result.timeline}
+                selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
+                onSelect={handleSelectPoint}
+                exportQuery={result.query}
+                exportScenario={resultScenario}
+              />
+
+              <ChatPanel />
+            </>
+          )}
+
+          {loading && <LoadingState />}
+
+          {!result && !loading && <CovidEmptyState onRun={handleSearch} />}
+        </main>
         ) : (
         <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
-        <SearchBar onSubmit={handleSearch} loading={loading} showDemoChips={!!result} />
-
         {result && (
           <>
+            <ScenarioHeader scenario={resultScenario} />
+            <SearchBar
+              chipsOnly
+              activeScenario={resultScenario}
+              onSubmit={handleSearch}
+              loading={loading}
+            />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               <div className="lg:col-span-2 space-y-4">
                 <TimelineChart
@@ -264,7 +409,7 @@ export default function App() {
                 </div>
                 <ClipStrip
                   timeline={result.timeline}
-                  selectedYear={selectedPoint?.year ?? null}
+                  selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
                   onSelect={handleSelectPoint}
                   exportQuery={result.query}
                   exportScenario={resultScenario}
@@ -282,8 +427,8 @@ export default function App() {
                     narrative={result?.narrative_summary}
                     bullets={result?.summary_bullets}
                     timeline={result.timeline}
-                    selectedYear={selectedPoint?.year ?? null}
-                    onSelectYear={selectYear}
+                    selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
+                    onSelectKey={selectByKey}
                   />
                 </div>
               </div>

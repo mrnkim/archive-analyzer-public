@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useEventSource } from "../hooks/useEventSource";
 import type { SummaryBullet, TimelinePoint } from "../types/api";
+import { pointKey, pointLabel } from "../lib/period";
 import { Markdown } from "./Markdown";
 
 type Props = {
@@ -14,8 +15,8 @@ type Props = {
   narrative?: string | null;
   bullets?: SummaryBullet[];
   timeline?: TimelinePoint[];
-  selectedYear?: number | null;
-  onSelectYear?: (year: number) => void;
+  selectedKey?: number | null;
+  onSelectKey?: (key: number) => void;
   /**
    * When true, flow the prose into magazine-style columns on wide screens.
    * Used when the panel sits as a full-width block instead of a narrow
@@ -107,14 +108,14 @@ export function NarrativePanel({
   narrative,
   bullets,
   timeline,
-  selectedYear,
-  onSelectYear,
+  selectedKey,
+  onSelectKey,
   columns,
 }: Props) {
   const fallback = fallbackBullets(narrative, timeline);
-  const providedByYear = new Map((bullets ?? []).map((bullet) => [bullet.year, bullet]));
+  const providedByKey = new Map((bullets ?? []).map((bullet) => [pointKey(bullet), bullet]));
   const linkedBullets = timeline?.length
-    ? timeline.map((point) => providedByYear.get(point.year) ?? fallback.find((b) => b.year === point.year))
+    ? timeline.map((point) => providedByKey.get(pointKey(point)) ?? fallback.find((b) => pointKey(b) === pointKey(point)))
         .filter((bullet): bullet is SummaryBullet => Boolean(bullet))
     : bullets ?? fallback;
   const hasLinkedBullets = linkedBullets.length > 0;
@@ -161,12 +162,12 @@ export function NarrativePanel({
           }
         >
           {linkedBullets.map((bullet, i) => {
-            const selected = bullet.year === selectedYear;
+            const selected = pointKey(bullet) === selectedKey;
             return (
               <button
                 key={`${bullet.year}-${bullet.headline}-${i}`}
                 type="button"
-                onClick={() => onSelectYear?.(bullet.year)}
+                onClick={() => onSelectKey?.(pointKey(bullet))}
                 className={
                   "w-full text-left rounded-nav-item border px-3 py-2.5 transition-colors " +
                   (selected
@@ -183,7 +184,7 @@ export function NarrativePanel({
                         : "bg-surface-secondary text-foreground-subtle")
                     }
                   >
-                    {bullet.year}
+                    {pointLabel(bullet)}
                   </span>
                   <span className="min-w-0">
                     <span className="block text-sm font-medium leading-snug">

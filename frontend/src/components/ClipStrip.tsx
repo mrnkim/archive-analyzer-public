@@ -1,9 +1,10 @@
 import { ExportButton } from "./ExportButton";
 import type { TimelinePoint } from "../types/api";
+import { pointKey, pointLabel } from "../lib/period";
 
 type Props = {
   timeline: TimelinePoint[];
-  selectedYear: number | null;
+  selectedKey: number | null;
   onSelect: (point: TimelinePoint) => void;
   exportQuery?: string;
   exportScenario?: string;
@@ -11,7 +12,7 @@ type Props = {
 
 export function ClipStrip({
   timeline,
-  selectedYear,
+  selectedKey,
   onSelect,
   exportQuery,
   exportScenario,
@@ -38,10 +39,10 @@ export function ClipStrip({
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-2">
         {timeline.map((p) => {
           const c = p.representative_clip;
-          const selected = p.year === selectedYear;
+          const selected = pointKey(p) === selectedKey;
           return (
             <button
-              key={`${p.year}-${c.asset_id}`}
+              key={`${pointKey(p)}-${c.asset_id}`}
               onClick={() => onSelect(p)}
               className={`group relative aspect-video rounded-tlds-4 overflow-hidden border-2 transition-all text-left ${
                 selected
@@ -66,8 +67,8 @@ export function ClipStrip({
               )}
               <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/85 via-black/45 to-transparent px-1.5 py-1">
                 <div className="flex items-center justify-between gap-1">
-                  <span className="text-[11px] font-semibold text-white tabular-nums">
-                    {p.year}
+                  <span className="text-[11px] font-semibold text-white tabular-nums whitespace-nowrap">
+                    {pointLabel(p)}
                   </span>
                   <span className="text-[9px] text-foreground-muted bg-black/40 rounded-sm px-1">
                     {p.frequency}×

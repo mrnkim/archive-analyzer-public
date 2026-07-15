@@ -2,26 +2,30 @@ type Props = {
   totalMentions: number;
   estimatedValueUsd: number;
   basis: string;
+  // The Retroactive Discovery / COVID tab ("V") reframes the same numbers for
+  // its buyer (researchers, documentary producers). Other tabs leave it unset.
+  scenario?: string;
 };
 
 function formatCurrency(value: number) {
   return `$${Math.round(value).toLocaleString()}`;
 }
 
-export function RevenueWidget({ totalMentions, estimatedValueUsd, basis }: Props) {
+export function RevenueWidget({ totalMentions, estimatedValueUsd, basis, scenario }: Props) {
   const assumedUnitValue =
     totalMentions > 0 ? estimatedValueUsd / totalMentions : 0;
+  const isRetro = (scenario ?? "").toUpperCase() === "V";
+  const heading = isRetro ? "Retroactive discovery value" : "Archive monetization estimate";
+  const subtitle = isRetro
+    ? "What pandemic researchers & documentary producers would license this pre-terminology footage for."
+    : "Modeled from verified scene count and a per-scene licensing assumption.";
 
   return (
     <div className="bg-surface-white border border-border-secondary rounded-tlds-3 p-4 overflow-hidden">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-sm font-medium text-foreground-body">
-            Archive monetization estimate
-          </h3>
-          <p className="text-xs text-foreground-subtle mt-1">
-            Modeled from verified scene count and a per-scene licensing assumption.
-          </p>
+          <h3 className="text-sm font-medium text-foreground-body">{heading}</h3>
+          <p className="text-xs text-foreground-subtle mt-1">{subtitle}</p>
         </div>
         <div className="text-right flex-none">
           <div className="text-[10px] uppercase tracking-[0.14em] text-foreground-subtle">

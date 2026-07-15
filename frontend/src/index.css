@@ -80,6 +80,17 @@ body {
   background-color: color-mix(in srgb, var(--tl-color-embed-green) 28%, transparent);
 }
 
+/* Pointer cursor on interactive elements. The TLDS/Radix default is
+   `cursor: default` on buttons; this restores the familiar hand cursor on
+   anything clickable, per product preference. Left UNLAYERED on purpose so it
+   wins over Tailwind's `utilities` layer (where cursor-default would live). */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+a[href],
+summary {
+  cursor: pointer;
+}
+
 /* Slim, on-brand scrollbars for the charcoal surfaces. */
 * {
   scrollbar-width: thin;

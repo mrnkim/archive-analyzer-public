@@ -1,5 +1,6 @@
 import { HlsClipPlayer } from "./HlsClipPlayer";
 import type { Scene, TimelinePoint } from "../types/api";
+import { pointLabel } from "../lib/period";
 
 type Props = {
   point: TimelinePoint | null;
@@ -26,7 +27,7 @@ export function ClipGrid({ point }: Props) {
       <div className="flex items-baseline justify-between mb-3">
         <div className="flex items-center gap-2">
           <h3 className="text-sm font-medium text-foreground-muted">
-            Scenes — {point.year}
+            Scenes — {pointLabel(point)}
           </h3>
           <span className="rounded-sm bg-surface-secondary px-1.5 py-0.5 text-[10px] font-tl-mono text-foreground-body">
             selected

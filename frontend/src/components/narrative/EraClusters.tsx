@@ -58,6 +58,10 @@ function toneWord(score: number): string {
 }
 
 export function EraClusters({ timeline }: Props) {
+  // Decade grouping is meaningless for the month-level COVID timeline (all in
+  // one year), so this era view is hidden there — the phases are already carried
+  // by the inflection points and the narrative.
+  if (timeline.some((p) => p.month != null)) return null;
   const clusters = buildClusters(timeline);
   if (clusters.length === 0) return null;
 

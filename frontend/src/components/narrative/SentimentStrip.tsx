@@ -1,12 +1,15 @@
 import type { TimelinePoint } from "../../types/api";
+import { pointKey, pointLabel } from "../../lib/period";
 
-// Sentiment overlay (PRD Scenario B differentiator #2): a year-by-year lane
-// of the prevailing coverage tone, colored hostile (red) → neutral → favorable
-// (green). Clicking a cell selects that year's evidence.
+// Sentiment overlay (PRD Scenario B differentiator #2): a lane of the prevailing
+// coverage tone over time, colored hostile (red) → neutral → favorable (green).
+// Works at year granularity (Trump) or month granularity (COVID). Clicking a
+// cell selects that point's evidence. `selectedKey` is a period key (year, or
+// year*100+month) — see lib/period.ts.
 
 type Props = {
   timeline: TimelinePoint[];
-  selectedYear: number | null;
+  selectedKey: number | null;
   onSelect: (point: TimelinePoint) => void;
 };
 
@@ -26,7 +29,7 @@ function toneLabel(p: TimelinePoint): string {
   return lbl.charAt(0).toUpperCase() + lbl.slice(1);
 }
 
-export function SentimentStrip({ timeline, selectedYear, onSelect }: Props) {
+export function SentimentStrip({ timeline, selectedKey, onSelect }: Props) {
   const points = timeline.filter((p) => p.sentiment);
   if (points.length === 0) return null;
 
@@ -58,12 +61,13 @@ export function SentimentStrip({ timeline, selectedYear, onSelect }: Props) {
       <div className="flex gap-1 overflow-x-auto pb-1">
         {points.map((p, i) => {
           const score = p.sentiment?.score ?? 0;
-          const active = p.year === selectedYear;
+          const active = pointKey(p) === selectedKey;
+          const label = pointLabel(p);
           return (
             <button
-              key={`${p.year}-${i}`}
+              key={`${pointKey(p)}-${i}`}
               onClick={() => onSelect(p)}
-              title={`${p.year} · ${toneLabel(p)} (${score >= 0 ? "+" : ""}${score.toFixed(2)}) · ${p.dominant_theme}`}
+              title={`${label} · ${toneLabel(p)} (${score >= 0 ? "+" : ""}${score.toFixed(2)}) · ${p.dominant_theme}`}
               className={
                 "group flex min-w-[44px] flex-1 flex-col items-center gap-1 rounded-nav-item border px-1 py-1.5 transition-colors " +
                 (active
@@ -75,7 +79,7 @@ export function SentimentStrip({ timeline, selectedYear, onSelect }: Props) {
                 className="h-6 w-full rounded-xs"
                 style={{ background: toneColor(score) }}
               />
-              <span className="text-[10px] font-tl-mono text-foreground-subtle">{p.year}</span>
+              <span className="text-[10px] font-tl-mono text-foreground-subtle whitespace-nowrap">{label}</span>
               <span
                 className={
                   "text-[10px] font-tl-mono tabular-nums " +

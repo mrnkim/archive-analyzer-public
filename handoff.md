@@ -7,12 +7,15 @@ to run, regenerate demo data, and deploy.
 
 - **URL:** https://archive-analyzer-public-production.up.railway.app
 - **Platform:** Railway (Dockerfile build, healthcheck `/api/health`, config in `railway.json`)
-- **Redeploy after a change:**
+- **Redeploy after a change:** run from the **repo root**
   ```bash
-  railway up <path-to-repo> --service archive-analyzer-public --ci
+  railway up --ci
   ```
-  Pass the explicit path — `railway up` uploads a directory. Changing a
-  service variable auto-redeploys the existing image.
+  `railway up` uploads the current directory, so run it from the repo root (the
+  older `railway up <path> --service …` form fails — use the bare `--ci` form).
+  Since 2026-07-13 the frontend depends on the private `@twelvelabs-io/react`
+  package, so the service needs a `REGISTRY_TOKEN` variable (see the 2026-07-13
+  section). Changing a service variable also auto-redeploys the existing image.
 - **Service env vars** (set in Railway, never committed — `.env` is dockerignored):
   `TWELVELABS_API_KEY`, `JOCKEY_BASE_URL`, `KS_ID`, `RATE_LIMIT_PER_MINUTE`,
   `APP_ENV=production`, `ALLOWED_ORIGINS=<the railway URL>`.
@@ -326,13 +329,13 @@ Tailwind v3, behavior unchanged._
         (year "2018", A/B/C letters) — `Chip` is a larger tag and doesn't fit them.
       - **Not done (optional, low value):** a full `<Text>` typography sweep.
 
-> **⚠️ Railway deploy is now BLOCKED until the Dockerfile handles the private
-> registry.** `Dockerfile` stage 1 runs `npm install` but (a) does NOT copy
-> `frontend/.npmrc` before it and (b) has no `REGISTRY_TOKEN` at build time — so the
-> Docker build now fails to resolve `@twelvelabs-io/react`. To deploy: copy `.npmrc`
-> into the frontend build stage AND pass `REGISTRY_TOKEN` (Docker build arg / BuildKit
-> secret), and set `REGISTRY_TOKEN` as a Railway build variable. This is the
-> public-repo × private-registry tradeoff — Track 1 avoided it; Track 2 requires it.
+> **✅ Railway deploy — RESOLVED (2026-07-13, see the dated section at the bottom).**
+> The `Dockerfile` frontend stage now copies `frontend/.npmrc` and takes an
+> `ARG REGISTRY_TOKEN`, so the Docker build installs the private
+> `@twelvelabs-io/react`. Set `REGISTRY_TOKEN` as a Railway **service** variable
+> (a *Shared* Variable must be shared into the service). Redeployed + verified live.
+> This is the public-repo × private-registry tradeoff — Track 1 avoided it; Track 2
+> requires the token at build time.
 
 ## Shipped this session (Track 1, PR1–PR2)
 
@@ -405,3 +408,308 @@ the startup hook (`main.py` → `cache.load_primed_from_disk()`) re-hydrates the
 `curl -s localhost:8000/api/query -X POST -H 'Content-Type: application/json'
 -d '{"query":"How has Adidas brand exposure changed from 1990 to 2025?","scenario":"A"}'
 -o /dev/null -w '%{http_code}\n'` → expect `200`.
+
+---
+
+# Handoff — 2026-07-13
+
+Long session: **finished Track 1, then executed all of Track 2** (adopting the
+real `@twelvelabs-io/react` component library), plus a Narrative-Evolution UX
+pass, a Dockerfile fix, and a live Railway redeploy. Everything is merged to
+**main (`7f6fb44`)** and deployed.
+
+## 1. Track 1 finalized
+- `::selection` highlight → TLDS `color-mix(... --tl-color-embed-green 28% ...)`
+  (`5c462cb`). Track 1 merged to main (`208b044`). (Full detail: 2026-07-09 section.)
+
+## 2. Narrative Evolution UX pass (commit `6681996`, in the Track 1 merge)
+Driven by feedback while running the app locally:
+- **Selected insight highlights in place** (chronological order) instead of being
+  pulled to the top of the AI-summary panel — the reordering read as confusing.
+  `NarrativePanel` dropped the pinned "Selected insight" card + the `visibleBullets`
+  filter; the in-place list item keeps the existing highlight.
+- **No load-time scroll jump.** Root cause was `ChatPanel`'s mount-time
+  `scrollIntoView` (the panel sits at the page bottom): guarded it to fire only
+  once the chat has messages. Also removed `NarrativePanel`'s now-redundant
+  scroll-to-selected effect.
+- **Narrative tab reordered** story-first: overview (timeline + sentiment +
+  inflection) → AI narrative → era clusters → clips → chat (was: narrative last).
+- **Tab labels shortened:** "Narrative Evolution" and "Brand Intelligence
+  (Adidas Examples)".
+
+## 3. Track 2 — real component library (merged to main `d38d560`)
+Per-PR detail is in the updated Track-2 checklist in the 2026-07-09 section above.
+Summary:
+- **Registry unblocked.** `@twelvelabs-io/react` is private (GitHub Packages, org
+  `twelvelabs-io`); an **outside-collaborator** `read:packages` PAT (SSO-authorized)
+  can read it. Local setup: token in `~/.tl-registry.env` (`export REGISTRY_TOKEN=…`),
+  `frontend/.npmrc` maps the scope + reads `${REGISTRY_TOKEN}`. Run npm as
+  `source ~/.tl-registry.env && npm …`.
+- **Stack upgrades** (each verified pixel-identical, merged to main): React
+  18→19.2.7 (`f95c93a`), Tailwind v3→v4.3.2 (`efae466`).
+- **PR8 (`82d82c1`):** installed `@twelvelabs-io/react@0.34.0`, imported the package
+  `tokens.css` + `theme.css` (dropped the vendored `tokens.css` + hand-rolled
+  `@theme`), added root `TooltipProvider`, installed the `twelvelabs-ui` Claude
+  skills (`.claude/skills`, gitignored).
+- **PR9 (`18e2d36`…`3e10f4b`):** swapped every cleanly-mapping control to the
+  library — `<Button>` (Analyze/Send/Export/demo prompts), `<TextField>` (search +
+  chat inputs), `<Spinner>`, the whole icon set (**`Icon.tsx` deleted**), a real
+  `<Tooltip>` on the timeline info hint, `CheckmarkIcon`. Kept custom (no fitting
+  component): recharts/data-viz, the tutorial doc layout, micro-badges. Skipped
+  the optional full `<Text>` sweep.
+- Verified end-to-end on **both tabs + tutorial**, zero console errors.
+
+## 4. Deployability + Railway
+- **Dockerfile fixed** (`352d9fc`, merged `7f6fb44`): the frontend build stage now
+  copies `frontend/.npmrc` and takes `ARG REGISTRY_TOKEN`, so the Docker build can
+  install the private package. Token stays in the build stage (multi-stage; the
+  runtime image copies only `dist/`), so it never ships.
+- **Railway:** set `REGISTRY_TOKEN` as a **service** variable. (A Railway *Shared*
+  Variable must be **shared into the service**, or added directly, to reach the
+  build `ARG`.)
+- **Redeployed the latest** via `railway up --ci` from the repo root — the service
+  had been serving a **stale old build**. Build succeeded (private package
+  installed), healthcheck passed, live bundle now the new version.
+
+## Handy: check which version is live
+```bash
+URL=https://archive-analyzer-public-production.up.railway.app
+JS=$(curl -s "$URL/" | grep -oE '/assets/index-[^"]+\.js' | head -1)
+curl -s "$URL$JS" | grep -oE "Adidas Examples|Trump Example"   # new vs old marker
+```
+
+## Notes for next session
+- The Docker build **requires** `REGISTRY_TOKEN` — CI / other machines / Railway all need it.
+- Optional remaining polish (low value): full `<Text>` typography sweep; `Chip`/`Banner` where they fit.
+- Local dev with the private package: always `source ~/.tl-registry.env` before `npm install`.
+
+---
+
+# Handoff — 2026-07-14
+
+Built the **third demo tab — "Retroactive Discovery (COVID-19)" (PRD Scenario C)**.
+It **ships on hand-built mock data and is verified end-to-end in the browser**;
+the live Jockey path is fully wired but the real ingest is **blocked by a Jockey
+beta account indexing limit** (see the blocker below). Nothing committed yet —
+all changes are in the working tree on `feature/tlds-components-track2`.
+
+## Scenario code + KS mapping
+- New scenario code is **`"V"`** (viral/COVID). Existing: A/B/C → Adidas KS,
+  N → Trump KS, **V → COVID KS** (`ks_id_covid`, unset for now → falls back to
+  primary KS, which is why mock mode still works).
+- ⚠️ **Naming note:** the code already had a scenario `"C"` (Adidas earned-vs-owned),
+  which is NOT the PRD's Scenario C. That's why COVID uses `"V"`.
+
+## What the COVID tab does (differentiator vs A/B/N)
+- **Month-level timeline** (year + month), not yearly. The 2020 emergence arc:
+  **Jan** mystery-pneumonia spike (pre-naming) → **Feb** WHO names COVID-19 →
+  **Mar** pandemic declared → **Dec** vaccine rollout. Months with no coverage
+  are skipped, so the chart reads as a clean emergence curve with a Jan peak.
+- Reuses the narrative-style layout: TimelineChart (month x-axis), SentimentStrip
+  (concern → cautious hope), InflectionPoints (4 pivotal months), NarrativePanel
+  bullets, ClipGrid/ClipStrip, plus RevenueWidget. EraClusters is hidden for
+  monthly data (decade grouping is meaningless in one year).
+- `pre_terminology` flag on early-2020 points → the chart tooltip shows
+  "Before it was named COVID-19".
+
+## Frontend — month support (no regression to Adidas/Trump)
+The year-based tabs are byte-unchanged because everything degrades to plain year
+when `month` is absent. Key change:
+- **NEW `frontend/src/lib/period.ts`** — `pointKey(p)` (= `year` or
+  `year*100+month`) and `pointLabel(p)` (= `period_label`/"Mon YYYY"/year).
+- Shared timeline components now take **`selectedKey`/`onSelectKey`** (period
+  keys) instead of `selectedYear`/`onSelectYear`, and render `pointLabel(p)`.
+  Touched: `TimelineChart` (x-axis dataKey `_k` + `tickFormatter`, pre_terminology
+  tooltip), `SentimentStrip`, `InflectionPoints`, `NarrativePanel` (bullets keyed
+  by `pointKey`), `ClipStrip`, `ClipGrid`, `EraClusters` (returns null when monthly).
+- `App.tsx`: new `covid` tab (nav + branch), `selectYear`→`selectByKey`,
+  `import { pointKey }`, `CovidEmptyState`.
+- **NEW `frontend/src/components/narrative/CovidEmptyState.tsx`**.
+- `types/api.ts`: `TimelinePoint` gains `month?`/`period_label?`/`pre_terminology?`;
+  `InflectionPoint` + `SummaryBullet` gain `month?`/`period_label?`.
+- ✅ `npm run build` green; browser-verified: month chart + labels render, Jan
+  peak "wow" visible, sentiment/inflection/bullets month-labeled, **real news
+  thumbnails play**, zero console errors. Adidas tab still shows "15 scenes across
+  12 years · peak 2018" (fallback confirmed).
+
+## Mock data — `data/primed/scenario_v.json`
+- Hand-built 2020 monthly payload, but the **scenes use the REAL uploaded assets'**
+  thumbnail + HLS URLs (fetched from `GET /assets/{id}`), so clips actually play.
+  20 clips, all media resolved.
+- The demo query string in `CovidEmptyState.COVID_DEMO.query` must stay identical
+  to the `query` field in `scenario_v.json` (cache key = query+scenario).
+
+## Backend — live path wired (ready for the data swap)
+- `config.py`: `ks_id_covid` + `ks_for_scenario` routes `"V"`.
+- `prompts/scenarios.py`: `SCENARIO_V_COVID` (month-level retroactive-discovery
+  prompt), registered `"V"`, followup subject. **Kept under the ~2000-char cap**
+  (`get_instructions("V")` = 1911 chars — over 2000 gets rejected "value too large").
+- `schemas/trend_data.py`: `month`/`period_label`/`pre_terminology` on the models;
+  **`COVID_DATA_JSON_SCHEMA`** (narrative schema + month fields, all `required`).
+- `routes/query.py`: selects `COVID_DATA_JSON_SCHEMA` for `"V"` (removed the old
+  `is_narrative` bool). Cache/enrichment path unchanged.
+- ✅ `pytest -q` → **23 passed**.
+
+## 🚧 BLOCKER — Jockey beta indexing limit (the real reason we're on mock)
+Curated **24 public 2020 COVID news clips** and ingested them via the jockey skill.
+**Only ~4/attempt reach `ready`; the rest fail indexing** (`status: failed`, no
+error message). Ruled out everything:
+- Content/codec: all failed items are valid `ready` assets (720p/1080p h264/av1,
+  HLS+thumbnail ready). The SAME asset succeeds one run, fails the next.
+- Burst/concurrency: staggering (6 s) gave the same ~4/20; **fully serialized
+  (1-at-a-time, wait for `ready`) still fails ~4/5 fast (~21 s vs ~94 s success).**
+This is the signature of an **account-level indexing rate/quota** (the account
+already has Adidas 23 + Trump 39 indexed). **Retrying is counterproductive.**
+
+### Ingest facts (for tomorrow's retry)
+- Ran with **`backend/.venv/bin/python`** (system `python3` has no `httpx`):
+  `backend/.venv/bin/python /Users/Miranda/twelveLabs/jockey/scripts/youtube_ingest.py "<url>" --ks-name "<name>"`.
+- `watch_videos?video_ids=ID1,ID2,...` expands to a playlist (verify:
+  `yt-dlp --dump-single-json --flat-playlist "<url>"`). The jockey skill forces a
+  **vanilla KS (no metadata)** → month precision relies on Jockey inferring dates
+  from content at query time.
+- **24 curated video IDs** (Phase 1 pre-naming ·2·3·4):
+  `2LtA0-qoHOg s6JDp-Uool8 wBI5ygku2Cg OVj-HIRzMLI YhlEq5MqAkQ ayUMPyMKcuI Mh8UGRIOwLU 5KJUcKV9q50 9VQVHz8APLw`
+  `TQBDq22-ADQ BpOGN8p6imY RR1Uwh2qsGs wJFr_JFkWMs GKymX9j_j9Q`
+  `O84hgvFk4HQ xKPWngYf2Wk 4ClTs8eAU2o gghJVPgdFvo 9mT0zFR9us8`
+  `p02fUBmOmlA SRPxbOJXLSE WrmdYOuaY20 ee__NG7YC8Q JYJ-GPYPMbg`
+  - 3 failed **download** (403, retry may clear): `OVj-HIRzMLI`, `TQBDq22-ADQ`, `wJFr_JFkWMs`.
+    Each has a redundant sibling already uploaded, so mock uses the other 20.
+- **20 uploaded assets are all `ready`** — a KS-only retry needs no re-download.
+- **3 junk COVID KSs created today (cleanup candidates — deleting frees quota):**
+  - `ks_019f5fd0-2457-7f63-9436-30eeb33c0b40` "COVID-19 Archive 2020" (4 ready + tombstoned items)
+  - `ks_019f5fe0-33a5-7382-a9cd-54d7f543b7fb` "COVID-19 Emergence Archive 2020" (3 ready)
+  - `ks_019f5fe7-2cea-7c60-a7f7-0e48157c5248` "COVID-19 Archive 2020 (serial)" (partial — I stopped it)
+- Gotcha: deleting a failed KS item then re-adding the SAME asset **409s** (delete
+  is eventually-consistent + tombstoned); re-home to a FRESH KS instead.
+
+## ⚠️ Gotcha hit today — `pytest` wipes the shared runtime cache
+`backend/tests/test_cache.py` calls `cache.clear()` on the **shared on-disk
+SQLite** (`data/runtime/query_cache.sqlite`). Running `pytest` therefore **empties
+the primed cache out from under a running backend**, so the next demo click misses
+cache → live Jockey call → `502 "instructions … value too large"`.
+**Fix = restart the backend** (startup re-hydrates `data/primed/*.json`). This is
+what happened at end of session; the COVID demo reverted to the empty state
+because the cache had been wiped by the test run.
+
+## State at end of session (resume here tomorrow)
+- **Nothing committed.** Working tree on `feature/tlds-components-track2` has all
+  the frontend/backend/mock changes above.
+- **No backend currently running** (stopped it; restart was declined to write this).
+- **To resume the demo:** `cd backend && .venv/bin/uvicorn app.main:app --port 8000`
+  (re-hydrates primed incl. `scenario_v.json`) → open http://127.0.0.1:8000 →
+  COVID tab → demo. Verify: `curl -s localhost:8000/api/query -X POST -H 'Content-Type: application/json' -d '{"query":"<COVID_DEMO.query>","scenario":"V"}' -o /dev/null -w '%{http_code}\n'` → `200` with `source":"cache"`.
+
+## Next-session TODO
+1. **Commit** today's work (frontend month refactor + COVID tab + backend wiring + mock).
+2. **Real data swap** (when the indexing quota resets): delete the 3 junk KSs to
+   free budget → one clean ingest of the 24 (ideally forcing yt-dlp `h264 ≤720p`
+   to also fix the 3 download-403s) → set `KS_ID_COVID` (`.env` + Railway) → capture
+   a live `scenario_v.json` (`python scripts/refresh_video_titles.py` after).
+3. Deploy via `railway up --ci` from repo root.
+
+> **✅ All three of the above were done on 2026-07-15 — see the next section.**
+> The Jockey indexing blocker was transient and cleared. The tab now runs on
+> LIVE data (plus a genuine Dec-2019 anchor) and is deployed. The 2026-07-14
+> facts above are historical.
+
+---
+
+# Handoff — 2026-07-15
+
+**The 2026-07-14 blocker is RESOLVED. The COVID tab now runs on LIVE Jockey data
+— including a genuine December-2019 broadcast anchor — and is DEPLOYED to Railway
+production.** All work is on branch **`feature/covid-tab`** (14 commits,
+`8a60eaa`…`6f443a5`), **NOT merged to main** — `railway up` deploys the working
+tree, so prod is running this branch's code.
+
+## 1. Indexing throttle was transient — RESOLVED
+Yesterday's "only ~4/20 index" failure was a **transient account-level indexing
+throttle**, not a hard quota; after ~1 day it cleared. Recovery (no re-download):
+- Deleted the 3 junk COVID KSs (`ks_019f5fd0…`, `ks_019f5fe0…`, `ks_019f5fe7…`).
+- **Re-homed the 20 already-`ready` assets into a FRESH KS → 20/20 indexed.**
+  Assets survive KS deletion; the failure was KS-item *indexing*, not upload.
+- **Live COVID KS = `ks_019f63c1-5083-78b2-9a37-136135c086fd`** ("COVID-19
+  Emergence 2020"), now 21 items (20 re-homed + the CCTV clip in §4).
+- Admin/re-home/poll helper scripts live in the session scratchpad; not committed.
+
+## 2. Live data swap (mock → real Jockey)
+`data/primed/scenario_v.json` is now a **live capture** against the COVID KS, not
+hand-built mock. Flow: set `KS_ID_COVID` in `.env` → move the mock aside → clear
+`data/runtime/query_cache.sqlite` → restart backend → POST the demo query → live
+Jockey call → save `{query, scenario:"V", payload}`.
+- **Prompt fix** (`prompts/scenarios.py`): scenario V uses a per-**month**
+  bullet instruction (`SUMMARY_BULLET_INSTRUCTIONS_MONTHLY`); the year-based one
+  collapsed all-2020 into one bullet. The ~2000-char cap is soft — N runs at 2322.
+
+## 3. Keyword-free demo query (PRD differentiator #1)
+The query no longer contains "COVID-19" — Jockey finds the illness by MEANING:
+> "Show me references to respiratory illness, unusual pneumonia, and Wuhan across
+> 2019–2020 archive content — surface the earliest mentions and how the coverage
+> evolved."
+Must stay byte-identical in `CovidEmptyState.COVID_DEMO.query` AND the
+`scenario_v.json` `query` field (cache key = `sha256("V|"+query.lower())`).
+
+## 4. Genuine December-2019 anchor (the real "wow")
+Genuine **Dec-2019** broadcast footage on YouTube is effectively nonexistent (the
+story broke ~Dec 31). The one real artifact is **CCTV 新闻直播间 "不明原因肺炎
+(pneumonia of unknown cause), Wuhan, 2019-12-31"** (verified yt-dlp metadata
+timestamp = 2019-12-31).
+- **Manual ingest** — the jockey skill is **YouTube-only** (rebuilds a
+  youtube.com/watch URL from the extracted id → fails on CCTV). So: `yt-dlp`
+  direct download → upload via the **assets multipart** endpoint
+  (`upload_asset_multipart`) → `add_ks_item` **after** the asset finishes
+  processing (adding before → 400 "asset being processed").
+- **The Dec-2019 timeline point is HAND-AUTHORED** in `scenario_v.json`: Jockey
+  (vanilla KS, no date metadata) grouped the CCTV clip under Jan 2020, so the
+  point was built from the asset's ground-truth date + real thumbnail/HLS. The
+  other 4 points (Jan/Feb/Mar/Dec 2020) are Jockey live-generated. Timeline now
+  **Dec 2019 → Jan → Feb → Mar → Dec 2020** (14 scenes, 5 bullets, 5 inflections;
+  Dec 2019 + Jan 2020 both `pre_terminology`). Demo-narration caveat: this one
+  point is curated, not auto-dated by Jockey.
+
+## 5. COVID tab redesign (purpose-built for Scenario C)
+Was borrowing the Narrative layout; rebuilt around retroactive discovery:
+- **NEW `frontend/src/components/covid/RetroactiveDiscovery.tsx`** replaces
+  InflectionPoints on the COVID tab (N tab keeps InflectionPoints): "matched by
+  meaning · not keywords" badge, "found before it had a name" hero (earliest ref
+  vs Feb 11 2020 naming), pre-terminology clip quotes.
+- **TimelineChart**: WHO-naming boundary marker + a filled monotone **emergence
+  curve (Area)** for monthly data (was sparse floating dots); year tabs keep Bar
+  (guarded by `isMonthly`).
+- **RevenueWidget**: scenario-V framing (researcher/documentary buyer).
+- **Removed** the "Coverage sentiment over time" panel from the COVID tab (N keeps it).
+- Layout: left col = timeline + AI narrative; right col = estimate (top) +
+  RetroactiveDiscovery.
+
+## 6. Cross-tab UX polish
+- **Scenario header** on every results page (`SCENARIO_META` + `ScenarioHeader`
+  in App.tsx) — title + one-line description, mirroring the demo-card copy.
+- **Single-scenario tabs (Narrative + COVID) auto-run** on selection; their
+  free-form **search bars were removed** (they invited arbitrary queries the
+  curated demo can't serve → the "Analyzing then revert" bug). Follow-ups still
+  live in the ChatPanel.
+- **Adidas**: the free-form text input was also removed; it now shows an **A/B/C
+  chip switcher** (`chipsOnly` mode on SearchBar) with the active scenario chip
+  filled (`primary`). The empty-state 3 cards remain the entry point.
+- **Nav**: grouped under a "Demo scenarios" label; a divider separates the
+  tutorial, relabeled "How it works" with an info icon. Scenario tabs are
+  two-line ([capability] / [subject]).
+- **Global pointer cursor** on buttons/links — unlayered rule in `index.css` so
+  it wins over Tailwind's utilities layer (TLDS/Radix default is `cursor:default`).
+
+## 7. Deployed to Railway production
+- Set `KS_ID_COVID=ks_019f63c1-5083-78b2-9a37-136135c086fd` as a Railway service
+  variable (`railway variables --set … --skip-deploys`) — `KS_ID` and
+  `KS_ID_NARRATIVE` were already present.
+- `railway up --ci` from repo root → build + deploy complete, healthcheck passed.
+- **Verified live:** the COVID query returns `source: cache` with the full
+  Dec 2019 → Dec 2020 timeline (14 scenes, Dec-2019 CCTV anchor) at
+  https://archive-analyzer-public-production.up.railway.app.
+
+## Notes for next session
+- **Branch not merged.** `feature/covid-tab` is deployed but not merged to `main`
+  — open a PR / merge when ready.
+- Re-capturing live COVID data later drops the hand-authored Dec-2019 point —
+  re-apply the CCTV anchor after any fresh capture.
+- `railway up` ships the local working tree; keep it clean before deploying.

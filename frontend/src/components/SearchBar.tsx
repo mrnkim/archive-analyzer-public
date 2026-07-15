@@ -7,6 +7,13 @@ type Props = {
   // Quick-access demo chips — hidden on the empty state (the scenario
   // cards cover that), shown once a result is on screen for fast re-runs.
   showDemoChips?: boolean;
+  // Scenario-specific input hint. Defaults to the Adidas brand example.
+  placeholder?: string;
+  // Render only the A/B/C scenario chips (no free-form text input) — used as a
+  // scenario switcher on the Adidas results view.
+  chipsOnly?: boolean;
+  // Scenario code of the on-screen result, so its chip reads as selected.
+  activeScenario?: string;
 };
 
 export const SEED_QUERIES = [
@@ -35,7 +42,14 @@ export const SEED_QUERIES = [
   },
 ];
 
-export function SearchBar({ onSubmit, loading, showDemoChips = true }: Props) {
+export function SearchBar({
+  onSubmit,
+  loading,
+  showDemoChips = true,
+  placeholder = "Ask anything — e.g. 'Adidas exposure over 30 years'",
+  chipsOnly = false,
+  activeScenario,
+}: Props) {
   const [input, setInput] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
@@ -45,12 +59,13 @@ export function SearchBar({ onSubmit, loading, showDemoChips = true }: Props) {
 
   return (
     <div className="space-y-3">
+      {!chipsOnly && (
       <form onSubmit={handleSubmit} className="flex gap-2">
         <TextField
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask anything — e.g. 'Adidas exposure over 30 years'"
+          placeholder={placeholder}
           disabled={loading}
           className="flex-1"
         />
@@ -65,14 +80,17 @@ export function SearchBar({ onSubmit, loading, showDemoChips = true }: Props) {
           {loading ? "Analyzing…" : "Analyze"}
         </Button>
       </form>
+      )}
 
-      {showDemoChips && (
+      {(chipsOnly || showDemoChips) && (
       <div className="flex flex-wrap gap-2">
-        <span className="text-xs text-foreground-subtle self-center">Demo prompts:</span>
+        <span className="text-xs text-foreground-subtle self-center">
+          {chipsOnly ? "Scenario:" : "Demo prompts:"}
+        </span>
         {SEED_QUERIES.map((s) => (
           <Button
             key={s.scenario}
-            variant="outlined-gray"
+            variant={s.scenario === activeScenario ? "primary" : "outlined-gray"}
             size="sm"
             onClick={() => {
               setInput(s.query);

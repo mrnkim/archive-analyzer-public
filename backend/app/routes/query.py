@@ -17,6 +17,7 @@ from app.deps import jockey_assets as jockey_api
 from app.deps.jockey_client import JockeyClient, QueryError
 from app.prompts import get_instructions
 from app.schemas.trend_data import (
+    COVID_DATA_JSON_SCHEMA,
     NARRATIVE_DATA_JSON_SCHEMA,
     TREND_DATA_JSON_SCHEMA,
     TrendResponse,
@@ -180,8 +181,7 @@ def _extract_structured_payload(jockey_response: dict) -> dict:
 @router.post("/query", response_model=QueryResponse)
 async def query(req: QueryRequest) -> QueryResponse:
     settings = get_settings()
-    is_narrative = (req.scenario or "").upper() == "N"
-    # The Narrative Evolution tab runs against a separate archive (Trump KS).
+    # The Narrative Evolution + COVID tabs run against separate archives.
     ks_id = settings.ks_for_scenario(req.scenario)
     client = JockeyClient(ks_id=ks_id)
 
@@ -199,7 +199,13 @@ async def query(req: QueryRequest) -> QueryResponse:
         return QueryResponse(**cached)
 
     instructions = get_instructions(req.scenario)
-    text_format = NARRATIVE_DATA_JSON_SCHEMA if is_narrative else TREND_DATA_JSON_SCHEMA
+    _sc = (req.scenario or "").upper()
+    if _sc == "V":
+        text_format = COVID_DATA_JSON_SCHEMA
+    elif _sc == "N":
+        text_format = NARRATIVE_DATA_JSON_SCHEMA
+    else:
+        text_format = TREND_DATA_JSON_SCHEMA
     try:
         raw = await client.create_response(
             question=req.query,
