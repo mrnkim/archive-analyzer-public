@@ -8,7 +8,7 @@ import { EmptyState } from "./components/EmptyState";
 import { LoadingState } from "./components/LoadingState";
 import { NarrativePanel } from "./components/NarrativePanel";
 import { RevenueWidget } from "./components/RevenueWidget";
-import { SearchBar } from "./components/SearchBar";
+import { SearchBar, SEED_QUERIES } from "./components/SearchBar";
 import { TimelineChart } from "./components/TimelineChart";
 import { TutorialPanel } from "./components/TutorialPanel";
 import { TwelveLabsLogo } from "./components/TwelveLabsLogo";
@@ -16,8 +16,8 @@ import { EraClusters } from "./components/narrative/EraClusters";
 import { SentimentStrip } from "./components/narrative/SentimentStrip";
 import { InflectionPoints } from "./components/narrative/InflectionPoints";
 import { RetroactiveDiscovery } from "./components/covid/RetroactiveDiscovery";
-import { NarrativeEmptyState } from "./components/narrative/NarrativeEmptyState";
-import { CovidEmptyState } from "./components/narrative/CovidEmptyState";
+import { NarrativeEmptyState, NARRATIVE_DEMO } from "./components/narrative/NarrativeEmptyState";
+import { CovidEmptyState, COVID_DEMO } from "./components/narrative/CovidEmptyState";
 import { pointKey } from "./lib/period";
 import { useStore } from "./store";
 
@@ -35,6 +35,38 @@ type HealthResponse = {
 const showDebug =
   typeof window !== "undefined" &&
   new URLSearchParams(window.location.search).get("debug") === "1";
+
+// Scenario title + one-line description, shown at the top of each results page
+// (mirrors the demo-card copy). A/B/C come from the Adidas seed queries; N and V
+// are the single-scenario Narrative + COVID tabs.
+const SCENARIO_META: Record<string, { title: string; blurb: string }> = {
+  ...Object.fromEntries(
+    SEED_QUERIES.map((s) => [s.scenario, { title: s.title, blurb: s.blurb }])
+  ),
+  N: {
+    title: "Narrative Evolution — Donald Trump, 1980s to 2026",
+    blurb:
+      "From real-estate mogul to reality-TV celebrity to president — thematic eras, sentiment shifts, and inflection points.",
+  },
+  V: {
+    title: "Retroactive Discovery — COVID-19, 2019 → 2020",
+    blurb:
+      "From the Dec 2019 “pneumonia of unknown cause” disclosure to a named pandemic to the vaccine rollout — surfaced by meaning, without the term “COVID-19”.",
+  },
+};
+
+function ScenarioHeader({ scenario }: { scenario?: string }) {
+  const meta = scenario ? SCENARIO_META[scenario.toUpperCase()] : undefined;
+  if (!meta) return null;
+  return (
+    <div className="space-y-1">
+      <h2 className="text-lg font-semibold text-foreground-body tracking-tight">
+        {meta.title}
+      </h2>
+      <p className="text-sm text-foreground-subtle leading-relaxed">{meta.blurb}</p>
+    </div>
+  );
+}
 
 export default function App() {
   const [health, setHealth] = useState<HealthResponse | null>(null);
@@ -54,10 +86,29 @@ export default function App() {
   const loading = useStore((s) => s.loading);
   const setLoading = useStore((s) => s.setLoading);
   const clipGridRef = useRef<HTMLDivElement>(null);
+  // Tracks whether the current single-scenario tab (narrative/covid) has already
+  // auto-run its demo, so a failed run doesn't loop. Reset in switchTab.
+  const autoRanRef = useRef(false);
 
   useEffect(() => {
     fetch("/api/health").then((r) => r.json()).then(setHealth).catch(() => {});
   }, []);
+
+  // Narrative + COVID are single-scenario tabs — selecting the tab runs its one
+  // demo immediately instead of making the user click a card.
+  useEffect(() => {
+    if (
+      (tab === "narrative" || tab === "covid") &&
+      !result &&
+      !loading &&
+      !autoRanRef.current
+    ) {
+      autoRanRef.current = true;
+      const demo = tab === "covid" ? COVID_DEMO : NARRATIVE_DEMO;
+      handleSearch(demo.query, demo.scenario);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab, result, loading]);
 
   // Wrapping setSelectedPoint so user-initiated picks (timeline click,
   // clip-strip click) also scroll the player into view. The initial
@@ -79,6 +130,7 @@ export default function App() {
       resetChat();
       setStreamingQuery(null);
       setResultScenario(undefined);
+      autoRanRef.current = false;
     }
     setTab(id);
   }
@@ -199,6 +251,7 @@ export default function App() {
 
           {result && (
             <>
+              <ScenarioHeader scenario={resultScenario} />
               {/* Overview: evidence volume + tone over time, with the pivotal
                   moments called out alongside. */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
@@ -263,6 +316,7 @@ export default function App() {
 
           {result && (
             <>
+              <ScenarioHeader scenario={resultScenario} />
               {/* Overview: monthly signal volume with the retroactive
                   discovery panel (pre-naming clips surfaced by meaning) and the
                   researcher/documentary value framing alongside. */}
@@ -327,6 +381,7 @@ export default function App() {
 
         {result && (
           <>
+            <ScenarioHeader scenario={resultScenario} />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               <div className="lg:col-span-2 space-y-4">
                 <TimelineChart
