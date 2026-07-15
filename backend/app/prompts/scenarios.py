@@ -184,6 +184,18 @@ bullet must use that timeline `year`, a short `headline`, and one sentence of
 UI can highlight the matching chart dot. Keep narrative_summary as a brief
 fallback only."""
 
+# Month-level variant for the COVID tab ("V"): every timeline point is the
+# same year (2020), so a per-year bullet collapses to one. Ask for one bullet
+# per MONTH/point instead so the narrative column stays populated.
+SUMMARY_BULLET_INSTRUCTIONS_MONTHLY = """
+
+For the AI summary, do not write long prose as the primary output. Return
+summary_bullets with exactly one bullet for EVERY month/point in the timeline
+— not one per year (every point here is 2020). Each bullet must carry that
+point's `year`, `month`, and `period_label`, a short `headline`, and one
+sentence of `text` on what changed that month so the UI can highlight the
+matching chart dot. Keep narrative_summary as a brief fallback only."""
+
 DEFAULT_INSTRUCTIONS = SCENARIO_A_BRAND
 
 SCENARIO_INSTRUCTIONS: dict[str, str] = {
@@ -198,11 +210,14 @@ SCENARIO_INSTRUCTIONS: dict[str, str] = {
 def get_instructions(scenario: str | None) -> str:
     """Return the system prompt for the requested scenario.
 
-    Falls back to scenario A when unknown.
+    Falls back to scenario A when unknown. The COVID tab ("V") is month-level
+    (every point is 2020), so it uses a per-month summary-bullet instruction
+    instead of the per-year one to keep the narrative column populated.
     """
-    if scenario and scenario.upper() in SCENARIO_INSTRUCTIONS:
-        return SCENARIO_INSTRUCTIONS[scenario.upper()] + SUMMARY_BULLET_INSTRUCTIONS
-    return DEFAULT_INSTRUCTIONS + SUMMARY_BULLET_INSTRUCTIONS
+    sc = scenario.upper() if scenario else None
+    base = SCENARIO_INSTRUCTIONS.get(sc, DEFAULT_INSTRUCTIONS)
+    bullets = SUMMARY_BULLET_INSTRUCTIONS_MONTHLY if sc == "V" else SUMMARY_BULLET_INSTRUCTIONS
+    return base + bullets
 
 
 def get_followup_instructions(scenario: str | None) -> str:

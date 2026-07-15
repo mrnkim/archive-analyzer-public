@@ -5,6 +5,7 @@ import {
   Cell,
   ComposedChart,
   ReferenceDot,
+  ReferenceLine,
   ResponsiveContainer,
   Scatter,
   Tooltip,
@@ -27,6 +28,7 @@ const CHART = {
   axisLine: "#d3d1cf", // --tl-color-gray-300 (border-secondary)
   peakLabel: "#1d1c1b", // --tl-color-gray-700 (foreground-body)
   brushFill: "#ffffff", // --tl-color-white (surface-white)
+  boundary: "#8f8984", // --tl-color-gray-500 (foreground-subtle) — naming line
 } as const;
 
 // Chart datum = a timeline point plus a numeric x key (`_k`) and its human
@@ -94,6 +96,14 @@ export function TimelineChart({ data, onPointClick }: Props) {
   const isMonthly = data.some((p) => p.month != null);
   const unit = isMonthly ? "months" : "years";
   const fmtTick = (v: number) => labelByKey.get(v) ?? String(v);
+  // COVID tab only: the first month that is NOT pre-terminology marks where the
+  // disease got its official name. Rendered as a boundary line so the eye reads
+  // everything to its left as pre-naming discovery. Undefined (→ no line) unless
+  // the data actually spans the pre/post-naming split, so year tabs are unchanged.
+  const namingDatum =
+    isMonthly && chartData.some((p) => p.pre_terminology)
+      ? chartData.slice().sort((a, b) => a._k - b._k).find((p) => !p.pre_terminology)
+      : undefined;
 
   return (
     <div className="bg-surface-white border border-border-secondary rounded-tlds-3 p-4">
@@ -116,6 +126,11 @@ export function TimelineChart({ data, onPointClick }: Props) {
           {totalScenes} scenes across {chartData.length} {unit} · peak: {peakDatum._label}
         </span>
       </div>
+      {isMonthly && (
+        <p className="-mt-1 mb-3 text-xs text-foreground-subtle">
+          Matched by meaning — these scenes were surfaced without the term “COVID-19”.
+        </p>
+      )}
       <ResponsiveContainer width="100%" height={320}>
         <ComposedChart
           data={chartData}
@@ -173,6 +188,20 @@ export function TimelineChart({ data, onPointClick }: Props) {
               />
             ))}
           </Scatter>
+          {namingDatum && (
+            <ReferenceLine
+              x={namingDatum._k}
+              stroke={CHART.boundary}
+              strokeDasharray="4 3"
+              label={{
+                value: "named “COVID-19”",
+                position: "insideTopRight",
+                fill: CHART.boundary,
+                fontSize: 10,
+                fontWeight: 600,
+              }}
+            />
+          )}
           <ReferenceDot
             x={peakDatum._k}
             y={peakDatum.frequency}

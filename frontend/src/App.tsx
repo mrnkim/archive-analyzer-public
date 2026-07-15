@@ -15,6 +15,7 @@ import { TwelveLabsLogo } from "./components/TwelveLabsLogo";
 import { EraClusters } from "./components/narrative/EraClusters";
 import { SentimentStrip } from "./components/narrative/SentimentStrip";
 import { InflectionPoints } from "./components/narrative/InflectionPoints";
+import { RetroactiveDiscovery } from "./components/covid/RetroactiveDiscovery";
 import { NarrativeEmptyState } from "./components/narrative/NarrativeEmptyState";
 import { CovidEmptyState } from "./components/narrative/CovidEmptyState";
 import { pointKey } from "./lib/period";
@@ -262,11 +263,9 @@ export default function App() {
 
           {result && (
             <>
-              {/* Overview: monthly signal volume + tone, with the pivotal
-                  moments (first Wuhan reference, WHO naming, pandemic, vaccine)
-                  and the archive-value framing alongside. NOTE: the timeline is
-                  still year-keyed here — the month-level x-axis + schema land
-                  once the live Jockey response shape is confirmed. */}
+              {/* Overview: monthly signal volume + tone, with the retroactive
+                  discovery panel (pre-naming clips surfaced by meaning) and the
+                  researcher/documentary value framing alongside. */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
                 <div className="lg:col-span-2 space-y-4">
                   <TimelineChart
@@ -280,11 +279,13 @@ export default function App() {
                   />
                 </div>
                 <div className="space-y-4">
-                  <InflectionPoints
-                    points={result.inflection_points ?? []}
+                  <RetroactiveDiscovery
+                    timeline={result.timeline}
+                    selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
                     onSelectKey={selectByKey}
                   />
                   <RevenueWidget
+                    scenario="V"
                     totalMentions={result.estimated_value.total_mentions}
                     estimatedValueUsd={result.estimated_value.estimated_brand_intelligence_value_usd}
                     basis={result.estimated_value.calculation_basis}
