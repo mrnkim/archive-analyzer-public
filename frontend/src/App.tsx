@@ -243,13 +243,6 @@ export default function App() {
           </main>
         ) : tab === "narrative" ? (
         <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
-          <SearchBar
-            onSubmit={(q, sc) => handleSearch(q, sc ?? "N")}
-            loading={loading}
-            showDemoChips={false}
-            placeholder="Ask about a public figure's media narrative — e.g. 'Trump's portrayal since the 1980s'"
-          />
-
           {result && (
             <>
               <ScenarioHeader scenario={resultScenario} />
@@ -309,13 +302,6 @@ export default function App() {
         </main>
         ) : tab === "covid" ? (
         <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
-          <SearchBar
-            onSubmit={(q, sc) => handleSearch(q, sc ?? "V")}
-            loading={loading}
-            showDemoChips={false}
-            placeholder="Ask about the archive's earliest signals — e.g. 'unusual pneumonia in Wuhan, 2019'"
-          />
-
           {result && (
             <>
               <ScenarioHeader scenario={resultScenario} />
