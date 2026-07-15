@@ -284,16 +284,18 @@ export default function App() {
                   />
                 </div>
                 <div className="space-y-4">
-                  <RetroactiveDiscovery
-                    timeline={result.timeline}
-                    selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
-                    onSelectKey={selectByKey}
-                  />
+                  {/* Estimate at the top-right, matching the Adidas + Narrative
+                      tabs; the retroactive-discovery panel sits below it. */}
                   <RevenueWidget
                     scenario="V"
                     totalMentions={result.estimated_value.total_mentions}
                     estimatedValueUsd={result.estimated_value.estimated_brand_intelligence_value_usd}
                     basis={result.estimated_value.calculation_basis}
+                  />
+                  <RetroactiveDiscovery
+                    timeline={result.timeline}
+                    selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
+                    onSelectKey={selectByKey}
                   />
                 </div>
               </div>
