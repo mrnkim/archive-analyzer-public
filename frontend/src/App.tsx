@@ -222,9 +222,9 @@ export default function App() {
             </p>
             <div className="space-y-1">
               {([
-                ["analyzer", "Brand Intelligence (Adidas Examples)"],
-                ["narrative", "Narrative Evolution"],
-                ["covid", "Retroactive Discovery (COVID-19)"],
+                ["analyzer", "Brand Intelligence — Adidas"],
+                ["narrative", "Narrative Evolution — Trump"],
+                ["covid", "Retroactive Discovery — COVID-19"],
               ] as [Tab, string][]).map(([id, label]) => (
                 <button
                   key={id}
