@@ -9,6 +9,9 @@ type Props = {
   showDemoChips?: boolean;
   // Scenario-specific input hint. Defaults to the Adidas brand example.
   placeholder?: string;
+  // Render only the A/B/C scenario chips (no free-form text input) — used as a
+  // scenario switcher on the Adidas results view.
+  chipsOnly?: boolean;
 };
 
 export const SEED_QUERIES = [
@@ -42,6 +45,7 @@ export function SearchBar({
   loading,
   showDemoChips = true,
   placeholder = "Ask anything — e.g. 'Adidas exposure over 30 years'",
+  chipsOnly = false,
 }: Props) {
   const [input, setInput] = useState("");
 
@@ -52,6 +56,7 @@ export function SearchBar({
 
   return (
     <div className="space-y-3">
+      {!chipsOnly && (
       <form onSubmit={handleSubmit} className="flex gap-2">
         <TextField
           type="text"
@@ -72,10 +77,13 @@ export function SearchBar({
           {loading ? "Analyzing…" : "Analyze"}
         </Button>
       </form>
+      )}
 
-      {showDemoChips && (
+      {(chipsOnly || showDemoChips) && (
       <div className="flex flex-wrap gap-2">
-        <span className="text-xs text-foreground-subtle self-center">Demo prompts:</span>
+        <span className="text-xs text-foreground-subtle self-center">
+          {chipsOnly ? "Scenario:" : "Demo prompts:"}
+        </span>
         {SEED_QUERIES.map((s) => (
           <Button
             key={s.scenario}

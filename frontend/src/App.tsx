@@ -365,11 +365,10 @@ export default function App() {
         </main>
         ) : (
         <main className="flex-1 px-6 py-6 max-w-7xl mx-auto w-full space-y-6">
-        <SearchBar onSubmit={handleSearch} loading={loading} showDemoChips={!!result} />
-
         {result && (
           <>
             <ScenarioHeader scenario={resultScenario} />
+            <SearchBar chipsOnly onSubmit={handleSearch} loading={loading} />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               <div className="lg:col-span-2 space-y-4">
                 <TimelineChart
