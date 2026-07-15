@@ -1,72 +1,126 @@
 {
-  "query": "Show references to an unexplained respiratory illness in Wuhan across 2020 — before it was called COVID-19 — and how the coverage evolved through the WHO naming, the pandemic declaration, and the vaccine rollout.",
+  "query": "Show me references to respiratory illness, unusual pneumonia, and Wuhan across 2019–2020 archive content — surface the earliest mentions and how the coverage evolved.",
   "scenario": "V",
   "payload": {
-    "entity": "References to the unexplained respiratory illness in Wuhan across 2020",
-    "query": "Show references to an unexplained respiratory illness in Wuhan across 2020 — before it was called COVID-19 — and how the coverage evolved through the WHO naming, the pandemic declaration, and the vaccine rollout.",
+    "entity": "Respiratory illness / unusual pneumonia / Wuhan outbreak coverage in the 2019–2020 archive",
+    "query": "Show me references to respiratory illness, unusual pneumonia, and Wuhan across 2019–2020 archive content — surface the earliest mentions and how the coverage evolved.",
     "timeline": [
+      {
+        "year": 2019,
+        "month": 12,
+        "period_label": "Dec 2019",
+        "pre_terminology": true,
+        "frequency": 1,
+        "dominant_theme": "Earliest disclosure — “pneumonia of unknown cause” in Wuhan",
+        "sentiment": {
+          "label": "negative",
+          "score": -0.5
+        },
+        "representative_clip": {
+          "asset_id": "6a571efe90a8878b1d32e908",
+          "timestamp_start": 0.0,
+          "timestamp_end": 31.96,
+          "title": "CCTV 新闻直播间 — Wuhan reports pneumonia of unknown cause",
+          "reason": "China's state broadcaster CCTV reports “不明原因肺炎” (pneumonia of unknown cause) in Wuhan on Dec 31, 2019 — weeks before any “coronavirus” or “COVID-19” terminology existed.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a571efe90a8878b1d32e908/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a571efe90a8878b1d32e908/hlses/playlist.m3u8",
+          "duration": 31.96
+        },
+        "scenes": [
+          {
+            "asset_id": "6a571efe90a8878b1d32e908",
+            "timestamp_start": 0.0,
+            "timestamp_end": 31.96,
+            "title": "CCTV 新闻直播间 — Wuhan reports pneumonia of unknown cause",
+            "reason": "China's state broadcaster CCTV reports “不明原因肺炎” (pneumonia of unknown cause) in Wuhan on Dec 31, 2019 — weeks before any “coronavirus” or “COVID-19” terminology existed.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a571efe90a8878b1d32e908/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a571efe90a8878b1d32e908/hlses/playlist.m3u8",
+            "duration": 31.96
+          }
+        ]
+      },
       {
         "year": 2020,
         "month": 1,
         "period_label": "Jan 2020",
         "pre_terminology": true,
-        "frequency": 4,
+        "frequency": 6,
         "dominant_theme": "Unexplained pneumonia in Wuhan",
         "representative_clip": {
-          "asset_id": "019f63c1-5647-7fb2-9672-c2077153c693",
+          "asset_id": "019f63c1-539d-73f3-b5f0-8fbddca71098",
           "timestamp_start": 0.0,
-          "timestamp_end": 20.0,
-          "title": "Mh8UGRIOwLU.mkv",
-          "reason": "Anchor and on-screen headline explicitly say 'WUHAN PNEUMONIA,' a pre-COVID-19 label tied to the unexplained outbreak.",
-          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f794a415b6c270965db3/thumbnails/5.jpeg",
-          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f794a415b6c270965db3/hlses/playlist.m3u8",
-          "duration": 137.168
+          "timestamp_end": 6.0,
+          "title": "Arirang report on mysterious pneumonia outbreak in Wuhan",
+          "reason": "The anchor explicitly calls it 'a mysterious pneumonia outbreak in the Chinese city of Wuhan,' a clear pre-COVID-19 framing.",
+          "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f78fa065980124e0d785/thumbnails/5.jpeg",
+          "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f78fa065980124e0d785/hlses/playlist.m3u8",
+          "duration": 53.688
         },
         "scenes": [
           {
-            "asset_id": "019f63c1-5647-7fb2-9672-c2077153c693",
-            "timestamp_start": 0.0,
-            "timestamp_end": 20.0,
-            "title": "Mh8UGRIOwLU.mkv",
-            "reason": "Anchor and on-screen headline explicitly say 'WUHAN PNEUMONIA,' a pre-COVID-19 label tied to the unexplained outbreak.",
-            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f794a415b6c270965db3/thumbnails/5.jpeg",
-            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f794a415b6c270965db3/hlses/playlist.m3u8",
-            "duration": 137.168
-          },
-          {
             "asset_id": "019f63c1-539d-73f3-b5f0-8fbddca71098",
             "timestamp_start": 0.0,
-            "timestamp_end": 11.0,
-            "title": "ayUMPyMKcuI.mkv",
-            "reason": "The introduction calls it a 'mysterious pneumonia outbreak' in Wuhan and visually pairs that with lung X-rays and protective gear before the COVID-19 name existed.",
+            "timestamp_end": 6.0,
+            "title": "Arirang report on mysterious pneumonia outbreak in Wuhan",
+            "reason": "The anchor explicitly calls it 'a mysterious pneumonia outbreak in the Chinese city of Wuhan,' a clear pre-COVID-19 framing.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f78fa065980124e0d785/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f78fa065980124e0d785/hlses/playlist.m3u8",
             "duration": 53.688
           },
           {
+            "asset_id": "019f63c1-5647-7fb2-9672-c2077153c693",
+            "timestamp_start": 0.0,
+            "timestamp_end": 20.0,
+            "title": "Arirang segment titled 'Wuhan pneumonia spreads further'",
+            "reason": "On-screen graphics read 'WUHAN PNEUMONIA SPREADS FURTHER,' directly showing pre-name terminology.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f794a415b6c270965db3/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f794a415b6c270965db3/hlses/playlist.m3u8",
+            "duration": 137.168
+          },
+          {
             "asset_id": "019f63c1-53bf-7402-a536-3c74b15670c1",
             "timestamp_start": 0.0,
             "timestamp_end": 10.0,
-            "title": "9VQVHz8APLw.mkv",
-            "reason": "The report links pneumonia symptoms to recent travel from Wuhan, showing the illness still framed as a location-based unexplained threat.",
+            "title": "South Korea alert over Wuhan pneumonia outbreak",
+            "reason": "The report ties pneumonia symptoms in Korea to recent travel from Wuhan, reflecting early cross-border alert coverage before official naming.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f792a065980124e0d79a/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f792a065980124e0d79a/hlses/playlist.m3u8",
             "duration": 132.968
           },
           {
+            "asset_id": "019f63c1-53af-7f21-b93f-a05ca408362d",
+            "timestamp_start": 0.0,
+            "timestamp_end": 14.0,
+            "title": "Singapore screens travelers from Wuhan over pneumonia outbreak",
+            "reason": "The lower-third reads 'CHINA PNEUMONIA OUTBREAK' as Singapore announces temperature screening for travelers from Wuhan.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f79390a8878b1d2db7e4/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f79390a8878b1d2db7e4/hlses/playlist.m3u8",
+            "duration": 46.948
+          },
+          {
             "asset_id": "019f63c1-538c-7250-975e-02180275bf58",
             "timestamp_start": 1.0,
             "timestamp_end": 20.0,
-            "title": "YhlEq5MqAkQ.mkv",
-            "reason": "The segment uses a 'WUHAN VIRUS' graphic and hospital B-roll, reflecting early outbreak framing before official WHO naming.",
+            "title": "CNA report on 'Wuhan virus' spread",
+            "reason": "The studio graphic says 'WUHAN VIRUS' while the report discusses rapidly rising cases and spread beyond China.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f797a415b6c270965dcf/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f797a415b6c270965dcf/hlses/playlist.m3u8",
             "duration": 228.268
+          },
+          {
+            "asset_id": "019f63c1-53da-7122-a060-3f30c83c1c4f",
+            "timestamp_start": 0.0,
+            "timestamp_end": 14.0,
+            "title": "WHO stops short of emergency declaration report",
+            "reason": "This report shows the late-January WHO emergency debate, when the story was still framed as a coronavirus outbreak rather than a named disease.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7974142d1df791d3926/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7974142d1df791d3926/hlses/playlist.m3u8",
+            "duration": 104.148
           }
         ],
         "sentiment": {
           "label": "negative",
-          "score": -0.84
+          "score": -0.79
         }
       },
       {
@@ -80,8 +134,8 @@
           "asset_id": "019f63c1-565d-7583-ac3b-53edf38bd446",
           "timestamp_start": 1.0,
           "timestamp_end": 28.0,
-          "title": "GKymX9j_j9Q.mkv",
-          "reason": "Tedros explicitly announces the official disease name 'COVID-19' and explains the spelling and rationale for the new terminology.",
+          "title": "WHO announcement naming the disease COVID-19",
+          "reason": "Tedros explicitly announces and spells 'COVID-19,' marking the transition away from Wuhan- and pneumonia-based labels.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a4170af3ffbeadb13a/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a4170af3ffbeadb13a/hlses/playlist.m3u8",
           "duration": 252.048
@@ -91,8 +145,8 @@
             "asset_id": "019f63c1-565d-7583-ac3b-53edf38bd446",
             "timestamp_start": 1.0,
             "timestamp_end": 28.0,
-            "title": "GKymX9j_j9Q.mkv",
-            "reason": "Tedros explicitly announces the official disease name 'COVID-19' and explains the spelling and rationale for the new terminology.",
+            "title": "WHO announcement naming the disease COVID-19",
+            "reason": "Tedros explicitly announces and spells 'COVID-19,' marking the transition away from Wuhan- and pneumonia-based labels.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a4170af3ffbeadb13a/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a4170af3ffbeadb13a/hlses/playlist.m3u8",
             "duration": 252.048
@@ -100,7 +154,7 @@
         ],
         "sentiment": {
           "label": "neutral",
-          "score": -0.1
+          "score": -0.18
         }
       },
       {
@@ -108,14 +162,14 @@
         "month": 3,
         "period_label": "Mar 2020",
         "pre_terminology": false,
-        "frequency": 3,
+        "frequency": 4,
         "dominant_theme": "Pandemic declared",
         "representative_clip": {
           "asset_id": "019f63c1-5698-7ad1-9207-5926600f58ca",
           "timestamp_start": 15.0,
           "timestamp_end": 42.0,
-          "title": "O84hgvFk4HQ.mkv",
-          "reason": "Tedros states on camera that COVID-19 can be characterized as a pandemic, making the narrative shift explicit.",
+          "title": "WHO press briefing declaring COVID-19 a pandemic",
+          "reason": "Tedros says COVID-19 'can be characterized as a pandemic,' the clearest statement of the narrative turning point.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a17fd488f932b96ea7/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a17fd488f932b96ea7/hlses/playlist.m3u8",
           "duration": 190.188
@@ -125,8 +179,8 @@
             "asset_id": "019f63c1-5698-7ad1-9207-5926600f58ca",
             "timestamp_start": 15.0,
             "timestamp_end": 42.0,
-            "title": "O84hgvFk4HQ.mkv",
-            "reason": "Tedros states on camera that COVID-19 can be characterized as a pandemic, making the narrative shift explicit.",
+            "title": "WHO press briefing declaring COVID-19 a pandemic",
+            "reason": "Tedros says COVID-19 'can be characterized as a pandemic,' the clearest statement of the narrative turning point.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a17fd488f932b96ea7/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7a17fd488f932b96ea7/hlses/playlist.m3u8",
             "duration": 190.188
@@ -134,19 +188,29 @@
           {
             "asset_id": "019f63c1-56b5-7003-ab35-afab8e2819a6",
             "timestamp_start": 55.0,
-            "timestamp_end": 82.0,
-            "title": "9mT0zFR9us8.webm",
-            "reason": "This clip reinforces the declaration with case counts, spread, severity, and warnings about global inaction.",
+            "timestamp_end": 106.0,
+            "title": "ABC coverage of WHO pandemic declaration",
+            "reason": "ABC’s version emphasizes 'alarming levels of spread and severity' and frames the declaration as a global escalation.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7b190a8878b1d2db8e7/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7b190a8878b1d2db8e7/hlses/playlist.m3u8",
             "duration": 166.168
           },
           {
+            "asset_id": "019f63c1-57f1-76c1-9447-df747d1a0aa4",
+            "timestamp_start": 62.0,
+            "timestamp_end": 133.0,
+            "title": "Explainer package on WHO pandemic declaration",
+            "reason": "Another packaged report explains what the word 'pandemic' means and warns against complacency after the declaration.",
+            "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7ab170af3ffbeadb175/thumbnails/5.jpeg",
+            "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7ab170af3ffbeadb175/hlses/playlist.m3u8",
+            "duration": 265.568
+          },
+          {
             "asset_id": "019f63c1-53b9-7f20-9db9-231f64fabb7f",
             "timestamp_start": 8.0,
             "timestamp_end": 21.0,
-            "title": "Unknown title",
-            "reason": "The segment immediately pivots from the declaration to explaining what 'pandemic' means, showing the editorial escalation of the story.",
+            "title": "Short report asking what the pandemic declaration means",
+            "reason": "This clip pairs Tedros’s declaration with explanatory framing about the significance of the pandemic label.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7af90a8878b1d2db8d3/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7af90a8878b1d2db8d3/hlses/playlist.m3u8",
             "duration": 83.808
@@ -154,7 +218,7 @@
         ],
         "sentiment": {
           "label": "negative",
-          "score": -0.9
+          "score": -0.67
         }
       },
       {
@@ -167,9 +231,9 @@
         "representative_clip": {
           "asset_id": "019f63c1-5786-7ed1-af87-7f3ddcb63c38",
           "timestamp_start": 0.0,
-          "timestamp_end": 17.0,
-          "title": "p02fUBmOmlA.webm",
-          "reason": "The UK rollout report shows Pfizer-BioNTech vaccinations beginning, marking the shift from emergency spread coverage to immunization.",
+          "timestamp_end": 26.0,
+          "title": "DW report on UK beginning Pfizer-BioNTech vaccinations",
+          "reason": "The report announces Britain’s rollout of the Pfizer-BioNTech vaccine and visually anchors the first public immunization phase.",
           "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7b97fd488f932b96f7d/thumbnails/5.jpeg",
           "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7b97fd488f932b96f7d/hlses/playlist.m3u8",
           "duration": 211.308
@@ -178,9 +242,9 @@
           {
             "asset_id": "019f63c1-5786-7ed1-af87-7f3ddcb63c38",
             "timestamp_start": 0.0,
-            "timestamp_end": 17.0,
-            "title": "p02fUBmOmlA.webm",
-            "reason": "The UK rollout report shows Pfizer-BioNTech vaccinations beginning, marking the shift from emergency spread coverage to immunization.",
+            "timestamp_end": 26.0,
+            "title": "DW report on UK beginning Pfizer-BioNTech vaccinations",
+            "reason": "The report announces Britain’s rollout of the Pfizer-BioNTech vaccine and visually anchors the first public immunization phase.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7b97fd488f932b96f7d/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7b97fd488f932b96f7d/hlses/playlist.m3u8",
             "duration": 211.308
@@ -188,9 +252,9 @@
           {
             "asset_id": "019f63c1-586f-7400-bf5f-d05f3f0f953d",
             "timestamp_start": 0.0,
-            "timestamp_end": 208.0,
-            "title": "WrmdYOuaY20.mkv",
-            "reason": "The U.S. vaccine segment pairs first-dose expectations with factory vials and reminders that masks and distancing must continue.",
+            "timestamp_end": 273.0,
+            "title": "ABC News segment on first Americans getting vaccine doses",
+            "reason": "ABC’s rollout segment shows vaccine vials, packaging lines, and cautions that vaccination does not yet eliminate transmission risk.",
             "thumbnail_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7bf7fd488f932b96fb6/thumbnails/5.jpeg",
             "manifest_url": "https://deuqpmn4rs7j5.cloudfront.net/64014aa08e079b9c96f4a55c/assets/6a55f7bf7fd488f932b96fb6/hlses/playlist.m3u8",
             "duration": 301.728
@@ -198,76 +262,90 @@
         ],
         "sentiment": {
           "label": "positive",
-          "score": 0.42
+          "score": 0.34
         }
       }
     ],
-    "narrative_summary": "The corpus shows a clear arc from January's 'mystery pneumonia' in Wuhan, to February's WHO naming, to March's pandemic framing, and finally December's vaccine rollout.",
+    "narrative_summary": "The archive does not surface direct 2019 clips; the earliest visible references are in Jan 2020, when broadcasters describe a Wuhan-linked 'mystery' or 'pneumonia-like' respiratory illness. Coverage then formalizes in Feb with the WHO naming of COVID-19, globalizes in Mar with the pandemic declaration, and turns cautiously optimistic in Dec with vaccine rollout coverage.",
     "summary_bullets": [
+      {
+        "year": 2019,
+        "month": 12,
+        "period_label": "Dec 2019",
+        "headline": "Before it had a name",
+        "text": "China's CCTV reports an unexplained pneumonia in Wuhan on Dec 31, 2019 — the earliest archive trace, weeks before the WHO naming."
+      },
       {
         "year": 2020,
         "month": 1,
         "period_label": "Jan 2020",
-        "headline": "Wuhan mystery-illness framing",
-        "text": "January coverage is dominated by alarmed reports of a mysterious pneumonia in Wuhan, often explicitly using pre-COVID terminology like 'Wuhan pneumonia' or 'mysterious outbreak.'"
+        "headline": "Mystery illness emerges",
+        "text": "January coverage centers on a Wuhan-linked unexplained respiratory illness, using labels like 'Wuhan pneumonia,' 'mysterious respiratory virus,' and 'viral pneumonia' before the COVID-19 name existed."
       },
       {
         "year": 2020,
         "month": 2,
         "period_label": "Feb 2020",
-        "headline": "Official naming standardizes the story",
-        "text": "February marks the vocabulary shift as WHO formally names the disease COVID-19, replacing looser Wuhan-centered descriptions with a global standard."
+        "headline": "Official naming replaces local shorthand",
+        "text": "In February, WHO’s naming of COVID-19 shifts reporting away from symptom-based and place-based labels toward a standardized global term."
       },
       {
         "year": 2020,
         "month": 3,
         "period_label": "Mar 2020",
-        "headline": "Outbreak becomes a pandemic story",
-        "text": "March coverage hardens into crisis reporting as Tedros says COVID-19 can be characterized as a pandemic, emphasizing spread, severity, and inaction."
+        "headline": "Outbreak becomes pandemic story",
+        "text": "March coverage reframes the crisis as a pandemic, stressing alarming spread, severity, and the consequences of inaction."
       },
       {
         "year": 2020,
         "month": 12,
         "period_label": "Dec 2020",
-        "headline": "Vaccines introduce cautious hope",
-        "text": "December coverage pivots to rollout logistics and public-health messaging, with early vaccinations framed as hopeful but not an immediate end to precautions."
+        "headline": "Rollout brings cautious hope",
+        "text": "December coverage focuses on first vaccinations, freezer logistics, supply limits, and the message that vaccines help but do not end precautions immediately."
       }
     ],
     "estimated_value": {
-      "total_mentions": 10,
-      "estimated_brand_intelligence_value_usd": 2500,
-      "calculation_basis": "Proxy estimate based on 10 distinct broadcast clips in the retrieved corpus, valued at roughly $250 per distinct verified mention/scene for historical media-intelligence use."
+      "total_mentions": 14,
+      "estimated_brand_intelligence_value_usd": 7000,
+      "calculation_basis": "Proxy estimate based on 14 distinct broadcast clips in the retrieved corpus (incl. the Dec 31 2019 CCTV disclosure), valued at ~$500 per distinct verified mention/scene for historical media-intelligence use."
     },
-    "session_id": "sess_019f63e1-96a4-7fb3-8cb6-84ea651a7ed0",
+    "session_id": "sess_019f6465-70a6-70b0-9f44-53d14793766f",
     "source": "jockey",
     "inflection_points": [
+      {
+        "year": 2019,
+        "month": 12,
+        "period_label": "Dec 2019",
+        "label": "First public disclosure",
+        "why": "CCTV reports “pneumonia of unknown cause” in Wuhan — the earliest reference in the archive, before any COVID-19 terminology."
+      },
       {
         "year": 2020,
         "month": 1,
         "period_label": "Jan 2020",
-        "label": "Mystery illness emerges in Wuhan",
-        "why": "Coverage frames the story as a mysterious or 'Wuhan pneumonia' outbreak, often before the disease had an official global name."
+        "label": "Earliest mystery-pneumonia framing",
+        "why": "Coverage first appears as a Wuhan-linked unexplained respiratory illness and 'pneumonia' story, before the disease had an official name."
       },
       {
         "year": 2020,
         "month": 2,
         "period_label": "Feb 2020",
         "label": "WHO names the disease COVID-19",
-        "why": "The narrative shifts from geographic or symptom-based labels to a standardized WHO term intended to avoid stigma and unify reporting."
+        "why": "The narrative shifts from geographic and symptom-based labels to a standardized global term designed to avoid stigma."
       },
       {
         "year": 2020,
         "month": 3,
         "period_label": "Mar 2020",
         "label": "Pandemic declaration",
-        "why": "Coverage moves from outbreak monitoring to full global-crisis framing once WHO says COVID-19 can be characterized as a pandemic."
+        "why": "Coverage pivots from outbreak tracking to worldwide spread, severity, and urgent government action after WHO’s pandemic declaration."
       },
       {
         "year": 2020,
         "month": 12,
         "period_label": "Dec 2020",
         "label": "Vaccine rollout begins",
-        "why": "The story turns from spread and emergency response to first-dose logistics, prioritization, and cautious hope."
+        "why": "The story turns from crisis escalation to cautious hope, with first-dose logistics and reminders that masking and distancing still matter."
       }
     ]
   }

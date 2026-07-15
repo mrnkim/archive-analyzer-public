@@ -5,8 +5,11 @@ import { SearchIcon } from "@twelvelabs-io/react";
 // illness in Wuhan *before* it was named COVID-19.
 
 export const COVID_DEMO = {
+  // Deliberately keyword-free (no "COVID-19") — the whole point is that Jockey
+  // finds the illness references by MEANING, before the term existed. Must stay
+  // byte-identical to data/primed/scenario_v.json's `query` (the cache key).
   query:
-    "Show references to an unexplained respiratory illness in Wuhan across 2020 — before it was called COVID-19 — and how the coverage evolved through the WHO naming, the pandemic declaration, and the vaccine rollout.",
+    "Show me references to respiratory illness, unusual pneumonia, and Wuhan across 2019–2020 archive content — surface the earliest mentions and how the coverage evolved.",
   scenario: "V",
 };
 
@@ -26,10 +29,11 @@ export function CovidEmptyState({ onRun }: Props) {
           Find the story before it had a name
         </h2>
         <p className="text-sm text-foreground-subtle leading-relaxed">
-          Jockey searches a 2020 broadcast archive semantically — surfacing early
-          references to an unexplained respiratory illness in Wuhan months before
-          "COVID-19" existed as a term, then tracing the month-by-month arc through
-          the WHO naming, the pandemic declaration, and the first vaccines.
+          Jockey searches a 2019–2020 broadcast archive semantically — without the
+          query ever using the term "COVID-19" — surfacing references to an
+          unexplained respiratory illness in Wuhan from the earliest December 2019
+          disclosure, then tracing the month-by-month arc through the WHO naming,
+          the pandemic declaration, and the first vaccines.
         </p>
       </div>
 
@@ -46,12 +50,12 @@ export function CovidEmptyState({ onRun }: Props) {
               V
             </span>
             <h3 className="text-sm font-medium text-foreground-body">
-              COVID-19 — retroactive discovery across 2020
+              COVID-19 — retroactive discovery, 2019 → 2020
             </h3>
             <p className="mt-1 text-xs leading-relaxed text-foreground-subtle">
-              From "mystery pneumonia in Wuhan" to a named pandemic to the vaccine
-              rollout — month-by-month signals, tone, and the moments the story
-              turned.
+              From the Dec 2019 "pneumonia of unknown cause" disclosure to a named
+              pandemic to the vaccine rollout — month-by-month signals and the
+              moments the story turned.
             </p>
             <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-foreground-body">
               <SearchIcon className="h-3 w-3" />

@@ -263,7 +263,7 @@ export default function App() {
 
           {result && (
             <>
-              {/* Overview: monthly signal volume + tone, with the retroactive
+              {/* Overview: monthly signal volume with the retroactive
                   discovery panel (pre-naming clips surfaced by meaning) and the
                   researcher/documentary value framing alongside. */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
@@ -271,11 +271,6 @@ export default function App() {
                   <TimelineChart
                     data={result.timeline}
                     onPointClick={handleSelectPoint}
-                  />
-                  <SentimentStrip
-                    timeline={result.timeline}
-                    selectedKey={selectedPoint ? pointKey(selectedPoint) : null}
-                    onSelect={handleSelectPoint}
                   />
                 </div>
                 <div className="space-y-4">
