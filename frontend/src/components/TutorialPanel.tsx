@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { CheckmarkIcon } from "@twelvelabs-io/react";
 
 /**
  * In-app tutorial — a plain-language walkthrough of how this app talks to the
@@ -105,21 +104,12 @@ function Code({ lang, children }: { lang?: string; children: string }) {
   );
 }
 
-function Check({ children }: { children: ReactNode }) {
-  return (
-    <li className="flex gap-3">
-      <CheckmarkIcon className="mt-0.5 size-4 flex-none text-tl-embed-green" />
-      <span className="text-sm leading-relaxed text-foreground-subtle">{children}</span>
-    </li>
-  );
-}
-
 const FLOW = [
-  ["User", "types a natural-language question"],
-  ["FastAPI /api/query", "POST /v1.3/responses — instructions + JSON Schema + KS_ID"],
-  ["Jockey", "returns structured JSON: timeline + narrative"],
+  ["Guided scenario", "selects a curated question and the right analysis lens"],
+  ["FastAPI /api/query", "chooses the scenario's prompt, JSON Schema, and Knowledge Store"],
+  ["Jockey", "returns structured JSON: timeline, evidence, and narrative"],
   ["Enrichment", "resolves clip thumbnails + HLS manifests"],
-  ["React UI", "timeline chart · clip strip · video playback · chat"],
+  ["React UI", "interactive timeline · source clips · export · follow-up chat"],
 ];
 
 export function TutorialPanel() {
@@ -133,22 +123,51 @@ export function TutorialPanel() {
           Tutorial
         </Pill>
         <h1 className="mt-4 text-3xl font-semibold tracking-tight text-foreground-body md:text-4xl">
-          How this app works on TwelveLabs Jockey
+          From archive to evidence-backed story
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-foreground-subtle md:text-base">
-          Jockey indexes your videos into a <strong className="text-foreground-muted">Knowledge
-          Store</strong>. Your app calls <code className="rounded-sm bg-surface-secondary px-1.5 py-0.5 text-xs text-tl-embed-green">POST /v1.3/responses</code> with
-          a question + a JSON Schema, and gets back a structured answer the UI can
-          render. Everything else is plumbing.
+          This sample turns curated video archives into three kinds of analysis:
+          brand intelligence, narrative evolution, and retroactive discovery.
+          Jockey searches each <strong className="text-foreground-muted">Knowledge Store</strong> and
+          returns structured evidence that the interface can connect to playable clips.
         </p>
 
         <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
-          <Stat value="23" label="videos indexed" />
-          <Stat value="1990–2025" label="time range" />
-          <Stat value="3" label="demo scenarios" />
-          <Stat value="~10ms" label="cached vs 60–180s cold" />
+          <Stat value="3" label="analysis lenses" />
+          <Stat value="3" label="curated archives" />
+          <Stat value="1990–2026" label="coverage span" />
+          <Stat value="Pinned" label="instant demo results" />
         </div>
       </div>
+
+      <Section eyebrow="Start here" title="Choose an analysis lens">
+        <div className="grid gap-4 md:grid-cols-3">
+          <Card title="Brand Intelligence · Adidas">
+            Compare three guided brand questions across a sports archive. The
+            year-by-year chart connects logo, kit, product, and campaign evidence
+            to an estimated archive value.
+            <p className="mt-3 text-xs font-medium text-foreground-muted">
+              23 curated videos · 1994–2025
+            </p>
+          </Card>
+          <Card title="Narrative Evolution · Trump">
+            Follow a public figure&apos;s portrayal over decades. The timeline adds
+            sentiment, thematic eras, and inflection points so the shifts in
+            coverage are legible at a glance.
+            <p className="mt-3 text-xs font-medium text-foreground-muted">
+              39 broadcast videos · 1986–2026
+            </p>
+          </Card>
+          <Card title="Retroactive Discovery · COVID-19">
+            Find the story before it had a name. A keyword-free question surfaces
+            early respiratory-illness coverage, then maps the Dec 2019–Dec 2020
+            emergence month by month.
+            <p className="mt-3 text-xs font-medium text-foreground-muted">
+              21 news clips · Dec 2019–Dec 2020
+            </p>
+          </Card>
+        </div>
+      </Section>
 
       {/* Architecture flow */}
       <Section eyebrow="Architecture" title="The request flow">
@@ -190,22 +209,47 @@ export function TutorialPanel() {
             <code className="text-tl-embed-green">instructions</code> (persona),{" "}
             <code className="text-tl-embed-green">text.format</code> (JSON Schema), and{" "}
             <code className="text-tl-embed-green">session_id</code> (multi-turn).
-            Use a <strong className="text-foreground-muted">300s timeout</strong> — reasoning over
-            a multi-video KS regularly runs 60–180s.
+            This app also selects a Knowledge Store per scenario: brand, narrative,
+            or COVID discovery. Use a <strong className="text-foreground-muted">300s timeout</strong> — reasoning over
+            a multi-video archive can take 60–180s.
           </Card>
+        </div>
+      </Section>
+
+      <Section eyebrow="Reading a result" title="Move from a claim to its source">
+        <div className="space-y-6">
+          <Step n={1} title="Start with the timeline">
+            Choose any bar, point, or monthly signal. The selected period becomes
+            the active piece of evidence throughout the page. COVID uses a filled
+            monthly emergence curve and marks the point where the WHO named COVID-19.
+          </Step>
+          <Step n={2} title="Read the linked story">
+            Timeline selection highlights the matching summary bullet. Narrative
+            Evolution also exposes sentiment and pivotal moments; Retroactive
+            Discovery calls out evidence found before the disease had a name.
+          </Step>
+          <Step n={3} title="Verify with clips, then continue the conversation">
+            The selected period&apos;s scenes appear directly below the chart. Play a
+            clip, scan every representative clip in the strip, export the evidence,
+            or ask a follow-up scoped to the selected media context.
+          </Step>
         </div>
       </Section>
 
       {/* Three keys */}
       <Section eyebrow="What we learned" title="Three keys to a usable answer">
         <div className="space-y-6">
-          <Step n={1} title="Visual-cue prompts">
+          <Step n={1} title="Visual-cue and meaning-based prompts">
             A bare "look for the Adidas brand" makes Jockey search for the{" "}
             <em>spoken or written</em> word — which broadcasts rarely say, so you get{" "}
             <strong className="text-foreground-muted">zero results</strong>. Instead, tell it what{" "}
             <em>visual</em> signals to look for by name (three-stripes kits, the trefoil
-            logo, specific match balls). This one change turned "0 timeline points" into
-            "10 with thumbnails."
+            logo, specific match balls). The COVID scenario takes the same idea in a
+            different direction: it asks about respiratory illness, unusual pneumonia,
+            and Wuhan — never the later term "COVID-19" — to surface pre-naming coverage.
+            <div className="mt-3">
+              <Code lang="backend/app/prompts/scenarios.py">{"# Brand: search what the camera shows, not only speech/OCR.\nLook for:\n- The three-stripes motif on team kits, footwear, shorts, and tracksuits\n- Official match balls: Jabulani (2010), Brazuca (2014), Telstar (2018)\n- Stadium boards, sideline LED ads, and product hero shots\n\n# COVID: use the vocabulary available before the final name existed.\nShow how references to respiratory illness, unusual pneumonia, and Wuhan\nevolved — surface the earliest mentions."}</Code>
+            </div>
           </Step>
           <Step n={2} title="JSON Schema for output">
             Don't ask for prose and regex-parse it. Hand Jockey a schema and it returns
@@ -229,6 +273,29 @@ export function TutorialPanel() {
         </div>
       </Section>
 
+      <Section eyebrow="From this codebase" title="Why the scenarios stay reliable">
+        <div className="grid gap-4 md:grid-cols-2">
+          <Card title="The backend selects the right archive and schema">
+            A scenario is more than a tab label. The query route picks its
+            Knowledge Store, prompt, and output contract before it calls Jockey.
+            COVID gets a stricter month-level contract; Narrative Evolution gets
+            per-period sentiment and inflection points.
+            <div className="mt-3">
+              <Code lang="backend/app/routes/query.py">{"ks_id = settings.ks_for_scenario(req.scenario)\ninstructions = get_instructions(req.scenario)\n_sc = (req.scenario or \"\").upper()\n\nif _sc == \"V\":\n    text_format = COVID_DATA_JSON_SCHEMA\nelif _sc == \"N\":\n    text_format = NARRATIVE_DATA_JSON_SCHEMA\nelse:\n    text_format = TREND_DATA_JSON_SCHEMA"}</Code>
+            </div>
+          </Card>
+          <Card title="The model output is checked before the UI sees it">
+            The response is parsed as JSON and validated with Pydantic. The
+            backend then resolves every scene&apos;s Knowledge Store item ID to an
+            asset ID so thumbnails and HLS playback work for all evidence, not
+            only the representative clip.
+            <div className="mt-3">
+              <Code lang="backend/app/routes/query.py">{"structured = _extract_structured_payload(raw)\nvalidated = TrendResponse(**structured)\n\nks_items = await _list_all_ks_items(api_key, ks_id, base_url)\nuuid_to_hex = {item[\"ksi_uuid\"]: item[\"asset_id\"] for item in ks_items}\nresolved = await jockey_api.resolve_assets(api_key, hex_ids)"}</Code>
+            </div>
+          </Card>
+        </div>
+      </Section>
+
       {/* Biggest gotcha */}
       <Section eyebrow="Watch out" title="The biggest gotcha: UUID ↔ hex">
         <Card className="border-[color-mix(in_srgb,var(--tl-misc-status-warning)_30%,transparent)] bg-[color-mix(in_srgb,var(--tl-misc-status-warning)_5%,transparent)]">
@@ -248,9 +315,9 @@ export function TutorialPanel() {
       <Section eyebrow="In production" title="Operational patterns">
         <div className="grid gap-4 md:grid-cols-2">
           <Card title="Cache aggressively">
-            A cold query takes 60–180s; a SQLite cache hit takes microseconds. This app
-            also ships <em>primed</em> answers in the repo so the demo buttons respond
-            instantly on a fresh deploy.
+            A cold query takes 60–180s; a SQLite cache hit is effectively instant. This
+            app ships <em>primed</em>, pinned answers for every guided demo and hydrates
+            them into the cache on startup, so a fresh deploy stays explorable.
           </Card>
           <Card title="Jockey is stochastic">
             Same query → slightly different results, with no temperature knob. Mitigate by
@@ -266,30 +333,6 @@ export function TutorialPanel() {
             so a malformed reply fails loud and early instead of corrupting the UI.
           </Card>
         </div>
-      </Section>
-
-      {/* Gotcha checklist */}
-      <Section eyebrow="Before you ship" title="Gotcha checklist">
-        <Card>
-          <ul className="space-y-2.5">
-            <Check>Sub-360p videos are silently rejected at ingest — curate HD only.</Check>
-            <Check>
-              <code className="text-foreground-muted">representative_clip.asset_id</code> is a KSI
-              UUID, not the hex key — always convert.
-            </Check>
-            <Check>Generic brand prompts find zero clips — name the visual signals.</Check>
-            <Check>Jockey is stochastic — cache, pre-prime, validate with a schema.</Check>
-            <Check>Timeout 300s, not 120s.</Check>
-            <Check>
-              <code className="text-foreground-muted">&lt;vref&gt;</code> citation tags are not
-              HTML — pre-process them before rendering markdown.
-            </Check>
-            <Check>
-              API key lives in <code className="text-foreground-muted">.env</code> (gitignored) —
-              never commit it to source.
-            </Check>
-          </ul>
-        </Card>
       </Section>
 
       <p className="mt-12 text-center text-xs text-foreground-subtle">
